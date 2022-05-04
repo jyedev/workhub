@@ -1,4 +1,4 @@
-package com.work.workhub.admin.dto.reserve;
+package com.work.workhub.admin.reserve.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
