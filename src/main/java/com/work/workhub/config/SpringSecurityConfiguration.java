@@ -5,13 +5,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 /* 스프링 시큐리티 설정 활성화 + bean 등록 가능 */
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+
 	private final PasswordEncoder passwordEncoder;
 	
 	@Autowired
@@ -28,6 +29,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/css/**", "/js/**", "/src/**", "/vendors/**");
 	}
 	
+
 	/* HTTP 요청에 대한 설정 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -48,21 +50,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 	}
 
-
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
