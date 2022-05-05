@@ -15,23 +15,23 @@ import com.work.workhub.admin.reserve.model.service.CarService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
+@Slf4j
 @RequestMapping("asset/car")
-public class CarRegistController {
-	
+public class CarModifyController {
+
 	private CarService carService;
 	private MessageSource messageSource;
 	
-	/* 차량 등록용 화면 이동*/
-	@GetMapping("regist")
-	public void registCar() {
+	/* 차량 정보 수정,삭제용 화면 이동*/
+	@GetMapping("modify")
+	public void modifyCar() {
 		
 	}
 	
 	
-	@PostMapping("regist")
-	public String registCar(@ModelAttribute CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
+	@PostMapping("modify")
+	public String modifyCar(@ModelAttribute CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 
 		
@@ -41,12 +41,11 @@ public class CarRegistController {
 		log.debug("등록요청메뉴 : {}", car);
 		log.trace("등록요청메뉴 : {}", car);
 		
-		carService.registCar(car);
+		carService.modifyCar(car);
 		
-		rttr.addFlashAttribute("successMessage", messageSource.getMessage("registCar", null, locale));
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("modifyCar", null, locale));
 		
 		return "redirect:/asset/car/list";
 		
 	}
-
 }
