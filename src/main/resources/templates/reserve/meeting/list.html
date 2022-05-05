@@ -11,163 +11,20 @@
     
 
     <!-- bootstrap -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-ar.css}"/>
-	
-	<link rel="stylesheet" type="text/css" th:href="@{/vendors/iconly/bold.css}"/>
-    
-	<link rel="stylesheet" type="text/css" th:href="@{/vendors/perfect-scrollbar/perfect-scrollbar.csss}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-icons/bootstrap-icons.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/app-ar.css}"/>
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/src/images/favicon-workHub.ico}"/>
+    <link rel="stylesheet" href="/assets/css/bootstrap-ar.css">
+
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app-ar.css">
+    <link rel="stylesheet" href="/assets/css/admin-ar.css">
+    <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
     
 </head>
 
 <body>
-    <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="index.html"><img src="src/images/logo-workhub-edit.png" alt="Logo" srcset=""></a>
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>홈</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>전자결재</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">결재 문서 생성</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">개인 결재함</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">부서 결재함</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>근태관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">내 근태 현황</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">내 연차 내역</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-alarm-fill"></i>
-                                <span>예약</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">회의실 예약</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">차량 예약</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-calendar-fill"></i>
-                                <span>캘린더</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>보고서</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-pen-fill"></i>
-                                <span>게시판</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">글쓰기</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">공지사항</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">자유게시판</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="table.html" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-fill"></i>
-                                <span>설문</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">설문 작성</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">진행 중인 설문</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">마감된 설문</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">내가 만든 설문</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="table-datatable.html" class='sidebar-link'>
-                                <i class="bi bi-chat-dots-fill"></i>
-                                <span>쪽지</span>
-                            </a>
-                        </li>
-                        <br><br><br><br>
-
-                        <li class="sidebar-item ">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-person-circle"></i>
-                                <span>내 정보 관리</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="ui-file-uploader.html" class='sidebar-link'>
-                                <img src="src/images/logout.png" alt="logout">
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
-        </div>
-    </div>
+    <div th:include="sidebar/sidebar" th:remove="tag"></div>
     <div id="main">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
@@ -178,19 +35,19 @@
         <div class="page-heading">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="" role="tab"
                         aria-controls="home" aria-selected="true">
                         <h5>회의실 예약</h5>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="" role="tab"
                         aria-controls="profile" aria-selected="false">
                         <h5>차량 예약</h5>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab"
+                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="" role="tab"
                         aria-controls="contact" aria-selected="false">
                         <h5>내 예약 조회</h5>
                     </a>
@@ -201,11 +58,11 @@
         <div class="page-heading border-bottom">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="" role="tab"
                         aria-controls="home" aria-selected="true">4층 회의실</a>
                 </li>
                 <li class="nav-item font-clr"  role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="" role="tab"
                         aria-controls="profile" aria-selected="false">5층 회의실</a>
                 </li>
 
@@ -249,80 +106,7 @@
             </script>
 
             <div id="cal_head_fixed_div_area">
-                <!-- ul li 활용 template -->
-                <!-- <div class="board_list">
-                    <ul class="mt-room-info" id="toc-toggle">
-                        
-                        <c:forEach var="review" items="${ reviewList }">
-                            
-                                <li class="left-side">
                 
-                                   
-                                </li>
-                                <li class="left-side">
-                                   
-                                </li>
-                
-                            
-                        </c:forEach>
-
-                        <c:forEach var="review" items="${ reviewList }">
-                            
-                                <li class="img-side">
-                
-                                    <p>
-                                        <a class="" href="">미팅룸 S1</a>
-                                    </p>
-                                </li>
-                                <li class="img-side">
-                                    <div class="mt-room-img">
-                                        <a href="#">
-                                            <img src="src/images/meeting-room1.jpg" alt="review_thumb" class="thumb-ctrl">
-                                        </a>
-                                    </div>
-                                </li>
-                
-                            
-                        </c:forEach>
-                        <c:forEach var="review" items="${ reviewList }">
-                            
-                                <li class="img-side">
-                
-                                    <p>
-                                        <a class="" href="">미팅룸 S2</a>
-                                    </p>
-                                </li>
-                                <li class="img-side">
-                                    <div class="mt-room-img">
-                                        <a href="#">
-                                            <img src="src/images/meeting-room2.jpg" alt="review_thumb" class="thumb-ctrl">
-                                        </a>
-                                    </div>
-                                </li>
-                
-                            
-                        </c:forEach>
-                        <c:forEach var="review" items="${ reviewList }">
-                            
-                                <li class="img-side">
-                
-                                    <p>
-                                        <a class="" href="">미팅룸 S3</a>
-                                    </p>
-                                </li>
-                                <li class="img-side">
-                                    <div class="mt-room-img">
-                                        <a href="#">
-                                            <img src="src/images/meeting-room3.jpg" alt="review_thumb" class="thumb-ctrl">
-                                        </a>
-                                    </div>
-                                </li>
-                
-                            
-                        </c:forEach>
-
-                    </ul>
-                </div> -->
 
                 <!-- table 활용 template -->
                 <table class="res-tbl">
@@ -356,7 +140,7 @@
                                     <tbody>
                                         <tr class="mt-room-img">
                                             <td>
-                                                <img src="src/images/meeting-room4.jpg" alt="room-img">
+                                                <img src="/assets/images/images/meeting-room4.jpg" alt="room-img">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -371,7 +155,7 @@
                                         </tr>
                                         <tr class="mt-room-img">
                                             <td>
-                                                <img src="src/images/meeting-room2.jpg" alt="room-img">
+                                                <img src="/assets/images/images/meeting-room2.jpg" alt="room-img">
                                             </td>
                                         </tr>
 
@@ -387,7 +171,7 @@
                                         </tr>
                                         <tr class="mt-room-img">
                                             <td>
-                                                <img src="src/images/meeting-room3.jpg" alt="room-img">
+                                                <img src="/assets/images/images/meeting-room3.jpg" alt="room-img">
                                             </td>
                                         </tr>
 
@@ -834,9 +618,10 @@
                         </button>
                     </div>
                     <!--method="post" th:action="@{/member/signup}"-->
-                    <form class="form form-horizontal" th:each="mtroom = ${ roomList }">
+                    <!-- th:each="mtroom = ${ roomList }"-->
+                    <form class="form form-horizontal">
                         <div class="form-body modal-body">
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-4 modal-margin">
                                     <label>회의실 이름</label>
                                 </div>
@@ -874,7 +659,7 @@
                                 </div>
 
 
-                            </div>
+                            </div> -->
                             <div class="modal-footer">
                                 <div class="col-sm-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary me-1 mb-1 btn-size">예약하기</button>
@@ -888,10 +673,10 @@
         </div>
     </div>
 
-    <script src="vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
 
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
