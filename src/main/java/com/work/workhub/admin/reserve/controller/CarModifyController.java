@@ -33,13 +33,8 @@ public class CarModifyController {
 	@PostMapping("modify")
 	public String modifyCar(@ModelAttribute CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
 		
+		log.info("등록요청 : {}",car);
 
-		
-		log.error("등록요청메뉴 : {}",car);
-		log.warn("등록요청메뉴 : {}",car);
-		log.info("등록요청메뉴 : {}",car);
-		log.debug("등록요청메뉴 : {}", car);
-		log.trace("등록요청메뉴 : {}", car);
 		
 		carService.modifyCar(car);
 		

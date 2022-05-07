@@ -29,7 +29,8 @@
                 <i class="bi bi-justify fs-3"></i>
             </a>
         </header>
-        <!-- 상단 horizontal nav-->
+        
+  		<!-- 상단 horizontal nav-->
         <div class="page-heading">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -47,6 +48,7 @@
                 
             </ul>
         </div>
+
 
         <div class="page-heading border-bottom">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -76,14 +78,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-bold-500">싼타페</td>
-                        <td>2259</td>
-                        <td class="text-bold-500">
-                            사용 가능
-                        </td>
+                    <tr th:each="car : ${ carList }">
+                        <td th:text="${ car.carName }"></td>
+                        <td th:text="${ car.carNumber }"></td>
+                        <td th:text="${ car.carYn }" id="carYn"></td>               
                         <td>
-                            <a th:href="@{/asset/car/modify}">수정</a>
+                        <form method="post" th:action="@{/asset/car/list}">
+                        	<a th:href="@{/asset/car/modify}">수정</a>
+                        </form>
                         </td>
 
                     </tr>
@@ -92,11 +94,36 @@
                 </tbody>
             </table>
         </div>
-
+		
+			<button type="button" onclick="updateCarView()">수정하기</button>
+			<!-- form 태그를 post 방식으로 제출 -->
+			<form name="carRegistForm" method="post">
+				<input type="hidden" name="no" value="${ car.carNo }">
+			</form>
+			<script>
+			function updateCarView(no){
+				location.href = "@{/asset/car/modify?no="+no;
+			}
+/* 			function deleteNotice(){
+				if(confirm('이 게시글을 삭제하시겠습니까?')){
+					document.forms.noticeForm.action = "${ pageContext.servletContext.contextPath }/notice/delete";
+					document.forms.noticeForm.submit();
+				}
+			} */
+			</script>
+		
     </div>
 
+    <script>
+		let yn = document.getElementById('carYn');
+        if(yn = 'Y') {
+            yn.replaceWith('사용 가능')
+        } else if(yn = 'N') {
+            yn.replaceWith('사용 불가')
+        }
+	</script>
 
-    </div>
+   
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>

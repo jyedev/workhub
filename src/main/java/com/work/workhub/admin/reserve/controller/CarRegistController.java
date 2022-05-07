@@ -2,6 +2,7 @@ package com.work.workhub.admin.reserve.controller;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,12 @@ public class CarRegistController {
 	private CarService carService;
 	private MessageSource messageSource;
 	
+	@Autowired
+	public CarRegistController(CarService carService, MessageSource messageSource) {
+		this.carService = carService;
+		this.messageSource = messageSource;
+	}
+	
 	/* 차량 등록용 화면 이동*/
 	@GetMapping("regist")
 	public void registCar() {
@@ -32,14 +39,11 @@ public class CarRegistController {
 	
 	@PostMapping("regist")
 	public String registCar(@ModelAttribute CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
-		
-
-		
-		log.error("등록요청메뉴 : {}",car);
-		log.warn("등록요청메뉴 : {}",car);
-		log.info("등록요청메뉴 : {}",car);
-		log.debug("등록요청메뉴 : {}", car);
-		log.trace("등록요청메뉴 : {}", car);
+				
+		log.error("등록요청 : {}",car);
+		log.warn("등록요청 : {}",car);
+		log.info("등록요청 : {}",car);
+		log.debug("등록요청 : {}", car);
 		
 		carService.registCar(car);
 		

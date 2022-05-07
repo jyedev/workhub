@@ -45,7 +45,7 @@ public class CarReserveController {
 		
 		rttr.addFlashAttribute("successMessage", messageSource.getMessage("reserveCar", null, locale));
 		
-		return "redirect:/asset/car/list";
+		return "redirect:/reserve/car/list";
 		
 	}
 

@@ -32,13 +32,13 @@
         <div class="page-heading">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                    <a class="nav-link" id="home-tab" data-bs-toggle="tab" th:href="@{/asset/room/list}" role="tab"
                         aria-controls="home" aria-selected="true">
                         <h5>회의실 관리</h5>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                    <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" th:href="@{/asset/car/list}" role="tab"
                         aria-controls="profile" aria-selected="false">
                         <h5>차량 관리</h5>
                     </a>
@@ -56,34 +56,32 @@
                 <h5>차량 등록</h5>
             </div>
             <div class="card-body">
-                <!--method="post" th:action="@{/member/signup}"-->
-                <!--  th:each="mtroom = ${ roomList }" -->
-                <form class="form form-horizontal">
+                <form class="form form-horizontal" method="post" th:action="@{/asset/car/regist}">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차종명</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="floor">
+                                <input type="text" class="form-control input-margin" name="carName">
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차량번호</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="room">
+                                <input type="text" class="form-control input-margin" name="carNumber" placeholder="뒷 자리 4자리만 숫자로 입력해주세요.">
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size" for="flexRadioDefault1">사용 가능 여부</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
                                 <div class="possible">
-                                    <input type="radio" class="form-check-input" name="roomYn" id="roomY" value="Y" checked>
-                                    <label class="form-check-label possi-size" for="roomYn">
+                                    <input type="radio" class="form-check-input" name="carYn" id="carY" value="Y" checked>
+                                    <label class="form-check-label possi-size" for="carYn">
                                         사용 가능
                                     </label>
-                                    <input type="radio" class="form-check-input" name="roomYn" id="roomN" value="N">
-                                    <label class="form-check-label possi-size" for="roomYn">
+                                    <input type="radio" class="form-check-input" name="carYn" id="carN" value="N">
+                                    <label class="form-check-label possi-size" for="carYn">
                                         사용 불가
                                     </label>
                                 </div>
