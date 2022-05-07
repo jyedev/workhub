@@ -12,6 +12,8 @@ public interface CarMapper {
 	List<CarDTO> selectAllCar();
 
 	int registCar(CarDTO car);
+
+	CarDTO selectCarInfo(int no);
 	
 	
 }

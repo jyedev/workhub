@@ -43,4 +43,9 @@ public class CarServiceImpl implements CarService{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public CarDTO selectCarInfo(int no) {
+		
+		return carMapper.selectCarInfo(no);
+	}
 }

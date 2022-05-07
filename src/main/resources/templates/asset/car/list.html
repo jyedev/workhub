@@ -83,9 +83,11 @@
                         <td th:text="${ car.carNumber }"></td>
                         <td th:text="${ car.carYn }" id="carYn"></td>               
                         <td>
-                        <form method="post" th:action="@{/asset/car/list}">
-                        	<a th:href="@{/asset/car/modify}">수정</a>
-                        </form>
+                        	<!-- form 태그를 post 방식으로 제출 -->
+							<form name="carModifyForm" method="post" action="@{/asset/car/list}">
+								<input type="hidden" name="no" value="${ car.carNo }">
+								<button class="" type="button" onclick="updateCarView()">수정</button>
+							</form>
                         </td>
 
                     </tr>
@@ -93,34 +95,19 @@
 
                 </tbody>
             </table>
-        </div>
-		
-			<button type="button" onclick="updateCarView()">수정하기</button>
-			<!-- form 태그를 post 방식으로 제출 -->
-			<form name="carRegistForm" method="post">
-				<input type="hidden" name="no" value="${ car.carNo }">
-			</form>
-			<script>
-			function updateCarView(no){
-				location.href = "@{/asset/car/modify?no="+no;
-			}
-/* 			function deleteNotice(){
-				if(confirm('이 게시글을 삭제하시겠습니까?')){
-					document.forms.noticeForm.action = "${ pageContext.servletContext.contextPath }/notice/delete";
-					document.forms.noticeForm.submit();
-				}
-			} */
-			</script>
-		
-    </div>
+        </div>		
+    </div>  <!-- id=main -->
 
-    <script>
-		let yn = document.getElementById('carYn');
-        if(yn = 'Y') {
-            yn.replaceWith('사용 가능')
-        } else if(yn = 'N') {
-            yn.replaceWith('사용 불가')
-        }
+	<script>
+		function updateCarView(no) {
+			location.href = "/asset/car/modify?no=" + no;
+		}
+		/* 			function deleteCar(){
+		 if(confirm('이 게시글을 삭제하시겠습니까?')){
+		 document.forms.noticeForm.action = "${ pageContext.servletContext.contextPath }/notice/delete";
+		 document.forms.noticeForm.submit();
+		 }
+		 } */
 	</script>
 
    

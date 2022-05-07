@@ -30,4 +30,11 @@
 		 ORDER BY CAR_NO DESC 	
 	</select>
 	
+	<select id="selectCarInfo" resultMap="carResultMap">
+		SELECT
+			*
+		  FROM COM_CAR
+		 WHERE CAR_NO = #{ carNo }
+	</select>
+	
 </mapper>

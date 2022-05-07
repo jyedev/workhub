@@ -11,4 +11,6 @@ public interface CarService {
 	void modifyCar(CarDTO car);
 
 	List<CarDTO> selectAllCar();
+
+	CarDTO selectCarInfo(int no);
 }
