@@ -16,12 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/approval")
-public class approvalController {
+public class ApprovalController {
 	
 	private ApprovalService approvalService;
 	
 	@Autowired
-	public approvalController(ApprovalService approvalService) {
+	public ApprovalController(ApprovalService approvalService) {
 		this.approvalService = approvalService;
 	}
 
