@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.workhub.member.approval.model.dao.ApprovalMapper">
+	
+	<resultMap id="approvalResultMap" type="com.work.workhub.member.approval.model.dto.ApprovalDTO">
+		<id property="no" column="APP_NO"/>
+		<result property="memNo" column="APP_MEM_NO"/>
+		<result property="title" column="APP_TITLE"/>
+		<result property="content" column="APP_CONTENT"/>
+		<result property="status" column="APP_STATUS"/>
+		<result property="createdDate" column="APP_CREATED_DATE"/>
+		<result property="dueDate" column="APP_DUE_DATE"/>
+	</resultMap>
+	
+	<select id="selectReceptionList" resultMap="approvalResultMap">
+		SELECT
+		   APP_NO
+		 , APP_MEM_NO
+		 , APP_TITLE
+		 , APP_CONTENT
+		 , APP_STATUS
+		 , APP_CREATED_DATE
+		 , APP_DUE_DATE
+		  FROM APPROVAL
+	</select>
+</mapper>
