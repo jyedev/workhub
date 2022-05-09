@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>차량 등록 - workhub</title>
+    <title>차량 수정 - workhub</title>
 
     <!-- fonts -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
@@ -37,7 +37,7 @@
 				</a>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link active"	id="profile-tab" th:href="@{/asset/car/list}">
+				<a class="nav-link active" id="profile-tab" th:href="@{/asset/car/list}">
 						<h5>차량 관리</h5>
 				</a>
 				</li>
@@ -51,35 +51,38 @@
 
         <div class="content-area card-rev">
             <div class="content-ttl">
-                <h5>차량 등록</h5>
+                <h5>차량 정보 수정</h5>
             </div>
             <div class="card-body">
-                <form class="form form-horizontal" method="post" th:action="@{/asset/car/regist}">
+                <!--method="post" th:action="@{/member/signup}"-->
+                <!--  th:each="mtroom = ${ roomList }" -->
+                <form class="form form-horizontal">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차종명</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="carName">
+                                <input type="text" class="form-control input-margin" name="floor">
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차량번호</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="carNumber" placeholder="뒷 자리 4자리만 숫자로 입력해주세요.">
+                                <input type="text" class="form-control input-margin" name="room">
                             </div>
+                            
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size" for="flexRadioDefault1">사용 가능 여부</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
                                 <div class="possible">
-                                    <input type="radio" class="form-check-input" name="carYn" id="carY" value="Y" checked>
-                                    <label class="form-check-label possi-size" for="carYn">
+                                    <input type="radio" class="form-check-input" name="roomYn" id="roomY" value="Y" checked>
+                                    <label class="form-check-label possi-size" for="roomYn">
                                         사용 가능
                                     </label>
-                                    <input type="radio" class="form-check-input" name="carYn" id="carN" value="N">
-                                    <label class="form-check-label possi-size" for="carYn">
+                                    <input type="radio" class="form-check-input" name="roomYn" id="roomN" value="N">
+                                    <label class="form-check-label possi-size" for="roomYn">
                                         사용 불가
                                     </label>
                                 </div>
@@ -92,8 +95,8 @@
                         </div>
                         <div class="modal-footer rev-footer-align">
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
-                                <button type="submit" class="btn btn-primary me-1 mb-1 btn-size">등록하기</button>&nbsp
-                                <button type="reset" class="btn btn-light-secondary me-1 mb-1 btn-size">초기화</button>
+                                <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn">수정</button>&nbsp
+                                <button type="submit" class="btn btn-light-secondary me-1 mb-1 edit-btn">삭제</button>
                                 
                             </div>
                         </div>

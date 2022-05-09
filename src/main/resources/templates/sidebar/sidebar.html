@@ -36,7 +36,7 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
+                        <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>홈</span>
@@ -81,10 +81,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="layout-default.html">회의실 예약</a>
+                                    <a th:href="@{/reserve/meeting/list}">회의실 예약</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">차량 예약</a>
+                                    <a th:href="@{/reserve/car/list}">차량 예약</a>
                                 </li>
                             </ul>
                         </li>
@@ -167,5 +167,10 @@
             </div>
         </div>
     </div>
+    
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>
