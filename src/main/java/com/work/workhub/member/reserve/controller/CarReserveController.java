@@ -1,5 +1,6 @@
 package com.work.workhub.member.reserve.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
@@ -8,10 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.work.workhub.member.reserve.model.dto.ResCarDTO;
-import com.work.workhub.member.reserve.model.service.CarService;
+import com.work.workhub.member.reserve.model.service.CarResService;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -19,14 +21,22 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/reserve/car")
 public class CarReserveController {
 	
-	private CarService carService;
+	private CarResService carService;
 	
 	private MessageSource messageSource;
 	
-	/* 차량 등록용 화면 이동*/
+	/* 차량 예약 화면 이동*/		
+	
 	@GetMapping("reserve")
-	public void registCar() {
+	public ModelAndView selectCarList(ModelAndView mv) {
+			
+		List<ResCarDTO> carList = carService.selectAllCar();
 		
+		mv.addObject("carList",carList);
+		
+		mv.setViewName("reserve/car/list");
+		
+		return mv;
 	}
 	
 	

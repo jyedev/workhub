@@ -5,8 +5,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 
 /* 스프링 시큐리티 설정 활성화 + bean 등록 가능 */
@@ -15,6 +16,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final PasswordEncoder passwordEncoder;
 	
+   
 	@Autowired
 	public SpringSecurityConfiguration(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
@@ -33,6 +35,20 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	/* HTTP 요청에 대한 설정 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
+		/* fileUpload를 위한 EncodingFilter 적용 */
+		/* 참고 - http://millky.com/@origoni/post/1057 */
+		
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		
+		filter.setEncoding("UTF-8");
+		
+		filter.setForceEncoding(true);
+
+		http.addFilterBefore(filter,CsrfFilter.class);
+
+	    
+		
 		http
 			/* CSRF(Cross-Site Request Forgery)
 			 * 웹 애플리케이션 취약점 중 하나로 사용자의 의지와 무관하게 공격자가 의도한 행위(등록/수정/삭제)를 

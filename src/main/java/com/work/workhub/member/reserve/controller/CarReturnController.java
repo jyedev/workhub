@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.work.workhub.member.reserve.model.dto.ResCarDTO;
-import com.work.workhub.member.reserve.model.service.CarService;
+import com.work.workhub.member.reserve.model.service.CarResService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/reserve/car")
 public class CarReturnController {
 	
-	private CarService carService;
+	private CarResService carService;
 	private MessageSource messageSource;
 	
 	/* 차량 반납용 화면 이동*/
