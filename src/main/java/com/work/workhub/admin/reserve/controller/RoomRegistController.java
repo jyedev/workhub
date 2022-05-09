@@ -47,7 +47,7 @@ public class RoomRegistController {
 
 
     @PostMapping("regist")
-    public String registRoom(@ModelAttribute MeetingRoomDTO room, RedirectAttributes rttr, Locale locale) throws Exception {
+    public String registRoom(@ModelAttribute MeetingRoomDTO room, RedirectAttributes rttr, Locale locale, @RequestParam MultipartFile singleFile, HttpServletRequest request, Model model) throws Exception {
 
 
 
@@ -60,24 +60,8 @@ public class RoomRegistController {
         roomService.registRoom(room);
 
         rttr.addFlashAttribute("successMessage", messageSource.getMessage("registRoom", null, locale));
-
-        return "redirect:/asset/room/list";
-
-    }
-    
-	@PostMapping("regist")
-	public String singleFileUpload(@RequestParam MultipartFile singleFile, HttpServletRequest request, Model model) {
-
-		/*
-		 * file upload를 위해서는 pom.xml에 commons-io, commons-fileupload 의존성을 추가해줘야 함. 또한,
-		 * CommonsMutipartResolver를 bean으로 등록해야함. (servlet-context.xml) MultipartFile
-		 * 타입의 변수인 매개변수를 선언하면 파일에 대한 처리를 할 수 있다.
-		 */
-
-		/*
-		 * multipart로 전송된 request에 대한 인코딩 처리를 해줘야 하는데 일반 인코딩 필터보다 구현하기 어려우므로 스프링에서 제공하는
-		 * 인코딩 필터를 사용한다. (web.xml)
-		 */
+        
+		
 		log.info("singleFile : {}" + singleFile);
 
 		// file 저장 경로 설정
@@ -106,6 +90,9 @@ public class RoomRegistController {
 			model.addAttribute("message", "파일 업로드 실패!");
 		}
 
-		return "result";
-	}
+        return "redirect:/asset/room/list";
+
+    }
+    
+	
 }
