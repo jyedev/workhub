@@ -49,21 +49,7 @@
         </div>
 
         <div class="page-heading border-bottom">
-            <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
-                        aria-controls="home" aria-selected="true">회의실 등록</a>
-                </li>
-                <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                        aria-controls="profile" aria-selected="false">회의실 수정</a>
-                </li>
-                <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                        aria-controls="profile" aria-selected="false">회의실 조회</a>
-                </li>
-
-            </ul> -->
+           
         </div>
 
         <div class="content-area card-rev">
@@ -72,28 +58,30 @@
             </div>
             <div class="subtt">* 은 필수 입력 항목입니다.</div>
             <div class="card-body">
-                <!--method="post" th:action="@{/member/signup}"-->
-                <!--  th:each="mtroom = ${ roomList }" -->
-                <form class="form form-horizontal">
+
+                <form class="form form-horizontal" method="post" th:action="@{/asset/room/regist}">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">위치</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="floor">
+                                <input type="text" class="form-control input-margin" name="rmLocation">
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">회의실 이름 *</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="room" required>
+                                <input type="text" class="form-control input-margin" name="roomName" required>
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">회의실 사진 *</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="file" id="contact-info" class="form-control input-margin" name="file" required>
+                            	<!-- <form action="singlefile" method="post" encType="multipart/form-data"> -->
+                                	<input type="file" id="contact-info" class="form-control input-margin" name="orgName" required>
+                                	<input type="submit">
+                                <!-- </form> -->
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size" for="flexRadioDefault1">사용 가능 여부 *</label>

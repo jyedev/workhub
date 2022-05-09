@@ -49,18 +49,6 @@
 
         <div class="page-heading border-bottom">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <!-- <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
-                        aria-controls="home" aria-selected="true">회의실 등록</a>
-                </li>
-                <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                        aria-controls="profile" aria-selected="false">회의실 수정</a>
-                </li>
-                <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                        aria-controls="profile" aria-selected="false">회의실 조회</a>
-                </li> -->
 
             </ul>
         </div>
@@ -87,14 +75,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-bold-500">4층 회의실</td>
-                        <td>회의실 S1</td>
-                        <td class="text-bold-500">
-                            사용 가능
-                        </td>
+                    <tr th:each="room : ${ roomList }">
+                        <td th:text="${ room.rmLocation }"></td>
+                        <td th:text="${ room.roomName }"></td>
+                        <td th:text="${ room.roomYn }"></td>
                         <td>
-                            <a th:href="@{/asset/room/modify}">수정</a>
+                            <!-- form 태그를 post 방식으로 제출 -->
+							<form name="carModifyForm" method="post" action="@{/asset/room/list}">
+								<input type="hidden" name="no" value="${ room.roomNo }">
+								<button class="addbtn editbtn" type="button" onclick="updateRoomView()">수정</button>
+							</form>
                         </td>
 
                     </tr>
@@ -106,8 +96,18 @@
 
     </div>
 
-
-    </div>
+	<script>
+		function updateRoomView(no) {
+			location.href = "/asset/room/modify?no=" + no;
+		}
+		/* 			function deleteCar(){
+		 if(confirm('이 게시글을 삭제하시겠습니까?')){
+		 document.forms.noticeForm.action = "${ pageContext.servletContext.contextPath }/notice/delete";
+		 document.forms.noticeForm.submit();
+		 }
+		 } */
+	</script>
+   
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
