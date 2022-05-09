@@ -9,13 +9,13 @@
     
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="/assets/css/bootstrap-ar.css">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-ar.css}">
 
-    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" th:href="@{/assets/vendors/iconly/bold.css}">
 
-    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/css/app-ar.css">
+    <link rel="stylesheet" th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendors/bootstrap-icons/bootstrap-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/app-ar.css}">
    	<link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
 </head>
 <body>
@@ -42,13 +42,13 @@
                                 <span>홈</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  has-sub">
+                        <li class="sidebar-item  has-sub active">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>전자결재</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
+                            <ul class="submenu active">
+                                <li class="submenu-item">
                                     <a href="extra-component-avatar.html">결재 문서 생성</a>
                                 </li>
                                 <li class="submenu-item ">
@@ -81,10 +81,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a th:href="@{/reserve/meeting/list}">회의실 예약</a>
+                                    <a href="layout-default.html">회의실 예약</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a th:href="@{/reserve/car/list}">차량 예약</a>
+                                    <a href="layout-vertical-1-column.html">차량 예약</a>
                                 </li>
                             </ul>
                         </li>
@@ -128,9 +128,6 @@
                                     <a href="form-editor-quill.html">설문 작성</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">설문 홈</a>
-                                </li>
-                                <li class="submenu-item ">
                                     <a href="form-editor-ckeditor.html">진행 중인 설문</a>
                                 </li>
                                 <li class="submenu-item ">
@@ -167,10 +164,5 @@
             </div>
         </div>
     </div>
-    
-    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-
-    <script src="/assets/js/main.js"></script>
 </body>
 </html>
