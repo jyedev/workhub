@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>차량 조회 - workhub</title>
+    <title>회의실 조회 - workhub</title>
 
-    <!-- fonts -->
+   	<!-- fonts -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="/assets/css/bootstrap-ar.css">
@@ -29,18 +28,17 @@
                 <i class="bi bi-justify fs-3"></i>
             </a>
         </header>
-        
-  		<!-- 상단 horizontal nav-->
+        <!-- 상단 horizontal nav-->
         <div class="page-heading">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
+                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
                         aria-controls="home" aria-selected="true">
                         <h5>회의실 관리</h5>
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
                         aria-controls="profile" aria-selected="false">
                         <h5>차량 관리</h5>
                     </a>
@@ -49,16 +47,15 @@
             </ul>
         </div>
 
-
         <div class="page-heading border-bottom">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-               
+
             </ul>
         </div>
 
         <div class="content-ttl">
-            <span class="mt-size">차량 목록</span>
-            <span><a th:href="@{/asset/car/regist}" class="addbtn">＋추가하기</a></span>
+            <span class="mt-size">회의실 목록</span>
+            <span><a th:href="@{/asset/room/regist}" class="addbtn">＋추가하기</a></span>
         </div>
 
 
@@ -71,22 +68,22 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>차종명</th>
-                        <th>차량번호</th>
+                        <th>위치</th>
+                        <th>회의실 이름</th>
                         <th>사용 가능 여부</th>
                         <th>상태</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="car : ${ carList }">
-                        <td th:text="${ car.carName }"></td>
-                        <td th:text="${ car.carNumber }"></td>
-                        <td th:text="${ car.carYn }" id="carYn"></td>               
+                    <tr th:each="room : ${ roomList }">
+                        <td th:text="${ room.rmLocation }"></td>
+                        <td th:text="${ room.roomName }"></td>
+                        <td th:text="${ room.roomYn }"></td>
                         <td>
-                        	<!-- form 태그를 post 방식으로 제출 -->
-							<form name="carModifyForm" method="post" action="@{/asset/car/list}">
-								<input type="hidden" name="no" value="${ car.carNo }">
-								<button class="addbtn editbtn" type="button" onclick="updateCarView()">수정</button>
+                            <!-- form 태그를 post 방식으로 제출 -->
+							<form name="carModifyForm" method="post" action="@{/asset/room/list}">
+								<input type="hidden" name="no" value="${ room.roomNo }">
+								<button class="addbtn editbtn" type="button" onclick="updateRoomView()">수정</button>
 							</form>
                         </td>
 
@@ -95,12 +92,13 @@
 
                 </tbody>
             </table>
-        </div>		
-    </div>  <!-- id=main -->
+        </div>
+
+    </div>
 
 	<script>
-		function updateCarView(no) {
-			location.href = "/asset/car/modify?no=" + no;
+		function updateRoomView(no) {
+			location.href = "/asset/room/modify?no=" + no;
 		}
 		/* 			function deleteCar(){
 		 if(confirm('이 게시글을 삭제하시겠습니까?')){
@@ -109,7 +107,6 @@
 		 }
 		 } */
 	</script>
-
    
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
