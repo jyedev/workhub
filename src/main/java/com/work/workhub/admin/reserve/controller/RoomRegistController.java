@@ -47,21 +47,14 @@ public class RoomRegistController {
 
 
     @PostMapping("regist")
-    public String registRoom(@ModelAttribute MeetingRoomDTO room, RedirectAttributes rttr, Locale locale, @RequestParam MultipartFile singleFile, HttpServletRequest request, Model model) throws Exception {
+    public String registRoom(@RequestParam(value="singleFile", required=false) MultipartFile singleFile, HttpServletRequest request, Model model, @ModelAttribute MeetingRoomDTO room, RedirectAttributes rttr, Locale locale) throws Exception {
 
 
-
-        log.error("등록요청메뉴 : {}",room);
-        log.warn("등록요청메뉴 : {}",room);
+    	/* 회의실 정보 등록 */
         log.info("등록요청메뉴 : {}",room);
-        log.debug("등록요청메뉴 : {}", room);
-        log.trace("등록요청메뉴 : {}", room);
 
-        roomService.registRoom(room);
-
-        rttr.addFlashAttribute("successMessage", messageSource.getMessage("registRoom", null, locale));
-        
 		
+        /* 회의실 사진 등록 */
 		log.info("singleFile : {}" + singleFile);
 
 		// file 저장 경로 설정
@@ -77,8 +70,8 @@ public class RoomRegistController {
 		}
 
 		// file name change
-		String originFileName = singleFile.getOriginalFilename();
-		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		String orgName = singleFile.getOriginalFilename();
+		String ext = orgName.substring(orgName.lastIndexOf("."));
 		String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
 
 		// file Save
@@ -90,6 +83,16 @@ public class RoomRegistController {
 			model.addAttribute("message", "파일 업로드 실패!");
 		}
 
+		room.setOrgName(orgName);
+		room.setSavedName(savedName);
+		room.setSavePath(savePath);
+		
+		log.info("room info : {}", room);
+		
+	    roomService.registRoom(room);
+
+        rttr.addFlashAttribute("successMessage", messageSource.getMessage("registRoom", null, locale));
+        
         return "redirect:/asset/room/list";
 
     }
