@@ -1,22 +1,33 @@
 package com.work.workhub.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.work.workhub.admin.member.model.service.AdminMemberService;
+import com.work.workhub.handler.LoginFailHandler;
+import com.work.workhub.member.member.service.MemberService;
 
 
 /* 스프링 시큐리티 설정 활성화 + bean 등록 가능 */
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	private final AdminMemberService adminMemberService;
 	private final PasswordEncoder passwordEncoder;
+	private final MemberService memberService;
 	
 	@Autowired
-	public SpringSecurityConfiguration(PasswordEncoder passwordEncoder) {
+	public SpringSecurityConfiguration(AdminMemberService adminMemberService, MemberService memberService, PasswordEncoder passwordEncoder) {
+		this.adminMemberService = adminMemberService;
+		this.memberService = memberService;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -46,10 +57,44 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.csrf().disable()	/* csrf는 기본적으로 활성화 되어 있으므로 비활성화 처리 */
 			/* 요청에 대한 권한 체크 */
 			.authorizeHttpRequests()
-				.anyRequest().permitAll();
-		
+				.antMatchers("/approval/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/approval/**").hasRole("MEMBER")
+				.antMatchers("/message/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/message/**").hasRole("MEMBER")
+				.anyRequest().permitAll()
+			.and()
+				.formLogin()
+				.loginPage("/member/login")
+				.successForwardUrl("/")
+				.failureHandler(loginFailHandler())
+			.and()
+				.logout()
+				/* 로그아웃 주소 */
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+				/* JSESSIONID 쿠키 삭제 */
+				.deleteCookies("JSESSIONID")
+				/* 세션 만료 */
+				.invalidateHttpSession(true)
+				/* 성공 시 랜딩 페이지 */
+				.logoutSuccessUrl("/member/login");
+			
 	}
 
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(memberService).passwordEncoder(passwordEncoder);
+	}
+	
+	/* 로그인 실패 핸들러 bean 등록 */
+	@Bean
+	public LoginFailHandler loginFailHandler() {
+		
+		return new LoginFailHandler();
+		
+	}
+	
+	
 	
 	
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.workhub.admin.member.model.dao.AdminMemberMapper">
+	
+	<resultMap id="loginMemberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="depNo" column="DEP_NO"/>
+		<result property="positionNo" column="POSITION_NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
+		
+		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+	</resultMap>
+	
+	<resultMap id="memberRoleResultMap" type="com.work.workhub.member.member.dto.MemberRoleDTO">
+		<id property="memberNo" column="REF_NO"/>
+		<id property="authNo" column="REF_AUTH_NO"/>
+		
+		<association property="authority" resultMap="authorityResultMap"/>
+	</resultMap>
+	
+	<resultMap id="authorityResultMap" type="com.work.workhub.member.member.dto.AuthorityDTO">
+		<id property="authNo" column="REF_AUTH_NO2"/>
+		<result property="authName" column="REF_AUTH_NAME"/>
+	</resultMap>
+	
+	<insert id="insertMember">
+		INSERT
+		  INTO TBL_MEMBER
+		(
+		  NO
+		, ID
+		, PWD
+		, DEP_NO
+		, POSITION_NO
+		, GROUP_NO
+		, NAME
+		, GENDER
+		, EMAIL
+		, PHONE
+		, STATUS
+		)
+		VALUES
+		(
+		  SEQ_MEMBER_NO.NEXTVAL
+		, #{ id }
+		, #{ pwd }
+		, #{ depNo }
+		, #{ positionNo }
+		, null
+		, #{ name }
+		, null
+		, #{ email }
+		, #{ phone }
+		, DEFAULT
+		)
+	</insert>
+	
+	<insert id="insertMemberRole">
+		INSERT
+		  INTO MEMBER_ROLE
+		(
+		  NO
+		  , AUTH_NO
+		)
+		VALUES
+		(
+		  SEQ_MEMBER_NO.CURRVAL
+		, #{ authNo }
+		)
+	</insert>
+	
+	
+</mapper>
