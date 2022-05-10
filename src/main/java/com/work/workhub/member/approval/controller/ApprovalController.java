@@ -34,7 +34,7 @@ public class ApprovalController {
 		List<ApprovalDTO> receptionList = approvalService.selectReceptionList();
 		
 		mv.addObject("receptionList", receptionList);
-		mv.setViewName("approval/receptionList");	
+		mv.setViewName("approval/receptionList");
 		
 		return mv;
 	}
