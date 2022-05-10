@@ -10,15 +10,15 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/css/bootstrap2.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap2.css">
 
-    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/app2.css">
-    <link rel="stylesheet" href="assets/css/com-surv.css">
-    <link rel="shortcut icon" href="src/images/favicon-workHub.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app2.css">
+    <link rel="stylesheet" href="/assets/css/com-surv.css">
+    <link rel="shortcut icon" href="/src/images/favicon-workHub.ico" type="image/x-icon">
 
 </head>
 
@@ -52,10 +52,10 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn btn-outline-primary">새글쓰기</a>
-                            <a href="#" class="btn btn-outline-primary">수정하기</a>
-                            <a href="#" class="btn btn-outline-primary">삭제하기</a>
-                            <a href="#" class="btn btn-outline-primary" id="btn-list">목록보기</a>
+                            <a th:href="@{/post/write}" class="btn btn-outline-primary">새글쓰기</a>
+                            <a th:href="@{/post/modify}" class="btn btn-outline-primary">수정하기</a>
+                            <a th:href="@{/post/delete}" class="btn btn-outline-primary">삭제하기</a>
+                            <a th:href="@{/post/list}" class="btn btn-outline-primary" id="btn-list">목록보기</a>
                         </div>
                         <hr><br>
                         <div class="card-body">
@@ -63,17 +63,17 @@
                                 <div class="detail-title">
                                     <h4>게시글 제목입니다.</h4>
                                     <div class="com-detail-messenger">
-                                        <img src="src/images/messenger.png" class="icon-messenger">
+                                        <img src="/assets/images/post-surv/messenger.png" class="icon-messenger">
                                         <span>1</span>
                                     </div>
                                 </div>
                                 <div class="com-detail-heart">
                                     <span>0</span>
-                                    <img src="src/images/emptyHeart.png" class="icon-heart">
+                                    <img src="/assets/images/post-surv/emptyHeart.png" class="icon-emptyHeart">
                                 </div>
                             </div>
                             <div class="com-detail-writer">
-                                <img src="src/images/grey.png" alt="profile" class="profile-photo">
+                                <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                 <span>김허브 대리</span>
                                 <span id="current-time"></span>
                             </div>
@@ -82,17 +82,17 @@
                                     게시글 내용입니다.
                                 </div>
                                 <div class="detail-body-footer">
-                                    <p> <img src="src/images/messenger.png" class="icon-messenger"> 댓글 1개 | 조회 1 |  
-                                        <img src="src/images/emptyHeart.png" class="icon-heart"> 추천 누른 사람 0명</p>
+                                    <p> <img src="/assets/images/post-surv/messenger.png" class="icon-messenger"> 댓글 1개 | 조회 1 |  
+                                        <img src="/assets/images/post-surv/emptyHeart.png" class="icon-heart"> 추천 누른 사람 0명</p>
                                 </div>
                             </div><hr>
                             <div class="com-detail-reply">
                                 <div class="com-reply-writer">
-                                    <img src="src/images/grey.png" alt="profile" class="profile-photo">
+                                    <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                     <span>김허브 대리</span>
                                     <span id="current-time2"></span>
                                     <div class="reply-btn" input type="button">
-                                        <img src="src/images/reply.png" class="icon-reply" alt="답글">
+                                        <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글">
                                         <span>답글</span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <form action="" method="post" class="com-insert-reply" >
-                                <img src="src/images/grey.png" alt="profile" class="profile-photo">
+                                <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                 <input type="text" class="text-reply" name="text-reply">
                                 <button type="file" class="btn btn-outline-secondary me-1 mb-1 btn-sm">첨부</button>
                                 <button type="submit" class="btn btn-secondary me-1 mb-1 btn-sm">등록</button>
@@ -186,13 +186,13 @@
         document.getElementById("current-time2").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
         "&nbsp&nbsp" + hour + ":" + minute;
     </script>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min2.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min2.js"></script>
 
-    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
-    <script src="assets/js/pages/dashboard.js"></script>
+    <script src="/assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="/assets/js/pages/dashboard.js"></script>
 
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

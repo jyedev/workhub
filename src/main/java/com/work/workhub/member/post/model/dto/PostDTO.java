@@ -24,9 +24,8 @@ public class PostDTO {
 	private String postContent;
 	private Date postDate; 
 	private Date postUpdate;
-	private Date postEndDate;
+	private Date noticeEndDate;
 	private String postStatus;
 	private int No;
 	private int categoryNo;
-
 }
