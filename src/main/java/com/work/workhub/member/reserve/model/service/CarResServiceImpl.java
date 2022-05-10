@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.member.reserve.model.dao.CarResMapper;
 import com.work.workhub.member.reserve.model.dto.ResCarDTO;
 
-@Service
+@Service("carResService")
+@Transactional
 public class CarResServiceImpl implements CarResService{
 
 	private CarResMapper carResMapper;
