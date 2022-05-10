@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,20 +8,20 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap2.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap2.css">
 
-    <link rel="stylesheet" href="assets/vendors/simple-datatables/style2.css">
+    <link rel="stylesheet" href="/assets/vendors/simple-datatables/style2.css">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/app2.css">
-    <link rel="stylesheet" href="assets/css/com-surv.css">
-    <link rel="shortcut icon" href="src/images/favicon-workHub.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app2.css">
+    <link rel="stylesheet" href="/assets/css/com-surv.css">
+    <link rel="shortcut icon" href="/src/images/favicon-workHub.ico" type="image/x-icon">
 </head>
 
 <body>
     <div id="app">
-        <div th:include="sidebar/sidebar" th:remove="tag"></div>
+        <div th:include="sidebar/sidebar" th:remove="tag"/>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -48,9 +48,9 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn btn-outline-primary">새글쓰기</a>
-                            <a href="#" class="btn btn-outline-primary">삭제하기</a>
-                            <a href="#" class="btn btn-outline-primary">공지등록</a>
+                            <a th:href="@{/post/write}" class="btn btn-outline-primary">새글쓰기</a>
+                            <a th:href="@{/post/delete}" class="btn btn-outline-primary">삭제하기</a>
+                            <a th:href="@{/post/noticeRegist}" class="btn btn-outline-primary">공지등록</a>
                         </div>
                         <div class="card-body">
                             <table class="table table-borderless" id="table1">
@@ -219,17 +219,17 @@
             </div>
         </div>
     </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min2.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min2.js"></script>
 
-    <script src="assets/vendors/simple-datatables/simple-datatables2.js"></script>
+    <script src="/assets/vendors/simple-datatables/simple-datatables2.js"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
 
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

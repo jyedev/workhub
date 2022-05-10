@@ -1,16 +1,19 @@
-package com.work.workhub.member.post.model.service;
+package com.work.workhub.member.post.model.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
 
-public interface PostService {
+@Mapper
+public interface PostMapper {
 
 	List<PostDTO> findAllPost();
 
 	List<CategoryDTO> findAllCategory();
 
-	boolean writePost(PostDTO post) throws Exception;
+	int writePost(PostDTO post);
 
 }
