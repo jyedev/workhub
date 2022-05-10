@@ -86,12 +86,10 @@
 							<td th:text="${ car.carNumber }"></td>
 							<td th:text="${ car.carYn }" id="carYn"></td>
 							<td>
-								<!-- form 태그를 post 방식으로 제출 -->
-								<form name="carModifyForm" method="post"
-									action="@{/asset/car/list}">
-									<input type="hidden" name="no" value="${ car.carNo }">
-									<button class="editbtn" type="button"
-										onclick="updateCarView()">수정</button>
+								<!-- form 태그를 get 방식으로 제출 -->
+								<form name="carModifyForm" method="get" th:action="@{/asset/car/modify}">
+									<input type="hidden" name="carNo" th:value="${ car.carNo }">
+									<button class="editbtn" type="submit">수정</button>
 								</form>
 							</td>
 
@@ -106,7 +104,7 @@
 	<!-- id=main -->
 
 	<script>
-		function updateCarView(no) {
+		function updateCarView(carNo) {
 			location.href = "/asset/car/modify?no=" + no;
 		}
 		/* 			function deleteCar(){

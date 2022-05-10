@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,22 +54,21 @@
                 <h5>차량 정보 수정</h5>
             </div>
             <div class="card-body">
-                <!--method="post" th:action="@{/member/signup}"-->
-                <!--  th:each="mtroom = ${ roomList }" -->
-                <form class="form form-horizontal">
+                
+                <form class="form form-horizontal" method="post" th:action="@{/asset/car/modify}">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차종명</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="floor">
+                                <input type="text" class="form-control input-margin" name="floor" th:value="${ carInfo.carName }">
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차량번호</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="room">
+                                <input type="text" class="form-control input-margin" name="room" th:value="${ carInfo.carNumber }">
                             </div>
                             
                             <div class="col-md-4 row-margin col-label">
