@@ -12,18 +12,32 @@
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> -->
+	
 
     <!-- bootstrap -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="/assets/css/bootstrap-ar.css">
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app copy.css">
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+=======
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendors/iconly/bold.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendors/bootstrap-icons/bootstrap-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/app copy.css}">
+    <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
+>>>>>>> refs/heads/master
 </head>
 
 <body>
+<<<<<<< HEAD
        <div th:include="sidebar/sidebar" th:remove="tag"></div>
+=======
+		<div th:include="sidebar/sidebar-approval" th:remove="tag"></div>
+>>>>>>> refs/heads/master
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -60,8 +74,13 @@
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div id="editor">
-                                                        <p>결재해주쇼</p>
+                                                     <div class="contentwritebox">
+                                                        <label for="firstName" class="form-label"><strong>내용</strong></label>
+                                                        <div class="contentcontainer mx-auto">
+                                                           <textarea class="textarea" rows="20" cols="150" name="content" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            내용을 입력하세요
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,7 +88,10 @@
                                     </div>
                                 </section>
                             </div>
+<<<<<<< HEAD
                             <!-- <script src="assets/vendors/ckeditor/ckeditor.js"></script> -->
+=======
+>>>>>>> refs/heads/master
 
                             <!-- 날짜 설정 -->
                             <div class="container">
@@ -279,7 +301,10 @@
                                 <input class="form-control form-control-sm" id="formFileSm" type="file">
                             </div>
 
+<<<<<<< HEAD
                             
+=======
+>>>>>>> refs/heads/master
                             <br><br>
                             <div class="d-grid col-1 mx-auto">
                             </div>
@@ -305,12 +330,22 @@
             </footer>
         </div>
     </div>
+<<<<<<< HEAD
     <!-- <script src="src/scripts/approval.js"></script> -->
     <!-- <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+=======
+    <script src="/assets/js/approval.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+>>>>>>> refs/heads/master
 
     <!-- <script src="assets/vendors/apexcharts/apexcharts.js"></script> -->
+<<<<<<< HEAD
     <script src="/assets/js/pages/dashboard.js"></script>
+=======
+    <!-- <script src="assets/js/pages/dashboard.js"></script> -->
+>>>>>>> refs/heads/master
     <script src="/assets/js/main.js"></script>
 </body>
 

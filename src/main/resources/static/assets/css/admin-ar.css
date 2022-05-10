@@ -44,19 +44,30 @@
 	font-size:18px;
 	padding: 2px 5px;
 	text-decoration:none;
-    margin-left: 78%;
+    position : absolute;
+    top: 170px;
+    right : 180px;
 }
 .addbtn:hover {
 	background-color:transparent;
 }
-.addbtn:active {
-	position:relative;
-	top:1px;
-}
+
 
 .subtt {
     position : relative;
     top: -10px;
     left : 550px;
     margin: -15px -20px -10px -30px;
+}
+
+.editbtn {
+	background-color:transparent;
+    border:1px solid #435ebe;
+	display:inline-block;
+	cursor:pointer;
+	font-size:18px;
+	padding: 2px 5px;
+	text-decoration:none;
+	margin : 0;
+	color: #435ebe;	
 }

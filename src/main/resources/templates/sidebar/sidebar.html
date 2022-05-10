@@ -36,7 +36,7 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
+                        <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>홈</span>
@@ -81,10 +81,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="layout-default.html">회의실 예약</a>
+                                    <a th:href="@{/reserve/meeting/list}">회의실 예약</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">차량 예약</a>
+                                    <a th:href="@{/reserve/car/list}">차량 예약</a>
                                 </li>
                             </ul>
                         </li>
@@ -107,13 +107,13 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">글쓰기</a>
+                                    <a th:href="@{/post/write}">글쓰기</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">공지사항</a>
+                                    <a th:href="@{/post/notice}">공지사항</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">자유게시판</a>
+                                    <a th:href="@{/post/list}">자유게시판</a>
                                 </li>
 
                             </ul>
@@ -125,16 +125,19 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">설문 작성</a>
+                                    <a th:href="@{/survey/write}">설문 작성</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">진행 중인 설문</a>
+                                    <a th:href="@{/survey/home}">설문 홈</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">마감된 설문</a>
+                                    <a th:href="@{/survey/ongoing}">진행 중인 설문</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">내가 만든 설문</a>
+                                    <a th:href="@{/survey/end}">마감된 설문</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/survey/mySurvey}">내가 만든 설문</a>
                                 </li>
                             </ul>
                         </li>
@@ -164,5 +167,10 @@
             </div>
         </div>
     </div>
+    
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>

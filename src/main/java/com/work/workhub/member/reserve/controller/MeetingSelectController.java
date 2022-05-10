@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/reserve")
+@RequestMapping("reserve")
 public class MeetingSelectController {
 	
 	@GetMapping("meeting/list")
-	public ModelAndView selectAllMtReserveList(ModelAndView mv) {
+	public ModelAndView selectMeetingList(ModelAndView mv) {
 			
 		
 		mv.setViewName("/reserve/meeting/list");
