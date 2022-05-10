@@ -1,5 +1,7 @@
 package com.work.workhub.member.member.dto;
 
+import java.util.List;
+
 import com.work.workhub.admin.workgroup.model.dto.WorkGroupDTO;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,8 @@ public class MemberDTO {
    private String email;
    private String phone;
    private String status;
+   
+   public List<MemberRoleDTO> memberRoleList;
    
    private DepartmentDTO dept;
    private PositionDTO position;

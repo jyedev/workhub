@@ -27,62 +27,56 @@
                     <h3 class="auth-title fs-1">사원 등록</h3>
                     <!-- <p class="auth-subtitle mb-5">사원을 등록합니다.</p> -->
 
-                    <form action="index.html">
+                    <form th:action="@{/admin/signUp}" method="post">
                         <div class="form-group position-relative has-icon-left mb-4">
                             
-                            <input type="text" class="form-control form-control-xl" placeholder="아이디">
+                            <input type="text" class="form-control form-control-xl" placeholder="아이디" name="id">
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="비밀번호">
+                            <input type="password" class="form-control form-control-xl" placeholder="비밀번호" name="pwd">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="비밀번호 확인">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="이름">
+                            <input type="text" class="form-control form-control-xl" placeholder="이름" name="name">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="이메일">
+                            <input type="text" class="form-control form-control-xl" placeholder="이메일" name="email">
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="연락처">
+                            <input type="text" class="form-control form-control-xl" placeholder="연락처" name="phone">
                             <div class="form-control-icon">
                                 <i class="bi bi-phone"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <select class="form-select form-select-xl" aria-label="Default select example">
+                            <select class="form-select form-select-xl" aria-label="Default select example" name="depNo">
                                 <option selected>부서를 선택하세요</option>
-                                <option value="1">영업팀</option>
-                                <option value="2">개발팀</option>
-                                <option value="3">마케팅팀</option>
-                                <option value="4">총무팀</option>
-                                <option value="5">인사팀</option>
+                                <option value="01">인사팀</option>
+                                <option value="02">총무팀</option>
+                                <option value="03">영업팀</option>
+                                <option value="04">마케팅팀</option>
+                                <option value="05">개발팀</option>
                               </select>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <select class="form-select form-select-xl" aria-label="Default select example">
+                            <select class="form-select form-select-xl" aria-label="Default select example" name="positionNo">
                                 <option selected>직급을 선택하세요</option>
-                                <option value="1">전무</option>
-                                <option value="2">상무</option>
-                                <option value="3">파트너</option>
-                                <option value="4">프로</option>
-                                <option value="5">인턴</option>
+                                <option value="02">전무</option>
+                                <option value="03">상무</option>
+                                <option value="04">파트너</option>
+                                <option value="05">프로</option>
+                                <option value="06">인턴</option>
                               </select>
                         </div>
                         
