@@ -1,11 +1,15 @@
 package com.work.workhub.member.message.model.dto;
 
+import com.work.workhub.member.member.dto.MemberDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class InboxDTO {
+@NoArgsConstructor
+public class MessageDTO {
 	
 	private int msgCode;			//쪽지번호 
 	private int senderNo;			//발신자사번 
@@ -17,5 +21,10 @@ public class InboxDTO {
 	private String readTime;		//읽은시간 
 	private String recycleBinStatus;//휴지통여부 
 	private String deleteStatus;	//삭제여부 
+	
+	private MemberDTO sender; //발신자 가져오기
+	private MemberDTO reicipient; // 수신자 가져오기 
+	
+	
 
 }

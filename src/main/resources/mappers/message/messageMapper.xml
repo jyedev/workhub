@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.workhub.member.message.model.dao.MessageMapper">
+
+	<resultMap id="messageResultMap" type="com.work.workhub.member.message.model.dto.MessageDTO">
+		<id property="msgCode" column="MSG_CODE"/>
+		<result property="senderNo" column="MSG_SENDER_NO"/>
+		<result property="reicipientNo" column="MSG_REICIPIENT_NO"/>
+		<result property="msgContent" column="MSG_CONTENT"/>
+		<result property="sendDate" column="MSG_SEND_DATE"/>
+		<result property="sendTime" column="MSG_SEND_TIME"/>
+		<result property="readDate" column="MSG_READ_DATE"/>
+		<result property="readTime" column="MSG_READ_TIME"/>
+		<result property="recycleBinStatus" column="MSG_RECYCLE_BIN_STATUS"/>
+		<result property="deleteStatus" column="MSG_DELETE_STATUS"/>
+		
+		<association property="sender" resultMap="memberResultMap"/>
+        <association property="reicipient" resultMap="memberResultMap"/>
+	</resultMap>
+	
+	<resultMap id="memberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="depNo" column="DEP_NO"/>
+		<result property="positionNo" column="POSITION_NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="findMessageInbox" resultMap="messageResultMap">
+		SELECT /* com.work.workhub.member.message.model.dao.findMessageInbox() */
+			    A.MSG_CODE
+			  , A.MSG_SENDER_NO
+			  , A.MSG_REICIPIENT_NO
+			  , A.MSG_CONTENT
+			  , A.MSG_SEND_DATE
+			  , A.MSG_SEND_TIME
+			  , A.MSG_READ_DATE
+			  , A.MSG_READ_TIME
+			  , A.MSG_RECYCLE_BIN_STATUS
+			  , A.MSG_DELETE_STATUS
+			  , B.NAME
+           FROM MESSAGE A
+           JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
+          WHERE MSG_SENDER_NO = 303
+	</select>
+	
+	<select id="findMessageSent" resultMap="messageResultMap">
+		SELECT /* com.work.workhub.member.message.model.dao.findMessageSent() */
+			    A.MSG_CODE
+			  , A.MSG_SENDER_NO
+			  , A.MSG_REICIPIENT_NO
+			  , A.MSG_CONTENT
+			  , A.MSG_SEND_DATE
+			  , A.MSG_SEND_TIME
+			  , A.MSG_READ_DATE
+			  , A.MSG_READ_TIME
+			  , A.MSG_RECYCLE_BIN_STATUS
+			  , A.MSG_DELETE_STATUS
+			  , B.NAME
+           FROM MESSAGE A
+           JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
+          WHERE A.MSG_REICIPIENT_NO = 303
+    </select>
+    
+    <select id="findMessageRecyclebinList" resultMap="messageResultMap">
+    	SELECT /* com.work.workhub.member.message.model.dao.findMessageRecyclebinList() */
+			    A.MSG_CODE
+			  , A.MSG_SENDER_NO
+			  , A.MSG_REICIPIENT_NO
+			  , A.MSG_CONTENT
+			  , A.MSG_SEND_DATE
+			  , A.MSG_SEND_TIME
+			  , A.MSG_READ_DATE
+			  , A.MSG_READ_TIME
+			  , A.MSG_RECYCLE_BIN_STATUS
+			  , A.MSG_DELETE_STATUS
+			  , B.NAME
+           FROM MESSAGE A
+           JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
+          WHERE A.MSG_REICIPIENT_NO = 303
+            AND A.MSG_RECYCLE_BIN_STATUS = 'Y'
+    </select>
+    
+    <select id="sendMessage" resultMap="messageResultMap">
+    	INSERT /* com.work.workhub.member.message.model.dao.sendMessage(MessageDTO message) */
+    	  INTO MESSAGE
+        (
+          MSG_CODE
+        , MSG_SENDER_NO
+        , MSG_REICIPIENT_NO
+        , MSG_CONTENT
+        , MSG_SEND_DATE
+        , MSG_SEND_TIME
+        , MSG_READ_DATE
+        , MSG_READ_TIME
+        , MSG_RECYCLE_BIN_STATUS
+        , MSG_DELETE_STATUS
+        )
+       VALUES
+       (
+         SEQ_MESSAGE_NO.NEXTVAL
+       , 0
+       , 0
+       , ''
+       , ''
+       , ''
+       , ''
+       , ''
+       , 'N'
+       , 'N'
+       );
+    </select>
+</mapper>
