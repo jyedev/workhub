@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +15,7 @@ import com.work.workhub.member.member.dao.MemberMapper;
 import com.work.workhub.member.member.dto.AuthorityDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
 import com.work.workhub.member.member.dto.MemberRoleDTO;
+import com.work.workhub.member.member.dto.UserImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,16 +57,11 @@ public class MemberServiceImpl implements MemberService {
 
 		}
 		
-		User user = new User(member.getId(), member.getPwd(), authorities);
-		log.info(user.toString());
+		/* User 객체에 담기지 않는 추가 정보를 User 객체를 extends한 UserImpl에 담아서 리턴한다. */
+		UserImpl user = new UserImpl(member.getId(), member.getPwd(), authorities);
+		user.setDetails(member);
 		
 		return user;
-		
-//		/* User 객체에 담기지 않는 추가 정보를 User 객체를 extends한 UserImpl에 담아서 리턴한다. */
-//		UserImpl user = new UserImpl(member.getId(), member.getPwd(), authorities);
-//		user.setDetails(member);
-//		
-//		return user;
 	}
 
 }
