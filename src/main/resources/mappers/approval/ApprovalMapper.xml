@@ -10,17 +10,49 @@
 		<result property="status" column="APP_STATUS"/>
 		<result property="createdDate" column="APP_CREATED_DATE"/>
 		<result property="dueDate" column="APP_DUE_DATE"/>
+		
+		<association property="receiver" resultMap="memberResultMap"/>
+		<association property="sender" resultMap="memberResultMap"/>
+	</resultMap>
+	
+	<resultMap id="memberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="depNo" column="DEP_NO"/>
+		<result property="positionNo" column="POSITION_NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
 	</resultMap>
 	
 	<select id="selectReceptionList" resultMap="approvalResultMap">
 		SELECT
-		   APP_NO
-		 , APP_MEM_NO
-		 , APP_TITLE
-		 , APP_CONTENT
-		 , APP_STATUS
-		 , APP_CREATED_DATE
-		 , APP_DUE_DATE
-		  FROM APPROVAL
+			   A.APP_NO
+			 , A.APP_MEM_NO
+			 , A.APP_TITLE
+			 , A.APP_CONTENT
+			 , A.APP_STATUS
+			 , A.APP_CREATED_DATE
+			 , A.APP_DUE_DATE
+			 , B.NAME
+	      FROM APPROVAL A
+		  JOIN TBL_MEMBER B ON(A.APP_MEM_NO = B.NO)
+	</select>
+	
+	<select id="selectSendList" resultMap="approvalResultMap">
+		SELECT
+			   A.APP_NO
+			 , A.APP_MEM_NO
+			 , A.APP_TITLE
+			 , A.APP_CONTENT
+			 , A.APP_STATUS
+			 , A.APP_CREATED_DATE
+			 , A.APP_DUE_DATE
+			 , B.NAME
+	      FROM APPROVAL A
+		  JOIN TBL_MEMBER B ON(A.APP_MEM_NO = B.NO)
 	</select>
 </mapper>
