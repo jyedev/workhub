@@ -8,4 +8,6 @@ public interface ApprovalService {
 
 	List<ApprovalDTO> selectReceptionList();
 
+	List<ApprovalDTO> selectSendList();
+
 }

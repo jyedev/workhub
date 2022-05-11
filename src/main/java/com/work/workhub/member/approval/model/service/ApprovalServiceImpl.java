@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.work.workhub.member.approval.model.dao.ApprovalMapper;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service("approvalService")
 public class ApprovalServiceImpl implements ApprovalService {
 
@@ -20,7 +23,14 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 	@Override
 	public List<ApprovalDTO> selectReceptionList() {
+		
 		return approvalMapper.selectReceptionList();
+	}
+
+	@Override
+	public List<ApprovalDTO> selectSendList() {
+		
+		return approvalMapper.selectSendList();
 	}
 
 }

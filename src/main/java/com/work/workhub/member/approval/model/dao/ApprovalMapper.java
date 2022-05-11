@@ -9,6 +9,8 @@ import com.work.workhub.member.approval.model.dto.ApprovalDTO;
 @Mapper
 public interface ApprovalMapper {
 
+	List<ApprovalDTO> selectSendList();
+
 	List<ApprovalDTO> selectReceptionList();
 
 }
