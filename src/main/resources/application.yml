@@ -4,12 +4,13 @@ server :
   
 spring:
   datasource:
-    url: jdbc:oracle:thin:@oracle_high?TNS_ADMIN=/Users/hyeweonyoo/Downloads/Wallet_oracle
+    url: jdbc:oracle:thin:@localhost:1521:xe
     driver-class-name: oracle.jdbc.OracleDriver
-    username: workhub
-    password: adminADMIN11
+    username: C##WORKHUB
+    password: WORKHUB
     
 # mybatis config
 mybatis : 
   mapper-locations : mappers/**/*.xml
+  
   
