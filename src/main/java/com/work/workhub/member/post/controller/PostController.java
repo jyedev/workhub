@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.work.workhub.member.member.dto.UserImpl;
 import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
 import com.work.workhub.member.post.model.service.PostService;
@@ -34,22 +36,21 @@ public class PostController {
 		this.messageSource = messageSource;
 	}
 	
-	@GetMapping("list")
+	@GetMapping("/list")
 	public ModelAndView findPostList(ModelAndView mv) {
 		
-//		List<PostDTO> postList = postService.findAllPost();
-//		
-//		mv.addObject("postList", postList);
-		mv.setViewName("post/list");
+		List<PostDTO> postList = postService.findAllPost();
+		
+		mv.addObject("postList", postList);
+		mv.setViewName("/post/list");
 		
 		return mv;
 	}
 	
-	//detail 따로 빼서 작성
-	@GetMapping("detail")
+	@GetMapping("/detail")
 	public ModelAndView findPostDetail(ModelAndView mv) {
 		
-		mv.setViewName("post/detail");
+		mv.setViewName("/post/detail");
 		
 		return mv;
 	}
@@ -62,17 +63,14 @@ public class PostController {
 	}
 	
 	//write
-	@GetMapping("write")
+	@GetMapping("/write")
 	public void writePage() {}
 	
-	@PostMapping("write")
-	public String writePost(@ModelAttribute PostDTO post, RedirectAttributes rttr, Locale locale) throws Exception {
+	@PostMapping("/write")
+	public String writePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
 		
-		log.error("등록 요청 글 : {}", post);
-		log.warn("등록 요청 글 : {}", post);
+		post.setNo(user.getNo());
 		log.info("등록 요청 글 : {}", post);
-		log.debug("등록 요청 글 : {}", post);
-		log.trace("등록 요청 글 : {}", post);
 		
 		postService.writePost(post);
 		
