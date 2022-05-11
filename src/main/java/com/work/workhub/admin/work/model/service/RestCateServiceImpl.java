@@ -7,38 +7,45 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.admin.work.model.dao.WorkMapper;
-import com.work.workhub.admin.work.model.dto.WorkDTO;
+import com.work.workhub.admin.work.model.dto.RestCateDTO;
 
-@Service("workService")
+
+
+@Service("restcateService")
 @Transactional
-public class WorkServiceImpl implements WorkService{
+public class RestCateServiceImpl implements RestCateService{
 	
 	private final WorkMapper workMapper;
 	
 	@Autowired
-	public WorkServiceImpl(WorkMapper workMapper) {
+	public RestCateServiceImpl(WorkMapper workMapper) {
 		this.workMapper = workMapper;
 	}
 	
-	//근무유형 작성
+	//연차유형 조회
 	@Override
-	public boolean workWrite(WorkDTO post) throws Exception {
+	public List<RestCateDTO> selectAllrestcate() {
 		
-		int result = workMapper.workWrite(post);
+		return workMapper.restcateSelect();
+	}
+	
+	//연차유형 작성
+	@Override
+	public boolean restCateWrite(RestCateDTO post) throws Exception {
+		
+		int result = workMapper.restCateWrite(post);
 		
 		if(result <= 0) {
 			throw new Exception("게시글 등록에 실패하였습니다.");
 		}
 		
 		return result > 0 ? true : false;
+		
 	}
 	
-	//근무유형 조회
-	@Override
-	public List<WorkDTO> selectAllwork() {
-		
-		return workMapper.workSelect();
-	}
+	
+	
+
 
 
 }

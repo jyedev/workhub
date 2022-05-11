@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workWrite</title>
+    <!-- fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/adminyj.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+</head>
+<body>
+ <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.html"><img src="src/images/logo-workhub.png" alt="Logo" srcset=""></a>
+                            
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active ">
+                            <a href="index.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>홈</span>
+                            </a>
+                        </li>
+
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-collection-fill"></i>
+                                <span>사원 관리</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="extra-component-avatar.html">정보 복수 변경</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">정보 다운로드</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-grid-1x2-fill"></i>
+                                <span>근태 관리</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="layout-default.html">근무그룹 등록</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="layout-vertical-1-column.html">사원 근무그룹 등록
+                                    </a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="layout-vertical-1-column.html">근무 유형 등록</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="layout-vertical-1-column.html">연차 유형 등록</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-hexagon-fill"></i>
+                                <span>게시판 관리</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="form-element-input.html">게시판 관리</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-element-input-group.html">작성한 공지사항</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>자산 관리</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="form-editor-quill.html">회의실 관리</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-editor-ckeditor.html">차량 관리</a>
+                                </li>
+
+                                </li>
+                            </ul>
+                        </li>
+
+                        <br><br><br><br><br><br>
+                        
+
+                        <li class="sidebar-item  ">
+                            <a href="ui-file-uploader.html" class='sidebar-link'>
+                                <img src="src/images/logout.png" alt="logout">
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        
+
+        <!--모든 근무 그룹 시작-->
+        <section class="section olggogo">
+            <div class="card">
+                <h4 style="color: black;" class="sdssssc wwww">근무유형</h4>
+                <input type="button" value="신규 추가" class="gttt" onclick="location.href='/restcate/restCateWrite'">
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th class="erre">코드</th>
+                                <th class="erff">휴가종류</th>
+                                <th class="sds">유/무급</th>
+                                <th class="deaf">연차 차감</th>
+                                <th class="deaf">공휴일 포함 여부</th>
+                                <th class="sds">작성일</th>
+                                <th class="deaf">사용여부</th>
+                                <th class="dfadsf">설정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="restcate : ${ restcateList }">
+                                <td th:text="${ restcate.restNo }"></td>  <!-- 코드 -->
+                                <td th:text="${ restcate.restName }"></td> <!-- 휴가종류 -->
+                                <td th:text="${ restcate.restMoney }"></td> <!-- 유/무급 -->
+                                <td th:text="${ restcate.restDed }"></td> <!-- 연차차감 -->
+                                <td th:text="${ restcate.restInclude }"></td> <!-- 공휴일 포함 여부 -->
+                                <td th:text="${ restcate.restDate }"></td> <!-- 작성일 -->
+                                <td th:text="${ restcate.restUse }"></td> <!-- 사용여부 -->
+                                <td>   
+                                    <span class="badge bg-success">설정</span>  <!-- 설정 -->
+                                </td>
+                            </tr>          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!--모든 근무 그룹 끝-->
+       
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
