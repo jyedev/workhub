@@ -14,47 +14,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.work.workhub.admin.work.model.dto.WorkDTO;
-import com.work.workhub.admin.work.model.service.WorkService;
+import com.work.workhub.admin.work.model.dto.RestCateDTO;
+import com.work.workhub.admin.work.model.service.RestCateService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/work")
-public class WorkWriteController {
+@RequestMapping("/restcate")
+public class RestCateController {
 	
-	private WorkService workService;
+	private RestCateService restcateService;
 	private MessageSource messageSource;
 	
 	@Autowired
-	public WorkWriteController(WorkService workService, MessageSource messageSource) {
-		this.workService = workService;
+	public RestCateController(RestCateService restcateService, MessageSource messageSource) {
+		this.restcateService = restcateService;
 		this.messageSource = messageSource;
 	}
 	
 	
-	/* 근무유형 조회*/		
+	/* 연차유형 조회*/		
 	
 	@GetMapping("list")
-	public ModelAndView workSelect(ModelAndView mv) {
+	public ModelAndView restCateSelect(ModelAndView mv) {
 			
-		List<WorkDTO> workList = workService.selectAllwork();
+		List<RestCateDTO> restcateList = restcateService.selectAllrestcate();
 		
-		mv.addObject("workList",workList);
+		mv.addObject("restcateList",restcateList);
 		
-		mv.setViewName("work/workSelect");
+		mv.setViewName("restcate/restCateSelect");
 		
 		return mv;
 	}
 	
 	
-	//근무 유형 작성 폼
-	@GetMapping("workWrite")
-	public void workWrite() {}
+	//연차 유형 작성 폼
+	@GetMapping("restCateWrite")
+	public void restCateWrite() {}
 	
-	@PostMapping("workWrite")
-	public String workWrite(@ModelAttribute WorkDTO post, RedirectAttributes rttr, Locale locale) throws Exception {
+	@PostMapping("restCateWrite")
+	public String restCateWrite(@ModelAttribute RestCateDTO post, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		log.error("등록 요청 글 : {}", post);
 		log.warn("등록 요청 글 : {}", post);
@@ -62,11 +62,11 @@ public class WorkWriteController {
 		log.debug("등록 요청 글 : {}", post);
 		log.trace("등록 요청 글 : {}", post);
 		
-		workService.workWrite(post);
+		restcateService.restCateWrite(post);
 		
-		rttr.addFlashAttribute("successMessage", messageSource.getMessage("workWrite", null, locale));
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("restCateWrite", null, locale));
 		
-		return "redirect:/work/list";
+		return "redirect:/restcate/list";
 		
 	}
 
