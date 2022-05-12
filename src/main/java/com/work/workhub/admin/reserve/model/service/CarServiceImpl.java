@@ -53,4 +53,14 @@ public class CarServiceImpl implements CarService{
 		
 		return carMapper.selectCarInfo(no);
 	}
+	@Override
+	public boolean deleteCar(CarDTO car) throws Exception {
+		int result = carMapper.deleteCar(car);
+		
+		if(result <=0) {
+			throw new Exception("차량 자산 삭제 실패");
+		}
+		
+		return result > 0 ? true : false;
+	}
 }

@@ -14,5 +14,7 @@ public interface RoomService {
 
 	MeetingRoomDTO selectRoomInfo(int roomNo);
 
+	boolean deleteRoom(MeetingRoomDTO room) throws Exception;
+
 
 }

@@ -16,6 +16,8 @@ public interface CarMapper {
 	CarDTO selectCarInfo(int no);
 
 	int modifyCar(CarDTO car);
+
+	int deleteCar(CarDTO car);
 	
 	
 }

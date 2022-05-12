@@ -51,11 +51,18 @@
     	RM_LOCATION = #{ rmLocation },
     	ROOM_NAME = #{ roomName },
     	ROOM_YN = #{ roomYn },
-    	<if test="singleFile != null">
+    	<if test="orgName != null">
     		ORG_NAME = #{ orgName },
     		SAVED_NAME = #{ savedName },
     		SAVE_PATH = #{ savePath }
     	</if>
     	WHERE ROOM_NO = #{ roomNo }
+    </update>
+    
+    <update id="deleteRoom">
+    	UPDATE MT_ROOM
+    	SET
+    	DEL_YN = 'Y'
+    	 WHERE ROOM_NO = #{ roomNo } 
     </update>
 </mapper>
