@@ -53,13 +53,10 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		
 		MemberRoleDTO memberRole = new MemberRoleDTO();
 		memberRole.setAuthNo(1);
-		memberRole.setSequenceName(sequenceName); // sequenceName 중복 알고는 있는데 귀찮아요.
+		memberRole.setSequenceName(sequenceName);
 		memberRole.setAuthNo(authNo);
 		adminMemberMapper.insertMemberRole(memberRole);
 		
 	}
-	
-	
-	
 	
 }

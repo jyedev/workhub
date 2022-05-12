@@ -35,5 +35,13 @@ public class MemberController {
 
 		model.addAttribute("errorMessage", errorMessage);
 	}
+
+	// =========================오류 해결 중=========================
+	// 비밀번호 찾기 폼
+//	@RequestMapping("/find_pw_form.do")
+//	public String find_pw_form() throws Exception{
+//		return "/member/find_pw_form";
+//	}
+
 	
 }
