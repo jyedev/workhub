@@ -61,7 +61,7 @@
                                 <div class="email-app-menu">
                                     <div class="form-group form-group-compose">
                                         <!-- compose button  -->
-                                        <a href="application-send-message.html" type="button" class="btn btn-primary btn-block my-4 compose-btn active">
+                                        <a type="button" class="btn btn-primary btn-block my-4 compose-btn active" onclick="location.href='/message/sendMessage'" style="cursor:pointer;">
                                             <i class="bi bi-plus"></i>
                                             새 쪽지 보내기
                                         </a>
@@ -69,9 +69,8 @@
                                     <div class="sidebar-menu-list ps">
                                         <!-- sidebar menu  -->
                                         <div class="list-group list-group-messages">
-                                            <a href="application-inbox.html" class="list-group-item pt-0 active" id="inbox-menu">
+                                            <a class="list-group-item pt-0 active" id="inbox-menu" onclick="location.href='/message/inboxList'" style="cursor:pointer;">
                                                 <div class="fonticon-wrap d-inline me-3">
-            
                                                     <i class="bi bi-envelope"></i>
                                                     </i>
                                                 </div>
@@ -79,14 +78,13 @@
                                                 <span
                                                     class="badge badge-light-primary badge-pill badge-round float-right mt-50">5</span>
                                             </a>
-                                            <a href="application-outbox.html" class="list-group-item">
+                                            <a class="list-group-item" onclick="location.href='/message/sentList'" style="cursor:pointer;">
                                                 <div class="fonticon-wrap d-inline me-3">
-            
                                                     <i class="bi bi-archive"></i>
                                                 </div>
                                                 보낸 쪽지함
                                             </a>
-                                            <a href="application-trash.html" class="list-group-item" id="trash-menu">
+                                            <a class="list-group-item" id="trash-menu" onclick="location.href='/message/recyclebinList'" style="cursor:pointer;">
                                                 <div class="fonticon-wrap d-inline me-3">
                                                     <i class="bi bi-trash"></i>
                                                 </div>
@@ -225,7 +223,7 @@
                                                         </div>
                                                         <div class="pr-50">
                                                             <div class="sender-fanme width=25">
-                                                                <p for="sender-name" id="sender-name" th:text="${ message.reicipientNo }">수신자사번</p>
+                                                                <p id="sender-name" th:text="${ message.sender.name }">발송인 이름</p>
                                                             </div>
                                                         </div>
                                                         <div class="media-body" data-bs-toggle="modal" data-bs-target="#readMessage" data-sendername="document.getElementById('sender-name')">

@@ -23,6 +23,7 @@ public class MemberDTO {
    private String email;
    private String phone;
    private String status;
+   private String sequenceName;
    
    public List<MemberRoleDTO> memberRoleList;
    

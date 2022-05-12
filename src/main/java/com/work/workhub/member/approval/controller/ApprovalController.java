@@ -36,6 +36,23 @@ public class ApprovalController {
 		mv.addObject("receptionList", receptionList);
 		mv.setViewName("approval/receptionList");
 		
+		log.info("수신목록 : {}", receptionList.toString());
+		log.error("수신목록 : {}", receptionList.toString());
+		
+		return mv;
+	}
+	
+	@GetMapping("sendList")
+	public ModelAndView sendList(ModelAndView mv) {
+		
+		List<ApprovalDTO> sendList = approvalService.selectSendList();
+		
+		mv.addObject("sendList", sendList);
+		mv.setViewName("approval/sendList");
+		
+		log.info("발신목록 : {}", sendList.toString());
+		log.error("발신목록 : {}", sendList.toString());
+		
 		return mv;
 	}
 

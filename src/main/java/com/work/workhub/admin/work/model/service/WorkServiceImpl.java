@@ -21,24 +21,24 @@ public class WorkServiceImpl implements WorkService{
 	}
 	
 	//근무유형 작성
-//	@Override
-//	public boolean workWrite(WorkDTO post) throws Exception {
-//		
-//		int result = workMapper.workWrite(post);
-//		
-//		if(result <= 0) {
-//			throw new Exception("게시글 등록에 실패하였습니다.");
-//		}
-//		
-//		return result > 0 ? true : false;
-//	}
+	@Override
+	public boolean workWrite(WorkDTO post) throws Exception {
+		
+		int result = workMapper.workWrite(post);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 등록에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+	}
 	
 	//근무유형 조회
-//	@Override
-//	public List<WorkDTO> selectAllwork() {
-//		
-//		return workMapper.workSelect();
-//	}
+	@Override
+	public List<WorkDTO> selectAllwork() {
+		
+		return workMapper.workSelect();
+	}
 
 
 }

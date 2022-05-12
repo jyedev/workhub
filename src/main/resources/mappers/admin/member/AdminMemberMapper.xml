@@ -47,7 +47,7 @@
 		)
 		VALUES
 		(
-		  SEQ_MEMBER_NO.NEXTVAL
+		  ${ sequenceName }.NEXTVAL
 		, #{ id }
 		, #{ pwd }
 		, #{ depNo }
@@ -70,7 +70,7 @@
 		)
 		VALUES
 		(
-		  SEQ_MEMBER_NO.CURRVAL
+		  ${ sequenceName }.CURRVAL
 		, #{ authNo }
 		)
 	</insert>
