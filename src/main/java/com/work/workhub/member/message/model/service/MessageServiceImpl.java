@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.work.workhub.member.member.dto.DepartmentDTO;
+import com.work.workhub.member.member.dto.MemberDTO;
 import com.work.workhub.member.message.model.dao.MessageMapper;
 import com.work.workhub.member.message.model.dto.MessageDTO;
 
@@ -50,6 +52,16 @@ public class MessageServiceImpl implements MessageService {
 		
 		return result > 0 ? true : false;
 		
+	}
+
+	@Override
+	public List<DepartmentDTO> selectDepartmentList() {
+		return messageMapper.selectDepartmentList();
+	}
+
+	@Override
+	public List<MemberDTO> selectMemberList() {
+		return messageMapper.selectMemberList();
 	}
 
 }
