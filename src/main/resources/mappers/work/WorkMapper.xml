@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.work.workhub.admin.work.model.dao.WorkMapper.">
+<mapper namespace="com.work.workhub.admin.work.model.dao.WorkMapper">
 
 <resultMap type="com.work.workhub.admin.work.model.dto.WorkDTO" id="workResultMap">
 	<id property="workNo" column="WORK_NO"/>
@@ -11,7 +11,22 @@
 	<result property="workDate" column="WORK_DATE"/>
 	<result property="workModdate" column="WORK_MODDATE"/>
 </resultMap>
+
+<resultMap type="com.work.workhub.admin.work.model.dto.RestCateDTO" id="restcateResultMap">
+	<id property="restNo" column="REST_NO"/>
+	<result property="restName" column="REST_NAME"/>
+	<result property="restDed" column="REST_DED"/>
+	<result property="restInclude" column="REST_INCLUDE"/>
+	<result property="restMoney" column="REST_MONEY"/>
+	<result property="restPoss" column="REST_POSS"/>
+	<result property="restDay" column="REST_DAY"/>
+	<result property="restUse" column="REST_USE"/>
+	<result property="restStatus" column="REST_STATUS"/>
+	<result property="restDate" column="REST_DATE"/>
+	<result property="restModdate" column="REST_MODDATE"/>
+</resultMap>
 	
+	<!-- 근태유형 작성 -->
 	<insert id="workWrite">
 		INSERT
 			INTO WORK_CATEGORY
@@ -31,11 +46,48 @@
 		, DEFAULT
 		)
 	</insert>
-
-<select id="workSelect" resultMap="workResultMap">
+	
+	<!-- 근태유형 조회 -->
+	<select id="workSelect" resultMap="workResultMap">
 	SELECT
 	    *
-	 FROM WORK_CATEGORY   
-</select>
-
+	 FROM WORK_CATEGORY 
+	 WHERE WORK_STATUS = 'Y'
+	 ORDER BY WORK_NO 
+	</select>
+	
+	<!-- 연차유형 조회 -->
+	<select id="restcateSelect" resultMap="restcateResultMap">
+	SELECT
+	    *
+	 FROM REST_CATEGORY
+	 WHERE REST_STATUS = 'Y'
+	 ORDER BY REST_NO    
+	</select>
+	
+	<!-- 연차유형 작성 -->
+	<insert id="restCateWrite">
+		INSERT
+			INTO REST_CATEGORY
+		(
+		  REST_NO
+		, REST_NAME
+		, REST_DED
+		, REST_INCLUDE
+		, REST_MONEY
+		, REST_USE
+		, REST_STATUS
+		)	
+		VALUES
+		(
+		  SEQ_REST_NO.NEXTVAL
+		, #{ restName } 
+		, #{ restDed }
+		, #{ restInclude }
+		, #{ restMoney }
+		, #{ restUse }
+		, DEFAULT
+		)
+	</insert>
+	
 </mapper>

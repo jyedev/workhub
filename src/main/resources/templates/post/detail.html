@@ -43,7 +43,7 @@
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">게시판</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/post/list}">자유게시판</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -86,6 +86,7 @@
                                         <img src="/assets/images/post-surv/emptyHeart.png" class="icon-heart"> 추천 누른 사람 0명</p>
                                 </div>
                             </div><hr>
+                            <!-- reply -->
                             <div class="com-detail-reply">
                                 <div class="com-reply-writer">
                                     <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">

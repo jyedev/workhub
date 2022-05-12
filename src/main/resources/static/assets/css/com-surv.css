@@ -156,6 +156,11 @@
     height: 0.7rem;
 }
 
+td a{
+	text-decoration:none;
+	color: #607080;
+}
+
 
 /* surv ------------------- */
 
