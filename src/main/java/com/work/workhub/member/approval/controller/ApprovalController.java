@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
 import com.work.workhub.member.approval.model.service.ApprovalService;
+import com.work.workhub.member.member.dto.DepartmentDTO;
+import com.work.workhub.member.member.dto.MemberDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,16 +28,33 @@ public class ApprovalController {
 	}
 
 	@GetMapping("regist")
-	public void registPage() {}
+	public ModelAndView registPage(ModelAndView mv) {
+		
+		List<DepartmentDTO> departmentList = approvalService.selectDepartmentList();
+		List<MemberDTO> memberList = approvalService.selectMemberList();
+		
+		mv.addObject("departmentList", departmentList);
+		mv.setViewName("approval/regist");
+		
+		mv.addObject("memberList", memberList);
+		mv.setViewName("approval/regist");
+		
+		log.info("부서 목록 : {}", departmentList);
+		log.info("사원 목록 : {}", memberList);
+		
+		return mv;
+	}
 	
 	@GetMapping("receptionList")
 	public ModelAndView receptionList(ModelAndView mv) {
 		
 		List<ApprovalDTO> receptionList = approvalService.selectReceptionList();
+
 		
 		mv.addObject("receptionList", receptionList);
-		mv.setViewName("approval/receptionList");
+
 		
+
 		log.info("수신목록 : {}", receptionList.toString());
 		log.error("수신목록 : {}", receptionList.toString());
 		

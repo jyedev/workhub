@@ -34,13 +34,23 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public boolean modifyRoom(MeetingRoomDTO room) throws Exception {
-        // TODO Auto-generated method stub
-        return false;
+    	int result = roomMapper.modifyRoom(room);
+		
+		if(result <=0) {
+			throw new Exception("미팅룸 자산 수정 실패");
+		}
+		
+		return result > 0 ? true : false;
     }
 
 	@Override
 	public List<MeetingRoomDTO> selectAllRoom() {
 		return roomMapper.selectRoomList();
+	}
+
+	@Override
+	public MeetingRoomDTO selectRoomInfo(int roomNo) {
+		return roomMapper.selectRoomInfo(roomNo);
 	}
 
 }

@@ -1,12 +1,11 @@
 package com.work.workhub.admin.reserve.controller;
-
-
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +24,17 @@ public class CarModifyController {
 	private CarService carService;
 	private MessageSource messageSource;
 	
-	/* 차량 정보 수정,삭제용 화면 이동*/
-	
+	@Autowired
+	public CarModifyController(CarService carService, MessageSource messageSource) {
+		this.carService = carService;
+		this.messageSource = messageSource;
+	}
 	
 	
 	@PostMapping("modify")
-	public String modifyCar(@ModelAttribute CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
+	public String modifyCar(@ModelAttribute("car") CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		log.info("수정할 차 : {}",car);
-
 		
 		carService.modifyCar(car);
 		

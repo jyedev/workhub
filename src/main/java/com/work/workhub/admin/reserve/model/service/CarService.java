@@ -8,7 +8,7 @@ public interface CarService {
 
 	boolean registCar(CarDTO car) throws Exception;
 
-	void modifyCar(CarDTO car);
+	boolean modifyCar(CarDTO car) throws Exception;
 
 	List<CarDTO> selectAllCar();
 
