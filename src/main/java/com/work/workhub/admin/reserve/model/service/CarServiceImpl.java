@@ -39,9 +39,14 @@ public class CarServiceImpl implements CarService{
 
 	
 	@Override
-	public void modifyCar(CarDTO car) {
-		// TODO Auto-generated method stub
+	public boolean modifyCar(CarDTO car) throws Exception {
+		int result = carMapper.modifyCar(car);
 		
+		if(result <=0) {
+			throw new Exception("차량 자산 수정 실패");
+		}
+		
+		return result > 0 ? true : false;
 	}
 	@Override
 	public CarDTO selectCarInfo(int no) {

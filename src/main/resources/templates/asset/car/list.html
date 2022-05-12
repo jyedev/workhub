@@ -27,7 +27,7 @@
 </head>
 
 <body>
-	<div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
+	<div th:include="sidebar/sidebar-admin-asset" th:remove="tag"></div>
 	<div id="main">
 		<header class="mb-3">
 			<a href="#" class="burger-btn d-block d-xl-none"> <i
@@ -103,17 +103,7 @@
 	</div>
 	<!-- id=main -->
 
-	<script>
-		function updateCarView(carNo) {
-			location.href = "/asset/car/modify?no=" + no;
-		}
-		/* 			function deleteCar(){
-		 if(confirm('이 게시글을 삭제하시겠습니까?')){
-		 document.forms.noticeForm.action = "${ pageContext.servletContext.contextPath }/notice/delete";
-		 document.forms.noticeForm.submit();
-		 }
-		 } */
-	</script>
+	
 
 
 

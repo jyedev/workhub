@@ -12,5 +12,7 @@ public interface RoomService {
 
 	List<MeetingRoomDTO> selectAllRoom();
 
+	MeetingRoomDTO selectRoomInfo(int roomNo);
+
 
 }
