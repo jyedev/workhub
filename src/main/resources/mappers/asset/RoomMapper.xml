@@ -9,7 +9,6 @@
         <result property="roomName" column="ROOM_NAME"/>
         <result property="roomYn" column="ROOM_YN"/>
         <result property="delYn" column="DEL_YN"/>
-        <result property="attachNo" column="ATTACH_NO"/>
         <result property="orgName" column="ORG_NAME"/>
         <result property="savedName" column="SAVED_NAME"/>
         <result property="savePath" column="SAVE_PATH"/>
@@ -25,7 +24,6 @@
             #{ roomName },
             #{ roomYn },
             DEFAULT,
-            SEQ_ROOM_ATTACH_NO.NEXTVAL,
             #{ orgName },
             #{ savedName },
             #{ savePath }
@@ -40,4 +38,24 @@
 		 ORDER BY ROOM_NO DESC 	
     	
     </select>
+    
+    <select id="selectRoomInfo" resultMap="roomResultMap">
+    	SELECT *
+    	  FROM MT_ROOM
+    	 WHERE ROOM_NO = #{ roomNo }
+    </select>
+    
+    <update id="modifyRoom">
+    	UPDATE MT_ROOM
+    	SET
+    	RM_LOCATION = #{ rmLocation },
+    	ROOM_NAME = #{ roomName },
+    	ROOM_YN = #{ roomYn },
+    	<if test="singleFile != null">
+    		ORG_NAME = #{ orgName },
+    		SAVED_NAME = #{ savedName },
+    		SAVE_PATH = #{ savePath }
+    	</if>
+    	WHERE ROOM_NO = #{ roomNo }
+    </update>
 </mapper>

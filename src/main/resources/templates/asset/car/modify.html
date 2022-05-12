@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
+    <div th:include="sidebar/sidebar-admin-asset" th:remove="tag"></div>
     <div id="main">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
@@ -62,13 +62,13 @@
                                 <label class="label-size">차종명</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="floor" th:value="${ carInfo.carName }">
+                                <input type="text" class="form-control input-margin" name="carName" th:value="${ carInfo.carName }">
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차량번호</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="room" th:value="${ carInfo.carNumber }">
+                                <input type="text" class="form-control input-margin" name="carNumber" th:value="${ carInfo.carNumber }">
                             </div>
                             
                             <div class="col-md-4 row-margin col-label">
@@ -76,12 +76,12 @@
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
                                 <div class="possible">
-                                    <input type="radio" class="form-check-input" name="roomYn" id="roomY" value="Y" checked>
-                                    <label class="form-check-label possi-size" for="roomYn">
+                                    <input type="radio" class="form-check-input" name="carYn" id="carY" value="Y" checked>
+                                    <label class="form-check-label possi-size" for="carYn">
                                         사용 가능
                                     </label>
-                                    <input type="radio" class="form-check-input" name="roomYn" id="roomN" value="N">
-                                    <label class="form-check-label possi-size" for="roomYn">
+                                    <input type="radio" class="form-check-input" name="carYn" id="carN" value="N">
+                                    <label class="form-check-label possi-size" for="carYn">
                                         사용 불가
                                     </label>
                                 </div>
@@ -94,6 +94,7 @@
                         </div>
                         <div class="modal-footer rev-footer-align">
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
+                            	<input type="hidden" name="carNo" th:value="${ carInfo.carNo }">
                                 <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn">수정</button>&nbsp
                                 <button type="submit" class="btn btn-light-secondary me-1 mb-1 edit-btn">삭제</button>
                                 
