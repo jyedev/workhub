@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.work.workhub.admin.work.model.dto.RestCateDTO;
 import com.work.workhub.admin.work.model.dto.WorkGroupDTO;
 import com.work.workhub.admin.work.model.service.WorkGroupService;
 
@@ -34,21 +35,58 @@ public class WorkGroupController {
 	}
 	
 	
-	/* 근무그룹유형 조회*/		
+	/* 근무그룹유형 조회 status = 'y'*/		
 	
-//	@GetMapping("list")
-//	public ModelAndView workGroupSelect(ModelAndView mv) {
+	@GetMapping("list")
+	public ModelAndView workGroupSelect(ModelAndView mv) {
+			
+		List<WorkGroupDTO> workGroupList = workgroupService.selectAllworkGroup();
+		
+
+		mv.addObject("workGroupList",workGroupList);
+		
+		mv.setViewName("group/workGroupSelect");
+		
+		return mv;
+	}
+	
+	 //근무그룹 유형 작성 폼
+		@GetMapping("workGroupWrite")
+		public void workGroupWrite() {}
+		
+		@PostMapping("workGroupWrite")
+		public String workGroupWrite(@ModelAttribute WorkGroupDTO post, RedirectAttributes rttr, Locale locale) throws Exception {
+			
+			
+			
+			log.error("등록 요청 글 : {}", post);
+			log.warn("등록 요청 글 : {}", post);
+			log.info("등록 요청 글 : {}", post);
+			log.debug("등록 요청 글 : {}", post);
+			log.trace("등록 요청 글 : {}", post);
+			
+			workgroupService.workGroupWrite(post);
+			
+			rttr.addFlashAttribute("successMessage", messageSource.getMessage("workGroupWrite", null, locale));
+			
+			return "redirect:/group/list";
+			
+		}
+		
+		/* 근무그룹유형 조회 use = '사용' 만*/		
+		
+//		@GetMapping("lists")
+//		public ModelAndView workGroupSelects(ModelAndView mv) {
+//				
+//			List<WorkGroupDTO> workGroupLists = workgroupService.selectAllworkGroups();
 //			
-//		List<WorkGroupDTO> workGroupList = workgroupService.selectAllworkGroup();
-//		
-//		mv.addObject("workGroupList",workGroupList);
-//		
-//		mv.setViewName("group/workGroupSelect");
-//		
-//		return mv;
-//	}
-	
-	
+//
+//			mv.addObject("workGroupLists",workGroupLists);
+//			
+//			mv.setViewName("group/workGroupWrite");
+//			
+//			return mv;
+//		}
 
 	
 	
