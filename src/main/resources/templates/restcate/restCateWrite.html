@@ -18,8 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 </head>
 <body>
-<body>
-<div id="app">
+ <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
@@ -131,41 +130,110 @@
             </div>
         </div>
         
+        
 
-        <!--모든 근무 그룹 시작-->
-        <section class="section olggogo">
-            <div class="card">
-                <h4 style="color: black;" class="sdssssc wwww">근무유형</h4>
-                <input type="button" value="신규 추가" class="gttt">
-                <div class="card-body">
-                    <table class="table table-striped" id="table1">
-                        <thead>
-                            <tr>
-                                <th class="erre">코드</th>
-                                <th class="erff">항목</th>
-                                <th class="sds">근무시간</th>
-                                <th class="deaf">사용여부</th>
-                                <th class="dfadsf">설정</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="work : ${ workList }">
-                                <td th:text="${ work.workNo }"></td>
-                                <td th:text="${ work.workName }"></td>
-                                <td th:text="${ work.workInclude }">김땡땡</td>
-                                <td th:text="${ work.workUse }">(기본근태)A형</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-         
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-        <!--모든 근무 그룹 끝-->
-       
+        <!--근무 유형 작성 시작-->
+        
+        <form class="wwfw" action="/restcate/restCateWrite" method="post">
+            <h4 style="color: black;" class="sdssssc">근무 유형 등록</h4>
+            <h6 class="fsdf">휴가 종류</h6>
+            <input type="text" name="restName">
+            <br><br>
+           
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="fsdf dsfs">연차 차감</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" 
+                                        id="flexRadioDefault1" name="restDed" value="차감">
+                                    <h6 class="fsdf dsfs pohg">
+                                       차감
+                                    </h6>
+                                </div>
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" 
+                                        id="flexRadioDefault2" name="restDed" value="차감안함" checked>
+                                    <h6 class="fsdf dsfs pohg">
+                                        차감안함
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card gggjj">
+                            <div class="card-header">
+                                <h6 class="fsdf dsfs">공휴일 포함</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio"
+                                        id="flexRadioDefault3"  name="restInclude" value="포함">
+                                    <h6 class="fsdf dsfs pohg">
+                                       포함
+                                    </h6>
+                                </div>
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" 
+                                        id="flexRadioDefault4" name="restInclude" value="미포함" checked>
+                                    <h6 class="fsdf dsfs pohg">
+                                        미포함
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card hddgf">
+                            <div class="card-header">
+                                <h6 class="fsdf dsfs">유/무급</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" name="restMoney" value="유급"
+                                        id="flexRadioDefault5" >
+                                    <h6 class="fsdf dsfs pohg">
+                                       유급
+                                    </h6>
+                                </div>
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" name="restMoney" value="무급"
+                                        id="flexRadioDefault6" checked>
+                                    <h6 class="fsdf dsfs pohg">
+                                        무급
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card dddffa">
+                            <div class="card-header">
+                                <h6 class="fsdf dsfs">사용여부</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" name="restUse" value="사용"
+                                        id="flexRadioDefault7">
+                                    <h6 class="fsdf dsfs pohg">
+                                       사용
+                                    </h6>
+                                </div>
+                                <div class="form-check ssswwe">
+                                    <input class="form-check-input" type="radio" name="restUse" value="미사용"
+                                        id="flexRadioDefault8" checked>
+                                    <h6 class="fsdf dsfs pohg">
+                                        미사용
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sdasdsss nuuuee">         
+    <input type="submit" class="btn btn-success rounded-pill" value="저장"></button>
+    <a href="#" class="btn btn-light rounded-pill">삭제</a>
+    <a href="#" class="btn btn-light rounded-pill">취소</a></div>
+    </form>
+        
+        <!--근무 유형 작성 끝-->
+    
     </div>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>

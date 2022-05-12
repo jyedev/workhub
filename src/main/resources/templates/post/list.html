@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="/assets/css/app2.css">
     <link rel="stylesheet" href="/assets/css/com-surv.css">
     <link rel="shortcut icon" href="/src/images/favicon-workHub.ico" type="image/x-icon">
+    <script>
+		const successMessage = '[[${successMessage}]]';
+		
+		if(successMessage) {
+			alert(successMessage);
+		}
+	</script>
 </head>
 
 <body>
@@ -39,7 +46,7 @@
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">게시판</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">자유게시판</li>
+                                    <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/post/list}">자유게시판</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -71,143 +78,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr th:each="post:${postList}">
                                         <td>
                                             <div class="checkbox checkbox-shadow">
                                                 <input type="checkbox" class="form-check-input" id="checkbox1">
                                                 <label for="checkbox1"></label>
                                             </div>
                                         </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>01</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
-                                        <td>10</td>
-                                        <td>게시글 제목입니다.</td>
-                                        <td>김허브 대리</td>
-                                        <td>22/04/18</td>
+                                        <td th:text="${post.postNo}">글번호</td>
+                                        <td><a th:href="@{/post/detail?(no=${post.postNo})}" th:text="${post.postTitle}">게시글 제목</a></td>
+                                        <td th:text="${post.member.name}">작성자</td>
+                                        <td th:text="${post.postDate}">작성 날짜</td>
                                         <td>0</td>
                                         <td>0</td>
                                     </tr>
