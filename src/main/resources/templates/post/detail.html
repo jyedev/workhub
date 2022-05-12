@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -61,7 +61,7 @@
                         <div class="card-body">
                             <div class="com-detail-title">
                                 <div class="detail-title">
-                                    <h4>게시글 제목입니다.</h4>
+                                    <h4 th:text="${ postList.postTitle }">제목</h4>
                                     <div class="com-detail-messenger">
                                         <img src="/assets/images/post-surv/messenger.png" class="icon-messenger">
                                         <span>1</span>
@@ -74,12 +74,12 @@
                             </div>
                             <div class="com-detail-writer">
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
-                                <span>김허브 대리</span>
+                                <span>작성자</span>
                                 <span id="current-time"></span>
                             </div>
                             <div class="com-detail-body">
                                 <div class="com-detail-content">
-                                    게시글 내용입니다.
+                                    내용
                                 </div>
                                 <div class="detail-body-footer">
                                     <p> <img src="/assets/images/post-surv/messenger.png" class="icon-messenger"> 댓글 1개 | 조회 1 |  
