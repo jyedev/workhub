@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
+    <div th:include="sidebar/sidebar-admin-asset" th:remove="tag"></div>
     <div id="main">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
@@ -55,28 +55,27 @@
             </div>
             <div class="subtt">* 은 필수 입력 항목입니다.</div>
             <div class="card-body">
-                <!--method="post" th:action="@{/member/signup}"-->
-                <!--  th:each="mtroom = ${ roomList }" -->
-                <form class="form form-horizontal">
+                <form class="form form-horizontal" method="post" th:action="@{/asset/room/modify}">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">위치</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="floor" readonly>
+                                <input type="text" class="form-control input-margin" name="rmLocation" th:value="${ roomInfo.rmLocation }" readonly>
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">회의실 이름 *</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="text" class="form-control input-margin" name="room" required>
+                                <input type="text" class="form-control input-margin" name="roomName" th:value="${ roomInfo.roomName }" required>
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">회의실 사진 *</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <input type="file" id="contact-info" class="form-control input-margin" name="file" required>
+                            	<input type="text" class="form-control input-margin margin-btw" name="fileName" th:value="|기존 파일 : ${ roomInfo.orgName }|" disabled>
+                                <input type="file" class="form-control input-margin" name="singleFile" required>
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size" for="flexRadioDefault1">사용 가능 여부 *</label>
@@ -101,6 +100,7 @@
                         </div>
                         <div class="modal-footer rev-footer-align">
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
+                            	<input type="hidden" name="roomNo" th:value="#{ roomInfo.roomNo }">
                                 <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn">수정</button>&nbsp
                                 <button type="submit" class="btn btn-light-secondary me-1 mb-1 edit-btn">삭제</button>
                                 

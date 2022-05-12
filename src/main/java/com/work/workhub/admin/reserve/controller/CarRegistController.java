@@ -43,7 +43,6 @@ public class CarRegistController {
 		log.error("등록요청 : {}",car);
 		log.warn("등록요청 : {}",car);
 		log.info("등록요청 : {}",car);
-		log.debug("등록요청 : {}", car);
 		
 		carService.registCar(car);
 		
