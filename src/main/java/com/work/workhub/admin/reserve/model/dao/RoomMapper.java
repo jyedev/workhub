@@ -17,4 +17,6 @@ public interface RoomMapper {
 
 	int modifyRoom(MeetingRoomDTO room);
 
+	int deleteRoom(MeetingRoomDTO room);
+
 }

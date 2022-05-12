@@ -43,4 +43,17 @@ public class CarModifyController {
 		return "redirect:/asset/car/list";
 		
 	}
+	
+	@PostMapping("delete")
+	public String deleteCar(@ModelAttribute("car") CarDTO car, RedirectAttributes rttr, Locale locale) throws Exception {
+		
+		log.info("삭제할 차 : {}",car);
+		
+		carService.deleteCar(car);
+		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("deleteCar", null, locale));
+		
+		return "redirect:/asset/car/list";
+		
+	}
 }

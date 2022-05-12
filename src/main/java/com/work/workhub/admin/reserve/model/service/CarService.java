@@ -13,4 +13,6 @@ public interface CarService {
 	List<CarDTO> selectAllCar();
 
 	CarDTO selectCarInfo(int no);
+
+	boolean deleteCar(CarDTO car) throws Exception;
 }

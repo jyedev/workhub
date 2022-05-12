@@ -47,4 +47,11 @@
 		
 	</update>
 	
+	<update id="deleteCar">
+		UPDATE COM_CAR
+		SET
+		DEL_YN = 'Y'
+		WHERE CAR_NO = #{ carNo }
+	</update>
+	
 </mapper>

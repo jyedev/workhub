@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/app-ar.css">
     <link rel="stylesheet" href="/assets/css/admin-ar.css">
     <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -55,7 +56,7 @@
             </div>
             <div class="subtt">* 은 필수 입력 항목입니다.</div>
             <div class="card-body">
-                <form class="form form-horizontal" method="post" th:action="@{/asset/room/modify}">
+                <form class="form form-horizontal" method="post" th:action="@{/asset/room/modify}" enctype="multipart/form-data">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
@@ -75,8 +76,11 @@
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
                             	<input type="text" class="form-control input-margin margin-btw" name="fileName" th:value="|기존 파일 : ${ roomInfo.orgName }|" disabled>
-                                <input type="file" class="form-control input-margin" name="singleFile" required>
+                                <input type="file" class="form-control input-margin" name="singleFile" id="fileRequired">
                             </div>
+                            
+                            
+                            
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size" for="flexRadioDefault1">사용 가능 여부 *</label>
                             </div>
@@ -100,9 +104,18 @@
                         </div>
                         <div class="modal-footer rev-footer-align">
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
-                            	<input type="hidden" name="roomNo" th:value="#{ roomInfo.roomNo }">
-                                <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn">수정</button>&nbsp
-                                <button type="submit" class="btn btn-light-secondary me-1 mb-1 edit-btn">삭제</button>
+                            	<input type="hidden" name="roomNo" th:value="${ roomInfo.roomNo }">
+                                <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn" onclick="fileRequired()">수정</button>&nbsp
+                                
+                                <script type="text/javascript">
+								function fileRequired() {
+									$('#fileRequired').attr("required", true);
+									
+								}
+								</script>
+                                
+                                <button type="submit" class="btn btn-light-secondary me-1 mb-1 edit-btn" 
+                                onclick="javascript: form.action='/asset/room/delete'">삭제</button>
                                 
                             </div>
                         </div>
@@ -113,8 +126,7 @@
 
     </div>
 
-
-    </div>
+    
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
