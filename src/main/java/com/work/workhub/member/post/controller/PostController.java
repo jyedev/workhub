@@ -86,4 +86,25 @@ public class PostController {
 		return "redirect:/post/list";
 		
 	}
+	
+	
+	//게시글 수정
+	@GetMapping("update/no/{postNo}")
+	public void updatePost() {}
+	
+	@PostMapping("update/no/{postNo}")
+	public String updatePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+		
+		post.setNo(user.getNo());
+		log.info("수정 요청 글 : {}", post);
+		
+		postService.writePost(post);
+		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("updatePost", null, locale));
+		
+		return "redirect:/post/detail/no/{postNo}";
+		
+	}
+	
+	
 }

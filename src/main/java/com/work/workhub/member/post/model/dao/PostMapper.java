@@ -18,5 +18,8 @@ public interface PostMapper {
 
 	PostDTO findPostDetail(Integer postNo);
 
+	int updatePost(int postNo);
+
+
 
 }

@@ -15,5 +15,5 @@ public interface PostService {
 
 	PostDTO findPostDetail(Integer postNo);
 
-
+	
 }

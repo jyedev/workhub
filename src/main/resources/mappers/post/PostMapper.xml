@@ -131,6 +131,28 @@
 		  AND P.POST_NO = #{ postNo } 
 	</select>
 	
+	<!-- 게시글 수정 -->
+	<update id="updatePost">
+		UPDATE
+			  POST_NO
+			, POST_TITLE
+			, POST_CONTENT
+			, CATEGORY_NO
+			, POST_DATE
+			, POST_STATUS
+			)
+			VALUES
+			(
+			  SEQ_POST_NO.CURRVAL
+			, #{ postDTO.post }
+			, #{ postContent }
+			, #{ categoryNo }
+			, SYSDATE
+			, DEFAULT
+			)
+		WHERE POST_NO = #{ postNo }			 
+	</update>
+	
 	
 	
 	
