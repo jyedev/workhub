@@ -64,4 +64,9 @@ public class MessageServiceImpl implements MessageService {
 		return messageMapper.selectMemberList();
 	}
 
+	@Override
+	public void deleteMessage(String code) {
+		messageMapper.deleteMessage(code);
+	}
+
 }
