@@ -18,5 +18,7 @@ public interface ApprovalMapper {
 	List<DepartmentDTO> selectDepartmentList();
 
 	List<MemberDTO> selectMemberList();
+	
+	void insertApproval(ApprovalDTO approval);
 
 }

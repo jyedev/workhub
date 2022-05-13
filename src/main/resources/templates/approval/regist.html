@@ -36,11 +36,11 @@
                 <div class="mx-auto writeform">
                     <h2 class="mb-3 border-bottom">결재 문서 <br><br></h2>
                     <br><br>
-                    <form class="needs-validation" validate>
+                    <form class="needs-validation" action="/approval/regist" method="post" validate>
                         <div class="writesubmit row g-3">
                             <div class="titletextbox col-sm-6">
                                 <label for="firstName" class="form-label"><strong>제목</strong></label>
-                                <input type="text" class="form-control" id="firstName" placeholder="제목 입력" name="appTitle">
+                                <input type="text" class="form-control" id="firstName" placeholder="제목 입력" name="title">
                                 <div class="invalid-feedback">
                                     제목을 입력하세요
                                 </div>
@@ -64,11 +64,7 @@
                                                      <div class="contentwritebox">
                                                         <label for="firstName" class="form-label"><strong>내용</strong></label>
                                                         <div class="contentcontainer mx-auto">
-                                                        	<textarea id="summernote" name="appContent"></textarea>
-                                                           <!-- <textarea class="textarea" rows="20" cols="150" name="content" required></textarea> -->
-<!--                                                         <div class="invalid-feedback">
-                                                            내용을 입력하세요
-                                                        </div> -->
+                                                        	<textarea id="summernote" name="content"></textarea>
                                                     	</div>
                                                 	</div>
                                            	 	</div>
@@ -76,7 +72,6 @@
                                     	</div>
                                 </section>
                             </div>
-
 
                             <!-- 날짜 설정 -->
                             <div class="container">
@@ -104,14 +99,12 @@
                                         </button>&nbsp;&nbsp;
                                         <button type="button" onclick="up();">
                                             <svg class="bi" width="1em" height="1em" fill="currentColor">
-                                                <use
-                                                    xlink:href="/assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-up" />
+                                                <use xlink:href="/assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-up" />
                                             </svg>
                                         </button>
                                         <button type="button" onclick="down();">
                                             <svg class="bi" width="1em" height="1em" fill="currentColor">
-                                                <use
-                                                xlink:href="/assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-down" />
+                                                <use xlink:href="/assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-down" />
                                             </svg>
                                         </button><br><br>
                                         
@@ -152,7 +145,7 @@
                                                                                 </tr>
                                                                             </thead>
 																				<!-- 인사팀 -->
-                                                                            	<tbody id="team1" style="display:none;">
+                                                                            	<tbody id="appteam1" style="display:none;">
                                                                                 <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '인사팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
@@ -163,7 +156,7 @@
                                                                                 </tr>
                                                                                 
                                                                                 <!-- 총무팀 -->
-                                                                                <tbody id="team2" style="display:none;">
+                                                                                <tbody id="appteam2" style="display:none;">
                                                                                 <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '총무팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
@@ -175,7 +168,7 @@
                                                                                 </tbody>
 
                                                                                 <!-- 영업팀 -->
-                                                                                <tbody id="team3" style="display:none;">
+                                                                                <tbody id="appteam3" style="display:none;">
                                                                                 <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '영업팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
@@ -187,7 +180,7 @@
                                                                                 </tbody>
                                                                                 
                                                                                 <!-- 마케팅팀 -->
-                                                                                <tbody id="team4" style="display:none;">
+                                                                                <tbody id="appteam4" style="display:none;">
                                                                                 <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '마케팅팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
@@ -199,7 +192,7 @@
                                                                                 </tbody>
                                                                                 
                                                                                 <!-- 개발팀 -->
-                                                                                <tbody id="team5" style="display:none;">
+                                                                                <tbody id="appteam5" style="display:none;">
                                                                                 <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '개발팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
@@ -223,7 +216,7 @@
                                             </div>
                                         </div>
                                         <!-- Modal end -->
-                                        <div class="list-group container" id="result">
+                                        <div class="list-group container" id="result" name="appList">
                                         </div>
                                     </div>
 
@@ -239,7 +232,7 @@
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">결재자 설정</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">참조자 설정</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
@@ -247,18 +240,18 @@
                                                         <div class="container">
                                                             <div class="row">
                                                                 <div class="col-5">
-                                                                    <div class="list-group">
-                                                                        <a href="#"
-                                                                            class="list-group-item list-group-item-action">관리부</a>
-                                                                        <a href="#"
-                                                                            class="list-group-item list-group-item-action">개발부</a>
-                                                                        <a href="#"
-                                                                            class="list-group-item list-group-item-action">영업부</a>
+                                                                
+                                                                	<!-- 부서 목록 -->
+                                                                	<th:block th:if="${ departmentList != null }">
+                                                                    <div class="list-group" th:each="department : ${ departmentList }">
+                                                                        <a
+                                                                            class="list-group-item list-group-item-action items" th:text="${ department.depName }" th:id="${ departmentStat.count }" href="javascript:void(0)" th:onclick="|javascript:showDeptMember2(this)|"></a>
                                                                     </div>
+                                                                    </th:block>
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="table-responsive">
-                                                                        <!-- 체크박스 추가/삭제 하기!!!!!!!!!!!!!!! -->
+                                                                        <!-- 사원 목록 -->
                                                                         <table class="table table-lg">
                                                                             <thead>
                                                                                 <tr>
@@ -268,36 +261,68 @@
                                                                                     <th>이름</th>
                                                                                 </tr>
                                                                             </thead>
-                                                                            <tbody>
-                                                                                <tr>
+																				<!-- 인사팀 -->
+                                                                            	<tbody id="refteam1" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '인사팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox2">
                                                                                     </td>
-                                                                                    <td name="department">인사부</td>
-                                                                                    <td name="rank">프로</td>
-                                                                                    <td name="memberName">김사랑</td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
                                                                                 </tr>
-                                                                                <tr>
+                                                                                
+                                                                                <!-- 총무팀 -->
+                                                                                <tbody id="refteam2" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '총무팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox2">
                                                                                     </td>
-                                                                                    <td name="department">인사부</td>
-                                                                                    <td name="rankd">파트너</td>
-                                                                                    <td name="memberName">주땡</td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
                                                                                 </tr>
-                                                                                <tr>
+                                                                                </tbody>
+
+                                                                                <!-- 영업팀 -->
+                                                                                <tbody id="refteam3" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '영업팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox2">
                                                                                     </td>
-                                                                                    <td name="department">인사부</td>
-                                                                                    <td name="rankd">파트너</td>
-                                                                                    <td name="memberName">최박사</td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
                                                                                 </tr>
-                                                                            </tbody>
+                                                                                </tbody>
+                                                                                
+                                                                                <!-- 마케팅팀 -->
+                                                                                <tbody id="refteam4" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '마케팅팀' }">
+                                                                                    <td>
+                                                                                        <input type="checkbox" name="user_CheckBox2">
+                                                                                    </td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                                
+                                                                                <!-- 개발팀 -->
+                                                                                <tbody id="refteam5" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '개발팀' }">
+                                                                                    <td>
+                                                                                        <input type="checkbox" name="user_CheckBox2">
+                                                                                    </td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
+                                                                                </tr>
+                                                                            	</tbody>
                                                                         </table>
-                                                                        <button type="button" id="selectBtn2" class="btn btn-primary">선택</button>
                                                                     </div>
                                                                 </div>
+                                                               <button type="button" id="selectBtn2" class="btn btn-primary">선택</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -316,7 +341,7 @@
 
                             <div class="mb-3">
                                 <label for="formFileSm" class="form-label">첨부 파일</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="attach">
                             </div>
 
 
@@ -362,16 +387,19 @@
 	
 	<script th:inline="javascript">
 		function showDeptMember(elem) {
-			var elemId = 'team' + elem.id;
+			var elemId = 'appteam' + elem.id;
 			console.log('#'+elemId);
 			$('#'+elemId).attr('style', "display:'';");
 			
-/* 			var deptId = $('#'+elemId);
-			if(deptId.style.display === 'none'){
-				deptId.style.display = 'block';
-			} else {
-				deptId.style.display = 'none';
-			} */
+			
+			
+		}
+		function showDeptMember2(elem) {
+			var elemId = 'refteam' + elem.id;
+			console.log('#'+elemId);
+			$('#'+elemId).attr('style', "display:'';");
+			
+			
 			
 		}
 			

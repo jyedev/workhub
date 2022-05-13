@@ -16,4 +16,6 @@ public interface ApprovalService {
 
 	List<MemberDTO> selectMemberList();
 
+	void registApproval(ApprovalDTO approval);
+
 }
