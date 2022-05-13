@@ -300,7 +300,7 @@
                                                         <div class="form-group pb-50">
                                                             <label for="emailfrom">보내는 사람</label>
                                                             <input type="text" id="emailfrom" class="form-control"
-                                                                placeholder="user@workhub.com" disabled="">
+                                                                disabled="" th:text="${ session.user.username }">
                                                         </div>
                                                         <div class="form-label-group">
                                                             <label for="emailTo">받는 사람 </label>
@@ -480,19 +480,16 @@
     	function showDeptMember(elem) {
     		var elemId = 'team' + elem.id;
     		var id = elem.id;
-    		var elemCurrent = elem.name;
-    		console.log(elemCurrent);
     		console.log('#'+elemId);
     		$('#'+elemId).show();
     		// $('#'+elemId).css("display", "");
     		// console.log($('#'+elemId));
     		/* $('#'+elemId).attr('style', "display:'';"); */
-    		for (var i = 1; i < 6; i++) {
-    			if(id == i) {
-    				$('#'+elemId).show();
-    			} else {
-    				
-    			}
+    		
+    		if(id == 1) {
+    			$('#'+id)
+    		} else {
+    			
     		}
     	}
     </script>
