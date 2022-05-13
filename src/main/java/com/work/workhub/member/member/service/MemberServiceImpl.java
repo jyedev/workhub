@@ -72,24 +72,24 @@ public class MemberServiceImpl implements MemberService {
 	public int findPwCheck(MemberDTO memberDTO) throws Exception {
 		return memberDTO.findPwCheck(memberDTO);
 	}
-	
+
 	@Override
-	public void findPw(String email, String id) throws Exception {
-		String memberKey = new TempKey().getKey(6, false);
-		String psw = BCrypt.hashpw(memberKey, BCrypt.gensalt());
-		MemberMapper.findPw(email, id, psw);
-		MailUtils sendmail = new MailUtils(mailUtils);
-		sendMail.setSubject("[WorkHub 임시 비밀번호 입니다.]"); //메일 제목
-		sendMail.setText(
-				"<h3>임시 비밀번호 발금</h3>" +
-						"<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
-						"<br/>임시 비밀번호 : <b>"+memberKey+"</b>"+
-						"<br/>로그인 후 비밀번호를 변경해주세요."+
-						"<a href='http://localhost:8001/member/login"+
-						">로그인 페이지</a>");
-		sendMail.setFrom("[보낼 이메일]", "WorkHub");
-		sendMail.setTo(memberEmail);
-		sendMail.send();
+	public void findPw(String memberEmail, String memberId) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	/*
+	 * @Override public void findPw(String email, String id) throws Exception {
+	 * String memberKey = new TempKey().getKey(6, false); String psw =
+	 * BCrypt.hashpw(memberKey, BCrypt.gensalt()); MemberMapper.findPw(email, id,
+	 * psw); MailUtils sendmail = new MailUtils(mailUtils);
+	 * sendMail.setSubject("[WorkHub 임시 비밀번호 입니다.]"); //메일 제목 sendMail.setText(
+	 * "<h3>임시 비밀번호 발금</h3>" + "<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
+	 * "<br/>임시 비밀번호 : <b>"+memberKey+"</b>"+ "<br/>로그인 후 비밀번호를 변경해주세요."+
+	 * "<a href='http://localhost:8001/member/login"+ ">로그인 페이지</a>");
+	 * sendMail.setFrom("[보낼 이메일]", "WorkHub"); sendMail.setTo(memberEmail);
+	 * sendMail.send(); }
+	 */
 
 }
