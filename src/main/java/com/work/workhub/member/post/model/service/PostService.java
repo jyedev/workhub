@@ -13,4 +13,7 @@ public interface PostService {
 
 	boolean writePost(PostDTO post) throws Exception;
 
+	PostDTO findPostDetail(Integer postNo);
+
+
 }

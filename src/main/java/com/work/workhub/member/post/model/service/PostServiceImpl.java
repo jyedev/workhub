@@ -44,4 +44,25 @@ public class PostServiceImpl implements PostService{
 		return result > 0 ? true : false;
 	}
 
+
+	@Override
+	public PostDTO findPostDetail(Integer postNo) {
+		
+		return postMapper.findPostDetail(postNo);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
