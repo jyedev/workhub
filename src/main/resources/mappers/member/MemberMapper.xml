@@ -28,6 +28,7 @@
 		<result property="authName" column="AUTH_NAME"/>
 	</resultMap>
 	
+	<!-- 사원 등록(/signUp) -->
 	<select id="findMemberById" resultMap="loginMemberResultMap">
 		SELECT
 			   A.NO
@@ -50,6 +51,12 @@
 		 LEFT JOIN AUTHORITY C ON (B.AUTH_NO = C.AUTH_NO)
 		WHERE A.ID = #{ username }
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<!-- 여기도 해결중...... -->
+<!-- 	<update id="update_pw" parameterType="member">
+		update member set pw = #{pw} where id = #{id}
+	</update> -->
 	
 	
 </mapper>

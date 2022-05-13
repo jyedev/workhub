@@ -37,4 +37,21 @@
 		 WHERE CAR_NO = #{ carNo }
 	</select>
 	
+	<update id="modifyCar">
+		UPDATE COM_CAR
+		SET
+		CAR_NAME = #{ carName },
+		CAR_NUMBER = #{ carNumber },
+		CAR_YN = #{ carYn }
+		WHERE CAR_NO = #{ carNo }
+		
+	</update>
+	
+	<update id="deleteCar">
+		UPDATE COM_CAR
+		SET
+		DEL_YN = 'Y'
+		WHERE CAR_NO = #{ carNo }
+	</update>
+	
 </mapper>

@@ -13,4 +13,10 @@ public interface RoomMapper {
 
 	int registRoom(MeetingRoomDTO room);
 
+	MeetingRoomDTO selectRoomInfo(int roomNo);
+
+	int modifyRoom(MeetingRoomDTO room);
+
+	int deleteRoom(MeetingRoomDTO room);
+
 }

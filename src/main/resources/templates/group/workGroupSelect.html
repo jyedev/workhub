@@ -18,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 </head>
 <body>
-	<div id="app">
+   <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header">
@@ -146,8 +146,7 @@
                                 <thead>
                                     <tr>
                                         <th>그룹명</th>
-                                        <th>근무 시작</th>
-                                        <th>근무 끝</th>
+                                        <th>근무시간</th>
                                         
                                     </tr>
                                 </thead>
@@ -155,10 +154,33 @@
                                     <tr>
                                         <td class="text-bold-500">(기본근태)A형</td>
                                         <td>09:00:00 ~ 18:00:00 </td>
-                                         <td>09:00:00 ~ 18:00:00 </td>
+                                        
 
                                     </tr>
-                                    
+                                    <tr>
+                                        <td class="text-bold-500">(기본근태)A형</td>
+                                        <td>09:00:00 ~ 18:00:00 </td>
+                                       
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">(기본근태)A형</td>
+                                        <td>09:00:00 ~ 18:00:00 </td>
+                                        
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">(기본근태)A형</td>
+                                        <td>09:00:00 ~ 18:00:00 </td>
+                                     
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">(기본근태)A형</td>
+                                        <td>09:00:00 ~ 18:00:00 </td>
+                                        
+
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -172,28 +194,38 @@
         <!--모든 근무 그룹 시작-->
         <section class="section">
             <div class="card">
-                <input type="button" value="신규 추가" class="gttt" onclick="location.href='/group/Write'">
+                <input type="button" value="신규 추가" class="gttt" onclick="location.href='/group/workGroupWrite'">
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
-                                <th class="erre">작성일</th>
-                                <th class="erff">근무그룹번호</th>
+                            	<th class="erre">No.</th>
+                                <th class="erre">작성일</th> 
                                 <th class="sds">그룹명</th>
+                                <th class="deaf">그룹설명</th>
+                                <th class="deaf">근무요일</th>
                                 <th class="deaf">근무 시작</th>
                                 <th class="deaf">근무 끝</th>
+                                <th class="deaf">쉬는시간 시작</th>
+                                <th class="deaf">쉬는시간 끝</th>
+                                <th class="deaf">연차일수</th>
                                 <th class="dfadsf">상태</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="group : ${ workGroupList }">
-                                <td th:text="${ restcate.groupDate }"></td>
-                                <td th:text="${ restcate.groupNo }"></td>
-                                <td th:text="${ restcate.groupName }"></td>
-                                <td th:text="${ restcate.groupFirdate }"></td>
-                                <td th:text="${ restcate.groupEnddate }"></td>
+                                <td th:text="${ group.groupNo }"></td> <!-- 근무그룹번호 -->
+                                <td th:text="${ group.groupDate }"></td> <!-- 작성일 -->
+                                <td th:text="${ group.groupName }"></td> <!-- 그룹명 -->
+                                <td th:text="${ group.groupEx }"></td> <!-- 그룹설명 -->
+                                <td th:text="${ group.groupDay }"></td> <!-- 그룹요일 -->
+                                <td th:text="${ group.groupFirdate }"></td> <!-- 근무시작 -->
+                                <td th:text="${ group.groupEnddate }"></td> <!-- 근무 끝 -->
+                                <td th:text="${ group.groupFirrest }"></td> <!-- 쉬는시간시작 -->
+                                <td th:text="${ group.groupEndrest }"></td> <!-- 쉬는시간 끝 -->
+                                <td th:text="${ group.groupRest }"></td> <!-- 연차일수-->
                                 <td>
-                                    <span th:text="${ restcate.groupStatus }" class="badge bg-success">설정</span>
+                                    <span th:text="${ group.groupUse }" class="badge bg-success">설정</span> <!-- 상태 -->
                                 </td>
                             </tr>                            
                         </tbody>

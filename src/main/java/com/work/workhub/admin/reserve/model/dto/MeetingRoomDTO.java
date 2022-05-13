@@ -14,7 +14,6 @@ public class MeetingRoomDTO {
 	private String roomName;
 	private String roomYn;
 	private String delYn;
-	private int attachNo;
 	private String orgName;
 	private String savedName;
 	private String savePath;

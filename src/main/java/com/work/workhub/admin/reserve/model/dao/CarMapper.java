@@ -14,6 +14,10 @@ public interface CarMapper {
 	int registCar(CarDTO car);
 
 	CarDTO selectCarInfo(int no);
+
+	int modifyCar(CarDTO car);
+
+	int deleteCar(CarDTO car);
 	
 	
 }
