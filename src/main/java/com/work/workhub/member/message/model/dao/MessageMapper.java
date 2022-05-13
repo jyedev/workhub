@@ -23,4 +23,7 @@ public interface MessageMapper {
 
 	List<MemberDTO> selectMemberList();
 
+	void deleteMessage(String code);
+
+
 }

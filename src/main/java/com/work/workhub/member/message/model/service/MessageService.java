@@ -20,4 +20,6 @@ public interface MessageService {
 
 	List<MemberDTO> selectMemberList();
 
+	void deleteMessage(String code);
+
 }
