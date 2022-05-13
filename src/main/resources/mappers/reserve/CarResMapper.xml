@@ -14,12 +14,45 @@
 	</resultMap>
 	
 	<resultMap id="carResultMap" type="com.work.workhub.admin.reserve.model.dto.CarDTO">
+	
 		<id property="carNo" column="CAR_NO"/>
 		<result property="carName" column="CAR_NAME"/>
 		<result property="carNumber" column="CAR_NUMBER"/>
 		<result property="carYn" column="CAR_YN"/>
 		<result property="delYn" column="DEL_YN"/>
+		
+		<association property="member" resultMap="loginMemberResultMap"/>
+		<association property="car" resultMap="carResultMap"/>
+		
 	</resultMap>
+	
+	<resultMap id="loginMemberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="depNo" column="DEP_NO"/>
+		<result property="positionNo" column="POSITION_NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
+		
+		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
+	</resultMap>
+	
+	<resultMap id="memberRoleResultMap" type="com.work.workhub.member.member.dto.MemberRoleDTO">
+		<id property="memberNo" column="REF_NO"/>
+		<id property="authNo" column="REF_AUTH_NO"/>
+		
+		<association property="authority" resultMap="authorityResultMap"/>
+	</resultMap>
+	
+	<resultMap id="authorityResultMap" type="com.work.workhub.member.member.dto.AuthorityDTO">
+		<id property="authNo" column="REF_AUTH_NO2"/>
+		<result property="authName" column="AUTH_NAME"/>
+	</resultMap>
+	
 	
 	<select id="selectCarList" resultMap="carResultMap">
 		SELECT

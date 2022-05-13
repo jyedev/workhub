@@ -106,14 +106,6 @@
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
                             	<input type="hidden" name="roomNo" th:value="${ roomInfo.roomNo }">
                                 <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn" onclick="fileRequired()">수정</button>&nbsp
-                                
-                                <script type="text/javascript">
-								function fileRequired() {
-									$('#fileRequired').attr("required", true);
-									
-								}
-								</script>
-                                
                                 <button type="submit" class="btn btn-light-secondary me-1 mb-1 edit-btn" 
                                 onclick="javascript: form.action='/asset/room/delete'">삭제</button>
                                 

@@ -55,16 +55,10 @@
         </div>
 
         <div class="page-heading border-bottom">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item font-clr" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="" role="tab"
-                        aria-controls="home" aria-selected="true">4층 회의실</a>
-                </li>
-                <li class="nav-item font-clr"  role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="" role="tab"
-                        aria-controls="profile" aria-selected="false">5층 회의실</a>
-                </li>
-
+            <ul class="nav nav-tabs" id="myTab" >
+				<li class="nav-item font-clr" th:each="location : ${ locationList }">
+					<a class="nav-link" id="home-tab" href="" th:text="${ location.rmLocation }"></a>
+				</li>          
             </ul>
         </div>
 
@@ -129,54 +123,24 @@
                                     </thead>
                                 </table>
                             </td>
-                            <td style="border-bottom:none;">
+                            <td style="border-bottom:none;" th:each="room : ${ roomList }">
                                 <table class="mt-room-info">
                                     <thead>
                                         <tr>
-                                            <th>미팅룸 S1</th>
+                                            <th th:text="${ room.roomName }"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="mt-room-img">
                                             <td>
-                                                <img src="/assets/images/images/meeting-room4.jpg" alt="room-img">
+                                                <img th:src="@{/uploadFiles/} + ${ room.savedName }" alt="room-img">
                                             </td>
                                         </tr>
+                                        
                                     </tbody>
                                 </table>
                             </td>
-                            <td style="border-bottom:none;">
-                                <table class="mt-room-info" no="6488">
-                                    <thead class="rs-view booking_resource_img_top">
-                                        <tr>
-                                            <th scope="col"><span class="resource_name_span" title="회의실">미팅룸 S2</span>
-                                            </th>
-                                        </tr>
-                                        <tr class="mt-room-img">
-                                            <td>
-                                                <img src="/assets/images/images/meeting-room2.jpg" alt="room-img">
-                                            </td>
-                                        </tr>
-
-                                    </thead>
-                                </table>
-                            </td>
-                            <td style="border-bottom:none;">
-                                <table class="mt-room-info" no="6488">
-                                    <thead class="rs-view booking_resource_img_top">
-                                        <tr>
-                                            <th scope="col"><span class="resource_name_span" title="회의실">미팅룸 S3</span>
-                                            </th>
-                                        </tr>
-                                        <tr class="mt-room-img">
-                                            <td>
-                                                <img src="/assets/images/images/meeting-room3.jpg" alt="room-img">
-                                            </td>
-                                        </tr>
-
-                                    </thead>
-                                </table>
-                            </td>
+                            
 
                         </tr>
                     </tbody>
