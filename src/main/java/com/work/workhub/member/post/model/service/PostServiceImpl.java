@@ -56,6 +56,7 @@ public class PostServiceImpl implements PostService{
 		
 		return postMapper.findPostDetail(postNo);
 	}
+	
 
 
 

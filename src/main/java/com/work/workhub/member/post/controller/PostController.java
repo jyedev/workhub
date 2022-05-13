@@ -53,9 +53,9 @@ public class PostController {
 	@GetMapping("detail/no/{postNo}")
 	public ModelAndView selectPostDetail(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
 
-		PostDTO postDetail = postService.findPostDetail(postNo);
+		PostDTO postDTO = postService.findPostDetail(postNo);
 		
-		mv.addObject("postDetail", postDetail);
+		mv.addObject("postDTO", postDTO);
 		
 		mv.setViewName("/post/detail");
 		
@@ -90,7 +90,16 @@ public class PostController {
 	
 	//게시글 수정
 	@GetMapping("update/no/{postNo}")
-	public void updatePost() {}
+	public ModelAndView updatePost(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
+
+		PostDTO postDTO = postService.findPostDetail(postNo);
+		
+		mv.addObject("postDTO", postDTO);
+		
+		mv.setViewName("/post/detail");
+		
+		return mv;
+	}
 	
 	@PostMapping("update/no/{postNo}")
 	public String updatePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
