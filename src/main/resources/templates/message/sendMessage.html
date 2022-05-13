@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -293,14 +294,14 @@
                                             <div class="card-header">
                                                 <h3 class="card-title" id="emailCompose">새 쪽지 보내기</h3>
                                             </div>
+                                            
                                             <!-- form start -->
                                             <form action="@{/message/sendMessage}" id="compose-form" method="post">
                                                 <div class="card-content">
                                                     <div class="card-body pt-0">
                                                         <div class="form-group pb-50">
                                                             <label for="emailfrom">보내는 사람</label>
-                                                            <input type="text" id="emailfrom" class="form-control"
-                                                                disabled="" th:text="${ session.user.username }">
+                                                            <div id="emailfrom" class="form-control" sec:authentication="principal.email" disabled ></div>
                                                         </div>
                                                         <div class="form-label-group">
                                                             <label for="emailTo">받는 사람 </label>
