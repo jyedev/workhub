@@ -1,16 +1,25 @@
 # server port config
 server : 
   port : 8001
-  
+
 spring:
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
     driver-class-name: oracle.jdbc.OracleDriver
     username: C##WORKHUB
     password: WORKHUB
-    
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+
 # mybatis config
 mybatis : 
-  mapper-locations : mappers/**/*.xml
-  
-  
+  mapper-locations : mappers/*/.xml
+ 
+
+# uploadFiles path
+custom:
+  path:
+    upload-files : C:/Users/pc/git/workhub/src/main/resources/uploadFiles/
