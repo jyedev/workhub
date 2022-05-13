@@ -131,11 +131,11 @@
         </div>
         
       
-
+	<h3 class="fdawr">사원 근무그룹 등록</h3>
         <!--모든 근무 그룹 시작-->
         <section class="section olggogo">
             <div class="card">
-                <input type="button" value="신규 추가" class="gttt">
+                <input type="button" value="신규 추가" class="gttt" onclick="location.href='/mgroup/memberGroupWrite'">
                 <div class="card-body">
                     <table class="table table-striped" id="table1">
                         <thead>
@@ -148,80 +148,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>김땡땡</td>
-                                <td>(기본근태)A형</td>
+                            <tr th:each="id : ${ memberGroupList }">
+                                <td th:text="${ id.gmDate }"></td>
+                                <td th:text="${ id.no }"></td>
+                                <td th:text="${ id.name }"></td>
+                                <td th:text="${ id.groupName }"></td>
                                 <td>
-                                    <span class="badge bg-success">사용</span>
+                                    <span th:text="${ id.groupStatus }" class="badge bg-success">사용</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>(기본근태)A형</td>
-                                <td>09:00:00 ~ 18:00:00</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>(기본근태)A형</td>
-                                <td>09:00:00 ~ 18:00:00</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>(기본근태)A형</td>
-                                <td>09:00:00 ~ 18:00:00</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>(기본근태)A형</td>
-                                <td>09:00:00 ~ 18:00:00</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>(기본근태)A형</td>
-                                <td>09:00:00 ~ 18:00:00</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2022-01-01</td>
-                                <td>11222</td>
-                                <td>(기본근태)A형</td>
-                                <td>09:00:00 ~ 18:00:00</td>
-                                <td>
-                                    <span class="badge bg-success">사용</span>
-                                </td>
-                            </tr>
-                            
                         </tbody>
                     </table>
                 </div>
             </div>
-            <form class="sdssss" action="/mgroup/list" method="post">
+            <form class="yurcfxg" action="/mgroup/memberGroupSelects" method="get">
                 <h6 class="fsdf">사원 검색 : </h6>
                 <input type="text" placeholder="사원 아이디 입력" class="ytgk" name="no">
                 <input type="submit" class="sdsss" value="검색">
             </form>
+         
         </section>
+        
         <!--모든 근무 그룹 끝-->
        
     </div>

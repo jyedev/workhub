@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.work.workhub.admin.work.model.dto.MemberGroupDTO;
 import com.work.workhub.admin.work.model.dto.RestCateDTO;
 import com.work.workhub.admin.work.model.dto.WorkDTO;
 import com.work.workhub.admin.work.model.dto.WorkGroupDTO;
@@ -30,8 +31,14 @@ public interface WorkMapper {
 	//근무그룹 작성
 	int workGroupWrite(WorkGroupDTO post);
 	
+	/* 근무그룹 select box*/
+	List<WorkGroupDTO> boxSelect();
+	
+	/*사원 근무그룹 등록*/
+	int memberGroupWrite(MemberGroupDTO post);
+	
 	//사원 아이디 검색으로 근무그룹 조회
-//	List<MemberDTO> memberGroupSelect();
+	List<MemberDTO> memberGroupSelect(int no);
 	
 	//근무그룹조회 use='사용'
 //	List<WorkGroupDTO> workGroupSelects();
