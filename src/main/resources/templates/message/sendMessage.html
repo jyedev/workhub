@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workhub-index</title>
+    <title>쪽지 - 새 쪽지 보내기</title>
 
     <!-- fonts -->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -311,8 +311,9 @@
                                                                     <div ></div>
                                                                     <input type="text" class="form-control" 
                                                                         aria-label="Recipient's username" aria-describedby="button-addon2" id="contactResult">
-                                                                    <button class="btn btn-outline-primary" type="button"
-                                                                        id="button-addon2" data-bs-toggle="modal" data-bs-target="#selectRecipient">주소록</button>
+                                                                    <button class="btn btn-outline-primary" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#selectRecipient">주소록</button>
+                                                                    
+                                                                    	<!-- 주소록 모달 창 시작 -->
                                                                         <div class="modal fade" id="selectRecipient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg">
                                                                             <div class="modal-content">
@@ -331,11 +332,10 @@
                                                                                                         <ul>
                                                                                                             <li>
                                                                                                                 <a title class>WorkHub</a>
-                                                                                                                <ul id="codeList">
-                                                                                                                    <li><a class="">전체 주소록</a></li>       
-                                                                                                                    <li>테스트1팀</li>
-                                                                                                                    <li>테스트2팀</li>
-                                                                                                                    <li>테스트3팀</li>
+                                                                                                                <ul id="codeList" >
+                                                                                                                    <li id="selectAllMembers" th:each="department : ${ departmentList }">
+                                                                                                                    	<a th:text="${ department.depName }" th:name="${departmentStat.current}" th:id="${departmentStat.count}" href="javascript:void(0);" th:onclick="|javascript:showDeptMember(this)|"></a>
+                                                                                                                    </li>       
                                                                                                                 </ul>
                                                                                                             </li>
                                                                                                         </ul>
@@ -354,14 +354,50 @@
                                                                                                                         <th class="email">이메일</th>
                                                                                                                     </tr>
                                                                                                                 </thead>
+                                                                                                                <tbody id="team1" style="display:none;">
+	                                                                                                                <tr  th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 1 }" >
+	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
+	                                                                                                                	<td th:text="${ member.name }"></td>
+	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
+	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
+	                                                                                                                	<td th:text="${ member.email }"></td>
+                                                                                                                	</tr>
+                                                                                                                </tbody>
                                                                                                                 <tbody>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" name="userCheckbox"></td>
-                                                                                                                        <td class="name">한상준</td>
-                                                                                                                        <td class="position">파트너</td>
-                                                                                                                        <td class="dept">경영지원본부</td>
-                                                                                                                        <td class="email">handemo@workhub.com</td>
-                                                                                                                    </tr>
+	                                                                                                                <tr id="team2" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 2 }" style="display:none;">
+	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
+	                                                                                                                	<td th:text="${ member.name }"></td>
+	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
+	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
+	                                                                                                                	<td th:text="${ member.email }"></td>
+                                                                                                                	</tr>
+                                                                                                                </tbody>
+                                                                                                                <tbody>
+	                                                                                                                <tr id="team3" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 3 }" style="display:none;">
+	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
+	                                                                                                                	<td th:text="${ member.name }"></td>
+	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
+	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
+	                                                                                                                	<td th:text="${ member.email }"></td>
+                                                                                                                	</tr>
+                                                                                                                </tbody>
+                                                                                                                <tbody>
+	                                                                                                                <tr id="team4" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 4 }" style="display:none;">
+	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
+	                                                                                                                	<td th:text="${ member.name }"></td>
+	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
+	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
+	                                                                                                                	<td th:text="${ member.email }"></td>
+                                                                                                                	</tr>
+                                                                                                                </tbody>
+                                                                                                                <tbody>
+	                                                                                                                <tr id="team5" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 5 }" style="display:none;">
+	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
+	                                                                                                                	<td th:text="${ member.name }"></td>
+	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
+	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
+	                                                                                                                	<td th:text="${ member.email }"></td>
+                                                                                                                	</tr>
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                         </div>
@@ -379,6 +415,7 @@
                                                                               </div>
                                                                             </div>
                                                                           </div>
+                                                                          <!-- 주소록 모달 창 종료  -->
 
                                                                 </div>
                                                             </div>
@@ -437,6 +474,27 @@
                     $('#letterNo').html("(100 / 100)");
                 }
             });
+    </script>
+    
+    <script th:inline="javascript">
+    	function showDeptMember(elem) {
+    		var elemId = 'team' + elem.id;
+    		var id = elem.id;
+    		var elemCurrent = elem.name;
+    		console.log(elemCurrent);
+    		console.log('#'+elemId);
+    		$('#'+elemId).show();
+    		// $('#'+elemId).css("display", "");
+    		// console.log($('#'+elemId));
+    		/* $('#'+elemId).attr('style', "display:'';"); */
+    		for (var i = 1; i < 6; i++) {
+    			if(id == i) {
+    				$('#'+elemId).show();
+    			} else {
+    				
+    			}
+    		}
+    	}
     </script>
     <script src="/assets/js/message.js"></script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

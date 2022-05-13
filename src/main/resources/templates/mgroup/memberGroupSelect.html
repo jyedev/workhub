@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>workGroupWrite</title>
+    <title>memberGroupSelect</title>
     <!-- fonts -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <!-- bootstrap -->
@@ -130,153 +130,101 @@
             </div>
         </div>
         
-        <!--근무 그룹 상태 'y'만-->
-        <div class="col-12 col-md-6">
+      
+
+        <!--모든 근무 그룹 시작-->
+        <section class="section olggogo">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">근무시간</h4>
+                <input type="button" value="신규 추가" class="gttt">
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th class="erre">지정일</th>
+                                <th class="erff">아이디</th>
+                                <th class="sds">이름</th>
+                                <th class="deaf">그룹명</th>
+                                <th class="dfadsf">사용여부</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>김땡땡</td>
+                                <td>(기본근태)A형</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>(기본근태)A형</td>
+                                <td>09:00:00 ~ 18:00:00</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>(기본근태)A형</td>
+                                <td>09:00:00 ~ 18:00:00</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>(기본근태)A형</td>
+                                <td>09:00:00 ~ 18:00:00</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>(기본근태)A형</td>
+                                <td>09:00:00 ~ 18:00:00</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>(기본근태)A형</td>
+                                <td>09:00:00 ~ 18:00:00</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2022-01-01</td>
+                                <td>11222</td>
+                                <td>(기본근태)A형</td>
+                                <td>09:00:00 ~ 18:00:00</td>
+                                <td>
+                                    <span class="badge bg-success">사용</span>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
                 </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <p class="card-text">근무 그룹 설정
-                        </p>
-                        <!-- Table with outer spacing -->
-                        <div class="table-responsive">
-                            <table class="table table-lg">
-                                <thead>
-                                    <tr>
-                                        <th>그룹명</th>
-                                        <th>근무시간</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                        
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                       
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                        
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                     
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                        
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-        <!--근무그룹 상태 'y' 끝-->
-        <div class='v-line'></div>
-
-        <!--근무 그룹 작성 시작-->
-        <form class="eeee" action="/group/workGroupWrite" method="post">
-            <h6 class="fsdf">그룹명</h6>
-            <input type="text" name="groupName">
-            <br><br>
-            <h6 class="fsdf">그룹설명</h6>
-            <textarea cols="80" rows="50" class="fdds" name="groupEx"></textarea><br><br>
-            <h6 class="fsdf">근무요일</h6>
-    <input type="checkbox" name="groupDay" value="월" checked>월&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="화">화&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="수">수&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="목">목&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="금">금&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="토">토
-    <br><br>
-    <h6 class="fsdf">업무시작</h6>
-    <input type="time" name="groupFirdate"> 
-    <br><br>
-    <h6 class="fsdf">업무끝</h6>
-    <input type="time" name="groupEnddate">  
-    <br><br>
-    <h6 class="fsdf">휴게시간 시작</h6>
-    <input type="time" name="groupFirrest"> 
-    <br><br>
-    <h6 class="fsdf">휴게시간 끝</h6>
-    <input type="time" name="groupEndrest">
-    <br><br>
-    <h6 class="fsdf">휴가일수</h6>
-    <input type="text" name="groupRest">   
-    
-    <div class="card">
-        <div class="card-header">
-            <h6 class="fsdf dsfs">사용여부</h6>
-        </div>
-        <div class="card-body">
-            <div class="form-check ssswwe">
-                <input class="form-check-input" type="radio" name="groupUse" value="사용"
-                    id="flexRadioDefault7">
-                <h6 class="fsdf dsfs pohg">
-                   사용
-                </h6>
-            </div>
-            <div class="form-check ssswwe">
-                <input class="form-check-input" type="radio" name="groupUse" value="미사용"
-                    id="flexRadioDefault8" checked>
-                <h6 class="fsdf dsfs pohg">
-                    미사용
-                </h6>
-            </div>
-        </div>
+            <form class="sdssss" action="/mgroup/list" method="post">
+                <h6 class="fsdf">사원 검색 : </h6>
+                <input type="text" placeholder="사원 아이디 입력" class="ytgk" name="no">
+                <input type="submit" class="sdsss" value="검색">
+            </form>
+        </section>
+        <!--모든 근무 그룹 끝-->
+       
     </div>
-    
-    <input type="submit" class="btn btn-success rounded-pill" id="btnChk" value="저장"></button>
-    <a href="#" class="btn btn-light rounded-pill">삭제</a>
-    <a href="#" class="btn btn-light rounded-pill">취소</a>
-    </form>
-        
-        <!--근무 그룹 작성 끝-->
-    
-    </div>
-    
-    <!-- groupDay 여러값 묶어서 전달 -->
-    <script>
-    $('#btnChk').click(function() {
-
-    	var gSize = "";
-
-    	$("input[name=groupDay]:checked").each(function() {
-
-    	if(gSize == ""){
-
-    	gSize = $(this).val();
-
-    	} else {
-
-    	gSize = gSize + "," + $(this).val();
-
-    	}
-
-    	});
-
-    	$('#gSize').val(gSize);
-
-    	});
-
-    </script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 

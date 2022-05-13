@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.work.workhub.member.member.dto.DepartmentDTO;
+import com.work.workhub.member.member.dto.MemberDTO;
+import com.work.workhub.member.member.dto.UserImpl;
 import com.work.workhub.member.message.model.dto.MessageDTO;
 import com.work.workhub.member.message.model.service.MessageService;
 
@@ -35,7 +39,7 @@ public class MessageController {
 	
 	
 	@GetMapping("inboxList")
-	public ModelAndView findMessageInboxList(ModelAndView mv) {
+	public ModelAndView findMessageInboxList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
 		List<MessageDTO> messageInboxList = messageService.findMessageInbox();
 		
@@ -50,6 +54,7 @@ public class MessageController {
 	public ModelAndView findMessageSentList(ModelAndView mv) {
 		
 		List<MessageDTO> messageSentList = messageService.findMessageSent();
+		
 		
 		mv.addObject("messageSentList", messageSentList);
 		mv.setViewName("message/sentList");
@@ -68,7 +73,20 @@ public class MessageController {
 		return mv;
 	}
 	@GetMapping("sendMessage")
-	public void sendMessagePage() {}
+	public ModelAndView sendMessagePage(ModelAndView mv) {
+		
+		List<DepartmentDTO> departmentList = messageService.selectDepartmentList();
+		List<MemberDTO> memberList = messageService.selectMemberList();
+		
+		mv.addObject("departmentList", departmentList);
+		mv.addObject("memberList", memberList);
+		mv.setViewName("message/sendMessage");
+		
+		log.info("부서 목록 : {}", departmentList);
+		log.info("사원 목록 : {}", memberList);
+		
+		return mv;
+	}
 	
 	@PostMapping("sendMessage")
 	public String sendMessage(@ModelAttribute MessageDTO message, RedirectAttributes rttr, Locale locale) throws Exception {

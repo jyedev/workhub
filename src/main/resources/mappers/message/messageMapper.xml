@@ -29,6 +29,19 @@
 		<result property="email" column="EMAIL"/>
 		<result property="phone" column="PHONE"/>
 		<result property="status" column="STATUS"/>
+		
+		<association property="position" resultMap="positionResultMap"/>
+		<association property="dept" resultMap="departmentResultMap"/>
+	</resultMap>
+	
+	<resultMap id="departmentResultMap" type="com.work.workhub.member.member.dto.DepartmentDTO">
+		<id property="depNo" column="DEP_NO"/>
+		<result property="depName" column="DEP_NAME"/>
+	</resultMap>
+	
+	<resultMap id="positionResultMap" type="com.work.workhub.member.member.dto.PositionDTO">
+		<id property="positionNo" column="POSITION_NO"/>
+		<result property="positionName" column="POSITION_NAME"/>
 	</resultMap>
 	
 	<select id="findMessageInbox" resultMap="messageResultMap">
@@ -114,5 +127,25 @@
        , 'N'
        , 'N'
        );
+    </select>
+    
+    <select id="selectDepartmentList" resultMap="departmentResultMap">
+    	SELECT
+    	       DEP_NO
+    	     , DEP_NAME
+    	  FROM DEPARTMENT
+    </select>
+    
+    <select id="selectMemberList" resultMap="memberResultMap">
+    	SELECT 
+    	       A.DEP_NO
+    	     , A.POSITION_NO
+    	     , A.NAME
+    	     , A.EMAIL
+    	     , B.POSITION_NAME
+    	     , C.DEP_NAME
+          FROM TBL_MEMBER A 
+          JOIN TBL_POSITION B ON(A.POSITION_NO = B.POSITION_NO)
+          JOIN DEPARTMENT C ON(A.DEP_NO = C.DEP_NO)
     </select>
 </mapper>

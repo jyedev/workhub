@@ -13,7 +13,7 @@
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> -->
 	
-
+    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-lite.min.css">
     <!-- bootstrap -->
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/assets/vendors/iconly/bold.css}">
@@ -40,7 +40,7 @@
                         <div class="writesubmit row g-3">
                             <div class="titletextbox col-sm-6">
                                 <label for="firstName" class="form-label"><strong>제목</strong></label>
-                                <input type="text" class="form-control" id="firstName" placeholder="제목 입력" value="">
+                                <input type="text" class="form-control" id="firstName" placeholder="제목 입력" name="appTitle">
                                 <div class="invalid-feedback">
                                     제목을 입력하세요
                                 </div>
@@ -64,15 +64,16 @@
                                                      <div class="contentwritebox">
                                                         <label for="firstName" class="form-label"><strong>내용</strong></label>
                                                         <div class="contentcontainer mx-auto">
-                                                           <textarea class="textarea" rows="20" cols="150" name="content" required></textarea>
-                                                        <div class="invalid-feedback">
+                                                        	<textarea id="summernote" name="appContent"></textarea>
+                                                           <!-- <textarea class="textarea" rows="20" cols="150" name="content" required></textarea> -->
+<!--                                                         <div class="invalid-feedback">
                                                             내용을 입력하세요
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                        </div> -->
+                                                    	</div>
+                                                	</div>
+                                           	 	</div>
+                                        	</div>
+                                    	</div>
                                 </section>
                             </div>
 
@@ -82,11 +83,11 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="exampleFormControlInput1" class="form-label">상신일</label><br>
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="createdDate">
                                     </div>
                                     <div class="col">
                                         <label for="exampleFormControlInput1" class="form-label">마감일</label><br>
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="dueDate">
                                     </div>
                                 </div>
                             </div>
@@ -127,19 +128,20 @@
                                                     <div class="modal-body">
                                                         <div class="container">
                                                             <div class="row">
+                                                            
+                                                            	<!-- 부서 목록 -->
                                                                 <div class="col-5">
-                                                                    <div class="list-group">
-                                                                        <a href="#"
-                                                                            class="list-group-item list-group-item-action">관리부</a>
-                                                                        <a href="#"
-                                                                            class="list-group-item list-group-item-action">개발부</a>
-                                                                        <a href="#"
-                                                                            class="list-group-item list-group-item-action">영업부</a>
+                                                                	<th:block th:if="${ departmentList != null }">
+                                                                    <div class="list-group" th:each="department : ${ departmentList }">
+                                                                        <a
+                                                                            class="list-group-item list-group-item-action" th:text="${ department.depName }" th:id="${ departmentStat.count }" href="javascript:void(0)" th:onclick="|javascript:showDeptMember(this)|"></a>
                                                                     </div>
+                                                                    </th:block>
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="table-responsive">
-                                                                        <!-- 체크박스 추가/삭제 하기!!!!!!!!!!!!!!! -->
+                                                                    
+                                                                        <!-- 사원 목록 -->
                                                                         <table class="table table-lg">
                                                                             <thead>
                                                                                 <tr>
@@ -149,36 +151,68 @@
                                                                                     <th>이름</th>
                                                                                 </tr>
                                                                             </thead>
-                                                                            <tbody>
-                                                                                <tr>
+																				<!-- 인사팀 -->
+                                                                            	<tbody id="team1" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '인사팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
                                                                                     </td>
-                                                                                    <td name="department">인사부</td>
-                                                                                    <td name="rank">프로</td>
-                                                                                    <td name="memberName">김사랑</td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
                                                                                 </tr>
-                                                                                <tr>
+                                                                                
+                                                                                <!-- 총무팀 -->
+                                                                                <tbody id="team2" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '총무팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
                                                                                     </td>
-                                                                                    <td name="department">인사부</td>
-                                                                                    <td name="rankd">파트너</td>
-                                                                                    <td name="memberName">주땡</td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
                                                                                 </tr>
-                                                                                <tr>
+                                                                                </tbody>
+
+                                                                                <!-- 영업팀 -->
+                                                                                <tbody id="team3" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '영업팀' }">
                                                                                     <td>
                                                                                         <input type="checkbox" name="user_CheckBox">
                                                                                     </td>
-                                                                                    <td name="department">인사부</td>
-                                                                                    <td name="rankd">파트너</td>
-                                                                                    <td name="memberName">최박사</td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
                                                                                 </tr>
-                                                                            </tbody>
+                                                                                </tbody>
+                                                                                
+                                                                                <!-- 마케팅팀 -->
+                                                                                <tbody id="team4" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '마케팅팀' }">
+                                                                                    <td>
+                                                                                        <input type="checkbox" name="user_CheckBox">
+                                                                                    </td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                                
+                                                                                <!-- 개발팀 -->
+                                                                                <tbody id="team5" style="display:none;">
+                                                                                <tr th:each="member : ${ memberList } " th:if="${ member.dept.depName == '개발팀' }">
+                                                                                    <td>
+                                                                                        <input type="checkbox" name="user_CheckBox">
+                                                                                    </td>
+                                                                                    <td th:text="${ member.dept.depName }" name="depName"></td>
+                                                                                    <td th:text="${ member.position.positionName }" name="positionName"></td>
+                                                                                    <td th:text="${ member.name }" name="memberName"></td>
+                                                                                </tr>
+                                                                            	</tbody>
                                                                         </table>
-                                                                        <button type="button" id="selectBtn" class="btn btn-primary">선택</button>
                                                                     </div>
                                                                 </div>
+	                                                           <button type="button" id="selectBtn" class="btn btn-primary">선택</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -314,12 +348,35 @@
     <script src="/assets/js/approval.js"></script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- <script src="assets/vendors/apexcharts/apexcharts.js"></script> -->
-
-    <!-- <script src="assets/js/pages/dashboard.js"></script> -->
-
+    <script src="/assets/vendors/summernote/summernote-lite.min.js"></script>
+	    <script>
+        $('#summernote').summernote({
+            tabsize: 2,
+            height: 120,
+        });
+        
+        $(document).ready(function(){
+        	$('#summernote').summernote();
+        });
+    </script>
+	
+	<script th:inline="javascript">
+		function showDeptMember(elem) {
+			var elemId = 'team' + elem.id;
+			console.log('#'+elemId);
+			$('#'+elemId).attr('style', "display:'';");
+			
+/* 			var deptId = $('#'+elemId);
+			if(deptId.style.display === 'none'){
+				deptId.style.display = 'block';
+			} else {
+				deptId.style.display = 'none';
+			} */
+			
+		}
+			
+		
+	</script>
     <script src="/assets/js/main.js"></script>
 </body>
 

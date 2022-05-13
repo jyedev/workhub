@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.work.workhub.admin.work.model.dao.WorkMapper">
 
+<!-- 근태유형 -->
 <resultMap type="com.work.workhub.admin.work.model.dto.WorkDTO" id="workResultMap">
 	<id property="workNo" column="WORK_NO"/>
 	<result property="workName" column="WORK_NAME"/>
@@ -12,6 +13,7 @@
 	<result property="workModdate" column="WORK_MODDATE"/>
 </resultMap>
 
+<!-- 연차유형 -->
 <resultMap type="com.work.workhub.admin.work.model.dto.RestCateDTO" id="restcateResultMap">
 	<id property="restNo" column="REST_NO"/>
 	<result property="restName" column="REST_NAME"/>
@@ -25,6 +27,50 @@
 	<result property="restDate" column="REST_DATE"/>
 	<result property="restModdate" column="REST_MODDATE"/>
 </resultMap>
+
+<!-- 근무그룹 유형 -->
+<resultMap type="com.work.workhub.admin.work.model.dto.WorkGroupDTO" id="workGroupResultMap">
+	<id property="groupNo" column="GROUP_NO"/>
+	<result property="groupName" column="GROUP_NAME"/>
+	<result property="groupEx" column="GROUP_EX"/>
+	<result property="groupDay" column="GROUP_DAY"/>
+	<result property="groupFirdate" column="GROUP_FIRDATE"/>
+	<result property="groupEnddate" column="GROUP_ENDDATE"/>
+	<result property="groupFirrest" column="GROUP_FIRREST"/>
+	<result property="groupEndrest" column="GROUP_ENDREST"/>
+	<result property="groupStatus" column="GROUP_STATUS"/>
+	<result property="groupRest" column="GROUP_REST"/>
+	<result property="groupDate" column="GROUP_DATE"/>
+	<result property="groupModdate" column="GROUP_MODDATE"/>
+	<result property="groupUse" column="GROUP_USE"/>
+</resultMap>
+
+<!-- 사원 -->
+<!--  <resultMap type="com.work.workhub.member.member.dto.MemberDTO" id="memberResultMap">
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="depNo" column="DEP_NO"/>
+		<result property="positionNo" column="POSITION_NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>-->
+
+<!-- 사원 근무그룹 지정-->
+<!--  <resultMap type="com.work.workhub.member.member.dto.MemberGroupDTO" id="memberGroupResultMap">
+		<id property="gmNo" column="GM_NO"/>
+		<result property="no" column="NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="gmDate" column="GM_DATE"/>
+		<result property="groupStatus" column="GROUP_STATUS"/>
+	
+	<collection property="memberList" resultMap="memberResultMap"/>
+	<collection property="workGroupList" resultMap="workGroupResultMap"/>
+	</resultMap>-->
+
 	
 	<!-- 근태유형 작성 -->
 	<insert id="workWrite">
@@ -89,5 +135,79 @@
 		, DEFAULT
 		)
 	</insert>
+	
+	<!-- 근무그룹유형 조회 -->
+	<select id="workGroupSelect" resultMap="workGroupResultMap">
+	SELECT
+	    *
+	 FROM WORK_GROUP
+	 WHERE GROUP_STATUS = 'Y'
+	 ORDER BY GROUP_NO    
+	</select>
+	
+	
+		<!-- 근무그룹유형 작성 -->
+	<insert id="workGroupWrite">
+		INSERT
+			INTO WORK_GROUP
+		(
+		  GROUP_NO
+		, GROUP_NAME
+		, GROUP_EX
+		, GROUP_DAY
+		, GROUP_FIRDATE
+		, GROUP_ENDDATE
+		, GROUP_FIRREST
+		, GROUP_ENDREST
+		, GROUP_STATUS
+		, GROUP_REST
+		, GROUP_USE
+		)	
+		VALUES
+		(
+		  SEQ_GROUP_NO.NEXTVAL
+		, #{ groupName } 
+		, #{ groupEx }
+		, #{ groupDay }
+		, #{ groupFirdate }
+		, #{ groupEnddate }
+		, #{ groupFirrest }
+		, #{ groupEndrest }
+		, DEFAULT
+		, #{ groupRest }
+		, #{ groupUse }
+		)
+	</insert>
+	
+	
+	
+	
+	<!-- 근무그룹유형 조회 -->
+	<!--  
+	<select id="workGroupSelects" resultMap="workGroupResultMap">
+	
+	SELECT
+	    *
+	 FROM WORK_GROUP
+	  WHERE GROUP_STATUS = 'Y'
+	 WHERE GROUP_USE = '사용'
+	 ORDER BY GROUP_NO    
+	</select>
+	-->
+	
+	
+	<!-- 사원 아이디 검색으로 근무그룹 조회 -->
+	<!--<select id="memberGroupSelect" resultMap="memberGroupResultMap">
+	SELECT
+	    A.GM_NO
+	    B.NO
+	    C.GROUP_NO
+	    A.GM_DATE
+	    A.GROUP_STATUS
+	 FROM GROUP_MEM A
+	 WHERE GROUP_STATUS = 'Y'
+	 ORDER BY GROUP_NO    
+	</select>
+	-->
 	
 </mapper>
