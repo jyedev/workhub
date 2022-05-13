@@ -36,12 +36,21 @@ public class MemberController {
 		model.addAttribute("errorMessage", errorMessage);
 	}
 
-	// =========================오류 해결 중=========================
-	// 비밀번호 찾기 폼
-//	@RequestMapping("/find_pw_form.do")
-//	public String find_pw_form() throws Exception{
-//		return "/member/find_pw_form";
-//	}
+	
+	//비밀번호 찾기
+	/*
+	 * @RequestMapping("/findPw", method=RequestMethod.POST) public String findPw()
+	 * throws Exception { return "/member/findPw"; }
+	 * 
+	 * @RequestMapping("/findPw", method=RequestMethod.POST) public String
+	 * findPw(MemberDTO memberDTO, Model model) throws Exception {
+	 * log.info("memberPw"+memberDTO.getMemberId());
+	 * 
+	 * if(memberService.findPwCheck(memberDTO)==0) { log.info("memberPwcheck");
+	 * model.addAttribute(""); }
+	 * 
+	 * }
+	 */
 
 	
 }
