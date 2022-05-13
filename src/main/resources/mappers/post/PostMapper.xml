@@ -118,6 +118,25 @@
 		)
 	</insert>
 	
+	<!-- 게시글 상세조회 -->
+	<select id="findPostDetail" resultMap="postResultMap">
+		SELECT
+			  P.POST_TITLE
+			, M.NAME
+			, P.POST_CONTENT
+			, P.POST_DATE
+		 FROM POST P
+		 JOIN TBL_MEMBER M ON (P.NO = M.NO)
+		WHERE P.POST_STATUS = 'Y'
+		  AND P.POST_NO = #{ postNo } 
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -61,7 +61,7 @@
                         <div class="card-body">
                             <div class="com-detail-title">
                                 <div class="detail-title">
-                                    <h4 th:text="${ postList.postTitle }">제목</h4>
+                                    <h4 th:text="${ postDetail.postTitle }">제목</h4>
                                     <div class="com-detail-messenger">
                                         <img src="/assets/images/post-surv/messenger.png" class="icon-messenger">
                                         <span>1</span>
@@ -74,11 +74,12 @@
                             </div>
                             <div class="com-detail-writer">
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
-                                <span>작성자</span>
-                                <span id="current-time"></span>
+                                <p th:text="${ postDetail.member.name }">작성자</span><br>
+<!--                                 <span id="current-time"></span> -->
+								<p th:text="${ postDetail.postDate }" class="com-detail-date">날짜</p>
                             </div>
                             <div class="com-detail-body">
-                                <div class="com-detail-content">
+                                <div th:utext="${ postDetail.postContent }" class="com-detail-content">
                                     내용
                                 </div>
                                 <div class="detail-body-footer">
@@ -86,11 +87,13 @@
                                         <img src="/assets/images/post-surv/emptyHeart.png" class="icon-heart"> 추천 누른 사람 0명</p>
                                 </div>
                             </div><hr>
+                            
                             <!-- reply -->
                             <div class="com-detail-reply">
                                 <div class="com-reply-writer">
                                     <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                     <span>김허브 대리</span>
+                                    <!-- 날짜 sysdate로 수정 -->
                                     <span id="current-time2"></span>
                                     <div class="reply-btn" input type="button">
                                         <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글">
@@ -171,22 +174,22 @@
             </div>
         </div>
     </div>
-    <script>
-        date = new Date();
-        year = date.getFullYear();
-        month = date.getMonth() + 1;
-        day = date.getDate();
+<!--     <script> -->
+//         date = new Date();
+//         year = date.getFullYear();
+//         month = date.getMonth() + 1;
+//         day = date.getDate();
 
-	    hour = date.getHours(); 
-	    hour = ( hour > 9 ) ? hour : "0" + hour; 
-	    minute = date.getMinutes(); 
-	    minute = ( minute > 9 ) ? minute : "0" + minute; 
+// 	    hour = date.getHours(); 
+// 	    hour = ( hour > 9 ) ? hour : "0" + hour; 
+// 	    minute = date.getMinutes(); 
+// 	    minute = ( minute > 9 ) ? minute : "0" + minute; 
 
-        document.getElementById("current-time").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
-        "&nbsp&nbsp" + hour + ":" + minute;
-        document.getElementById("current-time2").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
-        "&nbsp&nbsp" + hour + ":" + minute;
-    </script>
+//         document.getElementById("current-time").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
+//         "&nbsp&nbsp" + hour + ":" + minute;
+//         document.getElementById("current-time2").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
+//         "&nbsp&nbsp" + hour + ":" + minute;
+<!--     </script> -->
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min2.js"></script>
 

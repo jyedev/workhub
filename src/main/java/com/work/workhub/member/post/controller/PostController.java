@@ -37,7 +37,8 @@ public class PostController {
 		this.messageSource = messageSource;
 	}
 	
-	@GetMapping("/list")
+	//게시판 목록 조회
+	@GetMapping("list")
 	public ModelAndView findPostList(ModelAndView mv) {
 		
 		List<PostDTO> postList = postService.findAllPost();
@@ -48,26 +49,31 @@ public class PostController {
 		return mv;
 	}
 	
-	@RequestMapping("/detail/no={postNo}")
-	public ModelAndView findPostDetail(ModelAndView mv, @PathVariable("postNo") int postNo) {
+	//게시글 상세페이지
+	@GetMapping("detail/no/{postNo}")
+	public ModelAndView selectPostDetail(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
+
+		PostDTO postDetail = postService.findPostDetail(postNo);
+		
+		mv.addObject("postDetail", postDetail);
 		
 		mv.setViewName("/post/detail");
 		
 		return mv;
 	}
 	
-	//category
+	//게시글 카테고리
 	@GetMapping(value="category", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public List<CategoryDTO> findCategoryList(){
 		return postService.findAllCategory();
 	}
 	
-	//write
-	@GetMapping("/write")
+	//게시글 작성
+	@GetMapping("write")
 	public void writePage() {}
 	
-	@PostMapping("/write")
+	@PostMapping("write")
 	public String writePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		post.setNo(user.getNo());
