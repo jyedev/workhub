@@ -81,6 +81,7 @@
 			   A.DEP_NO
 			 , A.POSITION_NO
 			 , A.NAME
+			 , A.NO
 			 , B.POSITION_NAME
 			 , C.DEP_NAME
 		  FROM TBL_MEMBER A

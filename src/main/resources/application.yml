@@ -17,7 +17,6 @@ spring:
 # mybatis config
 mybatis : 
   mapper-locations : mappers/**/*.xml
- 
 
 # uploadFiles path
 custom:

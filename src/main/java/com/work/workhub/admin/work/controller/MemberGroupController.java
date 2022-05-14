@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import com.work.workhub.admin.work.model.dto.MemberGroupDTO;
 import com.work.workhub.admin.work.model.dto.WorkGroupDTO;
 import com.work.workhub.admin.work.model.service.MemberGroupService;
 import com.work.workhub.member.member.dto.MemberDTO;
+import com.work.workhub.member.member.dto.UserImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,10 +78,10 @@ public class MemberGroupController {
 	
 	/*사원 근무그룹 등록*/
 	@PostMapping("memberGroupWrite")
-	public String memberGroupWrite(@ModelAttribute MemberGroupDTO post, RedirectAttributes rttr, Locale locale) throws Exception {
+	public String memberGroupWrite(@ModelAttribute MemberGroupDTO post, @AuthenticationPrincipal UserImpl user ,RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		
-		
+		post.setWriteNo(user.getNo());
 		log.error("등록 요청 글 : {}", post);
 		log.warn("등록 요청 글 : {}", post);
 		log.info("등록 요청 글 : {}", post);

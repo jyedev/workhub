@@ -10,8 +10,6 @@
     <!-- fonts -->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> -->
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
@@ -296,12 +294,12 @@
                                             </div>
                                             
                                             <!-- form start -->
-                                            <form action="@{/message/sendMessage}" id="compose-form" method="post">
+                                            <form th:action="@{/message/sendMessage}" id="compose-form" method="post">
                                                 <div class="card-content">
                                                     <div class="card-body pt-0">
                                                         <div class="form-group pb-50">
                                                             <label for="emailfrom">보내는 사람</label>
-                                                            <div id="emailfrom" class="form-control" sec:authentication="principal.email" disabled ></div>
+                                                            <div id="emailfrom" class="form-control bg-light secondary" sec:authentication="principal.email" disabled></div>
                                                         </div>
                                                         <div class="form-label-group">
                                                             <label for="emailTo">받는 사람 </label>
@@ -312,7 +310,7 @@
                                                                     <div ></div>
                                                                     <input type="text" class="form-control" 
                                                                         aria-label="Recipient's username" aria-describedby="button-addon2" id="contactResult">
-                                                                    <button class="btn btn-outline-primary" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#selectRecipient">주소록</button>
+                                                                    <button class="btn btn-outline-primary" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#selectRecipient" onclick="uncheckAll()">주소록</button>
                                                                     
                                                                     	<!-- 주소록 모달 창 시작 -->
                                                                         <div class="modal fade" id="selectRecipient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -335,7 +333,7 @@
                                                                                                                 <a title class>WorkHub</a>
                                                                                                                 <ul id="codeList" >
                                                                                                                     <li id="selectAllMembers" th:each="department : ${ departmentList }">
-                                                                                                                    	<a th:text="${ department.depName }" th:name="${departmentStat.current}" th:id="${departmentStat.count}" href="javascript:void(0);" th:onclick="|javascript:showDeptMember(this)|"></a>
+                                                                                                                    	<a th:text="${ department.depName }" th:name="${departmentStat.current}" th:id="${department.depNo}" href="javascript:void(0);" th:onclick="|javascript:showDeptMember(this)|"></a>
                                                                                                                     </li>       
                                                                                                                 </ul>
                                                                                                             </li>
@@ -355,50 +353,13 @@
                                                                                                                         <th class="email">이메일</th>
                                                                                                                     </tr>
                                                                                                                 </thead>
-                                                                                                                <tbody id="team1" style="display:none;">
-	                                                                                                                <tr  th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 1 }" >
-	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
+                                                                                                                <tbody th:id="'team' + ${item.key}" th:each="item : ${ memberListMap }" style="display:none;">
+                                                                                                                	<tr th:each="member : ${ item.value }" >
+                                                                                                                		<td><input type="checkbox" name="userCheckbox" th:value="${ member.no }"></td>
 	                                                                                                                	<td th:text="${ member.name }"></td>
 	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
 	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
 	                                                                                                                	<td th:text="${ member.email }"></td>
-                                                                                                                	</tr>
-                                                                                                                </tbody>
-                                                                                                                <tbody>
-	                                                                                                                <tr id="team2" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 2 }" style="display:none;">
-	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
-	                                                                                                                	<td th:text="${ member.name }"></td>
-	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
-	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
-	                                                                                                                	<td th:text="${ member.email }"></td>
-                                                                                                                	</tr>
-                                                                                                                </tbody>
-                                                                                                                <tbody>
-	                                                                                                                <tr id="team3" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 3 }" style="display:none;">
-	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
-	                                                                                                                	<td th:text="${ member.name }"></td>
-	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
-	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
-	                                                                                                                	<td th:text="${ member.email }"></td>
-                                                                                                                	</tr>
-                                                                                                                </tbody>
-                                                                                                                <tbody>
-	                                                                                                                <tr id="team4" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 4 }" style="display:none;">
-	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
-	                                                                                                                	<td th:text="${ member.name }"></td>
-	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
-	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
-	                                                                                                                	<td th:text="${ member.email }"></td>
-                                                                                                                	</tr>
-                                                                                                                </tbody>
-                                                                                                                <tbody>
-	                                                                                                                <tr id="team5" th:each="member : ${ memberList }" th:if="${ member.dept.depNo == 5 }" style="display:none;">
-	                                                                                                                	<td><input type="checkbox" name="userCheckbox"></td>
-	                                                                                                                	<td th:text="${ member.name }"></td>
-	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
-	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
-	                                                                                                                	<td th:text="${ member.email }"></td>
-                                                                                                                	</tr>
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                         </div>
@@ -412,6 +373,7 @@
                                                                                 <div class="modal-footer">
                                                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                                                                   <button type="button" class="btn btn-primary" id="selectBtn" data-bs-dismiss="modal">확인</button>
+                                                                                  
                                                                                 </div>
                                                                               </div>
                                                                             </div>
@@ -421,17 +383,13 @@
                                                                 </div>
                                                             </div>
                                                         </div><br>
-                                                        <div class="form-label-group">
-                                                            <label for="emailSubject">제목</label>
-                                                            <input type="text" id="emailSubject" class="form-control" placeholder="제목을 입력하세요" required="">
-                                                        </div>
+                                                        
                                                         <!-- Compose mail Quill editor -->
-                                                        <br>
-                                                        <label for="messageContent">내용</label>
+                                                        <label for="messageContent">쪽지 내용</label>
                                                         <div class="snow-container border rounded p-50">
                                                             <div class="compose-editor mx-75 ql-container ql-snow">
                                                                 <div class="ql-editor ql-blank" data-gramm="false" data-placeholder="Type something....." contenteditable="true">
-                                                                    <p class="contextInput" name="contextInput" id="contextInput"><br></p>
+                                                                    <input class="contextInput" name="msgContent" id="contextInput"><br>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -452,6 +410,7 @@
                                                         <i class="bi bi-send-fill"></i>
                                                         <span class="d-sm-inline d-none">보내기</span>
                                                     </button>
+                                                    <input type="hidden" name="memberNos" id="memberNos" value="">
                                                 </div>
                                             </form>
                                             <!-- form start end-->
@@ -478,7 +437,13 @@
     </script>
     
     <script th:inline="javascript">
+    	function uncheckAll() {
+    		$('[id^=team]').hide();
+    		$('#selectRecipient input[type=checkbox]').prop('checked',false);
+    	}
+    	
     	function showDeptMember(elem) {
+    		$('[id^=team]').hide();
     		var elemId = 'team' + elem.id;
     		var id = elem.id;
     		console.log('#'+elemId);
@@ -487,11 +452,6 @@
     		// console.log($('#'+elemId));
     		/* $('#'+elemId).attr('style', "display:'';"); */
     		
-    		if(id == 1) {
-    			$('#'+id)
-    		} else {
-    			
-    		}
     	}
     </script>
     <script src="/assets/js/message.js"></script>

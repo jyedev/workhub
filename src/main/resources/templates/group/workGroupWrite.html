@@ -18,181 +18,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 </head>
 <body>
-	<div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="index.html"><img src="src/images/logo-workhub.png" alt="Logo" srcset=""></a>
-                            
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>홈</span>
-                            </a>
-                        </li>
-
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>사원 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">정보 복수 변경</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">정보 다운로드</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>근태 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">근무그룹 등록</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">사원 근무그룹 등록
-                                    </a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">근무 유형 등록</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">연차 유형 등록</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>게시판 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-element-input.html">게시판 관리</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-input-group.html">작성한 공지사항</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-pen-fill"></i>
-                                <span>자산 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">회의실 관리</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">차량 관리</a>
-                                </li>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <br><br><br><br><br><br>
-                        
-
-                        <li class="sidebar-item  ">
-                            <a href="ui-file-uploader.html" class='sidebar-link'>
-                                <img src="src/images/logout.png" alt="logout">
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
-        </div>
+	
+		<div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
         
-        <!--근무 그룹 상태 'y'만-->
-        <div class="col-12 col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">근무시간</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <p class="card-text">근무 그룹 설정
-                        </p>
-                        <!-- Table with outer spacing -->
-                        <div class="table-responsive">
-                            <table class="table table-lg">
-                                <thead>
-                                    <tr>
-                                        <th>그룹명</th>
-                                        <th>근무시간</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                        
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                       
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                        
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                     
-
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">(기본근태)A형</td>
-                                        <td>09:00:00 ~ 18:00:00 </td>
-                                        
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--근무그룹 상태 'y' 끝-->
-        <div class='v-line'></div>
-
+      
+		
         <!--근무 그룹 작성 시작-->
-        <form class="eeee" action="/group/workGroupWrite" method="post">
+        <form class="eeee kjhg" action="/group/workGroupWrite" method="post">
+            <h3 class="vfews">근무그룹 등록</h3>
             <h6 class="fsdf">그룹명</h6>
             <input type="text" name="groupName">
             <br><br>
@@ -221,36 +54,37 @@
     <h6 class="fsdf">휴가일수</h6>
     <input type="text" name="groupRest">   
     
-    <div class="card">
-        <div class="card-header">
+    
+
             <h6 class="fsdf dsfs">사용여부</h6>
-        </div>
+        
         <div class="card-body">
             <div class="form-check ssswwe">
                 <input class="form-check-input" type="radio" name="groupUse" value="사용"
                     id="flexRadioDefault7">
-                <h6 class="fsdf dsfs pohg">
+                <h6 class="fsdf pohg">
                    사용
                 </h6>
             </div>
             <div class="form-check ssswwe">
                 <input class="form-check-input" type="radio" name="groupUse" value="미사용"
                     id="flexRadioDefault8" checked>
-                <h6 class="fsdf dsfs pohg">
+                <h6 class="fsdf pohg">
                     미사용
                 </h6>
             </div>
         </div>
-    </div>
-    
-    <input type="submit" class="btn btn-success rounded-pill" id="btnChk" value="저장"></button>
+   
+    <div class="dfdssd">
+    <input type="submit" class="btn btn-success rounded-pill " id="btnChk" value="저장"></button>
     <a href="#" class="btn btn-light rounded-pill">삭제</a>
-    <a href="#" class="btn btn-light rounded-pill">취소</a>
+    <a onclick="location.href='/group/list'" class="btn btn-light rounded-pill">취소</a>
+    </div>
     </form>
         
         <!--근무 그룹 작성 끝-->
     
-    </div>
+    
     
     <!-- groupDay 여러값 묶어서 전달 -->
     <script>
