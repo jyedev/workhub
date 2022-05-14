@@ -64,6 +64,8 @@ public class ApprovalController {
 		
 		rttr.addFlashAttribute("successMessage", messageSource.getMessage("registApproval", null, locale));
 		
+		System.out.println("결재자 수 : " + approval.getReceiverCount());
+		
 		return "redirect:/approval/sendList";
 		
 	}
