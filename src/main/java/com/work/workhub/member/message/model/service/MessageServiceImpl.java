@@ -1,6 +1,9 @@
 package com.work.workhub.member.message.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +27,8 @@ public class MessageServiceImpl implements MessageService {
 
 	/* 쪽지 - 받은 쪽지함 조회 */
 	@Override
-	public List<MessageDTO> findMessageInbox() {
-		return messageMapper.findMessageInbox();
+	public List<MessageDTO> findMessageInbox(int no) {
+		return messageMapper.findMessageInbox(no);
 	}
 
 	/* 쪽지 - 보낸 쪽지함 조회 */
@@ -42,15 +45,20 @@ public class MessageServiceImpl implements MessageService {
 
 	/* 쪽지 - 새 쪽지 보내기 */
 	@Override
-	public boolean sendMessage(MessageDTO message) throws Exception {
-		
-		int result = messageMapper.sendMessage(message);
-		
-		if(result <= 0) {
-			throw new Exception("쪽지 전송에 실패하였습니다. 다시 시도해주세요.");
+	public void sendMessage(MessageDTO message) throws Exception {
+		/* memberNos 스플릿으로 잘라서 for문 돌려서 넘기기 */
+		//널값 체크하기
+		String[] memberNos = message.getMemberNos().split(",");
+//		for(String memberNo : memberNos) {
+//			MessageDTO messageTmp = new MessageDTO();
+//			messageTmp.setReicipientNo(Integer.parseInt(memberNo));
+//			messageTmp.setMsgContent(message.getMsgContent());
+//			messageMapper.sendMessage(messageTmp);
+//		}
+		for(String memberNo : memberNos) {
+			message.setReicipientNo(Integer.parseInt(memberNo));
+			messageMapper.sendMessage(message);
 		}
-		
-		return result > 0 ? true : false;
 		
 	}
 
@@ -68,5 +76,31 @@ public class MessageServiceImpl implements MessageService {
 	public void deleteMessage(String code) {
 		messageMapper.deleteMessage(code);
 	}
+
+	@Override
+	public Map<Integer, List<MemberDTO>> selectMemberListMap(List<DepartmentDTO> departmentList, List<MemberDTO> memberList) {
+		
+		Map<Integer,List<MemberDTO>> memberListMap = new HashMap<>();
+	      
+	    for(DepartmentDTO dto: departmentList) {
+	       if(!memberListMap.containsKey(dto.getDepNo())){
+	            memberListMap.put(dto.getDepNo(), new ArrayList<>());
+	       }
+	       for(MemberDTO memberDTO : memberList) {
+	         if(memberDTO.getDepNo()==dto.getDepNo()) {
+	             memberListMap.get(dto.getDepNo()).add(memberDTO);
+	         }
+	       }
+	    }
+	    
+		return memberListMap;
+	}
+
+	@Override
+	public void updateMessageForView(int msgCode) {
+		messageMapper.updateMessageForView(msgCode);
+		
+	}
+
 
 }
