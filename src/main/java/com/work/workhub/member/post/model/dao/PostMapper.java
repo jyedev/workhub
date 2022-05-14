@@ -16,9 +16,9 @@ public interface PostMapper {
 
 	int writePost(PostDTO post);
 
-	PostDTO findPostDetail(Integer postNo);
+	PostDTO findPostByNo(Integer postNo);
 
-	int updatePost(int postNo);
+	int updatePost(PostDTO post);
 
 
 

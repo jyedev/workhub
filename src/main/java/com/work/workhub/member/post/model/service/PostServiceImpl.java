@@ -38,7 +38,7 @@ public class PostServiceImpl implements PostService{
 		int result;
 		
 		if(post.getPostNo() != 0) {
-			result = postMapper.updatePost(post.getPostNo());
+			result = postMapper.updatePost(post);
 		} else {
 			result = postMapper.writePost(post);
 		}
@@ -52,9 +52,9 @@ public class PostServiceImpl implements PostService{
 
 
 	@Override
-	public PostDTO findPostDetail(Integer postNo) {
+	public PostDTO findPostByNo(Integer postNo) {
 		
-		return postMapper.findPostDetail(postNo);
+		return postMapper.findPostByNo(postNo);
 	}
 	
 

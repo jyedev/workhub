@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +38,7 @@ public class PostController {
 		this.messageSource = messageSource;
 	}
 	
+	
 	//게시판 목록 조회
 	@GetMapping("list")
 	public ModelAndView findPostList(ModelAndView mv) {
@@ -49,11 +51,12 @@ public class PostController {
 		return mv;
 	}
 	
+	
 	//게시글 상세페이지
 	@GetMapping("detail/no/{postNo}")
 	public ModelAndView selectPostDetail(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
 
-		PostDTO postDTO = postService.findPostDetail(postNo);
+		PostDTO postDTO = postService.findPostByNo(postNo);
 		
 		mv.addObject("postDTO", postDTO);
 		
@@ -62,12 +65,14 @@ public class PostController {
 		return mv;
 	}
 	
+	
 	//게시글 카테고리
 	@GetMapping(value="category", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public List<CategoryDTO> findCategoryList(){
 		return postService.findAllCategory();
 	}
+	
 	
 	//게시글 작성
 	@GetMapping("write")
@@ -92,28 +97,29 @@ public class PostController {
 	@GetMapping("update/no/{postNo}")
 	public ModelAndView updatePost(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
 
-		PostDTO postDTO = postService.findPostDetail(postNo);
+		PostDTO postDTO = postService.findPostByNo(postNo);
 		
 		mv.addObject("postDTO", postDTO);
-		
-		mv.setViewName("/post/detail");
+		mv.setViewName("/post/update");
 		
 		return mv;
 	}
 	
+	//제목밖에 안넘어옴ㅜ
 	@PostMapping("update/no/{postNo}")
-	public String updatePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+	public String updatePost(@RequestBody PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		post.setNo(user.getNo());
+		log.info("수정 요청 postNo : " , post.getPostNo());
 		log.info("수정 요청 글 : {}", post);
 		
 		postService.writePost(post);
 		
-		rttr.addFlashAttribute("successMessage", messageSource.getMessage("updatePost", null, locale));
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("writePost", null, locale));
 		
-		return "redirect:/post/detail/no/{postNo}";
-		
+		return "redirect:/post/list";
 	}
+
 	
 	
 }
