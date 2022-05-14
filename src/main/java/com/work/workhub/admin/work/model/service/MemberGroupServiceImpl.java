@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.admin.work.model.dao.WorkMapper;
+import com.work.workhub.admin.work.model.dto.MemberGroupDTO;
 import com.work.workhub.admin.work.model.dto.WorkGroupDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
 
@@ -24,12 +25,32 @@ public class MemberGroupServiceImpl implements MemberGroupService{
 		this.workMapper = workMapper;
 	}
 	
+	/* 근무그룹 select box*/
+	@Override
+	public List<WorkGroupDTO> selectAllbox() {
+		
+		return workMapper.boxSelect();
+	}
+	
+	/*사원 근무그룹 등록*/
+	@Override
+	public boolean memberGroupWrite(MemberGroupDTO post) throws Exception {
+		
+		int result = workMapper.memberGroupWrite(post);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 등록에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+	}
+	
 	//사원 아이디 검색으로 근무그룹 조회
-//	@Override
-//	public List<MemberDTO> selectAllmemberGroup() {
-//		
-//		return workMapper.memberGroupSelect();
-//	}
+	@Override
+	public List<MemberDTO> selectAllmemberGroup(int no) {
+		
+		return workMapper.memberGroupSelect(no);
+	}
 	
 
 

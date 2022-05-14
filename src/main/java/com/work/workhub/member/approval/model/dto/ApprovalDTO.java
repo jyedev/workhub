@@ -1,6 +1,7 @@
 package com.work.workhub.member.approval.model.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,9 +21,13 @@ public class ApprovalDTO {
 	private String title;
 	private String content;
 	private String status;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dueDate;
 	
-	private MemberDTO receiver;
 	private MemberDTO sender;
+	private List<MemberDTO> receiverList;
+	private List<MemberDTO> refList;
+	private AttachDTO att;
 }

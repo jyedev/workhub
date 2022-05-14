@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,7 +37,8 @@ public class PostController {
 		this.messageSource = messageSource;
 	}
 	
-	@GetMapping("/list")
+	//게시판 목록 조회
+	@GetMapping("list")
 	public ModelAndView findPostList(ModelAndView mv) {
 		
 		List<PostDTO> postList = postService.findAllPost();
@@ -47,26 +49,31 @@ public class PostController {
 		return mv;
 	}
 	
-	@GetMapping("/detail")
-	public ModelAndView findPostDetail(ModelAndView mv) {
+	//게시글 상세페이지
+	@GetMapping("detail/no/{postNo}")
+	public ModelAndView selectPostDetail(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
+
+		PostDTO postDetail = postService.findPostDetail(postNo);
+		
+		mv.addObject("postDetail", postDetail);
 		
 		mv.setViewName("/post/detail");
 		
 		return mv;
 	}
 	
-	//category
+	//게시글 카테고리
 	@GetMapping(value="category", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public List<CategoryDTO> findCategoryList(){
 		return postService.findAllCategory();
 	}
 	
-	//write
-	@GetMapping("/write")
+	//게시글 작성
+	@GetMapping("write")
 	public void writePage() {}
 	
-	@PostMapping("/write")
+	@PostMapping("write")
 	public String writePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		post.setNo(user.getNo());

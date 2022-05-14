@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +31,13 @@ public class RoomRegistController {
 
     private RoomService roomService;
     private MessageSource messageSource;
+    private String uploadFilePath;
 
     @Autowired
-    public RoomRegistController(RoomService roomService, MessageSource messageSource) {
+    public RoomRegistController(RoomService roomService, MessageSource messageSource, @Value("${custom.path.upload-files}") String uploadFilePath) {
         this.roomService = roomService;
         this.messageSource = messageSource;
+        this.uploadFilePath = uploadFilePath;
     }
 
     /* 회의실 등록용 화면 이동*/
@@ -47,7 +48,7 @@ public class RoomRegistController {
 
 
     @PostMapping("regist")
-    public String registRoom(@RequestParam(value="singleFile", required=false) MultipartFile singleFile, HttpServletRequest request, Model model, @ModelAttribute MeetingRoomDTO room, RedirectAttributes rttr, Locale locale) throws Exception {
+    public String registRoom(@RequestParam(value="singleFile", required=false) MultipartFile singleFile, Model model, @ModelAttribute MeetingRoomDTO room, RedirectAttributes rttr, Locale locale) throws Exception {
 
 
     	/* 회의실 정보 등록 */
@@ -58,13 +59,8 @@ public class RoomRegistController {
 		log.info("singleFile : {}" + singleFile);
 
 		// file 저장 경로 설정
-		String root = request.getSession().getServletContext().getRealPath("resources");
 
-		System.out.println("root : " + root);
-
-		String savePath = root + "\\uploadFiles";
-
-		File mkdir = new File(savePath);
+		File mkdir = new File(uploadFilePath);
 		if (!mkdir.exists()) {
 			mkdir.mkdirs();
 		}
@@ -76,7 +72,7 @@ public class RoomRegistController {
 
 		// file Save
 		try {
-			singleFile.transferTo(new File(savePath + "\\" + savedName));
+			singleFile.transferTo(new File(uploadFilePath + "\\" + savedName));
 			model.addAttribute("message", "파일 업로드 성공!");
 
 		} catch (IllegalStateException | IOException e) {
@@ -85,7 +81,7 @@ public class RoomRegistController {
 
 		room.setOrgName(orgName);
 		room.setSavedName(savedName);
-		room.setSavePath(savePath);
+		room.setSavePath(uploadFilePath);
 		
 		log.info("room info : {}", room);
 		

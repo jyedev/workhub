@@ -7,6 +7,7 @@
     <title>쪽지 - 받은쪽지함</title>
 
     <!-- fonts -->
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
     <!-- bootstrap -->
@@ -72,7 +73,6 @@
                                             <a class="list-group-item pt-0 active" id="inbox-menu" onclick="location.href='/message/inboxList'" style="cursor:pointer;">
                                                 <div class="fonticon-wrap d-inline me-3">
                                                     <i class="bi bi-envelope"></i>
-                                                    </i>
                                                 </div>
                                                 받은 쪽지함
                                                 <span
@@ -124,16 +124,16 @@
                                             <div class="email-action">
                                                 <!-- action left start here -->
                                                 <div class="action-left d-flex align-items-center">
-                                                    <!-- select All checkbox -->
+                                                    <!-- 체크박스 전체 선택하기 -->
                                                     <div class="checkbox checkbox-shadow checkbox-sm selectAll me-3">
-                                                        <input type="checkbox" id="checkboxsmall" class='form-check-input' onclick='selectAll(this)'>
+                                                        <input type="checkbox" id="checkboxsmall" class='form-check-input' name="allCheck">
                                                         <label for="checkboxsmall"></label>
                                                     </div>
                                                     <!-- delete unread dropdown -->
                                                     <ul class="list-inline m-0 d-flex">
                                                         <li class="list-inline-item mail-delete">
-                                                            <button type="button" class="btn btn-icon action-icon"
-                                                            data-bs-toggle="modal" data-bs-target="#alerttrash">
+                                                            <button type="button" class="btn btn-icon action-icon" data-bs-toggle="modal" data-bs-target="#alerttrash"
+                                                              onclick="deleteValue();">
                                                                 <span class="fonticon-wrap">
                                                                     <i class="bi bi-trash"></i>
                                                                 </span>
@@ -215,7 +215,7 @@
                                                         <div class="user-action">
                                                             <div class="checkbox-con me-3">
                                                                 <div class="checkbox checkbox-shadow checkbox-sm">
-                                                                    <input type="checkbox" id="checkboxsmall1" class='form-check-input'>
+                                                                    <input type="checkbox" id="checkboxsmall1" class='form-check-input' name="RowCheck" th:value="${ message.msgCode }">
                                                                     <label for="checkboxsmall1"></label>
                                                                 </div>
                                                             </div>
@@ -807,6 +807,63 @@
            
         </div>
     </div>
+    
+    <script th:inline="javascript">
+    	$(function(){
+    		var chkObj = document.getElementsByName("RowCheck");
+    		var rowCnt = chkObj.length;
+    		console.log(chkObj);
+    		console.log(rowCnt);
+    		
+    		$("input[name='allCheck']").click(function(){
+    			var chk_listArr = $("input[name='RowCheck']");
+    			for (var i=0; i < chk_listArr.length; i++) {
+    				chk_listArr[i].checked = this.checked;
+    			}
+    		});
+    		$("input[name='RowCheck']").click(function(){
+    			if($("input[name='RowCheck']:checked").length == rowCnt){
+    				$("input[name='allCheck']")[0].checked = true;
+    			} else {
+    				$("input[name='allCheck']")[0].checked = false;
+    			}
+    		});
+    	});
+    	
+    	function deleteValue() {
+    		var url = "delete";
+    		var valueArr = new Array();
+    		var list = $("input[name='RowCheck']");
+    		for(var i = 0; i < list.length; i++) {
+    			if(list[i].checked){
+    				valueArr.push(list[i].value);
+    			}
+    		}
+    		if (valueArr.length == 0){
+    			alert("선택된 쪽지가 없습니다."); // 쪽지 삭제할 때랑 같은 모달로 바꾸기 
+    		} else {
+    			var chkmsg = confirm("정말 삭제하시겠습니까?");
+    			$.ajax({
+    				url : url,
+    				type : 'POST',
+    				traditional : true,
+    				data : {
+    					valueArr : valueArr
+    				},
+    				success : function(data) {
+    					if(data = 1) {
+    						alert("선택한 쪽지가 삭제되었습니다."); // 쪽지 삭제할 때랑 같은 모달로 바꾸기 
+    						location.replace("inboxList")
+    					} else {
+    						alert("삭제에 실패하였습니다."); // 쪽지 삭제할 때랑 같은 모달로 바꾸기 
+    					}
+    				}
+    			});
+    		}
+    		
+    		
+    	}
+    </script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
 

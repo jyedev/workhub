@@ -43,7 +43,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	/* 정적 리소스는 권한이 없어도 요청 가능하게 무시할 경로를 작성한다 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/js/**", "/src/**", "/vendors/**");
+		web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/vendors/**", "/uploadFiles/**");
 	}
 	
 
@@ -81,6 +81,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/approval/**").hasRole("MEMBER")
 				.antMatchers("/message/**").authenticated()
 				.antMatchers(HttpMethod.GET, "/message/**").hasRole("MEMBER")
+				.antMatchers("/reserve/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/reserve/**").hasRole("MEMBER")
 				.anyRequest().permitAll()
 			.and()
 				.formLogin()

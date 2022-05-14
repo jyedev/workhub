@@ -39,9 +39,7 @@ $("#selectBtn").click(function(){
     // html에 넣어주기
      $("#result").html(str);
 
-        // console.log("dep : " + dep);
-        // console.log("rank : " + rank);
-        // console.log("name : " + name);
+         console.log("name : " + name);
 
         // $("#result").html(tdArr[i]);
     });
@@ -85,9 +83,7 @@ $("#selectBtn2").click(function(){
     // html에 넣어주기
      $("#result2").html(str2);
 
-        // console.log("dep : " + dep);
-        // console.log("rank : " + rank);
-        // console.log("name : " + name);
+         console.log("name2 : " + name2);
 
         // $("#result").html(tdArr[i]);
     });

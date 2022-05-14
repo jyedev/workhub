@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.work.workhub.member.approval.model.dao.ApprovalMapper;
+import com.work.workhub.member.approval.model.dto.AppLineDTO;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
 import com.work.workhub.member.member.dto.DepartmentDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
@@ -44,5 +45,18 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public List<MemberDTO> selectMemberList() {
 		return approvalMapper.selectMemberList();
 	}
+
+	@Override
+	public void registApproval(ApprovalDTO approval) {
+		
+		approvalMapper.insertApproval(approval);
+		
+		AppLineDTO appLine = new AppLineDTO();
+//		appLine.setAppNo(0);
+		
+//		approvalMapper.insertAppLine(appLine);
+		
+	}
+
 
 }

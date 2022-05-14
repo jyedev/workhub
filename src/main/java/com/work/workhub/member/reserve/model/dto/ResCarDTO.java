@@ -22,6 +22,8 @@ public class ResCarDTO {
 	private String carPurpose;
 	private String delYn;
 	
-
+	private MemberDTO member;
+	private CarDTO car;
+	
 
 }

@@ -87,4 +87,29 @@
 		  JOIN TBL_POSITION B ON(A.POSITION_NO = B.POSITION_NO)
 		  JOIN DEPARTMENT C ON(A.DEP_NO = C.DEP_NO)
 	</select>
+	
+	<insert id="insertApproval">
+		INSERT
+		  INTO APPROVAL
+		(
+		  APP_NO
+		, APP_MEM_NO
+		, APP_TITLE
+		, APP_CONTENT
+		, APP_STATUS
+		, APP_CREATED_DATE
+		, APP_DUE_DATE
+		)
+		VALUES
+		(
+		  SEQ_APP_NO.NEXTVAL
+		, #{ no }
+		, #{ title }
+		, #{ content }
+		, DEFAULT
+		, SYSDATE
+		, #{ dueDate }
+		)
+	</insert>
+	
 </mapper>

@@ -51,7 +51,7 @@ public class MessageController {
 	}
 	
 	@GetMapping("sentList")
-	public ModelAndView findMessageSentList(ModelAndView mv) {
+	public ModelAndView findMessageSentList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
 		List<MessageDTO> messageSentList = messageService.findMessageSent();
 		
@@ -63,7 +63,7 @@ public class MessageController {
 	}
 	
 	@GetMapping("recyclebinList")
-	public ModelAndView findMessageRecyclebinList(ModelAndView mv) {
+	public ModelAndView findMessageRecyclebinList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
 		List<MessageDTO> messageRecyclebinList = messageService.findMessageRecyclebinList();
 		
@@ -73,7 +73,7 @@ public class MessageController {
 		return mv;
 	}
 	@GetMapping("sendMessage")
-	public ModelAndView sendMessagePage(ModelAndView mv) {
+	public ModelAndView sendMessagePage(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
 		List<DepartmentDTO> departmentList = messageService.selectDepartmentList();
 		List<MemberDTO> memberList = messageService.selectMemberList();
@@ -96,5 +96,19 @@ public class MessageController {
 		
 		return "redirect:/message/inboxList";
 	}
-
+	
+	@PostMapping("delete")
+	public String deleteMessage(@ModelAttribute MessageDTO message, @RequestParam String[] valueArr, RedirectAttributes rttr, Locale locale) throws Exception {
+		
+		int size = valueArr.length;
+		for(int i = 0; i < size; i++) {
+			messageService.deleteMessage(valueArr[i]);
+		}
+		
+		log.info(valueArr.toString());
+		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("deleteMessage", null, locale));
+		
+		return "redirect:/message/inboxList";
+	}
 }
