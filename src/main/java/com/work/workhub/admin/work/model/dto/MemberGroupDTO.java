@@ -29,6 +29,7 @@ public class MemberGroupDTO {
 	private String name;
 	//WorkGroupDTO의 근무그룹 이름
 	private String groupName;
+	private int writeNo;
 	
 	public List<MemberDTO> memberList;
 	public List<WorkGroupDTO> workGroupList;

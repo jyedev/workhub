@@ -18,144 +18,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
 </head>
 <body>
- <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="index.html"><img src="src/images/logo-workhub.png" alt="Logo" srcset=""></a>
-                            
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>홈</span>
-                            </a>
-                        </li>
-
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>사원 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">정보 복수 변경</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">정보 다운로드</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>근태 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">근무그룹 등록</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">사원 근무그룹 등록
-                                    </a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">근무 유형 등록</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">연차 유형 등록</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>게시판 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-element-input.html">게시판 관리</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-input-group.html">작성한 공지사항</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-pen-fill"></i>
-                                <span>자산 관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">회의실 관리</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">차량 관리</a>
-                                </li>
-
-                                </li>
-                            </ul>
-                        </li>
-
-                        <br><br><br><br><br><br>
-                        
-
-                        <li class="sidebar-item  ">
-                            <a href="ui-file-uploader.html" class='sidebar-link'>
-                                <img src="src/images/logout.png" alt="logout">
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
-        </div>
+ 		
+ 		<div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
         
-        
-
+	
         <!--근무 유형 작성 시작-->
         
-        <form class="wwfw" action="/restcate/restCateWrite" method="post">
-            <h4 style="color: black;" class="sdssssc">근무 유형 등록</h4>
+        <form class="wwfw kjhg" action="/restcate/restCateWrite" method="post">
+            <h3 class="vfews">연차 유형 등록</h3>
             <h6 class="fsdf">휴가 종류</h6>
             <input type="text" name="restName">
             <br><br>
            
                         <div class="card">
                             <div class="card-header">
-                                <h6 class="fsdf dsfs">연차 차감</h6>
+                                <h6 class="fsdf dxfgfd">연차 차감</h6>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body dgyterdert">
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" 
                                         id="flexRadioDefault1" name="restDed" value="차감">
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                        차감
                                     </h6>
                                 </div>
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" 
                                         id="flexRadioDefault2" name="restDed" value="차감안함" checked>
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                         차감안함
                                     </h6>
                                 </div>
@@ -164,20 +54,20 @@
 
                         <div class="card gggjj">
                             <div class="card-header">
-                                <h6 class="fsdf dsfs">공휴일 포함</h6>
+                                <h6 class="fsdf dxfgfd">공휴일 포함</h6>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body dgyterdert">
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio"
                                         id="flexRadioDefault3"  name="restInclude" value="포함">
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                        포함
                                     </h6>
                                 </div>
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" 
                                         id="flexRadioDefault4" name="restInclude" value="미포함" checked>
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                         미포함
                                     </h6>
                                 </div>
@@ -185,20 +75,20 @@
                         </div>
                         <div class="card hddgf">
                             <div class="card-header">
-                                <h6 class="fsdf dsfs">유/무급</h6>
+                                <h6 class="fsdf dxfgfd">유/무급</h6>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body dgyterdert">
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" name="restMoney" value="유급"
                                         id="flexRadioDefault5" >
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                        유급
                                     </h6>
                                 </div>
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" name="restMoney" value="무급"
                                         id="flexRadioDefault6" checked>
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                         무급
                                     </h6>
                                 </div>
@@ -207,34 +97,34 @@
 
                         <div class="card dddffa">
                             <div class="card-header">
-                                <h6 class="fsdf dsfs">사용여부</h6>
+                                <h6 class="fsdf dxfgfd">사용여부</h6>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body dgyterdert">
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" name="restUse" value="사용"
                                         id="flexRadioDefault7">
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                        사용
                                     </h6>
                                 </div>
                                 <div class="form-check ssswwe">
                                     <input class="form-check-input" type="radio" name="restUse" value="미사용"
                                         id="flexRadioDefault8" checked>
-                                    <h6 class="fsdf dsfs pohg">
+                                    <h6 class="fsdf dfgdd">
                                         미사용
                                     </h6>
                                 </div>
                             </div>
                         </div>
-                        <div class="sdasdsss nuuuee">         
+                        <div class="sdasdsss nuuuee sdfgsfdsw">         
     <input type="submit" class="btn btn-success rounded-pill" value="저장"></button>
     <a href="#" class="btn btn-light rounded-pill">삭제</a>
-    <a href="#" class="btn btn-light rounded-pill">취소</a></div>
+    <a onclick="location.href='/restcate/list'" class="btn btn-light rounded-pill">취소</a></div>
     </form>
         
         <!--근무 유형 작성 끝-->
     
-    </div>
+  
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
