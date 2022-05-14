@@ -59,7 +59,8 @@
 			  , B.NAME
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
-          WHERE MSG_SENDER_NO = 303
+          WHERE MSG_RECYCLE_BIN_STATUS='N' 
+            AND MSG_SENDER_NO = 303
 	</select>
 	
 	<select id="findMessageSent" resultMap="messageResultMap">
@@ -95,8 +96,8 @@
 			  , B.NAME
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
-          WHERE A.MSG_REICIPIENT_NO = 303
-            AND A.MSG_RECYCLE_BIN_STATUS = 'Y'
+          WHERE A.MSG_RECYCLE_BIN_STATUS = 'Y'
+            AND MSG_SENDER_NO = 303
     </select>
     
     <select id="sendMessage" resultMap="messageResultMap">
@@ -148,4 +149,11 @@
           JOIN TBL_POSITION B ON(A.POSITION_NO = B.POSITION_NO)
           JOIN DEPARTMENT C ON(A.DEP_NO = C.DEP_NO)
     </select>
+    
+    <update id="deleteMessage">
+    	UPDATE /* com.work.workhub.member.message.model.dao.deleteMessage(valueArr) */
+    	       MESSAGE
+           SET MSG_RECYCLE_BIN_STATUS = 'Y'
+         WHERE MSG_CODE= #{ code }
+    </update>
 </mapper>

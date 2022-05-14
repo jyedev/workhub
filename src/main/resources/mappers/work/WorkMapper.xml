@@ -46,7 +46,7 @@
 </resultMap>
 
 <!-- 사원 -->
-<!--  <resultMap type="com.work.workhub.member.member.dto.MemberDTO" id="memberResultMap">
+  <!--   <resultMap type="com.work.workhub.member.member.dto.MemberDTO" id="memberResultMap">
 		<id property="no" column="NO"/>
 		<result property="id" column="ID"/>
 		<result property="pwd" column="PWD"/>
@@ -60,16 +60,17 @@
 	</resultMap>-->
 
 <!-- 사원 근무그룹 지정-->
-<!--  <resultMap type="com.work.workhub.member.member.dto.MemberGroupDTO" id="memberGroupResultMap">
+  <resultMap type="com.work.workhub.admin.work.model.dto.MemberGroupDTO" id="memberGroupResultMap">
 		<id property="gmNo" column="GM_NO"/>
 		<result property="no" column="NO"/>
 		<result property="groupNo" column="GROUP_NO"/>
 		<result property="gmDate" column="GM_DATE"/>
 		<result property="groupStatus" column="GROUP_STATUS"/>
-	
-	<collection property="memberList" resultMap="memberResultMap"/>
-	<collection property="workGroupList" resultMap="workGroupResultMap"/>
-	</resultMap>-->
+		<result property="name" column="NAME"/>
+		<result property="groupName" column="GROUP_NAME"/>
+	<!-- <collection property="memberList" resultMap="memberResultMap"/>
+	<collection property="workGroupList" resultMap="workGroupResultMap"/> -->
+	</resultMap>
 
 	
 	<!-- 근태유형 작성 -->
@@ -179,6 +180,33 @@
 		)
 	</insert>
 	
+	<!-- selectbox 근무그룹 -->
+	<select id="boxSelect" resultMap="workGroupResultMap">
+	SELECT
+	    *
+	 FROM WORK_GROUP
+	 WHERE GROUP_USE = '사용'
+	 ORDER BY GROUP_NO    
+	</select>
+	
+	<!-- 사원 근무그룹 등록 -->
+	<insert id="memberGroupWrite">
+		INSERT
+			INTO GROUP_MEM
+		(
+		  GM_NO
+		, NO
+		, GROUP_NO
+		, GROUP_STATUS
+		)	
+		VALUES
+		(
+		  SEQ_GM_NO.NEXTVAL
+		, #{ no } 
+		, #{ groupNo }
+		, DEFAULT
+		)
+	</insert>
 	
 	
 	
@@ -197,17 +225,21 @@
 	
 	
 	<!-- 사원 아이디 검색으로 근무그룹 조회 -->
-	<!--<select id="memberGroupSelect" resultMap="memberGroupResultMap">
+	<select id="memberGroupSelect" resultMap="memberGroupResultMap">
 	SELECT
-	    A.GM_NO
-	    B.NO
-	    C.GROUP_NO
 	    A.GM_DATE
-	    A.GROUP_STATUS
+	  , A.GM_NO
+	  , A.NO
+	  , A.GROUP_NO
+	  , C.NAME
+	  , B.GROUP_NAME
+	  , A.GROUP_STATUS
 	 FROM GROUP_MEM A
-	 WHERE GROUP_STATUS = 'Y'
-	 ORDER BY GROUP_NO    
+	 JOIN TBL_MEMBER C ON (A.NO = C.NO)
+	 JOIN WORK_GROUP B ON (A.GROUP_NO = B.GROUP_NO)
+	 WHERE A.NO =  #{ no }
+	 ORDER BY GM_NO   
 	</select>
-	-->
+	
 	
 </mapper>

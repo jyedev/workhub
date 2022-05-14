@@ -134,29 +134,20 @@
 
         <!--사원 근무 그룹 작성 시작-->
         
-        <form class="wwfw">
+        <form class="wwfw" action="/mgroup/memberGroupWrite" method="post">
             <h4 style="color: black;" class="sdssssc">사원 근무그룹 등록</h4>
-            <h6 class="fsdf">아이디</h6>
-            <input type="text">
-            <br><br>
-            <h6 class="fsdf">이름</h6>
-            <input type="text">
+            <h6 class="fsdf">사원 아이디</h6>
+            <input type="text" name="no">
             <br><br>
            <h6 class="fsdf">그룹명</h6>
            <fieldset class="form-group">
-            <select class="form-select" id="basicSelect">
-                <option value="0">(기본근태)A형</option>
-                <option value="1">(기본근태)B형</option>
-                <option value="2">(기본근태)C형</option>
+            <select class="form-select" id="basicSelect" name="groupNo">
+                <option th:each="val : ${boxList}" th:value="${val.groupNo}" th:utext="${val.groupName}"></option>
             </select>
            </fieldset>
            <br><br>
-           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" style="width: 50px; height: 23px;" checked>
-            <label class="form-check-label fsdf" for="flexSwitchCheckDefault">상태</label>
-        </div>
     <div class="sdasd">
-    <a href="#" class="btn btn-success rounded-pill">저장</a>
+    <input type="submit" class="btn btn-success rounded-pill" id="btnChk" value="저장"></button>
     <a href="#" class="btn btn-light rounded-pill">삭제</a>
     <a href="#" class="btn btn-light rounded-pill">취소</a></div>
     </form>
