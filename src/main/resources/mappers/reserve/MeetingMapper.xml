@@ -70,5 +70,13 @@
 		 ORDER BY ROOM_NO
 	</select>
     
+    <select id="selectUserInfo" resultMap="loginMemberResultMap">
+    	SELECT
+    			*
+    	  FROM TBL_MEMBER
+    	 WHERE STATUS='Y'
+    	   AND ID = #{ username } 
+    </select>
+    
 
 </mapper>

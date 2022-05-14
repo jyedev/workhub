@@ -1938,3 +1938,7 @@ a {
 .att2 {
     margin-top: 20px;
 }
+
+.col-width-ctrl {
+	width : 400px;
+}
