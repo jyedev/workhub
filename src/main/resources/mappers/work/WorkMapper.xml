@@ -11,6 +11,7 @@
 	<result property="workStatus" column="WORK_STATUS"/>
 	<result property="workDate" column="WORK_DATE"/>
 	<result property="workModdate" column="WORK_MODDATE"/>
+	<result property="writeNo" column="WRITE_NO"/>
 </resultMap>
 
 <!-- 연차유형 -->
@@ -26,6 +27,7 @@
 	<result property="restStatus" column="REST_STATUS"/>
 	<result property="restDate" column="REST_DATE"/>
 	<result property="restModdate" column="REST_MODDATE"/>
+	<result property="writeNo" column="WRITE_NO"/>
 </resultMap>
 
 <!-- 근무그룹 유형 -->
@@ -43,6 +45,7 @@
 	<result property="groupDate" column="GROUP_DATE"/>
 	<result property="groupModdate" column="GROUP_MODDATE"/>
 	<result property="groupUse" column="GROUP_USE"/>
+	<result property="writeNo" column="WRITE_NO"/>
 </resultMap>
 
 <!-- 사원 -->
@@ -68,6 +71,7 @@
 		<result property="groupStatus" column="GROUP_STATUS"/>
 		<result property="name" column="NAME"/>
 		<result property="groupName" column="GROUP_NAME"/>
+		<result property="writeNo" column="WRITE_NO"/>
 	<!-- <collection property="memberList" resultMap="memberResultMap"/>
 	<collection property="workGroupList" resultMap="workGroupResultMap"/> -->
 	</resultMap>
@@ -83,6 +87,7 @@
 		, WORK_INCLUDE
 		, WORK_USE
 		, WORK_STATUS
+		, WRITE_NO
 		)	
 		VALUES
 		(
@@ -91,25 +96,48 @@
 		, #{ workInclude }
 		, #{ workUse }
 		, DEFAULT
+		, #{ writeNo }
 		)
 	</insert>
 	
 	<!-- 근태유형 조회 -->
 	<select id="workSelect" resultMap="workResultMap">
 	SELECT
-	    *
-	 FROM WORK_CATEGORY 
-	 WHERE WORK_STATUS = 'Y'
-	 ORDER BY WORK_NO 
+	      A.WORK_NO
+		, A.WORK_NAME
+		, A.WORK_INCLUDE
+		, A.WORK_USE
+		, A.WORK_STATUS
+		, A.WORK_DATE
+		, A.WORK_MODDATE
+		, A.WRITE_NO
+		, B.NAME
+	 FROM WORK_CATEGORY A
+	 JOIN TBL_MEMBER B ON (A.WRITE_NO = B.NO)
+	 WHERE A.WORK_STATUS = 'Y'
+	 ORDER BY A.WORK_NO 
 	</select>
 	
 	<!-- 연차유형 조회 -->
 	<select id="restcateSelect" resultMap="restcateResultMap">
 	SELECT
-	    *
-	 FROM REST_CATEGORY
-	 WHERE REST_STATUS = 'Y'
-	 ORDER BY REST_NO    
+	      A.REST_NO
+		, A.REST_NAME
+		, A.REST_DED
+		, A.REST_INCLUDE
+		, A.REST_MONEY
+		, A.REST_POSS
+		, A.REST_DAY
+		, A.REST_USE
+		, A.REST_STATUS
+		, A.REST_DATE
+		, A.REST_MODDATE
+		, A.WRITE_NO
+		, B.NAME
+	 FROM REST_CATEGORY A
+	 JOIN TBL_MEMBER B ON (A.WRITE_NO = B.NO)
+	 WHERE A.REST_STATUS = 'Y'
+	 ORDER BY A.REST_NO    
 	</select>
 	
 	<!-- 연차유형 작성 -->
@@ -124,6 +152,7 @@
 		, REST_MONEY
 		, REST_USE
 		, REST_STATUS
+		, WRITE_NO
 		)	
 		VALUES
 		(
@@ -134,16 +163,32 @@
 		, #{ restMoney }
 		, #{ restUse }
 		, DEFAULT
+		, #{ writeNo }
 		)
 	</insert>
 	
 	<!-- 근무그룹유형 조회 -->
 	<select id="workGroupSelect" resultMap="workGroupResultMap">
 	SELECT
-	    *
-	 FROM WORK_GROUP
-	 WHERE GROUP_STATUS = 'Y'
-	 ORDER BY GROUP_NO    
+	      A.GROUP_NO
+	    , A.WRITE_NO
+	    , A.GROUP_NAME
+	    , A.GROUP_EX
+	    , A.GROUP_DAY
+	    , A.GROUP_FIRDATE
+	    , A.GROUP_ENDDATE
+	    , A.GROUP_FIRREST
+	    , A.GROUP_ENDREST
+	    , A.GROUP_STATUS
+	    , A.GROUP_REST
+	    , A.GROUP_DATE
+	    , A.GROUP_MODDATE
+	    , A.GROUP_USE
+	    , B.NAME
+	 FROM WORK_GROUP A
+	 JOIN TBL_MEMBER B ON (A.WRITE_NO = B.NO)
+	 WHERE A.GROUP_STATUS = 'Y'
+	 ORDER BY A.GROUP_NO    
 	</select>
 	
 	
@@ -163,6 +208,7 @@
 		, GROUP_STATUS
 		, GROUP_REST
 		, GROUP_USE
+		, WRITE_NO
 		)	
 		VALUES
 		(
@@ -177,6 +223,7 @@
 		, DEFAULT
 		, #{ groupRest }
 		, #{ groupUse }
+		, #{ writeNo }
 		)
 	</insert>
 	
@@ -198,6 +245,7 @@
 		, NO
 		, GROUP_NO
 		, GROUP_STATUS
+		, WRITE_NO
 		)	
 		VALUES
 		(
@@ -205,6 +253,7 @@
 		, #{ no } 
 		, #{ groupNo }
 		, DEFAULT
+		, #{ writeNo }
 		)
 	</insert>
 	
@@ -227,18 +276,21 @@
 	<!-- 사원 아이디 검색으로 근무그룹 조회 -->
 	<select id="memberGroupSelect" resultMap="memberGroupResultMap">
 	SELECT
-	    A.GM_DATE
+	    A.WRITE_NO
+	  , A.GM_DATE
 	  , A.GM_NO
 	  , A.NO
 	  , A.GROUP_NO
 	  , C.NAME
 	  , B.GROUP_NAME
 	  , A.GROUP_STATUS
+	  , D.NAME
 	 FROM GROUP_MEM A
 	 JOIN TBL_MEMBER C ON (A.NO = C.NO)
+	 JOIN TBL_MEMBER D ON (A.WRITE_NO = D.NO)
 	 JOIN WORK_GROUP B ON (A.GROUP_NO = B.GROUP_NO)
 	 WHERE A.NO =  #{ no }
-	 ORDER BY GM_NO   
+	 ORDER BY A.GM_NO   
 	</select>
 	
 	

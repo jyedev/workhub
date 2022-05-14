@@ -24,5 +24,6 @@ public class WorkDTO {
 	private String workStatus;
 	private Date workDate;
 	private Date workModdate;
-	
+	private int writeNo;
+	private String name;
 }
