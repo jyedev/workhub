@@ -11,19 +11,21 @@ import com.work.workhub.member.message.model.dto.MessageDTO;
 @Mapper
 public interface MessageMapper {
 	
-	List<MessageDTO> findMessageInbox();
+	List<MessageDTO> findMessageInbox(int no);
 
 	List<MessageDTO> findMessageSent();
 
 	List<MessageDTO> findMessageRecyclebinList();
 
-	int sendMessage(MessageDTO message);
+	void sendMessage(MessageDTO message);
 
 	List<DepartmentDTO> selectDepartmentList();
 
 	List<MemberDTO> selectMemberList();
 
 	void deleteMessage(String code);
+
+	void updateMessageForView(int msgCode);
 
 
 }
