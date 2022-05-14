@@ -63,13 +63,12 @@ function selectAll(selectAll)  {
 
 //주소록 값 가져오기
 $("#selectBtn").click(function(){
-
     var rowData = new Array();
     var tdArr = new Array();
     var checkbox = $("input[name=userCheckbox]:checked");
-
-    checkbox.each(function(i) {
-
+	var memberNos = '';
+    checkbox.each(function(i, obj) {
+		memberNos += obj.value + ',';
         var tr = checkbox.parent().parent().eq(i);
         var td = tr.children();
 
@@ -84,9 +83,11 @@ $("#selectBtn").click(function(){
         tdArr.push(position);
         tdArr.push(dept);
         tdArr.push(email);
+       	
 
     });
-    
+    memberNos = memberNos.substring(0,memberNos.length-1);
+    $('#memberNos').val(memberNos);
     $('#contactResult').val(tdArr);
     
 

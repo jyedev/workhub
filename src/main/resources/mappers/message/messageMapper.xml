@@ -60,7 +60,7 @@
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
           WHERE MSG_RECYCLE_BIN_STATUS='N' 
-            AND MSG_SENDER_NO = 303
+            AND MSG_SENDER_NO = #{ no }
 	</select>
 	
 	<select id="findMessageSent" resultMap="messageResultMap">
@@ -78,7 +78,7 @@
 			  , B.NAME
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
-          WHERE A.MSG_REICIPIENT_NO = 303
+          WHERE A.MSG_REICIPIENT_NO = #{ no }
     </select>
     
     <select id="findMessageRecyclebinList" resultMap="messageResultMap">
@@ -118,16 +118,16 @@
        VALUES
        (
          SEQ_MESSAGE_NO.NEXTVAL
-       , 0
-       , 0
-       , ''
-       , ''
-       , ''
+       , #{ senderNo }
+       , #{ reicipientNo }
+       , #{ msgContent }
+       , TO_CHAR(SYSDATE, 'YYYYMMDD')
+       , TO_CHAR(SYSDATE, 'HH24MISS')
        , ''
        , ''
        , 'N'
        , 'N'
-       );
+       )
     </select>
     
     <select id="selectDepartmentList" resultMap="departmentResultMap">
@@ -139,7 +139,8 @@
     
     <select id="selectMemberList" resultMap="memberResultMap">
     	SELECT 
-    	       A.DEP_NO
+    		   A.NO
+    	     , A.DEP_NO
     	     , A.POSITION_NO
     	     , A.NAME
     	     , A.EMAIL
@@ -155,5 +156,14 @@
     	       MESSAGE
            SET MSG_RECYCLE_BIN_STATUS = 'Y'
          WHERE MSG_CODE= #{ code }
+    </update>
+    
+    <update id="updateMessageForView">
+    	UPDATE 
+    	       MESSAGE
+           SET 
+           		MSG_READ_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+              , MSG_READ_TIME = TO_CHAR(SYSDATE, 'HH24MISS')
+         WHERE MSG_CODE= #{ msgCode }
     </update>
 </mapper>

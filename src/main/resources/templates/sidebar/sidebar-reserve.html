@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app-ar.css">
-    <link rel="stylesheet" href="/assets/css/admin-ar.css">
-    <link rel="shortcut icon" href="/assets/images/images/favicon-workHub.ico" type="image/x-icon">
+   	<link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
 </head>
 <body>
 	<div id="app">
@@ -27,7 +26,6 @@
                     <div class="d-flex justify-content-between">
                         <div class="logo">
                             <a href="index.html"><img src="/assets/images/images/logo-workhub-edit.png" alt="Logo"></a>
-                            
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -38,7 +36,7 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
+                        <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>홈</span>
@@ -46,70 +44,117 @@
                         </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>전자결재</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="extra-component-avatar.html">결재 문서 생성</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">개인 결재함</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">부서 결재함</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
                                 <i class="bi bi-collection-fill"></i>
-                                <span>사원 관리</span>
+                                <span>근태관리</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">정보 복수 변경</a>
+                                    <a href="extra-component-avatar.html">내 근태 현황</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">정보 다운로드</a>
+                                    <a href="extra-component-sweetalert.html">내 연차 내역</a>
                                 </li>
-                            </ul>
-                        </li>
 
-                        <li class="sidebar-item  has-sub">
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub active">
                             <a href="#" class='sidebar-link'>
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>근태 관리</span>
+                                <i class="bi bi-alarm-fill"></i>
+                                <span>예약</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                   <a onclick="location.href='/group/list'" style="cursor:pointer;">근무그룹 등록</a>
+                                    <a th:href="@{/reserve/meeting/list}">회의실 예약</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a onclick="location.href='/mgroup/memberGroupSelect'" style="cursor:pointer;">사원 근무그룹 등록
-                                    </a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a onclick="location.href='/work/list'" style="cursor:pointer;">근무 유형 등록</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a onclick="location.href='/restcate/list'" style="cursor:pointer;">연차 유형 등록</a>
+                                    <a th:href="@{/reserve/car/list}">차량 예약</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item  has-sub">
+                        <li class="sidebar-item">
                             <a href="#" class='sidebar-link'>
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>게시판 관리</span>
+                                <i class="bi bi-calendar-fill"></i>
+                                <span>캘린더</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-element-input.html">게시판 관리</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-input-group.html">작성한 공지사항</a>
-                                </li>
-                            </ul>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="form-layout.html" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>보고서</span>
+                            </a>
                         </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-pen-fill"></i>
-                                <span>자산 관리</span>
+                                <span>게시판</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">회의실 관리</a>
+                                    <a th:href="@{/post/write}">글쓰기</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">차량 관리</a>
+                                    <a th:href="@{/post/notice}">공지사항</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/post/list}">자유게시판</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-bar-chart-fill"></i>
+                                <span>설문</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a th:href="@{/survey/write}">설문 작성</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/survey/home}">설문 홈</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/survey/ongoing}">진행 중인 설문</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/survey/end}">마감된 설문</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a th:href="@{/survey/mySurvey}">내가 만든 설문</a>
                                 </li>
                             </ul>
                         </li>
-                        <br><br><br><br><br><br>
-                        
+                        <li class="sidebar-item  ">
+                            <a href="table-datatable.html" class='sidebar-link'>
+                                <i class="bi bi-chat-dots-fill"></i>
+                                <span>쪽지</span>
+                            </a>
+                        </li>
+                        <br><br><br><br>
+
+                        <li class="sidebar-item ">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-person-circle"></i>
+                                <span>내 정보 관리</span>
+                            </a>
+                        </li>
                         <li class="sidebar-item  ">
                             <a href="ui-file-uploader.html" class='sidebar-link'>
                                 <img src="/assets/images/images/logout.png" alt="logout">
@@ -122,7 +167,8 @@
             </div>
         </div>
     </div>
-   	<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
     <script src="/assets/js/main.js"></script>

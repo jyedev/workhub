@@ -28,5 +28,6 @@ public class RestCateDTO {
 	private String restStatus;
 	private Date restDate;
 	private Date restModdate;
-	
+	private int writeNo;
+	private String name;
 }

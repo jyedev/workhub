@@ -2,6 +2,7 @@ package com.work.workhub.member.message.controller;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -9,9 +10,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,11 +41,13 @@ public class MessageController {
 		this.messageSource = messageSource;
 	}
 	
-	
+	/* 받은 쪽지함 조회 */
 	@GetMapping("inboxList")
 	public ModelAndView findMessageInboxList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
-		List<MessageDTO> messageInboxList = messageService.findMessageInbox();
+		int no = user.getNo();
+		
+		List<MessageDTO> messageInboxList = messageService.findMessageInbox(no);
 		
 		mv.addObject("messageInboxList", messageInboxList);
 		mv.setViewName("message/inboxList");
@@ -50,6 +56,7 @@ public class MessageController {
 		
 	}
 	
+	/* 보낸 쪽지함 조회 */
 	@GetMapping("sentList")
 	public ModelAndView findMessageSentList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
@@ -62,6 +69,7 @@ public class MessageController {
 		return mv;
 	}
 	
+	/* 휴지통 조회 */
 	@GetMapping("recyclebinList")
 	public ModelAndView findMessageRecyclebinList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
@@ -72,14 +80,19 @@ public class MessageController {
 		
 		return mv;
 	}
+	
+	/* 쪽지 보내기 화면 연결 */
 	@GetMapping("sendMessage")
 	public ModelAndView sendMessagePage(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
 		List<DepartmentDTO> departmentList = messageService.selectDepartmentList();
 		List<MemberDTO> memberList = messageService.selectMemberList();
 		
+		Map<Integer, List<MemberDTO>> memberListMap = messageService.selectMemberListMap(departmentList, memberList);
+		
 		mv.addObject("departmentList", departmentList);
 		mv.addObject("memberList", memberList);
+		mv.addObject("memberListMap", memberListMap);
 		mv.setViewName("message/sendMessage");
 		
 		log.info("부서 목록 : {}", departmentList);
@@ -88,15 +101,20 @@ public class MessageController {
 		return mv;
 	}
 	
+	/* 쪽지 보내기 */
 	@PostMapping("sendMessage")
-	public String sendMessage(@ModelAttribute MessageDTO message, RedirectAttributes rttr, Locale locale) throws Exception {
+	public String sendMessage(@ModelAttribute MessageDTO message, RedirectAttributes rttr, Locale locale, @AuthenticationPrincipal UserImpl user) throws Exception {
 	
+		message.setSenderNo(user.getNo());
+		
 		messageService.sendMessage(message);
 		rttr.addFlashAttribute("successMessage", messageSource.getMessage("sendMessage", null, locale));
 		
+		log.info("쪽지 목록 : {}", message);
 		return "redirect:/message/inboxList";
 	}
 	
+	/* 쪽지 삭제(휴지통 이동) */
 	@PostMapping("delete")
 	public String deleteMessage(@ModelAttribute MessageDTO message, @RequestParam String[] valueArr, RedirectAttributes rttr, Locale locale) throws Exception {
 		
@@ -111,4 +129,23 @@ public class MessageController {
 		
 		return "redirect:/message/inboxList";
 	}
+	
+	/* 쪽지 읽었을 때 읽은 날짜/시간 값 UPDATE */
+	@PutMapping("view/{msgCode}")
+	public @ResponseBody int updateMessageForView(@PathVariable("msgCode") int msgCode) {
+		
+		log.info("쪽지 번호 : {}", msgCode);
+		messageService.updateMessageForView(msgCode);
+		
+		return msgCode;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

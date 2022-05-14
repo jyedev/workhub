@@ -53,7 +53,7 @@
                     <div class="card">
                         <div class="card-header">
                             <a th:href="@{/post/write}" class="btn btn-outline-primary">새글쓰기</a>
-                            <a th:href="@{/post/modify}" class="btn btn-outline-primary">수정하기</a>
+                            <a th:href="@{'/post/update/no/' + ${ postDTO.postNo }}" class="btn btn-outline-primary">수정하기</a>
                             <a th:href="@{/post/delete}" class="btn btn-outline-primary">삭제하기</a>
                             <a th:href="@{/post/list}" class="btn btn-outline-primary" id="btn-list">목록보기</a>
                         </div>
@@ -61,7 +61,7 @@
                         <div class="card-body">
                             <div class="com-detail-title">
                                 <div class="detail-title">
-                                    <h4 th:text="${ postDetail.postTitle }">제목</h4>
+                                    <h4 th:text="${ postDTO.postTitle }">제목</h4>
                                     <div class="com-detail-messenger">
                                         <img src="/assets/images/post-surv/messenger.png" class="icon-messenger">
                                         <span>1</span>
@@ -74,12 +74,12 @@
                             </div>
                             <div class="com-detail-writer">
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
-                                <p th:text="${ postDetail.member.name }">작성자</span><br>
+                                <p th:text="${ postDTO.member.name }">작성자</span><br>
 <!--                                 <span id="current-time"></span> -->
-								<p th:text="${ postDetail.postDate }" class="com-detail-date">날짜</p>
+								<p th:text="${ postDTO.postDate }" class="com-detail-date">날짜</p>
                             </div>
                             <div class="com-detail-body">
-                                <div th:utext="${ postDetail.postContent }" class="com-detail-content">
+                                <div th:utext="${ postDTO.postContent }" class="com-detail-content">
                                     내용
                                 </div>
                                 <div class="detail-body-footer">
@@ -94,7 +94,7 @@
                                     <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                     <span>김허브 대리</span>
                                     <!-- 날짜 sysdate로 수정 -->
-                                    <span id="current-time2"></span>
+                                    <span id="#"></span>
                                     <div class="reply-btn" input type="button">
                                         <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글">
                                         <span>답글</span>
@@ -104,7 +104,7 @@
                                     <p>댓글 내용이 표시됩니다.</p>
                                 </div>
                             </div>
-                            <form action="" method="post" class="com-insert-reply" >
+                            <form action="/post/detail" method="post" class="com-insert-reply" >
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                 <input type="text" class="text-reply" name="text-reply">
                                 <button type="file" class="btn btn-outline-secondary me-1 mb-1 btn-sm">첨부</button>
@@ -174,22 +174,7 @@
             </div>
         </div>
     </div>
-<!--     <script> -->
-//         date = new Date();
-//         year = date.getFullYear();
-//         month = date.getMonth() + 1;
-//         day = date.getDate();
 
-// 	    hour = date.getHours(); 
-// 	    hour = ( hour > 9 ) ? hour : "0" + hour; 
-// 	    minute = date.getMinutes(); 
-// 	    minute = ( minute > 9 ) ? minute : "0" + minute; 
-
-//         document.getElementById("current-time").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
-//         "&nbsp&nbsp" + hour + ":" + minute;
-//         document.getElementById("current-time2").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
-//         "&nbsp&nbsp" + hour + ":" + minute;
-<!--     </script> -->
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min2.js"></script>
 
@@ -197,6 +182,8 @@
     <script src="/assets/js/pages/dashboard.js"></script>
 
     <script src="/assets/js/main.js"></script>
+    
+
 </body>
 
 </html>

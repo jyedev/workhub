@@ -42,5 +42,6 @@ public class WorkGroupDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String groupModdate;
 	private String groupUse;
-	
+	private int writeNo;
+	private String name;
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.admin.reserve.model.dto.MeetingRoomDTO;
+import com.work.workhub.member.member.dto.MemberDTO;
 import com.work.workhub.member.reserve.model.dao.MeetingMapper;
 
 @Service("meetingService")
@@ -27,4 +28,10 @@ public class MeetingServiceImpl implements MeetingService {
 		return meetingMapper.selectRoomList();
 	}
 
+	@Override
+	public MemberDTO selectUserInfo(String username) {
+		return meetingMapper.selectUserInfo(username);
+	}
+
+	
 }

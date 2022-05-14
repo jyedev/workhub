@@ -119,17 +119,25 @@
 	</insert>
 	
 	<!-- 게시글 상세조회 -->
-	<select id="findPostDetail" resultMap="postResultMap">
+	<select id="findPostByNo" resultMap="postResultMap">
 		SELECT
-			  P.POST_TITLE
+			  P.*
 			, M.NAME
-			, P.POST_CONTENT
-			, P.POST_DATE
 		 FROM POST P
 		 JOIN TBL_MEMBER M ON (P.NO = M.NO)
 		WHERE P.POST_STATUS = 'Y'
 		  AND P.POST_NO = #{ postNo } 
 	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updatePost">
+		UPDATE POST
+		  SET POST_TITLE = #{ postTitle }
+		    , POST_CONTENT = #{ postContent }
+		    , CATEGORY_NO = #{ categoryNo }
+		    , POST_UPDATE = SYSDATE
+		WHERE POST_NO = #{ postNo }		
+	</update>
 	
 	
 	
