@@ -28,10 +28,4 @@ public class MeetingServiceImpl implements MeetingService {
 		return meetingMapper.selectRoomList();
 	}
 
-	@Override
-	public MemberDTO selectUserInfo(String username) {
-		return meetingMapper.selectUserInfo(username);
-	}
-
-	
 }
