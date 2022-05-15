@@ -39,6 +39,28 @@ public class WorkServiceImpl implements WorkService{
 		
 		return workMapper.workSelect();
 	}
+	
+	//근태유형 예전 값
+	@Override
+	public List<WorkDTO> Modifywork(int workNo) {
+		
+		return workMapper.Modifywork(workNo);
+	}
+	
+	
+	//근태유형 수정
+//	@Override
+//	public boolean workModifyGo(WorkDTO post) throws Exception {
+//		
+//		int result = workMapper.workModifyGo(post);
+//		
+//		if(result <= 0) {
+//			throw new Exception("게시글 등록에 실패하였습니다.");
+//		}
+//		
+//		return result > 0 ? true : false;
+//		
+//	}
 
 
 }
