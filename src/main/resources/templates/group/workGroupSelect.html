@@ -43,7 +43,8 @@
                                 <th class="deaf">쉬는시간 끝</th>
                                 <th class="deaf">연차일수</th>
                                 <th class="dfadsf">작성자</th>
-                                <th class="dfadsf">상태</th>
+                                <th class="dfadsf">사용여부</th>
+                                <th class="dfadsf">수정</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +62,9 @@
                                 <td th:text="${ group.name }"></td> <!-- 작성자-->
                                 <td>
                                     <span th:text="${ group.groupUse }" class="badge bg-success">설정</span> <!-- 상태 -->
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">수정</span> <!-- 상태 -->
                                 </td>
                             </tr>                            
                         </tbody>

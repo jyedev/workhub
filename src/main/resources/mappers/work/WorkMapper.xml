@@ -72,6 +72,7 @@
 		<result property="name" column="NAME"/>
 		<result property="groupName" column="GROUP_NAME"/>
 		<result property="writeNo" column="WRITE_NO"/>
+		<result property="writeName" column="NAME"/>
 	<!-- <collection property="memberList" resultMap="memberResultMap"/>
 	<collection property="workGroupList" resultMap="workGroupResultMap"/> -->
 	</resultMap>
@@ -117,6 +118,38 @@
 	 WHERE A.WORK_STATUS = 'Y'
 	 ORDER BY A.WORK_NO 
 	</select>
+	
+	
+	<!-- 근태유형 수정 예전 값-->
+	<select id="Modifywork" resultMap="workResultMap">
+	SELECT
+	      A.WORK_NO
+		, A.WORK_NAME
+		, A.WORK_INCLUDE
+		, A.WORK_USE
+		, A.WORK_STATUS
+		, A.WORK_DATE
+		, A.WORK_MODDATE
+		, A.WRITE_NO
+		, B.NAME
+	 FROM WORK_CATEGORY A
+	 JOIN TBL_MEMBER B ON (A.WRITE_NO = B.NO)
+	 WHERE WORK_NO = #{ workNo }
+	</select>
+	
+	<!-- 근태 유형  수정-->
+	<!--  <update id="workModifyGo">
+		UPDATE
+		    WORK_CATEGORY
+		  SET 
+		      WORK_NO = #{ workNo }
+		  	, WORK_NAME = #{ workName }  
+		    , WORK_INCLUDE = #{ workInclude }
+		    , WORK_USE = #{ workUse }
+		    , WRITE_NO = #{ writeNo }
+		  WHERE WORK_NO = #{ workNo } 
+	</update>-->
+	
 	
 	<!-- 연차유형 조회 -->
 	<select id="restcateSelect" resultMap="restcateResultMap">

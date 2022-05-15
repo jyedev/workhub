@@ -7,16 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.work.workhub.admin.work.model.dto.WorkDTO;
 import com.work.workhub.admin.work.model.service.WorkService;
+import com.work.workhub.member.member.dto.MemberDTO;
 import com.work.workhub.member.member.dto.UserImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -73,6 +76,42 @@ public class WorkWriteController {
 		
 	}
 
-	
+	  //근무유형 수정 예전 값 보기
+		@GetMapping("workModify")
+		public ModelAndView workModify(@RequestParam int workNo, ModelAndView mv) {
+				
+			List<WorkDTO> workMo = workService.Modifywork(workNo);
+			
+			
+			mv.addObject("workMo",workMo);
+			
+			System.out.println(workMo);
+			
+			mv.setViewName("work/workModify");
+			
+			return mv;
+			
+		}
+		
+		
+		//근무유형 수정
+//		@PostMapping("workModifyGo")
+//		public String workModifyGo(@ModelAttribute WorkDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+//			
+//			post.setWriteNo(user.getNo());
+//			log.error("등록 요청 글 : {}", post);
+//			log.warn("등록 요청 글 : {}", post);
+//			log.info("등록 요청 글 : {}", post);
+//			log.debug("등록 요청 글 : {}", post);
+//			log.trace("등록 요청 글 : {}", post);
+//			
+//			workService.workModifyGo(post);
+//			
+//			rttr.addFlashAttribute("successMessage", messageSource.getMessage("workModifyGo", null, locale));
+//			
+//			return "redirect:/work/list";
+//			
+//		}
+		
 	
 }
