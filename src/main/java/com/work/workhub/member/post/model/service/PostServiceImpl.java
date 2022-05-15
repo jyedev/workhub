@@ -56,6 +56,12 @@ public class PostServiceImpl implements PostService{
 		
 		return postMapper.findPostByNo(postNo);
 	}
+
+
+	@Override
+	public int deletePost(Integer postNo) {
+		return postMapper.deletePost(postNo);
+	}
 	
 
 

@@ -37,10 +37,11 @@
                                 <th class="sds">유/무급</th>
                                 <th class="deaf">연차 차감</th>
                                 <th class="deaf">공휴일 포함 여부</th>
-                                <th class="sds">작성일</th>
-                                <th class="deaf">사용여부</th>
+                                <th class="sds">작성일</th>                               
                                 <th class="deaf">작성자</th>
-                                <th class="dfadsf">설정</th>
+                                <th class="deaf">사용여부</th>
+                                <th class="deaf">수정</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -51,10 +52,12 @@
                                 <td th:text="${ restcate.restDed }"></td> <!-- 연차차감 -->
                                 <td th:text="${ restcate.restInclude }"></td> <!-- 공휴일 포함 여부 -->
                                 <td th:text="${ restcate.restDate }"></td> <!-- 작성일 -->
-                                <td th:text="${ restcate.restUse }"></td> <!-- 사용여부 -->
                                 <td th:text="${ restcate.name }"></td> <!-- 사용여부 -->
                                 <td>   
-                                    <span class="badge bg-success">설정</span>  <!-- 설정 -->
+                                    <span th:text="${ restcate.restUse }" class="badge bg-success">설정</span>  <!-- 설정 -->
+                                </td>
+                                <td>   
+                                    <span class="badge bg-success">수정</span>  <!-- 설정 -->
                                 </td>
                             </tr>          
                         </tbody>

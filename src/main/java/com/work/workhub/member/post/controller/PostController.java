@@ -119,6 +119,22 @@ public class PostController {
 		
 		return "redirect:/post/list";
 	}
+	
+	
+	 //게시글 삭제
+	@GetMapping("delete/no/{postNo}")
+	public String deletePost(@PathVariable("postNo") Integer postNo, @AuthenticationPrincipal UserImpl user) {
+		
+		PostDTO post = postService.findPostByNo(postNo);
+		
+		post.setNo(user.getNo());
+		log.info("삭제 요청 글 : {}", post.getPostNo());
+		
+		postService.deletePost(postNo);
+		
+		
+		return null;
+	}
 
 	
 	

@@ -40,6 +40,13 @@ public interface WorkMapper {
 	//사원 아이디 검색으로 근무그룹 조회
 	List<MemberDTO> memberGroupSelect(int no);
 	
+	//근태 유형 수정 예전 값
+	List<WorkDTO> Modifywork(int workNo);
+	
+	
+	//근태유형 수정
+//	int workModifyGo(WorkDTO post);
+	
 	//근무그룹조회 use='사용'
 //	List<WorkGroupDTO> workGroupSelects();
 

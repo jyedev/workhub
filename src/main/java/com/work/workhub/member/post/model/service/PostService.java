@@ -15,5 +15,7 @@ public interface PostService {
 
 	PostDTO findPostByNo(Integer postNo);
 
+	int deletePost(Integer postNo);
+
 	
 }
