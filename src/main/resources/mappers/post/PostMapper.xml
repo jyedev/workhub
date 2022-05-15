@@ -139,6 +139,11 @@
 		WHERE POST_NO = #{ postNo }		
 	</update>
 	
+	<update id="deletePost">
+		UPDATE POST
+		  SET POST_STATUS = 'N'
+		WHERE POST_NO = #{ postNo}
+	</update>
 	
 	
 	
