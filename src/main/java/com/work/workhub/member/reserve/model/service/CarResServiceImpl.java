@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.work.workhub.admin.reserve.model.dto.CarDTO;
 import com.work.workhub.member.reserve.model.dao.CarResMapper;
 import com.work.workhub.member.reserve.model.dto.ResCarDTO;
 
@@ -32,9 +33,12 @@ public class CarResServiceImpl implements CarResService{
 	}
 
 	@Override
-	public List<ResCarDTO> selectAllCar() {
-		// TODO Auto-generated method stub
+	public List<CarDTO> selectAllCar() {
 		return carResMapper.selectCarList();
+	}
+	@Override
+	public List<ResCarDTO> selectAllResCarList() {
+		return carResMapper.selectAllResCarList();
 	}
 
 }
