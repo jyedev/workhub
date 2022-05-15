@@ -14,6 +14,5 @@ public interface MeetingMapper {
 
 	List<MeetingRoomDTO> selectRoomList();
 
-	MemberDTO selectUserInfo(String username);
 
 }

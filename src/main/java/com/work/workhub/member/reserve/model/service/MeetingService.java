@@ -11,7 +11,6 @@ public interface MeetingService {
 
 	List<MeetingRoomDTO> selectRoomList();
 
-	MemberDTO selectUserInfo(String username);
 	
 	
 
