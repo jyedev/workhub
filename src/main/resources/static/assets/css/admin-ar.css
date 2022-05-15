@@ -75,3 +75,8 @@
 .margin-btw {
 	margin-bottom : 10px;
 }
+
+.logout-array {
+	position : relative;
+	top : 250px;
+}

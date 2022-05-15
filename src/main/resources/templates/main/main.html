@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -23,8 +23,8 @@
 </head>
 
 <body>
+	<div th:include="sidebar/sidebar" th:remove="tag"></div>
     <div id="app">
-         <div th:include="sidebar/sidebar" th:remove="tag"/>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">

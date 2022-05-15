@@ -32,7 +32,7 @@ public class MeetingSelectController {
 	}
 	
 	@GetMapping("meeting/list")
-	public ModelAndView selectMeetingList(ModelAndView mv, String username, @AuthenticationPrincipal UserImpl user) {
+	public ModelAndView selectMeetingList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
 		log.info("로그인 유저 {} : ", user);
 		

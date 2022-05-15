@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.work.workhub.admin.reserve.model.dto.CarDTO;
 import com.work.workhub.member.reserve.model.dto.ResCarDTO;
 import com.work.workhub.member.reserve.model.service.CarResService;
 
@@ -30,7 +31,7 @@ public class CarReserveController {
 	@GetMapping("reserve")
 	public ModelAndView selectCarList(ModelAndView mv) {
 			
-		List<ResCarDTO> carList = carService.selectAllCar();
+		List<CarDTO> carList = carService.selectAllCar();
 		
 		mv.addObject("carList",carList);
 		

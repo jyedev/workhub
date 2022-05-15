@@ -11,6 +11,8 @@
 		<result property="carPurpose" column="CAR_PURPOSE"/>
 		<result property="delYn" column="DEL_YN"/>
 		
+		<association property="member" resultMap="loginMemberResultMap"/>
+		<association property="car" resultMap="carResultMap"/>
 	</resultMap>
 	
 	<resultMap id="carResultMap" type="com.work.workhub.admin.reserve.model.dto.CarDTO">
@@ -20,9 +22,6 @@
 		<result property="carNumber" column="CAR_NUMBER"/>
 		<result property="carYn" column="CAR_YN"/>
 		<result property="delYn" column="DEL_YN"/>
-		
-		<association property="member" resultMap="loginMemberResultMap"/>
-		<association property="car" resultMap="carResultMap"/>
 		
 	</resultMap>
 	
@@ -59,7 +58,15 @@
 		*
 		FROM COM_CAR
 		WHERE DEL_YN = 'N'
-		ORDER BY CAR_NO DESC
+		ORDER BY CAR_NO
+	</select>
+	
+	<select id="selectAllResCarList" resultMap="carResResultMap">
+		SELECT
+		*
+		FROM RES_CAR A
+		JOIN TBL_MEMBER B ON (A.NO = B.NO)
+		<!-- WHERE A.NO = #{ no } -->
 	</select>
 	
 	
