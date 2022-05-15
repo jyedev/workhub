@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -18,10 +19,11 @@
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app-ar.css">
     <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div th:include="sidebar/sidebar" th:remove="tag"></div>
+    <div th:include="sidebar/sidebar-reserve" th:remove="tag"></div>
     <div id="main">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
@@ -55,13 +57,61 @@
         <div class="page-heading border-bottom">
            
         </div>
+		<!-- 날짜 설정 script -->
+        <script>
+                // 날짜 이동
+                function moveDate(str) {
+                    var date = $j('#booking_date').val();
 
+                    switch (str) {
+                        case 'previous':
+                            $j('#booking_date').val(bookingCommon.makeDate(date, '00:00:00', '-1 day').format('Y-m-d'));
+                            break;
+                        case 'next':
+                            $j('#booking_date').val(bookingCommon.makeDate(date, '00:00:00', '+1 day').format('Y-m-d'));
+                            break;
+                    }
+
+                    bookingResourceListTime.getResourceList(bookingResourceListTime.PAGE);
+                }
+				
+                function formatDate(date) {
+                    
+                    var d = new Date(date),
+                    
+                    month = '' + (d.getMonth() + 1) , 
+                    day = '' + d.getDate(), 
+                    year = d.getFullYear();
+                    
+                    if (month.length < 2) month = '0' + month; 
+                    if (day.length < 2) day = '0' + day; 
+                    
+                    return [year, month, day].join('-');
+                    
+                    }
+
+                
+                // 오늘 버튼 이벤트
+                function setToday() {
+                    $('input#booking_date').val(formatDate(new Date()));
+
+                }
+        </script>
         
         <div>
             <div class="content-ttl">
                 <h5>차량 예약</h5>
             </div>
-
+			<!-- isAuthenticated() : 인증(로그인) 되어 있는지 확인 -->
+			<th:block sec:authorize="isAuthenticated()">
+			<!-- 
+				principal : 로그인 된 User 객체의 정보를 담고 있다.
+				principal.username : 로그인 시 입력한 id 값
+				그 외의 정보가 필요할 경우 User 타입을 상속한 클래스를 만들어서 커스터마이징 할 수 있다.
+			 -->
+			<input type="hidden" sec:authentication="principal.no" name="no">
+			</th:block>
+			
             <div class="centered" id="date-area">
                 <!--  -->
                 <span><button type="button" class="date-before" onclick="moveDate('previous');">&lt;</button></span>
@@ -70,21 +120,24 @@
                 <span><button type="button" class="today-btn"
                         onclick="setToday();">오늘</button></span>
             </div>
-            <div class="car-img">
-               <div class="car2">
-                    <div><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+            <!--  index 값으로 각각 가져오기 -->
+            
+            <div class="car-img" th:each="resCar : ${ resCarList }">
+               <div class="car2"><th:block th:each="car : ${ #numbers.sequence(carList[0],carList[1]) }">
+                    <div th:unless="${ carList.empty }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+                    <div th:if="${ #lists.isEmpty(carList) }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
+                    <div th:if="${ car.carNo == resCar.carNo }"><a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a></div>
+               </th:block></div>
+               <div class="car2"><th:block th:each="car : ${ #numbers.sequence(carList[0],carList[1]) }">
+               <div><label th:value="|${car.carNumber}${car.carName}|"></label></div>
+               </th:block></div>
+               <div class="car3"><th:block th:each="car : ${ carList }.sequence(3,5)">
+                    <div><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
                     <div><a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a></div>
-                    <div><label>8894 K5</label></div>
-                    <div><label>5067 모닝</label></div>
                </div>
-               <div class="car3">
-                    <div><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <div><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <div><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <div><label>차량명</label></div>
-                    <div><label> </label></div>
-                    <div><label> </label></div>
-               </div>
+               <div class="car2"><th:block th:each="car : ${ carList }.sequence(3,5)">
+               <div><label th:value="|${car.carNumber}${car.carName}|"></label></div>
+               </th:block></div>
             </div>
         </div>
 

@@ -43,6 +43,7 @@
                                 <th class="deaf">그룹명</th>
                                 <th class="deaf">작성자</th>
                                 <th class="dfadsf">사용여부</th>
+                                <th class="dfadsf">수정</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,9 @@
                                 <td th:text="${ id.name }"></td>
                                 <td>
                                     <span th:text="${ id.groupStatus }" class="badge bg-success">사용</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">수정</span>
                                 </td>
                             </tr>
                         </tbody>

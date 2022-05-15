@@ -11,6 +11,14 @@ public interface WorkService {
 	
 	//근태유형 조회
 	List<WorkDTO> selectAllwork();
+	
+	//근태유형 수정 예전 값
+	List<WorkDTO> Modifywork(int workNo);
+	
+	//근태유형 수정
+//	boolean workModifyGo(WorkDTO post) throws Exception;
+//	
+//	
 
 	
 

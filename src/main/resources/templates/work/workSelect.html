@@ -37,7 +37,8 @@
                                 <th class="sds">근무시간</th>
                                 <th class="deaf">사용여부</th>
                                 <th class="deaf">작성자</th>
-                                <th class="dfadsf">설정</th>
+                                <th class="dfadsf">사용여부</th>
+                                <th class="dfadsf">수정</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,9 +48,12 @@
                                 <td th:text="${ work.workInclude }"></td>
                                 <td th:text="${ work.workUse }"></td>
                                 <td th:text="${ work.name }"></td>
-                                <a onclick="location.href='/menu/list'"><td >
+                                <td >
                                     <span th:text="${ work.workUse }" class="badge bg-success">사용</span>
-                                </td></a>
+                                </td>
+                                 <td >                               
+                                    <span class="badge bg-success" th:onclick="|javascript:workModify('${ work.workNo }')|">수정</span>
+                                </td>
                             </tr>
          
                         </tbody>
@@ -58,7 +62,13 @@
             </div>
         </section>
         <!--모든 근무 그룹 끝-->
-       
+    <script type="text/javascript">
+    function workModify(workNo) { 
+    	// 근무그룹  번호 확인용
+    	alert(workNo); 
+    	var workNo = workNo; 
+        location.href='/work/workModify?workNo='+workNo; }
+    </script>   
     
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
