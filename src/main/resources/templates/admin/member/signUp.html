@@ -24,7 +24,7 @@
                         <div class="logo">
                             <a href="index.html"><img src="/assets/images/images/logo-workhub-edit.png" alt="Logo"></a>
                         </div><br><br>
-                    <h3 class="auth-title fs-1">사원 등록</h3>
+                    <h5 class="auth-title fs-3">사원 등록</h5>
                     <!-- <p class="auth-subtitle mb-5">사원을 등록합니다.</p> -->
 
                     <form th:action="@{/admin/signUp}" method="post">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="연락처" name="phone">
+                            <input type="text" class="form-control form-control-xl" placeholder="'-'를 제외한 숫자만 입력해주세요." name="phone">
                             <div class="form-control-icon">
                                 <i class="bi bi-phone"></i>
                             </div>

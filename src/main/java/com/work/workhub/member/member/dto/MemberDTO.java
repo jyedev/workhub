@@ -30,6 +30,11 @@ public class MemberDTO {
    private DepartmentDTO dept;
    private PositionDTO position;
    private WorkGroupDTO workGroup;
+   
+   
+public int findPwCheck(MemberDTO memberDTO) {
+	return 0;
+}
 
    
 }
