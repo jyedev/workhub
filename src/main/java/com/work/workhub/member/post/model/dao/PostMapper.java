@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
+import com.work.workhub.member.post.model.dto.ReplyDTO;
 
 @Mapper
 public interface PostMapper {
@@ -21,7 +22,6 @@ public interface PostMapper {
 	int updatePost(PostDTO post);
 
 	int deletePost(Integer postNo);
-
 
 
 }
