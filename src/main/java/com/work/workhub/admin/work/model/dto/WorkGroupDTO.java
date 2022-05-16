@@ -44,4 +44,5 @@ public class WorkGroupDTO {
 	private String groupUse;
 	private int writeNo;
 	private String name;
+
 }

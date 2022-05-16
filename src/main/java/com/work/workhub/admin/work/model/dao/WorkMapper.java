@@ -43,13 +43,44 @@ public interface WorkMapper {
 	//근태 유형 수정 예전 값
 	List<WorkDTO> Modifywork(int workNo);
 	
+	//근태유형 삭제
+	int workDelete(WorkDTO post, int workNo);
+	
 	
 	//근태유형 수정
-//	int workModifyGo(WorkDTO post);
+	int workModifyGo(WorkDTO post);
+	
+	//사원근무그룹 수정 예전 값 보기
+	List<WorkDTO> ModifymemberGroup(int gmNo);
+	
+	//사원 근무그룹 수정
+	int memberGroupModifyGo(MemberGroupDTO post);
+	
+	//사원 근무그룹 삭제
+	int memberGroupDelete(MemberGroupDTO post, int gmNo);
+	
+	//연차 유형 예전 값
+	List<RestCateDTO> ModifyrestCate(int restNo);
+	
+	//연차 유형 수정
+	int restCateModifyGo(RestCateDTO post);
+	
+	//연차 유형 삭제
+	int restCateDelete(RestCateDTO post, int restNo);
+	
+	//근무그룹 예전값
+	List<WorkGroupDTO> ModifyworkGroup(int groupNo);
+	
+	//근무 그룹 수정
+	int workGroupModifyGo(WorkGroupDTO post);
+	
+	//근무그룹 삭제
+	int workGroupDelete(WorkGroupDTO post, int groupNo);
 	
 	//근무그룹조회 use='사용'
 //	List<WorkGroupDTO> workGroupSelects();
 
 
+	
 
 }
