@@ -1,17 +1,21 @@
 package com.work.workhub.admin.member.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.work.workhub.admin.member.model.service.AdminMemberService;
 import com.work.workhub.member.member.dto.MemberDTO;
+import com.work.workhub.member.member.dto.UserImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,8 +46,14 @@ public class AdminMemberController {
 //	}
 	
 	@GetMapping(value="/member/memberList")
-	public void memberListPage() {
+	public ModelAndView memberListPage(ModelAndView mv) {
 		
+		List<MemberDTO> memberList = adminMemberService.memberList();
+		mv.addObject("memberList", memberList);
+		
+		mv.setViewName("admin/member/memberList");
+		
+		return mv;
 	}
 	
 	@PostMapping("/signUp")

@@ -1,5 +1,7 @@
 package com.work.workhub.admin.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -59,5 +61,12 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		adminMemberMapper.insertMemberRole(memberRole);
 		
 	}
+
+	@Override
+	public List<MemberDTO> memberList() {
+		return adminMemberMapper.selectMemberList();
+	}
+	
+	
 	
 }

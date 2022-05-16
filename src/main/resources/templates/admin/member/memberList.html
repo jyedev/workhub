@@ -186,7 +186,9 @@
                                 <ul>
                                     <li><a href="#">인사팀</a></li>
                                     <li><a href="#">총무팀</a></li>
-                                    <li><a href="#">d</a></li>
+                                    <li><a href="#">영업팀</a></li>
+                                    <li><a href="#">마게팅팀</a></li>
+                                    <li><a href="#">개발팀</a></li>
                                 </ul>
                             </div> <!-- /mem-tab-list -->
                         </section> <!-- /mem-tab -->
@@ -200,15 +202,14 @@
                                     <th>이름</th>
                                     <th>조직 · 직책</th>
                                     <th>직위</th>
-                                    <th>입사일</th>
-                                    <th>사번</th>
+                                    <th>상태</th>
                                 </tr>
-                                <tr>
-                                    <td>김허브</td>
-                                    <td>개발부</td>
-                                    <td>대리</td>
-                                    <td>2022-05-18</td>
-                                    <td>20220518</td>
+                                <tr th:each="member : ${ memberList } ">
+                                    <td th:text="${ member.name }" name="memberName"></td>
+                                    <td th:text="${ member.depName }" name="depName"></td>
+                                    <td th:text="${ member.positionName }" name="positionName"></td>
+                                    <td th:if="${ member.status == 'Y' }" name="memberStatus">재직중</td>
+                                    <td th:unless="${ member.status == 'Y' }" name="memberStatus">퇴직</td>
                                 </tr>
                             </table>
                         </section>  <!-- /mem-list -->

@@ -17,7 +17,9 @@ public class MemberDTO {
    private String id;
    private String pwd;
    private int depNo;
+   private String depName;
    private int positionNo;
+   private String positionName;
    private int groupNo;
    private String name;
    private String email;
