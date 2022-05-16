@@ -16,6 +16,13 @@
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/adminyj.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+<script>
+	const successMessage = '[[${successMessage}]]';
+	
+	if(successMessage) {
+		alert(successMessage);
+	}
+</script>
 </head>
 <body>
 	
@@ -52,12 +59,12 @@
                                 <td th:text="${ id.no }"></td>
                                 <td th:text="${ id.name }"></td>
                                 <td th:text="${ id.groupName }"></td>
-                                <td th:text="${ id.name }"></td>
+                                <td th:text="${ id.writeName }"></td>
                                 <td>
                                     <span th:text="${ id.groupStatus }" class="badge bg-success">사용</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-success">수정</span>
+                                    <span class="badge bg-success" th:onclick="|javascript:memberGroupModify('${ id.gmNo }')|">수정</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -67,6 +74,15 @@
         </section>
         
         <!--모든 근무 그룹 끝-->
+       
+       <!-- 수정하기 버튼을 눌렀을 때 게시글 번호 넘기는 것 -->
+    <script type="text/javascript">
+    function memberGroupModify(gmNo) { 
+    	// 근무그룹  번호 확인용
+    	alert(gmNo); 
+    	var gmNo = gmNo; 
+        location.href='/mgroup/memberGroupModify?gmNo='+gmNo; }
+    </script> 
        
     
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

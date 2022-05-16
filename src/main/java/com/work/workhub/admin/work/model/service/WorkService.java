@@ -15,10 +15,12 @@ public interface WorkService {
 	//근태유형 수정 예전 값
 	List<WorkDTO> Modifywork(int workNo);
 	
+	//근태유형 삭제
+	boolean workDelete(WorkDTO post, int workNo) throws Exception;
+	
 	//근태유형 수정
-//	boolean workModifyGo(WorkDTO post) throws Exception;
-//	
-//	
+	boolean workModifyGo(WorkDTO post) throws Exception;
+
 
 	
 

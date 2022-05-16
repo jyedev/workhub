@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.work.workhub.admin.work.model.dto.MemberGroupDTO;
+import com.work.workhub.admin.work.model.dto.WorkDTO;
 import com.work.workhub.admin.work.model.dto.WorkGroupDTO;
 import com.work.workhub.admin.work.model.service.MemberGroupService;
 import com.work.workhub.member.member.dto.MemberDTO;
@@ -97,4 +98,71 @@ public class MemberGroupController {
 	}
 	
 	
+	
+
+	
+	
+	  //사원근무그룹 수정 예전 값 보기
+			@GetMapping("memberGroupModify")
+			public ModelAndView memberGroupModify(@RequestParam int gmNo, ModelAndView mv) {
+					
+				
+				//예전 값 가져오는 것
+				List<WorkDTO> memberGroupMo = memberGroupService.ModifymemberGroup(gmNo);
+				
+				//selectbox 값 가져오기
+				List<WorkGroupDTO> boxList = memberGroupService.selectAllbox();
+				
+				//예전 값 가져오는 것
+				mv.addObject("memberGroupMo",memberGroupMo);
+				
+				//selectbox 값 가져오기
+				mv.addObject("boxList",boxList);
+				
+				System.out.println(memberGroupMo);
+				
+				mv.setViewName("mgroup/memberGroupModify");
+				
+				return mv;
+				
+			}
+	
+	
+			//사원근무그룹 수정
+			@PostMapping("memberGroupModifyGo")
+			public String memberGroupModifyGo(@ModelAttribute MemberGroupDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+				
+				post.setWriteNo(user.getNo());
+
+				log.info("등록 요청 글 : {}", post);
+
+				
+				memberGroupService.memberGroupModifyGo(post);
+				
+				rttr.addFlashAttribute("successMessage", messageSource.getMessage("memberGroupModifyGo", null, locale));
+				
+				return "redirect:/mgroup/memberGroupSelect";
+				
+			}		
+			
+			
+			//사원근무그룹 삭제
+			@GetMapping("memberGroupDelete")
+			public String memberGroupDelete(@RequestParam int gmNo ,@ModelAttribute MemberGroupDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+				
+				post.setWriteNo(user.getNo());
+				
+				log.info("삭제 요청 글 : {}", post);
+				
+				
+				memberGroupService.memberGroupDelete(post, gmNo);
+				
+				rttr.addFlashAttribute("successMessage", messageSource.getMessage("memberGroupDelete", null, locale));
+				
+				return "redirect:/mgroup/memberGroupSelect";
+				
+			}
+			
+			
+			
 }

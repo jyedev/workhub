@@ -44,6 +44,40 @@ public class WorkGroupServiceImpl implements WorkGroupService{
 		
 	}
 	
+	//근무그룹 예전 값
+	@Override
+	public List<WorkGroupDTO> ModifyworkGroup(int groupNo) {
+		
+		return workMapper.ModifyworkGroup(groupNo);
+	}
+	
+	//근무 그룹 수정
+	@Override
+	public boolean workGroupModifyGo(WorkGroupDTO post) throws Exception {
+		
+		int result = workMapper.workGroupModifyGo(post);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 수정에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+	}
+	
+	//근무그룹 삭제
+	@Override
+	public boolean workGroupDelete(WorkGroupDTO post, int groupNo) throws Exception {
+		
+		int result = workMapper.workGroupDelete(post, groupNo);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 삭제에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+		
+	}
+	
 	//근무그룹조회 use='사용'
 //	@Override
 //	public List<WorkGroupDTO> selectAllworkGroups() {

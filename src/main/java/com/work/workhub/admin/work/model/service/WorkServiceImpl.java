@@ -47,20 +47,34 @@ public class WorkServiceImpl implements WorkService{
 		return workMapper.Modifywork(workNo);
 	}
 	
+	//근태유형 삭제
+	@Override
+	public boolean workDelete(WorkDTO post, int workNo) throws Exception {
+		
+		int result = workMapper.workDelete(post, workNo);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 삭제에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+		
+	}
+	
 	
 	//근태유형 수정
-//	@Override
-//	public boolean workModifyGo(WorkDTO post) throws Exception {
-//		
-//		int result = workMapper.workModifyGo(post);
-//		
-//		if(result <= 0) {
-//			throw new Exception("게시글 등록에 실패하였습니다.");
-//		}
-//		
-//		return result > 0 ? true : false;
-//		
-//	}
+	@Override
+	public boolean workModifyGo(WorkDTO post) throws Exception {
+		
+		int result = workMapper.workModifyGo(post);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 수정에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+		
+	}
 
 
 }

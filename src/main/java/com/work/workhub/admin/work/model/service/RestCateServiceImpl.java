@@ -43,6 +43,39 @@ public class RestCateServiceImpl implements RestCateService{
 		
 	}
 	
+	//연차유형 예전 값
+	@Override
+	public List<RestCateDTO> ModifyrestCate(int restNo) {
+		
+		return workMapper.ModifyrestCate(restNo);
+	}
+	
+	//연차 유형 수정
+	@Override
+	public boolean restCateModifyGo(RestCateDTO post) throws Exception {
+		
+		int result = workMapper.restCateModifyGo(post);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 수정에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+	}
+
+	@Override
+	public boolean restCateDelete(RestCateDTO post, int restNo) throws Exception {
+		
+		int result = workMapper.restCateDelete(post, restNo);
+		
+		if(result <= 0) {
+			throw new Exception("게시글 삭제에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;		
+		
+	}
+	
 	
 	
 
