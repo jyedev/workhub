@@ -33,22 +33,19 @@
         </header>
         <!-- 상단 horizontal nav-->
         <div class="page-heading">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="" role="tab"
-                        aria-controls="home" aria-selected="true">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" th:href="@{ /reserve/meeting/list }">
                         <h5>회의실 예약</h5>
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="" role="tab"
-                        aria-controls="profile" aria-selected="false">
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" th:href="@{ /reserve/car/list }">
                         <h5>차량 예약</h5>
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="" role="tab"
-                        aria-controls="contact" aria-selected="false">
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" th:href="@{ /reserve/mylist }">
                         <h5>내 예약 조회</h5>
                     </a>
                 </li>
@@ -394,7 +391,7 @@
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
                                     <input type="text" class="form-control input-margin" name="room"
-                                        th:value="${ room[0].roomName }" readonly>
+                                        th:value="${ room.roomName }" readonly>
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약기간</label>
@@ -414,9 +411,9 @@
                                     <label>예약자</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
-                                	<input type="hidden" name="username" th:value="">
+                                	<input type="hidden" name="username">
                                     <input type="text" id="contact-info" class="form-control input-margin" name="name"
-                                        th:value="" readonly>
+                                        readonly>
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>목적</label>

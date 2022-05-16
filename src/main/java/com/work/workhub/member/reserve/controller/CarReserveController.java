@@ -32,8 +32,10 @@ public class CarReserveController {
 	public ModelAndView selectCarList(ModelAndView mv) {
 			
 		List<CarDTO> carList = carService.selectAllCar();
+		List<ResCarDTO> carResList = carService.selectAllResCarList();
 		
 		mv.addObject("carList",carList);
+		mv.addObject("carResList",carResList);
 		
 		mv.setViewName("reserve/car/list");
 		
