@@ -39,6 +39,7 @@ public class WorkWriteController {
 	}
 	
 	
+	
 	/* 근무유형 조회*/		
 	
 	@GetMapping("list")

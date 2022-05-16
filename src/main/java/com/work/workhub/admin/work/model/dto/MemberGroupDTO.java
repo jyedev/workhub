@@ -38,4 +38,5 @@ public class MemberGroupDTO {
 	public List<MemberDTO> memberList;
 	public List<WorkGroupDTO> workGroupList;
 	
+	
 }

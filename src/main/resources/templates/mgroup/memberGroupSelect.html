@@ -25,7 +25,6 @@
 </script>
 </head>
 <body>
-	
     <div th:include="sidebar/sidebar-admin" th:remove="tag"></div>    
       
 	<h3 class="fdawr">사원 근무그룹</h3>
@@ -79,7 +78,7 @@
     <script type="text/javascript">
     function memberGroupModify(gmNo) { 
     	// 근무그룹  번호 확인용
-    	alert(gmNo); 
+    	//alert(gmNo); 
     	var gmNo = gmNo; 
         location.href='/mgroup/memberGroupModify?gmNo='+gmNo; }
     </script> 

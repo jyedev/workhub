@@ -39,6 +39,7 @@ public class WorkGroupController {
 	}
 	
 	
+	
 	/* 근무그룹유형 조회 status = 'y'*/		
 	
 	@GetMapping("list")

@@ -20,8 +20,7 @@
 <body>
 	
 		<div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
-        
-      
+           
 		
         <!--근무 그룹 작성 시작-->
         <form class="eeee kjhg" action="/group/workGroupModifyGo" method="post" th:each="workGroupMos: ${workGroupMo}">
@@ -33,24 +32,26 @@
             <h6 class="fsdf">그룹설명</h6>
             <textarea cols="80" rows="50" class="fdds" name="groupEx" th:value="${workGroupMos.groupEx}" th:text="${workGroupMos.groupEx}"></textarea><br><br>
             <h6 class="fsdf">근무요일</h6>
-    <input type="checkbox" name="groupDay" value="월" >월&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="화">화&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="수">수&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="목">목&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="금">금&nbsp;&nbsp;&nbsp;
-    <input type="checkbox" name="groupDay" value="토">토
+    <!-- string.equals은 문자열과 완전히 일치할때 체크되는 것이고 string.contains는 포함되어있는 문자열이 있다며 체크해준다.
+    DB로 넘길 때 나는 월,화,수 형식으로 넘기기 때문에 contain을 사용해야한다. -->
+    <input type="checkbox" name="groupDay" value="월" th:checked="${#strings.contains(workGroupMos.groupDay, '월')}">월&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="groupDay" value="화" th:checked="${#strings.contains(workGroupMos.groupDay, '화')}">화&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="groupDay" value="수" th:checked="${#strings.contains(workGroupMos.groupDay, '수')}">수&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="groupDay" value="목" th:checked="${#strings.contains(workGroupMos.groupDay, '목')}">목&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="groupDay" value="금" th:checked="${#strings.contains(workGroupMos.groupDay, '금')}">금&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" name="groupDay" value="토" th:checked="${#strings.contains(workGroupMos.groupDay, '토')}">토
     <br><br>
     <h6 class="fsdf">업무시작</h6>
-    <input type="time" name="groupFirdate"> 
+    <input type="time" name="groupFirdate" th:value="${workGroupMos.groupFirdate}"> 
     <br><br>
     <h6 class="fsdf">업무끝</h6>
-    <input type="time" name="groupEnddate">  
+    <input type="time" name="groupEnddate" th:value="${workGroupMos.groupEnddate}">  
     <br><br>
     <h6 class="fsdf">휴게시간 시작</h6>
-    <input type="time" name="groupFirrest"> 
+    <input type="time" name="groupFirrest" th:value="${workGroupMos.groupFirrest}"> 
     <br><br>
     <h6 class="fsdf">휴게시간 끝</h6>
-    <input type="time" name="groupEndrest">
+    <input type="time" name="groupEndrest" th:value="${workGroupMos.groupEndrest}">
     <br><br>
     <h6 class="fsdf">휴가일수</h6>
     <input type="text" name="groupRest" th:value="${workGroupMos.groupRest}">   
@@ -62,14 +63,14 @@
         <div class="card-body">
             <div class="form-check ssswwe">
                 <input class="form-check-input" type="radio" name="groupUse" value="사용"
-                    id="flexRadioDefault7">
+                    id="flexRadioDefault7" th:checked="${#strings.equals(workGroupMos.groupUse, '사용')}">
                 <h6 class="fsdf pohg">
                    사용
                 </h6>
             </div>
             <div class="form-check ssswwe">
                 <input class="form-check-input" type="radio" name="groupUse" value="미사용"
-                    id="flexRadioDefault8">
+                    id="flexRadioDefault8" th:checked="${#strings.equals(workGroupMos.groupUse, '미사용')}">
                 <h6 class="fsdf pohg">
                     미사용
                 </h6>

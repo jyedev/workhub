@@ -19,8 +19,7 @@
 </head>
 <body>
   
-        <div th:include="sidebar/sidebar-admin" th:remove="tag"></div>
-        
+        <div th:include="sidebar/sidebar-admin" th:remove="tag"></div>     
 
         <!--사원 근무 그룹 작성 시작-->
         
@@ -33,7 +32,8 @@
            <h6 class="fsdf">그룹명</h6>
            <fieldset class="form-group ppawqq">
             <select class="form-select" id="basicSelect" name="groupNo">
-                <option th:each="val : ${boxList}" th:value="${val.groupNo}" th:utext="${val.groupName}"></option>
+                <!-- 예전에 입력한 값이 selected 되도록 -->
+                <option th:each="val : ${boxList}" th:value="${val.groupNo}" th:utext="${val.groupName}" th:selected="${memberGroupMos.groupNo} == ${val.groupNo}"></option>
             </select>
            </fieldset>
            <br><br>

@@ -22,7 +22,6 @@ public interface RestCateService {
 	//연차유형 삭제
 	boolean restCateDelete(RestCateDTO post, int restNo) throws Exception;
 
-	
 
 	
 

@@ -44,6 +44,7 @@ public class MemberGroupController {
 		this.messageSource = messageSource;
 	}
 	
+	
 	//사원 근무그룹 사원 아이디 검색 없는 조회
 	@GetMapping("memberGroupSelect")
 	public void memberGroupSelect() {}

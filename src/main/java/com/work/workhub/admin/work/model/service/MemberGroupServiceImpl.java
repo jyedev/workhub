@@ -33,6 +33,7 @@ public class MemberGroupServiceImpl implements MemberGroupService{
 		return workMapper.boxSelect();
 	}
 	
+	
 	/*사원 근무그룹 등록*/
 	@Override
 	public boolean memberGroupWrite(MemberGroupDTO post) throws Exception {

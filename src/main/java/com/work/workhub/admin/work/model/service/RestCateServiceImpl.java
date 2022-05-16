@@ -29,6 +29,7 @@ public class RestCateServiceImpl implements RestCateService{
 		return workMapper.restcateSelect();
 	}
 	
+	
 	//연차유형 작성
 	@Override
 	public boolean restCateWrite(RestCateDTO post) throws Exception {

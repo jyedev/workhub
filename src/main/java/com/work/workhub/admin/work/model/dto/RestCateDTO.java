@@ -30,4 +30,5 @@ public class RestCateDTO {
 	private Date restModdate;
 	private int writeNo;
 	private String name;
+
 }

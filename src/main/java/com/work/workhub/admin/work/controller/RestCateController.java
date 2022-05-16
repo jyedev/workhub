@@ -38,6 +38,7 @@ public class RestCateController {
 	}
 	
 	
+	
 	/* 연차유형 조회*/		
 	
 	@GetMapping("list")
