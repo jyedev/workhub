@@ -19,29 +19,40 @@
 </head>
 <body>
   
-        <div th:include="sidebar/sidebar-admin" th:remove="tag"></div> 
+        <div th:include="sidebar/sidebar-admin" th:remove="tag"></div>     
 
         <!--사원 근무 그룹 작성 시작-->
         
-        <form class="wwfw fffhetg" action="/mgroup/memberGroupWrite" method="post">
+        <form class="wwfw fffhetg" action="/mgroup/memberGroupModifyGo" method="post" th:each="memberGroupMos: ${memberGroupMo}">
+             <input type="hidden" th:value="${memberGroupMos.gmNo}" name="gmNo">
              <h3 class="vfews">사원 근무그룹 등록</h3>
             <h6 class="fsdf">사원 아이디</h6>
-            <input type="text" name="no">
+            <input type="text" name="no" th:value="${memberGroupMos.no}">
             <br><br>
            <h6 class="fsdf">그룹명</h6>
            <fieldset class="form-group ppawqq">
             <select class="form-select" id="basicSelect" name="groupNo">
-                <option th:each="val : ${boxList}" th:value="${val.groupNo}" th:utext="${val.groupName}"></option>
+                <!-- 예전에 입력한 값이 selected 되도록 -->
+                <option th:each="val : ${boxList}" th:value="${val.groupNo}" th:utext="${val.groupName}" th:selected="${memberGroupMos.groupNo} == ${val.groupNo}"></option>
             </select>
            </fieldset>
            <br><br>
     <div class="sdasd">
     <input type="submit" class="btn btn-success rounded-pill" id="btnChk" value="저장"></button>
-    <a href="#" class="btn btn-light rounded-pill">삭제</a>
+    <a th:onclick="|javascript:memberGroupDelete('${ memberGroupMos.gmNo }')|" class="btn btn-light rounded-pill">삭제</a>
     <a onclick="location.href='/mgroup/memberGroupSelect'" class="btn btn-light rounded-pill">취소</a></div>
     </form>
    
         <!--근무 그룹 작성 끝-->
+    
+    <!-- 삭제 버튼 -->
+    <script type="text/javascript">
+    function memberGroupDelete(gmNo) { 
+    	// 근무그룹  번호 확인용
+    	
+    	var gmNo = gmNo; 
+        location.href='/mgroup/memberGroupDelete?gmNo='+gmNo; }
+    </script> 
     
     
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
