@@ -18,4 +18,7 @@ public class ReplyDTO {
 	private int No;
 	private int refReplyNo;
 	
+	private PostDTO post;
+	private MemberDTO member;
+	private ReplyDTO reply;
 }

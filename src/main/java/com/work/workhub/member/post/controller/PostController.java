@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.work.workhub.member.member.dto.UserImpl;
 import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
+import com.work.workhub.member.post.model.dto.ReplyDTO;
 import com.work.workhub.member.post.model.service.PostService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -123,7 +124,7 @@ public class PostController {
 	
 	 //게시글 삭제
 	@GetMapping("delete/no/{postNo}")
-	public String deletePost(@PathVariable("postNo") Integer postNo, @AuthenticationPrincipal UserImpl user) {
+	public String deletePost(@PathVariable("postNo") Integer postNo, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) {
 		
 		PostDTO post = postService.findPostByNo(postNo);
 		
@@ -132,10 +133,10 @@ public class PostController {
 		
 		postService.deletePost(postNo);
 		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("deletePost", null, locale));
 		
-		return null;
+		return "redirect:/post/list";
 	}
 
-	
 	
 }
