@@ -25,6 +25,8 @@ public class MemberGroupDTO {
 	private int groupNo;
 	private Date gmDate; 
 	private String groupStatus;
+	private Date gmModdate;
+	
 	//MemberDTO의 사원이름
 	private String name;
 	//WorkGroupDTO의 근무그룹 이름
@@ -32,7 +34,9 @@ public class MemberGroupDTO {
 	private int writeNo;
 	private String writeName;
 	
+	
 	public List<MemberDTO> memberList;
 	public List<WorkGroupDTO> workGroupList;
+	
 	
 }
