@@ -32,28 +32,26 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         </header>
         <!-- 상단 horizontal nav-->
         <div class="page-heading">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
-                        aria-controls="home" aria-selected="true">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="nav-item">
+                    <a class="nav-link" id="home-tab" th:href="@{ /reserve/meeting/list }">
                         <h5>회의실 예약</h5>
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                        aria-controls="profile" aria-selected="false">
+                <li class="nav-item">
+                    <a class="nav-link active" id="profile-tab" th:href="@{ /reserve/car/list }">
                         <h5>차량 예약</h5>
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab"
-                        aria-controls="contact" aria-selected="false">
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" th:href="@{ /reserve/mylist }">
                         <h5>내 예약 조회</h5>
                     </a>
                 </li>
             </ul>
         </div>
 
+		
         <div class="page-heading border-bottom">
            
         </div>
@@ -109,7 +107,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				principal.username : 로그인 시 입력한 id 값
 				그 외의 정보가 필요할 경우 User 타입을 상속한 클래스를 만들어서 커스터마이징 할 수 있다.
 			 -->
-			<input type="hidden" sec:authentication="principal.no" name="no">
+			<input type="hidden" th:value="${#authentication.principal.no}" name="no">
 			</th:block>
 			
             <div class="centered" id="date-area">
@@ -122,21 +120,22 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             </div>
             <!--  index 값으로 각각 가져오기 -->
             
-            <div class="car-img" th:each="resCar : ${ resCarList }">
-               <div class="car2"><th:block th:each="car : ${ #numbers.sequence(carList[0],carList[1]) }">
-                    <div th:unless="${ carList.empty }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
-                    <div th:if="${ #lists.isEmpty(carList) }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <div th:if="${ car.carNo == resCar.carNo }"><a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a></div>
+            <div class="car-img">
+               <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }" sec:authorize="isAuthenticated()">
+                    <div th:if="${ #lists.size(carList) > num }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+                    <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
+                    <div th:if="${ carResList.no == #authentication.principal.no }"><a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a></div>
+              </th:block></div>
+               <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }">
+               <div><label th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
                </th:block></div>
-               <div class="car2"><th:block th:each="car : ${ #numbers.sequence(carList[0],carList[1]) }">
-               <div><label th:value="|${car.carNumber}${car.carName}|"></label></div>
+               
+               <div class="car3"><th:block th:each="num : ${ #numbers.sequence(2,4) }">
+                    <div th:if="${ #lists.size(carList) > num }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+                    <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
                </th:block></div>
-               <div class="car3"><th:block th:each="car : ${ carList }.sequence(3,5)">
-                    <div><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <div><a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a></div>
-               </div>
-               <div class="car2"><th:block th:each="car : ${ carList }.sequence(3,5)">
-               <div><label th:value="|${car.carNumber}${car.carName}|"></label></div>
+               <div class="car3"><th:block th:each="num : ${ #numbers.sequence(2,4) }">
+               <div><label th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
                </th:block></div>
             </div>
         </div>
