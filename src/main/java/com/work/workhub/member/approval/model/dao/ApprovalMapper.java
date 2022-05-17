@@ -11,14 +11,16 @@ import com.work.workhub.member.member.dto.MemberDTO;
 @Mapper
 public interface ApprovalMapper {
 
-	List<ApprovalDTO> selectSendList();
+	List<ApprovalDTO> selectSendList(int no);
 
-	List<ApprovalDTO> selectReceptionList();
+	List<ApprovalDTO> selectReceptionList(int no);
 
 	List<DepartmentDTO> selectDepartmentList();
 
 	List<MemberDTO> selectMemberList();
 	
 	void insertApproval(ApprovalDTO approval);
+
+	ApprovalDTO findAppByNo(Integer approvalNo);
 
 }

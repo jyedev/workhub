@@ -8,14 +8,16 @@ import com.work.workhub.member.member.dto.MemberDTO;
 
 public interface ApprovalService {
 
-	List<ApprovalDTO> selectReceptionList();
+	List<ApprovalDTO> selectReceptionList(int no);
 
-	List<ApprovalDTO> selectSendList();
+	List<ApprovalDTO> selectSendList(int no);
 
 	List<DepartmentDTO> selectDepartmentList();
 
 	List<MemberDTO> selectMemberList();
 
 	void registApproval(ApprovalDTO approval);
+
+	ApprovalDTO findAppByNo(Integer approvalNo);
 
 }
