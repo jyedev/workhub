@@ -71,30 +71,7 @@
 		<result property="authName" column="AUTH_NAME"/>
 	</resultMap>
 	
-	<!-- reply -->
-<!-- 	<resultMap id="replyResultMap" type="com.work.workhub.member.post.dto.ReplyDTO"> -->
-<!-- 		<id property="replyNo" column="REPLY_NO"/> -->
-<!-- 		<result property="replyContent" column="REPLY_CONTENT"/> -->
-<!-- 		<result property="replyDate" column="REPLY_DATE"/> -->
-<!-- 		<result property="replyUpdate" column="REPLY_UPDATE"/> -->
-<!-- 		<result property="replyStatus" column="REPLY_STATUS"/> -->
-<!-- 		<result property="postNo" column="POST_NO"/> -->
-<!-- 		<result property="No" column="NO"/> -->
-<!-- 		<result property="RefReplyNo" column="REF_REPLY_NO"/> -->
-		
-<!-- 		<association property="member" resultMap="loginMemberResultMap"/>		 -->
-<!-- 		<association property="post" resultMap="postResultMap"/>		 -->
-<!-- 		<association property="reply" resultMap="replyResultMap"/>		 -->
-<!-- 	</resultMap> -->
-	
-	<!-- Reply img -->
-<!-- 	<resultMap type="com.work.workhub.member.post.model.dto.replyImgDTO" id="replyImgDTO"> -->
-<!-- 		<result property="replyNo" column="REPLY_NO"/> -->
-<!-- 		<result property="imgNo" column="IMG_NO"/> -->
-	
-<!-- 		<association property="reply" resultMap="replyResultMap"/> -->
-<!-- 		<collection property="img" resultMap="imgResultMap"/>  -->
-<!-- 	</resultMap> -->	
+
 	
 	
 	<!-- 자유게시판 목록 조회 -->
@@ -170,61 +147,6 @@
 		  SET POST_STATUS = 'N'
 		WHERE POST_NO = #{ postNo }
 	</update>
-	
-	<!-- 댓글 상세조회 -->
-<!-- 	<select id="findReplyByNo" resultMap="replyResultMap"> -->
-<!-- 		SELECT -->
-<!-- 			  R.* -->
-<!-- 			, M.NAME -->
-<!-- 		 FROM REPLY R -->
-<!-- 		 JOIN TBL_MEMBER M ON (R.NO = M.NO) -->
-<!-- 		WHERE R.REPLY_STATUS = 'Y' -->
-<!-- 		  AND P.POST_NO = #{ postNo }  -->
-<!-- 	</select> -->
-	
-	<!-- 댓글 작성 -->
-<!-- 	<insert id="writeReply"> -->
-<!-- 		INSERT INTO REPLY -->
-<!-- 		( -->
-<!-- 		  REPLY_NO -->
-<!-- 		, REPLY_CONTENT -->
-<!-- 		, REPLY_DATE -->
-<!-- 		, REPLY_STATUS -->
-<!-- 		, POST_NO -->
-<!-- 		, NO -->
-<!-- 		) -->
-<!-- 		VALUES -->
-<!-- 		( -->
-<!-- 		  SEQ_REPLY_NO.NEXTVAL -->
-<!-- 		, #{ replyContent } -->
-<!-- 		, SYSDATE -->
-<!-- 		, DEFAULT -->
-<!-- 		, #{ postNo } -->
-<!-- 		, #{ no } -->
-<!-- 		) -->
-<!-- 	</insert> -->
-	
-	<!-- 댓글 수정 -->
-<!-- 	<update id="updateReply"> -->
-<!-- 		UPDATE REPLY -->
-<!-- 		  SET REPLY_CONTENT = #{ replyContent } -->
-<!-- 		    , REPLY_DATE = SYSDATE -->
-<!-- 		WHERE REPLY_NO = #{ replyNo } -->
-<!-- 	</update>	 -->
-	
-	<!-- 댓글 삭제 -->
-<!-- 	<update id="deleteReply"> -->
-<!-- 		UPDATE REPLY -->
-<!-- 		  SET REPLY_STATUS = 'N' -->
-<!-- 		WHERE REPLY_NO = #{ replyNo } -->
-<!-- 	</update>	 -->
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 </mapper>

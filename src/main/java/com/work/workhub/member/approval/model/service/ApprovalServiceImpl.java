@@ -25,15 +25,15 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public List<ApprovalDTO> selectReceptionList() {
+	public List<ApprovalDTO> selectReceptionList(int no) {
 		
-		return approvalMapper.selectReceptionList();
+		return approvalMapper.selectReceptionList(no);
 	}
 
 	@Override
-	public List<ApprovalDTO> selectSendList() {
+	public List<ApprovalDTO> selectSendList(int no) {
 		
-		return approvalMapper.selectSendList();
+		return approvalMapper.selectSendList(no);
 	}
 
 	@Override
@@ -56,6 +56,12 @@ public class ApprovalServiceImpl implements ApprovalService {
 		
 //		approvalMapper.insertAppLine(appLine);
 		
+	}
+
+	@Override
+	public ApprovalDTO findAppByNo(Integer approvalNo) {
+		
+		return approvalMapper.findAppByNo(approvalNo);
 	}
 
 

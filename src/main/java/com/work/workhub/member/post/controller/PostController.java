@@ -22,6 +22,7 @@ import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
 import com.work.workhub.member.post.model.dto.ReplyDTO;
 import com.work.workhub.member.post.model.service.PostService;
+import com.work.workhub.member.post.model.service.ReplyService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,11 +33,13 @@ public class PostController {
 	
 	private PostService postService;
 	private MessageSource messageSource;
+	private ReplyService replyService;
 	
 	@Autowired
-	public PostController(PostService postService, MessageSource messageSource) {
+	public PostController(PostService postService, MessageSource messageSource, ReplyService replyService) {
 		this.postService = postService;
 		this.messageSource = messageSource;
+		this.replyService = replyService;
 	}
 	
 	
@@ -62,6 +65,12 @@ public class PostController {
 		mv.addObject("postDTO", postDTO);
 		
 		mv.setViewName("/post/detail");
+		
+		
+		//댓글 조회
+		List<ReplyDTO> reply = null;
+		reply = replyService.findReplyListByPostNo(postNo);
+		mv.addObject("reply", reply);
 		
 		return mv;
 	}
