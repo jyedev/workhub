@@ -383,7 +383,7 @@
                         </button>
                     </div>
                    	
-                    <form class="form form-horizontal" method="post" th:action="@{/reserve/meeting/list}" th:each="room, stat : ${ roomList }">
+                    <form class="form form-horizontal" method="post" th:action="@{/reserve/meeting/list}">
                         <div class="form-body modal-body">
                            <div class="row">
                                 <div class="col-md-4 modal-margin">
@@ -391,20 +391,18 @@
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
                                     <input type="text" class="form-control input-margin" name="room"
-                                        th:value="${ room.roomName }" readonly>
+                                        th:value="${ roomList[0].roomName }" readonly>
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약기간</label>
                                 </div>
                                 <div class="col-md-8 form-group date-grid modal-margin">
                                     <div>
-                                        <input type="datetime-local" class="form-control pe-font-size" name="period"
-                                            value="2022-04-28T09:00">
+                                        <input type="datetime-local" class="form-control pe-font-size" name="startTime" id="period1">
                                     </div>
                                     <div>-</div>
                                     <div>
-                                        <input type="datetime-local" class="form-control pe-font-size" name="period"
-                                            value="2022-04-28T09:00">
+                                        <input type="datetime-local" class="form-control pe-font-size" name="endTime" id="period2">
                                     </div>
                                 </div>
                                 <div class="col-md-4 modal-margin">
