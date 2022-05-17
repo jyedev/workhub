@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workGroupSelect</title>
+    <!-- fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+   
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/memberyj.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
+    
+   
+</head>
+<body>
+   		
+		<div th:include="sidebar/sidebar" th:remove="tag"/></div>
+        
+        
+         <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
+        
+            <div class="wrapper">
+                <div><p class="hatta">근태관리</p></div>
+                <div id="clock" class="clocka">clock</div>
+                <div id="digital_clock" class="glow">00:00:00</div>
+                <div>
+                <div class="hattc"><p>출근시간</p></div>
+                <div class="hattd"><p>09:00:00</p></div>
+                </div>
+                <div>
+                <div class="hatte"><p>퇴근시간</p></div>
+                <div class="hattf"><p>09:00:00</p></div>
+            </div>
+            <div>
+                <div class="hattee"><p>주간 누적 근무시간</p></div>
+                <div class="hattff"><p>09:00:00</p></div>
+            </div>
+              </div>
+        
+        <hr width="260" class="hr1" size="5">
+       
+        <!--출근하기 버튼-->
+        <a onclick="location.href='/employ/in'" class="buttons">출근하기</a>
+        <!--퇴근하기 버튼-->
+        <a onclick="location.href='/employ/out'" class="buttonsa">퇴근하기</a>
+        
+        <!-- 근무 유형-->
+        
+        
+        <form action="/employ/other" method="post">
+        <select name="workNo" class="workss">
+            <option >업무</option>
+       </select>
+      <input type="submit" class="chec" value="✓">
+       </form>
+       
+       
+       <!-- 연차 신청 -->
+       <a href="#" class="dgsaujjk">연차 신청</a>
+       
+       <p class="hattsd">내 연차 내역</p>
+      
+      <!--사원 프로필 있는 곳-->
+       <div class="boxx">
+       <div class="box box1">
+           <div class="sss"></div>
+           <span class="nsns">김땡땡 사원</span></div>
+       <div class="box box2">
+        <span class="asa">사용 연차</span>   
+        <span class="csc">0</span></div>
+       <div class="box box3">
+        <span class="asa">총 연차</span>    
+        <span class="csc">0</span></div>
+       <div class="box box4">
+        <span class="asa">잔여 연차</span>    
+        <span class="csc">0</span></div>
+    </div>
+    
+    <!--날짜 필터-->
+    <form class="oopo">
+    <label for="rest_fir" class="asss">시작 날짜 : </label>
+   <input type="date" class="asss" id="rest_fir">
+   <label for="rest_fir" class="assss">종료 날짜 : </label>
+   <input type="date" class="assss" id="rest_end">
+   <input type="submit" value="조회" class="sds">     
+</form>
+
+
+                <!-- 사용한 연차 조회 시작-->
+                
+                    <div class="row" id="table-hover-row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">사용 내역</h4>
+                                </div>
+                                <div class="card-content">
+          
+                                    <!-- table hover -->
+                                    <div class="table-responsive">
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="qqq">이름</th>
+                                                    <th class="qqq">부서명</th>
+                                                    <th class="qqq">휴가 종류</th>
+                                                    <th class="qqqs">연차 사용기간</th>
+                                                    <th class="qqqss">사용 연차</th>
+                                                    <th>내용</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-bold-500">김땡땡</td>
+                                                    <td>워크허브</td>
+                                                    <td class="text-bold-500">연차</td>
+                                                    <td>2022-04-02 ~ 2022-05-01</td>
+                                                    <td>4</td>
+                                                    <td><a href="#"><i
+                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                data-feather="mail"></i></a>너무너무 피곤해서</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-bold-500">Morgan Vanblum</td>
+                                                    <td>$13/hr</td>
+                                                    <td class="text-bold-500">Graphic concepts</td>
+                                                    <td>Remote</td>
+                                                    <td>Shangai,China</td>
+                                                    <td><a href="#"><i
+                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                data-feather="mail"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-bold-500">Tiffani Blogz</td>
+                                                    <td>$15/hr</td>
+                                                    <td class="text-bold-500">Animation</td>
+                                                    <td>Remote</td>
+                                                    <td>Austin,Texas</td>
+                                                    <td><a href="#"><i
+                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                data-feather="mail"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-bold-500">Ashley Boul</td>
+                                                    <td>$15/hr</td>
+                                                    <td class="text-bold-500">Animation</td>
+                                                    <td>Remote</td>
+                                                    <td>Austin,Texas</td>
+                                                    <td><a href="#"><i
+                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                data-feather="mail"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-bold-500">Mikkey Mice</td>
+                                                    <td>$15/hr</td>
+                                                    <td class="text-bold-500">Animation</td>
+                                                    <td>Remote</td>
+                                                    <td>Austin,Texas</td>
+                                                    <td><a href="#"><i
+                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                data-feather="mail"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!-- 연차 사용 내역 끝 -->
+
+
+                                <!-- 신청한 연차 조회 시작-->
+                               
+                                    <div class="rows" id="table-hover-row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">생성 내역</h4>
+                                                </div>
+                                                <div class="card-content">
+                          
+                                                    <!-- table hover -->
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="qqq">이름</th>
+                                                                    <th class="qqq">부서명</th>
+                                                                    <th class="qqq">휴가 종류</th>
+                                                                    <th class="qqqs">연차 사용기간</th>
+                                                                    <th class="qqqss">사용 연차</th>
+                                                                    <th>내용</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="text-bold-500">김땡땡</td>
+                                                                    <td>워크허브</td>
+                                                                    <td class="text-bold-500">연차</td>
+                                                                    <td>2022-04-02 ~ 2022-05-01</td>
+                                                                    <td>4</td>
+                                                                    <td><a href="#"><i
+                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                                data-feather="mail"></i></a>너무너무 피곤해서</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-bold-500">Morgan Vanblum</td>
+                                                                    <td>$13/hr</td>
+                                                                    <td class="text-bold-500">Graphic concepts</td>
+                                                                    <td>Remote</td>
+                                                                    <td>Shangai,China</td>
+                                                                    <td><a href="#"><i
+                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                                data-feather="mail"></i></a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-bold-500">Tiffani Blogz</td>
+                                                                    <td>$15/hr</td>
+                                                                    <td class="text-bold-500">Animation</td>
+                                                                    <td>Remote</td>
+                                                                    <td>Austin,Texas</td>
+                                                                    <td><a href="#"><i
+                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                                data-feather="mail"></i></a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-bold-500">Ashley Boul</td>
+                                                                    <td>$15/hr</td>
+                                                                    <td class="text-bold-500">Animation</td>
+                                                                    <td>Remote</td>
+                                                                    <td>Austin,Texas</td>
+                                                                    <td><a href="#"><i
+                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                                data-feather="mail"></i></a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-bold-500">Mikkey Mice</td>
+                                                                    <td>$15/hr</td>
+                                                                    <td class="text-bold-500">Animation</td>
+                                                                    <td>Remote</td>
+                                                                    <td>Austin,Texas</td>
+                                                                    <td><a href="#"><i
+                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                                data-feather="mail"></i></a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                <!-- 신청한 연차 사용 내역 끝 -->
+
+    <script>
+        setInterval(showTime, 1000);
+  
+        function showTime(){
+          let time = new Date();
+          let hr = time.getHours();
+          let min = time.getMinutes();
+          let sec = time.getSeconds();
+          AMPM = 'AM'; 
+  
+        if(hr > 12) {
+          hr -= 12;
+          AMPM = "PM";
+        }
+        if(hr == 0) {
+          hr = 12;
+          AMPM = "AM";
+        }
+  
+        hr = hr < 10 ? "0" + hr : hr;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+  
+        let curentTime = hr + ":" + min + ":" + sec + AMPM; 
+  
+        document.getElementById('digital_clock').innerHTML = curentTime;
+  
+      }
+      showTime();
+      </script>
+
+
+        <script>
+        var Target = document.getElementById("clock");
+        function clock() {
+            var time = new Date();
+
+            var month = time.getMonth();
+            var date = time.getDate();
+            var day = time.getDay();
+            var week = ['일', '월', '화', '수', '목', '금', '토'];
+
+            Target.innerText = 
+            `${month + 1}월 ${date}일 ${week[day]}요일 ` ;
+                
+        }
+        clock();
+        setInterval(clock, 1000); // 1초마다 실행
+    </script>
+
+
+
+
+
+   
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+   		
+</body>
+</html>
