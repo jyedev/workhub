@@ -14,6 +14,10 @@ public interface CarResService {
 	List<CarDTO> selectAllCar();
 
 	List<ResCarDTO> selectAllResCarList();
+
+	CarDTO selectedCar(int carIndex);
+
+	boolean registReservation(ResCarDTO resCar) throws Exception;
 	
 	
 

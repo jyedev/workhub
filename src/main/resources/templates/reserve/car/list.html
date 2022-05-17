@@ -20,6 +20,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <link rel="stylesheet" href="/assets/css/app-ar.css">
     <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <!-- datepicker 추가! -->
+<!--     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+	
 </head>
 
 <body>
@@ -122,26 +128,35 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             
             <div class="car-img">
                <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }" sec:authorize="isAuthenticated()">
-                    <div th:if="${ #lists.size(carList) > num }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+                    <div class="car-sec" th:if="${ #lists.size(carList) > num }">
+                    		<img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                    </div>
                     <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <div th:if="${ carResList.no == #authentication.principal.no }"><a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a></div>
+                    <th:block th:if="${ !resCarList.isEmpty }">
+                    	<div class="car-sec" th:if="${ resCarList.memberNo == #authentication.principal.no }">
+                    		<a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a>
+                    	</div>
+                    </th:block>
               </th:block></div>
                <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }">
-               <div><label th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
+               <div><label class="carLabel" th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
                </th:block></div>
                
                <div class="car3"><th:block th:each="num : ${ #numbers.sequence(2,4) }">
-                    <div th:if="${ #lists.size(carList) > num }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+                    <div class="car-sec" th:if="${ #lists.size(carList) > num }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
                     <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
+                    <th:block th:if="${ !resCarList.isEmpty }">
+                    	<div class="car-sec" th:if="${ resCarList.memberNo == #authentication.principal.no }">
+                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a>
+                    	</div>
+                    </th:block>
                </th:block></div>
                <div class="car3"><th:block th:each="num : ${ #numbers.sequence(2,4) }">
-               <div><label th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
+               <div><label class="carLabel" th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
                </th:block></div>
             </div>
         </div>
-
-       
-
+		
         <!--차량 예약 Modal -->
         <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
             aria-hidden="true">
@@ -154,38 +169,36 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                             <i data-feather="x"></i>
                         </button>
                     </div>
-                    <!--method="post" th:action="@{/member/signup}"-->
-                    <!--    th:each="mtroom = ${ roomList }"  -->
-                    <form class="form form-horizontal">
-                        <div class="form-body modal-body">
+                    
+                    <form class="form form-horizontal" method="post" th:action="@{/reserve/car/list}">
+                        <div class="form-body modal-body" sec:authorize="isAuthenticated()">
                             <div class="row">
                                 <div class="col-md-4 modal-margin">
                                     <label>차량명</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
-                                    <input type="text" class="form-control input-margin" name="room"
-                                        value="th:value='${ mtroom.room }'" readonly>
+                                    <input type="text" class="form-control input-margin" id="carIndex" name="carName" readonly>
+                                    <!-- <input type="hidden" name="carNo" th:value="">-->
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약기간</label>
                                 </div>
                                 <div class="col-md-8 form-group date-grid modal-margin">
                                     <div>
-                                        <input type="datetime-local" class="form-control pe-font-size" name="period"
-                                            value="2022-04-28T09:00">
+                                        <input type="datetime-local" class="form-control pe-font-size" name="startTime" id="period1">
                                     </div>
                                     <div>-</div>
                                     <div>
-                                        <input type="datetime-local" class="form-control pe-font-size" name="period"
-                                            value="2022-04-28T09:00">
+                                        <input type="datetime-local" class="form-control pe-font-size" name="endTime" id="period2">
                                     </div>
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약자</label>
                                 </div>
-                                <div class="col-md-8 form-group modal-margin">
+                                <div class="col-md-8 form-group modal-margin" sec:authorize="isAuthenticated()">
                                     <input type="text" id="contact-info" class="form-control input-margin" name="name"
-                                        value="th:value='${ login.userName }'" readonly>
+                                        th:value="${#authentication.principal.name}" readonly>
+                                    <input type="hidden" name="memberNo" th:value="${#authentication.principal.no}">
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>목적</label>
@@ -210,7 +223,51 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         </div>
 
     </div>
-
+	<script>
+		$(".car-sec").click(function(){
+			const carIndex = $(".car-sec").index(this);
+			console.log(carIndex);
+			
+			let modalCarName = document.getElementById('carIndex');
+			//let labelArray = $(".carLabel");
+			//console.log(labelArray);
+			//console.log($(".carLabel")[carIndex]);
+			modalCarName.value = $(".carLabel")[carIndex].innerText;
+			let check = modalCarName.value;
+			console.log(check);
+		
+		})
+	
+		let dateElement = document.getElementById('period1');
+	    let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -8);
+	    dateElement.value = date;
+	    
+	    dateElement.setAttribute("min", date);
+	    
+	    function setMinValue() {
+	        if(dateElement.value < date) {
+	            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
+	            dateElement.value = date;
+	        }
+	    }
+	    
+	    const d = new Date();
+		let dateElement2 = document.getElementById('period2');
+	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -8);
+	    console.log(date2);
+	    let date3 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0, -8);
+	    console.log(date3);
+	    dateElement2.value = date3;
+	    
+	    dateElement2.setAttribute("min", date);
+	
+	    function setMinValue2() {
+	        if(dateElement2.value < date) {
+	            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
+	            dateElement2.value = date;
+	        }
+	    }
+	</script>
 
 
 
