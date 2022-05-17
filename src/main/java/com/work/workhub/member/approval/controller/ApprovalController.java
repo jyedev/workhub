@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -73,7 +74,9 @@ public class ApprovalController {
 	@GetMapping("receptionList")
 	public ModelAndView receptionList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
-		List<ApprovalDTO> receptionList = approvalService.selectReceptionList();
+		int no = user.getNo();
+		
+		List<ApprovalDTO> receptionList = approvalService.selectReceptionList(no);
 
 		
 		mv.addObject("receptionList", receptionList);
@@ -89,7 +92,9 @@ public class ApprovalController {
 	@GetMapping("sendList")
 	public ModelAndView sendList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
-		List<ApprovalDTO> sendList = approvalService.selectSendList();
+		int no = user.getNo();
+		
+		List<ApprovalDTO> sendList = approvalService.selectSendList(no);
 		
 		mv.addObject("sendList", sendList);
 		mv.setViewName("approval/sendList");
@@ -98,6 +103,20 @@ public class ApprovalController {
 		log.error("발신목록 : {}", sendList.toString());
 		
 		return mv;
+	}
+	
+	@GetMapping("receptionDetail/no/{approvalNo}")
+	public ModelAndView receptionDetail(ModelAndView mv, @PathVariable("approvalNo") Integer approvalNo) {
+		
+		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
+		
+		mv.addObject("approvalDTO", approval);
+		
+		mv.setViewName("/approval/receptionDetail");
+		
+		return mv;
+		
+		
 	}
 
 }
