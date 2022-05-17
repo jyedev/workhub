@@ -1,11 +1,15 @@
 package com.work.workhub.member.post.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.work.workhub.member.member.controller.MemberController;
-import com.work.workhub.member.post.model.service.PostService;
+import com.work.workhub.member.member.dto.UserImpl;
+import com.work.workhub.member.post.model.dto.ReplyDTO;
 import com.work.workhub.member.post.model.service.ReplyService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +21,13 @@ public class ReplyController {
 	
 	private ReplyService replyService;
 	private MessageSource messageSource;
+	
+	@Autowired
+	public ReplyController(ReplyService replyService, MessageSource messageSource	) {
+		this.replyService = replyService;
+		this.messageSource = messageSource;
+	}
+	
 	
 	
 	//댓글 등록
@@ -30,6 +41,17 @@ public class ReplyController {
 //		
 //		return "redirect:/post/detail/no/{postNo}";
 //	}
+	
+	@PostMapping("write")
+	public String writeReply(ReplyDTO reply, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr) throws Exception {
+		
+		reply.setNo(user.getNo());
+		log.info("등록 요청 댓글 : {}", reply);
+		
+		replyService.writeReply(reply);
+		
+		return "redirect:/post/detail/no/" + reply.getPostNo();
+	}
 	
 	
 	//댓글 수정

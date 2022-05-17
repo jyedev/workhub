@@ -15,7 +15,7 @@ public class ReplyDTO {
 	private Date replyUpdate;
 	private String replyStatus;
 	private int postNo;
-	private int No;
+	private int no;
 	private int refReplyNo;
 	
 	private PostDTO post;
