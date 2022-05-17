@@ -53,8 +53,8 @@
                     <div class="card">
                         <div class="card-header">
                             <a th:href="@{/post/write}" class="btn btn-outline-primary">새글쓰기</a>
-                            <a th:href="@{'/post/update/no/' + ${ postDTO.postNo }}" class="btn btn-outline-primary">수정하기</a>
-                            <a th:href="@{'/post/delete/no/' + ${ postDTO.postNo }}" class="btn btn-outline-primary">삭제하기</a>
+	                        <a th:href="@{'/post/update/no/' + ${ postDTO.postNo }}" class="btn btn-outline-primary">수정하기</a>
+	                        <a th:href="@{'/post/delete/no/' + ${ postDTO.postNo }}" class="btn btn-outline-primary" onclick="removeCheck()">삭제하기</a>
                             <a th:href="@{/post/list}" class="btn btn-outline-primary" id="btn-list">목록보기</a>
                         </div>
                         <hr><br>
@@ -75,7 +75,6 @@
                             <div class="com-detail-writer">
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                 <p th:text="${ postDTO.member.name }">작성자</span><br>
-<!--                                 <span id="current-time"></span> -->
 								<p th:text="${ postDTO.postDate }" class="com-detail-date">날짜</p>
                             </div>
                             <div class="com-detail-body">
@@ -89,27 +88,28 @@
                             </div><hr>
                             
                             <!-- reply -->
-                            <div class="com-detail-reply">
-                                <div class="com-reply-writer">
-                                    <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
-                                    <span>김허브 대리</span>
-                                    <!-- 날짜 sysdate로 수정 -->
-                                    <span id="#"></span>
-                                    <div class="reply-btn" input type="button">
-                                        <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글">
-                                        <span>답글</span>
-                                    </div>
-                                </div>
-                                <div class="reply-content">
-                                    <p>댓글 내용이 표시됩니다.</p>
-                                </div>
-                            </div>
-                            <form action="/post/detail" method="post" class="com-insert-reply" >
-                                <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
-                                <input type="text" class="text-reply" name="text-reply">
-                                <button type="file" class="btn btn-outline-secondary me-1 mb-1 btn-sm">첨부</button>
-                                <button type="submit" class="btn btn-secondary me-1 mb-1 btn-sm">등록</button>
-                            </form>
+<!--                             <div class="com-detail-reply">  -->
+<!--                                 <div class="com-reply-writer"> -->
+<!--                                     <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo"> -->
+<!--                                     <span th:text="${ reply.member.name }">댓글 작성자</span> -->
+<!--                                     <span th:text="${ reply.replyDate }" class="com-detail-date">날짜</span> -->
+<!--                                     <div class="reply-btn"> -->
+<!--                                         <input type="image" src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글"> -->
+<!--                                         <span>답글</span> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                                 <div class="reply-content"> -->
+<!--                                     <p th:text="${ reply.replyContent }">댓글 내용</p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <form action="/reply/write" method="post" class="com-insert-reply"> -->
+<!--                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo"> -->
+<!--                                 <input type="text" class="text-reply" name="replyContent"> -->
+<!--                                 hidden 타입으로 postNo 전달 -->
+<!--                                 <input type="hidden" name="postNo" value="${ postDTO.postNo }"> -->
+<!--                                 <input type="file" class="btn btn-outline-secondary me-1 mb-1 btn-sm"">첨부</button> -->
+<!--                                 <button type="submit" class="btn btn-secondary me-1 mb-1 btn-sm">등록</button> -->
+<!--                             </form> -->
                             <hr>
 
                             <div class="post-detail-list">
@@ -183,6 +183,15 @@
 
     <script src="/assets/js/main.js"></script>
     
+    <script>
+    function removeCheck(){
+    	if(confirm("게시글을 삭제하시겠습니까?")==true){
+    		document.submit();
+    	} else{
+    		return false;
+    	}
+    }
+    </script>
 
 </body>
 

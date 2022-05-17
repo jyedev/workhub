@@ -4,7 +4,7 @@
 	<resultMap id="carResResultMap" type="com.work.workhub.member.reserve.model.dto.ResCarDTO">
 		
 		<id property="resNo" column="RES_NO"/>
-		<result property="no" column="NO"/>
+		<result property="memberNo" column="NO"/>
 		<result property="carNo" column="CAR_NO"/>
 		<result property="startTime" column="START_TIME"/>
 		<result property="endTime" column="END_TIME"/>
@@ -69,5 +69,28 @@
 		<!-- WHERE A.NO = #{ no } -->
 	</select>
 	
+	<select id="selectedCar" resultMap="carResultMap">
+		SELECT
+		*
+		FROM COM_CAR
+		WHERE DEL_YN='N'
+		  AND CAR_NO = #{ carIndex }
+	</select>
 	
+	<insert id="reserveCar">
+		INSERT INTO RES_CAR
+		VALUES
+		(
+			SEQ_RES_CAR_NO.NEXTVAL,
+			#{ memberNo },
+			#{ carNo },
+			#{ startTime },
+			#{ endTime },
+			#{ carPurpose }
+		)
+			
+			
+		)
+		
+	</insert>
 </mapper>

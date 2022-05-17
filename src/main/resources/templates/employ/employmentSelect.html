@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workGroupSelect</title>
+    <!-- fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+   
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/memberyj.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
+    
+    <!--캘린더-->    
+    <link href='/assets/css/calendar/core.css' rel='stylesheet' />
+<link href='/assets/css/calendar/daygrid.css' rel='stylesheet' />
+<link href='/assets/css/calendar/list.css' rel='stylesheet' />
+<link href='/assets/css/calendar/timegrid.css' rel='stylesheet' />
+<script src='/assets/js/calendar/core.js'></script>
+<script src='/assets/js/calendar/daygrid.js'></script>
+<script src='/assets/js/calendar/interaction.js'></script>
+<script src='/assets/js/calendar/list.js'></script>
+<script src='/assets/js/calendar/timegrid.js'></script>
+
+<style>
+
+    body {
+      margin: 40px 10px;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+  
+    #calendar {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  
+  </style>    
+</head>
+<body>
+   		
+		<div th:include="sidebar/sidebar" th:remove="tag"/></div>
+        
+        
+         <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
+        
+            <div class="wrapper">
+                <div><p class="hatta">근태관리</p></div>
+                <div id="clock" class="clocka">clock</div>
+                <div id="digital_clock" class="glow">00:00:00</div>
+                <div>
+                <div class="hattc"><p>출근시간</p></div>
+                <div class="hattd"><p>09:00:00</p></div>
+                </div>
+                <div>
+                <div class="hatte"><p>퇴근시간</p></div>
+                <div class="hattf"><p>09:00:00</p></div>
+            </div>
+            <div>
+                <div class="hattee"><p>주간 누적 근무시간</p></div>
+                <div class="hattff"><p>09:00:00</p></div>
+            </div>
+              </div>
+        
+        <hr width="260" class="hr1" size="5">
+       
+        <!--출근하기 버튼-->
+        <a onclick="location.href='/employ/in'" class="buttons">출근하기</a>
+        <!--퇴근하기 버튼-->
+        <a onclick="location.href='/employ/out'" class="buttonsa">퇴근하기</a>
+        
+        <!-- 근무 유형-->
+        
+        <form action="/employ/other" method="post">
+        <select name="workNo" class="workss">
+            <option th:each="att : ${attList}" th:value="${att.workNo}" th:utext="${att.workName}">업무</option>
+       </select>
+      <input type="submit" class="chec" value="✓">
+       </form>
+       
+       <p class="hattsd">내 근태 내역</p>
+      
+       <!--사원 근무그룹-->
+      <!--사원 프로필 있는 곳-->
+       <div class="risis">
+        <h6>(기본 근태)B형</h6>
+       <div class="box box1">
+           <div class="sss"></div>
+           <span class="nsns">김땡땡 사원</span></div>
+       <div class="box box2">
+        <span class="asa vvv">이번주 누적</span>   
+        <span class="csc ssgdd">1:00:00</span></div>
+       <div class="box box3">
+        <span class="asa vvv">이번주 초과</span>    
+        <span class="csc ssgdd">1:00:00</span></div>
+       <div class="box box4">
+        <span class="asa vvv">이번주 잔여</span>    
+        <span class="csc ssgdd">1:00:00</span></div>
+        <div class="box box3">
+            <span class="asa vvv">이번달 누적</span>    
+            <span class="csc ssgdd">1:00:00</span></div>
+           <div class="box box4">
+            <span class="asa vvv">이번달 연장</span>    
+            <span class="csc ssgdd">1:00:00</span></div>
+    </div>
+    <div class="soiojy">
+    <input type="button" value="연장근무 신청" class="ppo">
+    <input type="button" value="목록 다운로드" class="ppo">
+    </div>
+
+    <!--풀 캘린더 시작-->
+    <div id='calendar'></div>
+    <!--풀 캘린더 끝-->
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+      
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+            header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            defaultDate: '2020-02-12',
+            navLinks: true, // can click day/week names to navigate views
+      
+            weekNumbers: true,
+            weekNumbersWithinDays: true,
+            weekNumberCalculation: 'ISO',
+      
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+              {
+                title: 'All Day Event',
+                start: '2020-02-01'
+              },
+              {
+                title: 'Long Event',
+                start: '2020-02-07',
+                end: '2020-02-10'
+              },
+              {
+                groupId: 999,
+                title: 'Repeating Event',
+                start: '2020-02-09T16:00:00'
+              },
+              {
+                groupId: 999,
+                title: 'Repeating Event',
+                start: '2020-02-16T16:00:00'
+              },
+              {
+                title: 'Conference',
+                start: '2020-02-11',
+                end: '2020-02-13'
+              },
+              {
+                title: 'Meeting',
+                start: '2020-02-12T10:30:00',
+                end: '2020-02-12T12:30:00'
+              },
+              {
+                title: 'Lunch',
+                start: '2020-02-12T12:00:00'
+              },
+              {
+                title: 'Meeting',
+                start: '2020-02-12T14:30:00'
+              },
+              {
+                title: 'Happy Hour',
+                start: '2020-02-12T17:30:00'
+              },
+              {
+                title: 'Dinner',
+                start: '2020-02-12T20:00:00'
+              },
+              {
+                title: 'Birthday Party',
+                start: '2020-02-13T07:00:00'
+              },
+              {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2020-02-28'
+              },
+              {
+                title: '김윤정',
+                start: '2020-02-29',
+                end: '2020-02-29'
+              },
+              {
+                  title: '김윤정',
+                  start: '2020-05-17',
+                }
+            ]
+          });
+      
+          calendar.render();
+        });
+      
+      </script>
+
+
+    <script>
+        setInterval(showTime, 1000);
+  
+        function showTime(){
+          let time = new Date();
+          let hr = time.getHours();
+          let min = time.getMinutes();
+          let sec = time.getSeconds();
+          AMPM = 'AM'; 
+  
+        if(hr > 12) {
+          hr -= 12;
+          AMPM = "PM";
+        }
+        if(hr == 0) {
+          hr = 12;
+          AMPM = "AM";
+        }
+  
+        hr = hr < 10 ? "0" + hr : hr;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+  
+        let curentTime = hr + ":" + min + ":" + sec + AMPM; 
+  
+        document.getElementById('digital_clock').innerHTML = curentTime;
+  
+      }
+      showTime();
+      </script>
+
+
+        <script>
+        var Target = document.getElementById("clock");
+        function clock() {
+            var time = new Date();
+
+            var month = time.getMonth();
+            var date = time.getDate();
+            var day = time.getDay();
+            var week = ['일', '월', '화', '수', '목', '금', '토'];
+
+            Target.innerText = 
+            `${month + 1}월 ${date}일 ${week[day]}요일 ` ;
+                
+        }
+        clock();
+        setInterval(clock, 1000); // 1초마다 실행
+    </script>
+
+
+
+
+
+   
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+   		
+</body>
+</html>

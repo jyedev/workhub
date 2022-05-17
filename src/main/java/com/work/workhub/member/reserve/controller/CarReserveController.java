@@ -3,6 +3,7 @@ package com.work.workhub.member.reserve.controller;
 import java.util.List;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +27,22 @@ public class CarReserveController {
 	
 	private MessageSource messageSource;
 	
+	@Autowired
+	public CarReserveController(CarResService carService, MessageSource messageSource) {
+		this.carService = carService;
+		this.messageSource = messageSource;
+	}
+	
 	/* 차량 예약 화면 이동*/		
 	
 	@GetMapping("reserve")
 	public ModelAndView selectCarList(ModelAndView mv) {
 			
 		List<CarDTO> carList = carService.selectAllCar();
+		List<ResCarDTO> carResList = carService.selectAllResCarList();
 		
 		mv.addObject("carList",carList);
+		mv.addObject("carResList",carResList);
 		
 		mv.setViewName("reserve/car/list");
 		

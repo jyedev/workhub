@@ -4,3 +4,10 @@
 	border:none;
 	background:none;
 }
+	.auth-logo>a>img {
+		width:300px;
+		margin-left:20px;
+	}
+		#auth #auth-left .auth-logo img {
+			height:auto;
+		}

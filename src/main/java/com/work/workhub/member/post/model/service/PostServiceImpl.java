@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.work.workhub.member.post.model.dao.PostMapper;
 import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
+import com.work.workhub.member.post.model.dto.ReplyDTO;
 
 @Service("postService")
 @Transactional
@@ -62,20 +63,6 @@ public class PostServiceImpl implements PostService{
 	public int deletePost(Integer postNo) {
 		return postMapper.deletePost(postNo);
 	}
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

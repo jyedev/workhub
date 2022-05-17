@@ -71,6 +71,8 @@
 		<result property="authName" column="AUTH_NAME"/>
 	</resultMap>
 	
+
+	
 	
 	<!-- 자유게시판 목록 조회 -->
 	<select id="findAllPost" resultMap="postResultMap">
@@ -135,24 +137,16 @@
 		  SET POST_TITLE = #{ postTitle }
 		    , POST_CONTENT = #{ postContent }
 		    , CATEGORY_NO = #{ categoryNo }
-		    , POST_UPDATE = SYSDATE
+		    , POST_DATE = SYSDATE
 		WHERE POST_NO = #{ postNo }		
 	</update>
 	
+	<!-- 게시글 삭제 -->
 	<update id="deletePost">
 		UPDATE POST
 		  SET POST_STATUS = 'N'
-		WHERE POST_NO = #{ postNo}
+		WHERE POST_NO = #{ postNo }
 	</update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 </mapper>

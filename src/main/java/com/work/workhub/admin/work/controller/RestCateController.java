@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.work.workhub.admin.work.model.dto.RestCateDTO;
+import com.work.workhub.admin.work.model.dto.WorkDTO;
 import com.work.workhub.admin.work.model.service.RestCateService;
 import com.work.workhub.member.member.dto.UserImpl;
 
@@ -34,6 +36,7 @@ public class RestCateController {
 		this.restcateService = restcateService;
 		this.messageSource = messageSource;
 	}
+	
 	
 	
 	/* 연차유형 조회*/		
@@ -73,6 +76,57 @@ public class RestCateController {
 		
 	}
 
+	
+	//연차유형 수정 예전 값 보기
+	@GetMapping("restCateModify")
+	public ModelAndView restCateModify(@RequestParam int restNo, ModelAndView mv) {
+					
+		List<RestCateDTO> restCateMo = restcateService.ModifyrestCate(restNo);
+				
+				
+		mv.addObject("restCateMo",restCateMo);
+				
+		System.out.println(restCateMo);
+				
+		mv.setViewName("restcate/restCateModify");
+				
+		return mv;
+				
+		}
+	
+	//연차유형 수정
+	@PostMapping("restCateModifyGo")
+	public String restCateModifyGo(@ModelAttribute RestCateDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+		
+		post.setWriteNo(user.getNo());
+
+		log.info("등록 요청 글 : {}", post);
+
+		
+		restcateService.restCateModifyGo(post);
+		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("restCateModifyGo", null, locale));
+		
+		return "redirect:/restcate/list";
+		
+	}	
+
+	//연차유형 삭제
+	@GetMapping("restCateDelete")
+	public String restCateDelete(@RequestParam int restNo ,@ModelAttribute RestCateDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+		
+		post.setWriteNo(user.getNo());
+		
+		log.info("삭제 요청 글 : {}", post);
+		
+		
+		restcateService.restCateDelete(post, restNo);
+		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("restCateDelete", null, locale));
+		
+		return "redirect:/restcate/list";
+		
+	}	
 	
 	
 }

@@ -39,6 +39,7 @@ public class WorkWriteController {
 	}
 	
 	
+	
 	/* 근무유형 조회*/		
 	
 	@GetMapping("list")
@@ -95,23 +96,38 @@ public class WorkWriteController {
 		
 		
 		//근무유형 수정
-//		@PostMapping("workModifyGo")
-//		public String workModifyGo(@ModelAttribute WorkDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
-//			
-//			post.setWriteNo(user.getNo());
-//			log.error("등록 요청 글 : {}", post);
-//			log.warn("등록 요청 글 : {}", post);
-//			log.info("등록 요청 글 : {}", post);
-//			log.debug("등록 요청 글 : {}", post);
-//			log.trace("등록 요청 글 : {}", post);
-//			
-//			workService.workModifyGo(post);
-//			
-//			rttr.addFlashAttribute("successMessage", messageSource.getMessage("workModifyGo", null, locale));
-//			
-//			return "redirect:/work/list";
-//			
-//		}
+		@PostMapping("workModifyGo")
+		public String workModifyGo(@ModelAttribute WorkDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+			
+			post.setWriteNo(user.getNo());
+
+			log.info("등록 요청 글 : {}", post);
+
+			
+			workService.workModifyGo(post);
+			
+			rttr.addFlashAttribute("successMessage", messageSource.getMessage("workModifyGo", null, locale));
+			
+			return "redirect:/work/list";
+			
+		}
 		
+		
+		//근무유형 삭제
+		@GetMapping("workDelete")
+		public String workDelete(@RequestParam int workNo ,@ModelAttribute WorkDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+			
+			post.setWriteNo(user.getNo());
+			
+			log.info("삭제 요청 글 : {}", post);
+			
+			
+			workService.workDelete(post, workNo);
+			
+			rttr.addFlashAttribute("successMessage", messageSource.getMessage("workDelete", null, locale));
+			
+			return "redirect:/work/list";
+			
+		}
 	
 }
