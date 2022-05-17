@@ -35,11 +35,6 @@
     display:flex;
 }
 
-.com-detail-date{
-	margin-left: 5px;
-	opacity: 70%;
-}
-
 .profile-photo{
     height: 36px;
     width: 36px;
@@ -161,10 +156,6 @@
     height: 0.7rem;
 }
 
-td a{
-	text-decoration:none;
-	color: #607080;
-}
 
 
 /* surv ------------------- */
@@ -324,6 +315,7 @@ td a{
 
 #startDate, #endDate{
     opacity: 70%;
+    height: 30px;
 }
 
 .textarea-surv{
@@ -332,4 +324,80 @@ td a{
     resize: none;
     border-color: #dedede;
     border-radius: 4px;
+}
+
+#que-title-delete{
+    height: 12px;
+}
+
+.input-survey-table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.que-title-box{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.que-title-box input{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.que-title-box-add{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    opacity: 50%;
+}
+
+.que-title-box-add input{
+    margin-left: 10px;
+    margin-right: 10px;
+    border-style: none;
+    outline-style: none;
+    background: none;
+}
+
+.que-button{
+    width: 200px;
+    margin: 30px auto;
+}
+
+.que-button input{
+    border-style: none;
+    border-radius: 3px;
+    width: 5rem;
+    height: 2.2rem;
+}
+
+#que-submit, #surv-submit{
+    background-color: #6CAF8D;
+    color: white;
+}
+
+#que-cancle, #surv-cancle{
+    background-color: #dedede;
+}
+
+#surv-add-btn{
+    border-style: none;
+    border-radius: 3px;
+    background-color: #dedede;
+    width: 25rem;
+    height: 2.2rem;
+    margin: 10px 33%;
+}
+
+.surv-head{
+    margin-bottom: 5%;
+}
+
+.que-num{
+    width: 10rem;
+    height: 2.2rem;
+    border-radius: 3px;
+    border-color: #dedede;
 }

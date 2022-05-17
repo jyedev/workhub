@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkHub | 설문작성</title>
+
+    <!-- fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/com-surv.css">
+    <link rel="shortcut icon" href="src/images/favicon-workHub.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        
+                        <div class="logo">
+                            <a href="index.html"><img src="src/images/logo-workhub.png" alt="Logo" srcset=""></a>
+                            
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active ">
+                            <a href="index.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>홈</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>전자결재</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="extra-component-avatar.html">결재 문서 생성</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">개인 결재함</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">부서 결재함</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-collection-fill"></i>
+                                <span>근태관리</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="extra-component-avatar.html">내 근태 현황</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="extra-component-sweetalert.html">내 연차 내역</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-alarm-fill"></i>
+                                <span>예약</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="layout-default.html">회의실 예약</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="layout-vertical-1-column.html">차량 예약</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-calendar-fill"></i>
+                                <span>캘린더</span>
+                            </a>
+                            
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="form-layout.html" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>보고서</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-pen-fill"></i>
+                                <span>게시판</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="form-editor-quill.html">글쓰기</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-editor-ckeditor.html">공지사항</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-editor-summernote.html">자유게시판</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="table.html" class='sidebar-link'>
+                                <i class="bi bi-bar-chart-fill"></i>
+                                <span>설문</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="form-editor-quill.html">설문 작성</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-editor-ckeditor.html">진행 중인 설문</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-editor-summernote.html">마감된 설문</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="form-editor-summernote.html">내가 만든 설문</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="table-datatable.html" class='sidebar-link'>
+                                <i class="bi bi-chat-dots-fill"></i>
+                                <span>쪽지</span>
+                            </a>
+                        </li>
+                        <br><br><br><br>
+                        
+
+                        
+
+                        <li class="sidebar-item ">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-person-circle"></i>
+                                <span>내 정보 관리</span>
+                            </a>
+                            
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="ui-file-uploader.html" class='sidebar-link'>
+                                <img src="src/images/logout.png" alt="logout">
+                                <span>Logout</span>
+                            </a>
+                        </li>
+
+                       
+
+                        
+
+                        
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>설문 작성</h3>
+            </div>
+            <section class="section">
+                <div class="card">
+                    <div class="card-header" name="survey-content">
+                        <form>
+                            <div class="row write-body-head surv-head">
+                                <div class="col-md-2 write-title">
+                                    <label>설문 제목</label>
+                                </div>
+                                <div class="col-md-10 form-group">
+                                    <input type="text" class="form-control btn-sm" name="title">
+                                </div>
+                                <div class="col-md-2 write-title">
+                                    <label>설문 대상</label>
+                                </div>
+                                <div class="col-md-10 form-group">
+                                    <div class="surv-target">
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label for="checkbox2">허브본부</label>
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label for="checkbox2">인사팀</label>
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label for="checkbox2">총무팀</label>
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label for="checkbox2">영업팀</label>
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label for="checkbox2">마케팅팀</label>
+                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <label for="checkbox2">개발팀</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 write-title">
+                                    <label>설문 기간</label>
+                                </div>
+                                <div class="col-md-10 form-group surv-date">
+                                    <form>
+                                        <input type="date" id="startDate">
+                                    </form>
+                                    <p> &nbsp - &nbsp </p>
+                                    <form>
+                                        <input type="date" id="endDate">                      
+                                    </form>
+                                </div>
+                                <div class="col-md-2 write-title">
+                                    <label>설문 설명</label>
+                                </div>
+                                <div class="col-md-10 form-group">
+                                    <textarea class="textarea-surv"></textarea>
+                                    <input type="file" name="input-surv-file">
+                                </div>
+                            </div><hr>
+
+                            <!-- 질문 -->
+                            <div class="surv-question">
+                                <form>
+                                    <div class="row write-body-head">
+                                        <div class="col-md-2 write-title">
+                                            <label>질문</label>
+                                        </div>
+                                        <div class="col-md-10 form-group">
+                                            <input type="text" name="question" class="form-control btn-sm">
+                                        </div>
+                                        <div class="col-md-2 write-title">
+                                            <label>선택 가능 문항수</label>
+                                        </div>
+                                        <div class="col-md-10 form-group">
+                                            <select class="que-num">
+                                                <option value="1">하나만 선택</option>
+                                                <option value="2">두가지 선택</option>
+                                                <option value="3">다중 선택</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 write-title">
+                                            <label>설문 항목</label>
+                                        </div>
+                                        <div class="col-md-10 form-group">
+                                            <span class="que-title-box">
+                                                <input type="radio" name="que-title-radio">
+                                                <input type="text" name="queTitle" class="form-control btn-sm">
+                                                <input type="image" src="src/images/cancle.png" name="que-title-delete" id="que-title-delete" >
+                                            </span>
+                                            <span class="que-title-box">
+                                                <input type="radio" name="que-title-radio">
+                                                <input type="text" name="queTitle" class="form-control btn-sm">
+                                                <input type="image" src="src/images/cancle.png" name="que-title-delete" id="que-title-delete" >
+                                            </span>
+                                            <span class="que-title-box-add">
+                                                <input type="radio" name="que-title-radio">
+                                                <input type="button" value="항목을 추가하려면 이 곳을 클릭하세요.">
+                                            </span>
+                                        </div>
+                                        <div class="que-button">
+                                            <input type="submit" value="완료" id="que-submit">
+                                            <input type="submit" value="취소" id="que-cancle">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><hr>
+                            <input type="button" value="질문 추가" id="surv-add-btn">
+                            <div class="que-button">
+                                <input type="submit" value="등록" id="surv-submit">
+                                <input type="submit" value="취소" id="surv-cancle">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
