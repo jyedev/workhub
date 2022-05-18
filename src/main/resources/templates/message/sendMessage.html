@@ -299,7 +299,7 @@
                                                     <div class="card-body pt-0">
                                                         <div class="form-group pb-50">
                                                             <label for="emailfrom">보내는 사람</label>
-                                                            <div id="emailfrom" class="form-control bg-light secondary" sec:authentication="principal.email" disabled></div>
+                                                            <div id="emailfrom" class="form-control bg-light secondary" sec:authentication="principal.name" disabled></div>
                                                         </div>
                                                         <div class="form-label-group">
                                                             <label for="emailTo">받는 사람 </label>
@@ -406,7 +406,7 @@
                                                     <button type="reset" class="btn btn-light-secondary cancel-btn mr-1 me-2">
                                                         <span class="d-sm-inline d-none">취소</span>
                                                     </button>
-                                                    <button type="submit" class="btn-send btn btn-primary">
+                                                    <button type="submit" class="btn-send btn btn-primary" id="sendMessageBtn">
                                                         <i class="bi bi-send-fill"></i>
                                                         <span class="d-sm-inline d-none">보내기</span>
                                                     </button>
@@ -434,6 +434,16 @@
                     $('#letterNo').html("(100 / 100)");
                 }
             });
+        	
+        	/* 웹소켓 메시지 전송 영역 */
+        	$('#sendMessageBtn').click(function(e){
+        		let sender = $('#emailfrom').val();
+        		let url = '/message/inboxList';
+        		
+        		socket.send(url + "," + sender);
+        	
+	        	$('#contextInput').val(''); //초기화  
+        	});
     </script>
     
     <script th:inline="javascript">

@@ -26,5 +26,5 @@ public interface MessageService {
 	Map<Integer, List<MemberDTO>> selectMemberListMap(List<DepartmentDTO> departmentList, List<MemberDTO> memberList);
 
 	void updateMessageForView(int msgCode);
-
+	
 }
