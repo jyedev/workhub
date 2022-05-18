@@ -16,6 +16,13 @@
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/adminyj.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+<script>
+	const successMessage = '[[${successMessage}]]';
+	
+	if(successMessage) {
+		alert(successMessage);
+	}
+</script>
 </head>
 <body>
 <body>
@@ -62,10 +69,12 @@
             </div>
         </section>
         <!--모든 근무 그룹 끝-->
+    
+    <!-- 수정하기 버튼을 눌렀을 때 게시글 번호 넘기는 것 -->
     <script type="text/javascript">
     function workModify(workNo) { 
     	// 근무그룹  번호 확인용
-    	alert(workNo); 
+    	//alert(workNo); 
     	var workNo = workNo; 
         location.href='/work/workModify?workNo='+workNo; }
     </script>   

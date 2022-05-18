@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.workhub.member.employ.model.dao.EmpstatusMapper">
+
+<!-- 근태관리 -->
+<resultMap type="com.work.workhub.member.employ.model.dto.AttDTO" id="AttResultMap">
+	<id property="attNo" column="ATT_NO"/>
+	<result property="no" column="NO"/>
+	<result property="workNo" column="WORK_NO"/>
+	<result property="attGo" column="ATT_GO"/>
+	<result property="attOff" column="ATT_OFF"/>
+	<result property="attAdd" column="ATT_ADD"/>
+	<result property="attOver" column="ATT_OVER"/>
+	<result property="attNight" column="ATT_NIGHT"/>
+	<result property="attReason" column="ATT_REASON"/>
+	<result property="attDate" column="ATT_DATE"/>
+	<result property="attStatus" column="ATT_STATUS"/>
+	<result property="attModdate" column="ATT_MODDATE"/>
+</resultMap>
+
+<!-- 근태유형 -->
+<resultMap type="com.work.workhub.admin.work.model.dto.WorkDTO" id="workResultMap">
+	<id property="workNo" column="WORK_NO"/>
+	<result property="workName" column="WORK_NAME"/>
+	<result property="workInclude" column="WORK_INCLUDE"/>
+	<result property="workUse" column="WORK_USE"/>
+	<result property="workStatus" column="WORK_STATUS"/>
+	<result property="workDate" column="WORK_DATE"/>
+	<result property="workModdate" column="WORK_MODDATE"/>
+	<result property="writeNo" column="WRITE_NO"/>
+</resultMap>
+
+<!-- 연차유형 -->
+<resultMap type="com.work.workhub.admin.work.model.dto.RestCateDTO" id="restResultMap">
+	<id property="restNo" column="REST_NO"/>
+	<result property="restName" column="REST_NAME"/>
+	<result property="restDed" column="REST_DED"/>
+	<result property="restInclude" column="REST_INCLUDE"/>
+	<result property="restMoney" column="REST_MONEY"/>
+	<result property="restPoss" column="REST_POSS"/>
+	<result property="restDay" column="REST_DAY"/>
+	<result property="restUse" column="REST_USE"/>
+	<result property="restStatus" column="REST_STATUS"/>
+	<result property="restDate" column="REST_DATE"/>
+	<result property="restModdate" column="REST_MODDATE"/>
+	<result property="writeNo" column="WRITE_NO"/>
+</resultMap>
+
+	<!-- 출근하기 버튼 눌렀을 때 -->
+	<insert id="employmentIn">
+		INSERT
+			INTO ATT
+		(
+		   ATT_NO
+		 , NO
+		 , WORK_NO
+		 , ATT_GO
+		 , ATT_STATUS
+		)
+		VALUES
+		(
+		SEQ_ATT_NO.NEXTVAL
+		, #{ no }
+		, 15
+		, TO_CHAR(SYSDATE,'YYYY.MM.DD HH24:MI:SS')
+		, DEFAULT
+		)
+	</insert>
+	
+	<!-- 퇴근하기 버튼 눌렀을 때 -->
+	<insert id="employmentOut">
+		INSERT
+			INTO ATT
+		(
+		   ATT_NO
+		 , NO
+		 , WORK_NO
+		 , ATT_GO
+		 , ATT_STATUS
+		)
+		VALUES
+		(
+		SEQ_ATT_NO.NEXTVAL
+		, #{ no }
+		, 16
+		, TO_CHAR(SYSDATE,'YYYY.MM.DD HH24:MI:SS')
+		, DEFAULT
+		)
+	</insert>
+	
+	<!-- 근무유형 select box -->
+	<!-- 출근, 퇴근 근태 등록은 따로 버튼이 있으므로 출근, 퇴근은
+	조회에서 제외한다. -->
+	<select id="boxWork" resultMap="workResultMap">
+		SELECT
+			*
+		FROM WORK_CATEGORY
+		WHERE WORK_USE = '사용'
+		AND NOT WORK_NAME = '출근'
+		AND NOT WORK_NAME = '퇴근'
+		ORDER BY WORK_NO
+	</select>
+	
+	<!-- select box 근무 등록 -->
+	<insert id="employmentOther">
+		INSERT
+			INTO ATT
+		(
+		   ATT_NO
+		 , NO
+		 , WORK_NO
+		 , ATT_GO
+		 , ATT_STATUS
+		)
+		VALUES
+		(
+		SEQ_ATT_NO.NEXTVAL
+		, #{ no }
+		, #{ workNo }
+		, TO_CHAR(SYSDATE,'YYYY.MM.DD HH24:MI:SS')
+		, DEFAULT
+		)
+	</insert>
+	
+	<!-- 근태 조회 -->
+	<select id="attenSelect" resultMap="AttResultMap">
+		SELECT
+			*
+		FROM ATT
+		WHERE ATT_STATUS = 'Y'
+		ORDER BY ATT_NO
+	</select>
+	
+	
+	<!-- 근무유형 select box -->
+	<!-- 출근, 퇴근 근태 등록은 따로 버튼이 있으므로 출근, 퇴근은
+	조회에서 제외한다. -->
+	<select id="boxsWork" resultMap="workResultMap">
+		SELECT
+			*
+		FROM WORK_CATEGORY
+		WHERE WORK_USE = '사용'
+		AND NOT WORK_NAME = '출근'
+		AND NOT WORK_NAME = '퇴근'
+		ORDER BY WORK_NO
+	</select>
+	
+	
+	<!-- 휴가 신청서의 휴가 유형 selectBox -->
+	<select id="boxRc" resultMap="restResultMap">
+	SELECT
+		*
+		FROM REST_CATEGORY
+	WHERE REST_USE = '사용'
+	AND REST_STATUS = 'Y'
+	ORDER BY REST_NO
+	</select>
+	
+	
+	
+</mapper>

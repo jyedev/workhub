@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.work.workhub.member.post.model.dto.CategoryDTO;
 import com.work.workhub.member.post.model.dto.PostDTO;
+import com.work.workhub.member.post.model.dto.ReplyDTO;
 
 public interface PostService {
 

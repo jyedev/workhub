@@ -40,5 +40,20 @@ public class CarResServiceImpl implements CarResService{
 	public List<ResCarDTO> selectAllResCarList() {
 		return carResMapper.selectAllResCarList();
 	}
+	@Override
+	public CarDTO selectedCar(int carIndex) {
+		return carResMapper.selectedCar(carIndex);
+	}
+	@Override
+	public boolean registReservation(ResCarDTO resCar) throws Exception {
+		int result = carResMapper.reserveCar(resCar);
+		
+		if(result <= 0) {
+			throw new Exception("차량 예약 실패");
+		}
+		
+		
+		return result > 0 ? true : false;	
+	}
 
 }

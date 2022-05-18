@@ -32,7 +32,5 @@ public class ApprovalDTO {
 	private String refCount;
 	
 	private MemberDTO sender;
-	private List<MemberDTO> receiver;
-	private List<MemberDTO> ref;
 	private AttachDTO att;
 }

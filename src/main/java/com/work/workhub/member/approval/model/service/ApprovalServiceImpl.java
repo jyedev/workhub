@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.work.workhub.member.approval.model.dao.ApprovalMapper;
 import com.work.workhub.member.approval.model.dto.AppLineDTO;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
+import com.work.workhub.member.approval.model.dto.ReferenceDTO;
 import com.work.workhub.member.member.dto.DepartmentDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
 
@@ -25,15 +26,15 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 	@Override
-	public List<ApprovalDTO> selectReceptionList() {
+	public List<ApprovalDTO> selectReceptionList(int no) {
 		
-		return approvalMapper.selectReceptionList();
+		return approvalMapper.selectReceptionList(no);
 	}
 
 	@Override
-	public List<ApprovalDTO> selectSendList() {
+	public List<ApprovalDTO> selectSendList(int no) {
 		
-		return approvalMapper.selectSendList();
+		return approvalMapper.selectSendList(no);
 	}
 
 	@Override
@@ -56,6 +57,24 @@ public class ApprovalServiceImpl implements ApprovalService {
 		
 //		approvalMapper.insertAppLine(appLine);
 		
+	}
+
+	@Override
+	public ApprovalDTO findAppByNo(Integer approvalNo) {
+		
+		return approvalMapper.findAppByNo(approvalNo);
+	}
+
+	@Override
+	public List<AppLineDTO> findReceiverByNo(Integer approvalNo) {
+		
+		return approvalMapper.findReceiverByNo(approvalNo);
+	}
+
+	@Override
+	public List<ReferenceDTO> findRefByNo(Integer approvalNo) {
+		
+		return approvalMapper.findRefByNo(approvalNo);
 	}
 
 

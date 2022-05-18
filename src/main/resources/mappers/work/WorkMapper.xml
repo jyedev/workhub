@@ -69,10 +69,11 @@
 		<result property="groupNo" column="GROUP_NO"/>
 		<result property="gmDate" column="GM_DATE"/>
 		<result property="groupStatus" column="GROUP_STATUS"/>
+		<result property="gmModdate" column="GM_MODDATE"/>
 		<result property="name" column="NAME"/>
 		<result property="groupName" column="GROUP_NAME"/>
 		<result property="writeNo" column="WRITE_NO"/>
-		<result property="writeName" column="NAME"/>
+		<result property="writeName" column="WRITE_NAME"/>
 	<!-- <collection property="memberList" resultMap="memberResultMap"/>
 	<collection property="workGroupList" resultMap="workGroupResultMap"/> -->
 	</resultMap>
@@ -130,15 +131,13 @@
 		, A.WORK_STATUS
 		, A.WORK_DATE
 		, A.WORK_MODDATE
-		, A.WRITE_NO
-		, B.NAME
 	 FROM WORK_CATEGORY A
-	 JOIN TBL_MEMBER B ON (A.WRITE_NO = B.NO)
 	 WHERE WORK_NO = #{ workNo }
 	</select>
 	
 	<!-- 근태 유형  수정-->
-	<!--  <update id="workModifyGo">
+	<!-- MODDATE 새로 날짜 삽입해야함 -->
+	 <update id="workModifyGo">
 		UPDATE
 		    WORK_CATEGORY
 		  SET 
@@ -147,8 +146,17 @@
 		    , WORK_INCLUDE = #{ workInclude }
 		    , WORK_USE = #{ workUse }
 		    , WRITE_NO = #{ writeNo }
+		    , WORK_MODDATE = SYSDATE
 		  WHERE WORK_NO = #{ workNo } 
-	</update>-->
+	</update>
+	
+	<!-- 근태유형 삭제 -->
+	<update id="workDelete">
+		UPDATE
+			WORK_CATEGORY
+		SET WORK_STATUS = 'N'
+		WHERE WORK_NO = #{ workNo }
+	</update>
 	
 	
 	<!-- 연차유형 조회 -->
@@ -199,6 +207,50 @@
 		, #{ writeNo }
 		)
 	</insert>
+	
+	<!-- 연차 유형 예전 값 -->
+	<select id="ModifyrestCate" resultMap="restcateResultMap">
+	SELECT
+	      A.REST_NO
+		, A.REST_NAME
+		, A.REST_DED
+		, A.REST_INCLUDE
+		, A.REST_MONEY
+		, A.REST_POSS
+		, A.REST_DAY
+		, A.REST_USE
+		, A.REST_STATUS
+		, A.REST_DATE
+		, A.REST_MODDATE
+	 FROM REST_CATEGORY A
+	 WHERE A.REST_NO = #{ restNo }
+	</select>
+	
+	<!-- 연차 유형  수정-->
+	<!-- MODDATE 새로 날짜 삽입해야함 -->
+	 <update id="restCateModifyGo">
+		UPDATE
+		    REST_CATEGORY
+		  SET 
+		      REST_NO = #{ restNo }
+		  	, REST_NAME = #{ restName }  
+		    , REST_DED = #{ restDed }
+		    , REST_INCLUDE = #{ restInclude }
+		    , REST_MONEY = #{ restMoney }
+		    , REST_USE = #{ restUse }
+		    , WRITE_NO = #{ writeNo }
+		    , REST_MODDATE = SYSDATE
+		  WHERE REST_NO = #{ restNo } 
+	</update>
+	
+	<!-- 연차유형 삭제 -->
+	<update id="restCateDelete">
+		UPDATE
+			REST_CATEGORY
+		SET	REST_STATUS = 'N'
+		 WHERE  REST_NO = #{ restNo }
+	</update>
+	
 	
 	<!-- 근무그룹유형 조회 -->
 	<select id="workGroupSelect" resultMap="workGroupResultMap">
@@ -260,6 +312,54 @@
 		)
 	</insert>
 	
+	<!-- 근무그룹유형 예전값 -->
+	<select id="ModifyworkGroup" resultMap="workGroupResultMap">
+	SELECT
+	      A.GROUP_NO
+	    , A.GROUP_NAME
+	    , A.GROUP_EX
+	    , A.GROUP_DAY
+	    , A.GROUP_FIRDATE
+	    , A.GROUP_ENDDATE
+	    , A.GROUP_FIRREST
+	    , A.GROUP_ENDREST
+	    , A.GROUP_STATUS
+	    , A.GROUP_REST
+	    , A.GROUP_DATE
+	    , A.GROUP_MODDATE
+	    , A.GROUP_USE
+	 FROM WORK_GROUP A
+	 WHERE A.GROUP_NO = #{ groupNo } 
+	</select>
+	
+	<!-- 근무그룹 수정 -->
+	<update id="workGroupModifyGo">
+		UPDATE
+			WORK_GROUP
+		SET	
+		 	 GROUP_NO = #{ groupNo }
+			, GROUP_NAME = #{ groupName }
+			, GROUP_EX = #{ groupEx }
+			, GROUP_DAY = #{ groupDay }
+			, GROUP_FIRDATE = #{ groupFirdate }
+			, GROUP_ENDDATE = #{ groupEnddate }
+			, GROUP_FIRREST = #{ groupFirrest }
+			, GROUP_ENDREST = #{ groupEndrest }
+			, GROUP_REST = #{ groupRest }
+			, GROUP_USE = #{ groupUse }
+			, WRITE_NO = #{ writeNo }
+			, GROUP_MODDATE = SYSDATE
+		 WHERE  GROUP_NO = #{ groupNo }
+	</update>
+	
+	<!-- 근무그룹 삭제 -->
+	<update id="workGroupDelete">
+		UPDATE
+			WORK_GROUP
+		SET	GROUP_STATUS = 'N'
+		 WHERE  GROUP_NO = #{ groupNo }
+	</update>
+	
 	<!-- selectbox 근무그룹 -->
 	<select id="boxSelect" resultMap="workGroupResultMap">
 	SELECT
@@ -307,6 +407,10 @@
 	
 	
 	<!-- 사원 아이디 검색으로 근무그룹 조회 -->
+	<!-- 같은 테이블에서 NAME이라는 컬럼을 두번 다른 값으로 불러와야 하기 때문에
+	D.NAME 뒤에는 resultMap 에서 정의해둔 컬럼명을 별칭으로 뒤에 적는다. 그럼 다른 값이 
+	불러와진다. DTO 에 정의하고 resultMap에도 정의했다. erd에 추가는 필요없다. 그냥 값을
+	담아두기 위해 만들어둔 것이다. -->
 	<select id="memberGroupSelect" resultMap="memberGroupResultMap">
 	SELECT
 	    A.WRITE_NO
@@ -317,14 +421,53 @@
 	  , C.NAME
 	  , B.GROUP_NAME
 	  , A.GROUP_STATUS
-	  , D.NAME
+	  , D.NAME WRITE_NAME
 	 FROM GROUP_MEM A
 	 JOIN TBL_MEMBER C ON (A.NO = C.NO)
 	 JOIN TBL_MEMBER D ON (A.WRITE_NO = D.NO)
 	 JOIN WORK_GROUP B ON (A.GROUP_NO = B.GROUP_NO)
 	 WHERE A.NO =  #{ no }
+	 AND A.GROUP_STATUS = 'Y'
 	 ORDER BY A.GM_NO   
 	</select>
+	
+	<!-- 사원근무그룹 수정 예전 값 보기 -->
+	<select id="ModifymemberGroup" resultMap="memberGroupResultMap">
+	SELECT
+	   A.GM_DATE
+	  , A.GM_NO
+	  , A.NO
+	  , A.GROUP_NO
+	  , C.NAME
+	  , B.GROUP_NAME
+	  , A.GROUP_STATUS
+	 FROM GROUP_MEM A
+	 JOIN TBL_MEMBER C ON (A.NO = C.NO)
+	 JOIN WORK_GROUP B ON (A.GROUP_NO = B.GROUP_NO)
+	 WHERE A.GM_NO =  #{ gmNo } 
+	</select>
+	
+	
+	<!-- 사원근무그룹 수정 -->
+	<update id="memberGroupModifyGo">
+		UPDATE
+			GROUP_MEM
+		SET	
+		 	 GM_NO = #{ gmNo }
+			, NO = #{ no }
+			, GROUP_NO = #{ groupNo }
+			, WRITE_NO = #{ writeNo }
+			, GM_MODDATE = SYSDATE
+		 WHERE  GM_NO = #{ gmNo }
+	</update>
+	
+	<!-- 사원근무그룹 삭제 -->
+	<update id="memberGroupDelete">
+		UPDATE
+			GROUP_MEM
+		SET	GROUP_STATUS = 'N'
+		 WHERE  GM_NO = #{ gmNo }
+	</update>
 	
 	
 </mapper>

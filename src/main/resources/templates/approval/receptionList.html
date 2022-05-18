@@ -71,7 +71,8 @@
                                     <tbody>
                                         <tr th:each="approval : ${ receptionList }">
                                             <td th:text="${#dates.format(approval.createdDate, 'yyyy-MM-dd')}"></td>
-                                            <td th:text="${ approval.title }"></td>
+                                            <td><a th:href="|@{/approval/receptionDetail?approvalNo={approvalNo}(approvalNo=${approval.no})}|" th:text="${ approval.title }"></a></td>
+                                            <!-- <td th:text="${ approval.title }"></td> -->
                                             <td th:text="${ approval.sender.name }"></td>
                                             <td>
                                                 <!-- <span class="badge bg-light-success" th:text="${ approval.status }"></span> -->
@@ -89,7 +90,7 @@
                 </section>
             </div>
 
-            <footer>
+            
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
                         <p>2022 &copy; WorkHub</p>

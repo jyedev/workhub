@@ -106,6 +106,7 @@
                     top:80px;
                     margin:0; padding:0;
                     width:100%;
+                    overflow:scroll;
                 }
                     tr {
                         text-align:center;

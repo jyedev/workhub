@@ -14,4 +14,9 @@ public interface CarResMapper {
 
 	List<ResCarDTO> selectAllResCarList();
 
+	CarDTO selectedCar(int carIndex);
+
+	int reserveCar(ResCarDTO resCar);
+
+
 }

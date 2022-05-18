@@ -52,11 +52,9 @@
 		WHERE A.ID = #{ username }
 	</select>
 	
-	<!-- 비밀번호 변경 -->
-	<!-- 여기도 해결중...... -->
-<!-- 	<update id="update_pw" parameterType="member">
-		update member set pw = #{pw} where id = #{id}
+	<!-- 회원정보 수정 -->
+<!-- 	<update id="update_mypage" parameterType="member">
+		update member set email = #{email} where id = #{id}
 	</update> -->
-	
 	
 </mapper>
