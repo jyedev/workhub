@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.work.workhub.member.approval.model.dto.AppLineDTO;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
+import com.work.workhub.member.approval.model.dto.ReferenceDTO;
 import com.work.workhub.member.member.dto.DepartmentDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
 
@@ -22,5 +24,9 @@ public interface ApprovalMapper {
 	void insertApproval(ApprovalDTO approval);
 
 	ApprovalDTO findAppByNo(Integer approvalNo);
+
+	List<AppLineDTO> findReceiverByNo(Integer approvalNo);
+
+	List<ReferenceDTO> findRefByNo(Integer approvalNo);
 
 }

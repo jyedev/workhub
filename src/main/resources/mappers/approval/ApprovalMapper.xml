@@ -19,12 +19,16 @@
 		<result property="appNo" column="LINE_APP_NO"/>
 		<result property="memNo" column="LINE_MEM_NO"/>
 		<result property="level" column="LINE_LEVEL"/>
+		
+		<association property="receiver" resultMap="memberResultMap"/>
 	</resultMap>
 	
 	<resultMap id="referenceResultMap" type="com.work.workhub.member.approval.model.dto.ReferenceDTO">
 		<id property="no" column="REF_NO"/>
 		<result property="appNo" column="REF_APP_NO"/>
 		<result property="memNo" column="REF_MEM_NO"/>
+		
+		<association property="ref" resultMap="memberResultMap"/>
 	</resultMap>
 	
 	<resultMap id="memberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
@@ -130,11 +134,28 @@
 	<select id="findAppByNo" resultMap="approvalResultMap">
 		SELECT
 			   A.*
-			 , B.NAME REC_NAME
-			 , C.NAME REF_NAME
+			 , B.NAME
 		  FROM APPROVAL A
 		  JOIN TBL_MEMBER B ON(A.APP_MEM_NO = B.NO)
-		  JOIN TBL_MEMBER C ON(A.APP_MEM_NO = )
+		 WHERE APP_NO = #{ no }
+	</select>
+	
+	<select id="findReceiverByNo" resultMap="receiverResultMap">
+		SELECT
+			   A.*
+			 , B.NAME
+		  FROM APP_LINE A
+		  JOIN TBL_MEMBER B ON(A.LINE_MEM_NO = B.NO)
+		 WHERE A.LINE_APP_NO = #{ no }
+	</select>
+	
+	<select id="findRefByNo" resultMap="referenceResultMap">
+		SELECT
+			   A.*
+			 , B.NAME
+		  FROM TBL_REFERENCE A
+		  JOIN TBL_MEMBER B ON(A.REF_MEM_NO = B.NO)
+		 WHERE A.REF_APP_NO = #{ no }
 	</select>
 	
 </mapper>

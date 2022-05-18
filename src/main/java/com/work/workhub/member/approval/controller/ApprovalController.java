@@ -9,13 +9,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.work.workhub.member.approval.model.dto.AppLineDTO;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
+import com.work.workhub.member.approval.model.dto.ReferenceDTO;
 import com.work.workhub.member.approval.model.service.ApprovalService;
 import com.work.workhub.member.member.dto.DepartmentDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
@@ -84,7 +86,7 @@ public class ApprovalController {
 		
 
 		log.info("수신목록 : {}", receptionList.toString());
-		log.error("수신목록 : {}", receptionList.toString());
+//		log.error("수신목록 : {}", receptionList.toString());
 		
 		return mv;
 	}
@@ -100,17 +102,21 @@ public class ApprovalController {
 		mv.setViewName("approval/sendList");
 		
 		log.info("발신목록 : {}", sendList.toString());
-		log.error("발신목록 : {}", sendList.toString());
+//		log.error("발신목록 : {}", sendList.toString());
 		
 		return mv;
 	}
 	
-	@GetMapping("receptionDetail/no/{approvalNo}")
-	public ModelAndView receptionDetail(ModelAndView mv, @PathVariable("approvalNo") Integer approvalNo) {
+	@GetMapping("receptionDetail")
+	public ModelAndView receptionDetail(ModelAndView mv, @RequestParam("approvalNo") Integer approvalNo) {
 		
 		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
+		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
+		List<ReferenceDTO> ref = approvalService.findRefByNo(approvalNo);
 		
 		mv.addObject("approvalDTO", approval);
+		mv.addObject("receiver", receiver);
+		mv.addObject("ref", ref);
 		
 		mv.setViewName("/approval/receptionDetail");
 		
