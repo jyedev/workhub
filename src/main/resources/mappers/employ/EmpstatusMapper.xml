@@ -30,6 +30,22 @@
 	<result property="writeNo" column="WRITE_NO"/>
 </resultMap>
 
+<!-- 연차유형 -->
+<resultMap type="com.work.workhub.admin.work.model.dto.RestCateDTO" id="restResultMap">
+	<id property="restNo" column="REST_NO"/>
+	<result property="restName" column="REST_NAME"/>
+	<result property="restDed" column="REST_DED"/>
+	<result property="restInclude" column="REST_INCLUDE"/>
+	<result property="restMoney" column="REST_MONEY"/>
+	<result property="restPoss" column="REST_POSS"/>
+	<result property="restDay" column="REST_DAY"/>
+	<result property="restUse" column="REST_USE"/>
+	<result property="restStatus" column="REST_STATUS"/>
+	<result property="restDate" column="REST_DATE"/>
+	<result property="restModdate" column="REST_MODDATE"/>
+	<result property="writeNo" column="WRITE_NO"/>
+</resultMap>
+
 	<!-- 출근하기 버튼 눌렀을 때 -->
 	<insert id="employmentIn">
 		INSERT
@@ -114,5 +130,32 @@
 		WHERE ATT_STATUS = 'Y'
 		ORDER BY ATT_NO
 	</select>
+	
+	
+	<!-- 근무유형 select box -->
+	<!-- 출근, 퇴근 근태 등록은 따로 버튼이 있으므로 출근, 퇴근은
+	조회에서 제외한다. -->
+	<select id="boxsWork" resultMap="workResultMap">
+		SELECT
+			*
+		FROM WORK_CATEGORY
+		WHERE WORK_USE = '사용'
+		AND NOT WORK_NAME = '출근'
+		AND NOT WORK_NAME = '퇴근'
+		ORDER BY WORK_NO
+	</select>
+	
+	
+	<!-- 휴가 신청서의 휴가 유형 selectBox -->
+	<select id="boxRc" resultMap="restResultMap">
+	SELECT
+		*
+		FROM REST_CATEGORY
+	WHERE REST_USE = '사용'
+	AND REST_STATUS = 'Y'
+	ORDER BY REST_NO
+	</select>
+	
+	
 	
 </mapper>
