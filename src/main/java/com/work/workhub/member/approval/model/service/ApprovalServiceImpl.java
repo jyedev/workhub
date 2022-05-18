@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.work.workhub.member.approval.model.dao.ApprovalMapper;
 import com.work.workhub.member.approval.model.dto.AppLineDTO;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
+import com.work.workhub.member.approval.model.dto.ReferenceDTO;
 import com.work.workhub.member.member.dto.DepartmentDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
 
@@ -62,6 +63,18 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public ApprovalDTO findAppByNo(Integer approvalNo) {
 		
 		return approvalMapper.findAppByNo(approvalNo);
+	}
+
+	@Override
+	public List<AppLineDTO> findReceiverByNo(Integer approvalNo) {
+		
+		return approvalMapper.findReceiverByNo(approvalNo);
+	}
+
+	@Override
+	public List<ReferenceDTO> findRefByNo(Integer approvalNo) {
+		
+		return approvalMapper.findRefByNo(approvalNo);
 	}
 
 

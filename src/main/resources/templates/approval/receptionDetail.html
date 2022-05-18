@@ -68,9 +68,9 @@
                                 </div> -->
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">제목</span>
-                                    <input type="text" class="form-control" id="app-title1" value="4월 업무협조전" readonly>
+                                    <input th:value="${ approvalDTO.title }" type="text" class="form-control" id="app-title1" readonly>
                                     <span class="input-group-text" id="basic-addon1">상신자</span>
-                                    <input type="text" class="form-control" id="app-title" value="주땡" readonly>
+                                    <input th:value="${ approvalDTO.sender.name }" type="text" class="form-control" id="app-title" readonly>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">첨부 파일</span>
@@ -78,27 +78,26 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">내용</span>
-                                    <input type="text" class="form-control" id="app-content" value="4월 업무협조전 첨부드립니다."
-                                        readonly>
+                                    <input th:utext="${ approvalDTO.content }" type="text" class="form-control" id="app-content" readonly>
                                 </div>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col">
                                             <div class="card" id="app-date">
                                                 <h6 class="card-subtitle mb-2 text-muted">상신일</h6>
-                                                <p class="card-text">2022-01-01</p>
+                                                <p th:text="${#dates.format(approvalDTO.createdDate, 'yyyy-MM-dd')}" class="card-text"></p>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="card" id="app-date">
                                                 <h6 class="card-subtitle mb-2 text-muted">마감일</h6>
-                                                <p class="card-text">2022-01-07</p>
+                                                <p th:text="${#dates.format(approvalDTO.dueDate, 'yyyy-MM-dd')}" class="card-text"></p>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="card" id="app-date">
                                                 <h6 class="card-subtitle mb-2 text-muted">진행 상태</h6>
-                                                <p class="card-text">진행 중</p>
+                                                <p th:text="${ approvalDTO.status }" class="card-text"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -110,30 +109,21 @@
                                             <h6 class="card-subtitle mb-2 text-muted">결재자</h6>
                                             <div class="card" id="app-date">
                                                 <div class="row">
-                                                    <div class="col">
-                                                        유관순 파트너
-                                                    </div>
+                                                <div th:each="receiver : ${ receiver }">
+                                                	<div th:text="${ receiver.receiver.name }" class="col"></div>
+                                                </div>
                                                     <div class="col">
                                                         <span>승인</span>
                                                         <span>2022-01-02</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        김에르메스 회장
-                                                    </div>
-                                                    <div class="col">
-                                                        <span></span>
-                                                        <span></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <h6 class="card-subtitle mb-2 text-muted">참조자</h6>
-                                            <div class="card" id="app-date">
-                                                홍길동
-                                            </div>
+                                               <div th:each="ref : ${ ref }">
+                                                	<div th:text="${ ref.ref.name }" class="col"></div>
+                                               </div>
                                         </div>
                                     </div>
                                 </div>
