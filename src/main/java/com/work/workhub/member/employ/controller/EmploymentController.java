@@ -44,7 +44,22 @@ public class EmploymentController {
 		this.messageSource = messageSource;
 	}
 	
+	/* 근무유형 select box*/
+	@GetMapping("employmentSelect")
+	public ModelAndView employmentSelect(ModelAndView mv) {
+		
+		//근무 유형 select box
+		List<WorkDTO> attList = employmentService.selectBox();
+		
 
+		mv.addObject("attList",attList);
+		
+		
+		mv.setViewName("employ/employmentSelect");
+		
+		return mv;
+	}
+		
 		
 		//출근하기 버튼 눌렀을 때
 		@GetMapping("in")
@@ -80,19 +95,16 @@ public class EmploymentController {
 			
 		}
 		
-		/* 근무유형 select box*/		
+				
 		//근태 조회
-		@GetMapping("employmentSelect")
-		public ModelAndView employmentSelect(ModelAndView mv) {
+		@GetMapping("employmentSelects")
+		public ModelAndView employmentSelects(ModelAndView mv) {
 			
-			//근무 유형 select box
-			List<WorkDTO> attList = employmentService.selectBox();
 			
 			//근태 조회
 			List<AttDTO> attenList = employmentService.attenSelect();
 			
 
-			mv.addObject("attList",attList);
 			mv.addObject("attenList",attenList);
 			
 			mv.setViewName("employ/employmentSelect");
