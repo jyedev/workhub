@@ -91,7 +91,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.loginPage("/")
 				.loginProcessingUrl("/member/login")
 				//.successForwardUrl("/")
-				.defaultSuccessUrl("/approval/regist", true)
+				.defaultSuccessUrl("/employ/employmentSelect", true)
 				.failureHandler(loginFailHandler())
 			.and()
 				.logout()
