@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -160,7 +161,9 @@
 
         </div>
 
-
+		<script>
+		
+		</script>
         <div class="res-view">
 		<form>
             <table class="res-tbl" id="booking_main_tbl">
@@ -169,6 +172,7 @@
                 </colgroup>
 
                 <tbody>
+                	<!-- time 표시 열 (왼쪽) -->
                     <td style="border-bottom:none;">
                         <table class="table mb-0">
                             <tbody class="tr-height-2x">
@@ -226,33 +230,35 @@
                     
 
 
-	
-
-						<td style="border-bottom:none;" class="col-width-ctrl" th:each="room: ${ roomList }">
+						<td style="border-bottom:none;" class="col-width-ctrl rmClick" th:each="room: ${ roomList }">
                         <div class="table-responsive" th:if="${ room.delYn } == 'N'">
                             <table class="table table-hover mb-0">
                                 <tbody class="tr-height">
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                                            <input type="hidden" id="eight" value="08:00" class="time">
-                                            <input type="button" onclick="timeDispatch(eight.value)" hidden></button>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        	<input class="hiddenRmName" type="hidden" th:value="${ room.roomName }">	
+                                            <input type="hidden" class="time" value="08:00">
                                         </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        	<input type="hidden" class="time" value="08:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        	<input type="hidden" class="time" value="09:00">
                                         </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        	<input type="hidden" class="time" value="09:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal"
-                                            data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        	<input type="hidden" class="time" value="10:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
                                         <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
@@ -362,12 +368,17 @@
             </table>
         </form>
         </div>
-		<script type="text/JavaScript">
-   
-        function timeDispatch($time) {
+		<script>
+		
+		 	$('.time-td').click(function(){
+		 		const timeIndex = $('.time').index($(this).find(".time"));
+		 		console.log(timeIndex);
+		 	})
+		
+/*         function timeDispatch($time) {
             jQuery('#eight').val($time);
             jQuery('#eightthirty').val($time);
-        }
+        } */
 		</script>
 
         <!--회의실 예약 Modal -->
@@ -390,8 +401,7 @@
                                     <label>회의실 이름</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
-                                    <input type="text" class="form-control input-margin" name="room"
-                                        th:value="${ roomList[0].roomName }" readonly>
+                                    <input type="text" class="form-control input-margin" name="roomName" id="rmName" readonly>
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약기간</label>
@@ -408,10 +418,10 @@
                                 <div class="col-md-4 modal-margin">
                                     <label>예약자</label>
                                 </div>
-                                <div class="col-md-8 form-group modal-margin">
-                                	<input type="hidden" name="username">
+                                <div class="col-md-8 form-group modal-margin" sec:authorize="isAuthenticated()">
                                     <input type="text" id="contact-info" class="form-control input-margin" name="name"
-                                        readonly>
+                                        th:value="${#authentication.principal.name}" readonly>
+                                    <input type="hidden" name="memberNo" th:value="${#authentication.principal.no}">
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>목적</label>
@@ -435,6 +445,49 @@
             </div>
         </div>
     </div>
+    
+    <script>
+    	/* tableBody의 input hidden으로 숨겨둔 roomName value 가져와 form roomName 적는 곳에 넣어주기 */
+		$(".rmClick").click(function() {
+			let val = $(this).find('.hiddenRmName').val();
+			console.log(val);
+			
+			let roomNameField = document.getElementById('rmName');
+			console.log(roomNameField);
+			
+			roomNameField.value = val;
+			
+		})
+    
+    
+		/* let dateElement = document.getElementById('period1');
+	    let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -8);
+	    dateElement.value = date;
+	    
+	    dateElement.setAttribute("min", date);
+	    
+	    function setMinValue() {
+	        if(dateElement.value < date) {
+	            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
+	            dateElement.value = date;
+	        }
+	    }
+	    
+		let dateElement2 = document.getElementById('period2');
+	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0, -8);
+	    console.log(date2);
+	    dateElement2.value = date2;
+	    
+	    dateElement2.setAttribute("min", date);
+	
+	    function setMinValue2() {
+	        if(dateElement2.value < date) {
+	            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
+	            dateElement2.value = date;
+	        }
+	    } */
+	</script>
+    </script>
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>

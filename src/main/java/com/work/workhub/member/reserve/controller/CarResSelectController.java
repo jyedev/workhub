@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -42,11 +43,14 @@ public class CarResSelectController {
 
 		List<CarDTO> carList = carResService.selectAllCar();
 		List<ResCarDTO> resCarList = carResService.selectAllResCarList();
+		
+		
 
 		mv.addObject("carList", carList);
 		mv.addObject("resCarList", resCarList);
 
-
+		log.info("admin 등록된 차량 리스트: {}", carList);
+		log.info("예약 차량 리스트: {}", resCarList);
 		 
 		
 		mv.setViewName("reserve/car/list");
@@ -55,7 +59,7 @@ public class CarResSelectController {
 	}
 	
 	@PostMapping("list")
-	public String registCarReserve(@ModelAttribute ResCarDTO resCar, RedirectAttributes rttr, Locale locale) throws Exception {
+	public String registCarReserve(@ModelAttribute ResCarDTO resCar, RedirectAttributes rttr, Locale locale, @RequestParam int memberNo) throws Exception {
 		
 		log.error("등록요청 : {}",resCar);
 		log.warn("등록요청 : {}",resCar);
@@ -66,7 +70,6 @@ public class CarResSelectController {
 		rttr.addFlashAttribute("successMessage", messageSource.getMessage("registCarReservation", null, locale));
 		
 		return "redirect:/reserve/car/list";
-		
 	}
 	
 

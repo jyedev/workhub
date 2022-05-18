@@ -129,12 +129,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             <div class="car-img">
                <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }" sec:authorize="isAuthenticated()">
                     <div class="car-sec" th:if="${ #lists.size(carList) > num }">
+                    		<input type="hidden" th:value="${ carList[num].carNo }" class="carNoInput">
                     		<img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm">
                     </div>
                     <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <th:block th:if="${ !resCarList.isEmpty }">
-                    	<div class="car-sec" th:if="${ resCarList.memberNo == #authentication.principal.no }">
-                    		<a onclick="" th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a>
+                    <th:block th:if="${ #lists.size(resCarList) > num }">
+                    	<div class="car-sec" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
+                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
                     	</div>
                     </th:block>
               </th:block></div>
@@ -143,11 +144,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                </th:block></div>
                
                <div class="car3"><th:block th:each="num : ${ #numbers.sequence(2,4) }">
-                    <div class="car-sec" th:if="${ #lists.size(carList) > num }"><img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm"></div>
+                    <div class="car-sec" th:if="${ #lists.size(carList) > num }">
+                    	<input type="hidden" th:value="${ carList[num].carNo }" class="carNoInput">
+                    	<img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                    </div>
                     <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <th:block th:if="${ !resCarList.isEmpty }">
-                    	<div class="car-sec" th:if="${ resCarList.memberNo == #authentication.principal.no }">
-                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent.png" alt="car"></a>
+                    <th:block th:if="${ #lists.size(resCarList) > num }">
+                    	<div class="car-sec" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
+                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
                     	</div>
                     </th:block>
                </th:block></div>
@@ -174,11 +178,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                         <div class="form-body modal-body" sec:authorize="isAuthenticated()">
                             <div class="row">
                                 <div class="col-md-4 modal-margin">
-                                    <label>차량명</label>
+                                    <label>차종명</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
                                     <input type="text" class="form-control input-margin" id="carIndex" name="carName" readonly>
-                                    <!-- <input type="hidden" name="carNo" th:value="">-->
+                                    <input type="hidden" name="carNo" id="carNo">
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약기간</label>
@@ -204,7 +208,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                     <label>목적</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
-                                    <textarea rows="5" cols="49" name="content" style="resize:none;"
+                                    <textarea rows="5" cols="49" name="carPurpose" style="resize:none;"
                                         required></textarea>
                                 </div>
 
@@ -229,14 +233,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			console.log(carIndex);
 			
 			let modalCarName = document.getElementById('carIndex');
-			//let labelArray = $(".carLabel");
-			//console.log(labelArray);
-			//console.log($(".carLabel")[carIndex]);
-			modalCarName.value = $(".carLabel")[carIndex].innerText;
+			let carAll = $(".carLabel")[carIndex].innerText;
+			let carName = carAll.substring(5, carAll.length);
+			modalCarName.value = carName;
 			let check = modalCarName.value;
 			console.log(check);
-		
+			
+			let carNo  = document.getElementById('carNo');
+			let carNoInput = $(this).find('.carNoInput').val();
+			console.log(carNoInput);
+			carNo.value = carNoInput;
+			
 		})
+		
+		
 	
 		let dateElement = document.getElementById('period1');
 	    let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -8);
@@ -251,13 +261,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	        }
 	    }
 	    
-	    const d = new Date();
 		let dateElement2 = document.getElementById('period2');
-	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -8);
+	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0, -8);
 	    console.log(date2);
-	    let date3 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0, -8);
-	    console.log(date3);
-	    dateElement2.value = date3;
+	    dateElement2.value = date2;
 	    
 	    dateElement2.setAttribute("min", date);
 	
