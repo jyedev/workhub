@@ -61,47 +61,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         <div class="page-heading border-bottom">
            
         </div>
-		<!-- 날짜 설정 script -->
-        <script>
-                // 날짜 이동
-                function moveDate(str) {
-                    var date = $j('#booking_date').val();
-
-                    switch (str) {
-                        case 'previous':
-                            $j('#booking_date').val(bookingCommon.makeDate(date, '00:00:00', '-1 day').format('Y-m-d'));
-                            break;
-                        case 'next':
-                            $j('#booking_date').val(bookingCommon.makeDate(date, '00:00:00', '+1 day').format('Y-m-d'));
-                            break;
-                    }
-
-                    bookingResourceListTime.getResourceList(bookingResourceListTime.PAGE);
-                }
-				
-                function formatDate(date) {
-                    
-                    var d = new Date(date),
-                    
-                    month = '' + (d.getMonth() + 1) , 
-                    day = '' + d.getDate(), 
-                    year = d.getFullYear();
-                    
-                    if (month.length < 2) month = '0' + month; 
-                    if (day.length < 2) day = '0' + day; 
-                    
-                    return [year, month, day].join('-');
-                    
-                    }
-
-                
-                // 오늘 버튼 이벤트
-                function setToday() {
-                    $('input#booking_date').val(formatDate(new Date()));
-
-                }
-        </script>
-        
+		       
         <div>
             <div class="content-ttl">
                 <h5>차량 예약</h5>
@@ -117,13 +77,68 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			</th:block>
 			
             <div class="centered" id="date-area">
-                <!--  -->
+
                 <span><button type="button" class="date-before" onclick="moveDate('previous');">&lt;</button></span>
-                <span><input type="date" class="res-date" id="booking_date" value=""></span>
+                <span><input type="date" class="res-date" id="booking_date"></span>
                 <span><button type="button" class="date-before" onclick="moveDate('next');">&gt;</button></span>
                 <span><button type="button" class="today-btn"
                         onclick="setToday();">오늘</button></span>
             </div>
+            
+            
+            <!-- moveDate script -->
+            <script>
+            /* 기본값 오늘 날짜 지정 */
+            document.getElementById('booking_date').valueAsDate = new Date();
+
+            /* Date Format 지정 */    
+            function formatDate(date) {
+                    
+                    var d = new Date(date),
+                    
+                    month = '' + (d.getMonth() + 1) , 
+                    day = '' + d.getDate(), 
+                    year = d.getFullYear();
+                    
+                    if (month.length < 2) month = '0' + month; 
+                    if (day.length < 2) day = '0' + day; 
+                    
+                    return [year, month, day].join('-');
+                    
+            }
+			          
+            // 오늘 버튼 이벤트
+            function setToday() {
+                $('input#booking_date').val(formatDate(new Date()));
+
+            }
+            
+            /* 이전 날짜, 이후 날짜 이동 +1Day */
+            function moveDate(str) {
+               var yesterday = new Date($('#booking_date').val());
+               var tomorrow = new Date($('#booking_date').val());
+               
+               console.log(yesterday);
+               console.log(tomorrow);
+               
+               switch (str) {
+               case 'previous':
+            	   	yesterday.setDate(yesterday.getDate() - 1);
+            	   	console.log(yesterday);
+	            	$('#booking_date').val(formatDate(yesterday));
+                break;
+               case 'next':
+            	   tomorrow.setDate(tomorrow.getDate() + 1);
+            	   console.log(tomorrow);
+            	   $('#booking_date').val(formatDate(tomorrow));
+               break;
+            	}
+             }
+            
+            
+            </script>
+            
+            
             <!--  index 값으로 각각 가져오기 -->
             
             <div class="car-img">

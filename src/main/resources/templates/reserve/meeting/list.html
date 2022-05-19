@@ -52,7 +52,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                 </li>
             </ul>
         </div>
-
+		
+		<!-- 회의실 위치 보여주는 Tab -->
         <div class="page-heading border-bottom">
             <ul class="nav nav-tabs" id="myTab" >
 				<li class="nav-item font-clr" th:each="location : ${ locationList }">
@@ -62,8 +63,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         </div>
 
         <div class="res-head">
-            <div id="date-area">
-                <!--  -->
+            <div id="date-area" class="mt-date-area">
+
                 <span><button type="button" class="date-before" onclick="moveDate('previous');">&lt;</button></span>
                 
                 <span><input type="date" class="res-date" id="booking_date"></span>
@@ -74,23 +75,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
             <!-- moveDate script -->
             <script>
-                // 날짜 이동
-                function moveDate(str) {
-                    var date = $j('#booking_date').val();
+            /* 기본값 오늘 날짜 지정 */
+            document.getElementById('booking_date').valueAsDate = new Date();
 
-                    switch (str) {
-                        case 'previous':
-                            $j('#booking_date').val(bookingCommon.makeDate(date, '00:00:00', '-1 day').format('Y-m-d'));
-                            break;
-                        case 'next':
-                            $j('#booking_date').val(bookingCommon.makeDate(date, '00:00:00', '+1 day').format('Y-m-d'));
-                            break;
-                    }
-
-                    bookingResourceListTime.getResourceList(bookingResourceListTime.PAGE);
-                }
-				
-                function formatDate(date) {
+            /* Date Format 지정 */    
+            function formatDate(date) {
                     
                     var d = new Date(date),
                     
@@ -103,14 +92,37 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     
                     return [year, month, day].join('-');
                     
-                    }
+            }
+			          
+            // 오늘 버튼 이벤트
+            function setToday() {
+                $('input#booking_date').val(formatDate(new Date()));
 
-                
-                // 오늘 버튼 이벤트
-                function setToday() {
-                    $('input#booking_date').val(formatDate(new Date()));
-
-                }
+            }
+            
+            /* 이전 날짜, 이후 날짜 이동 +1Day */
+            function moveDate(str) {
+               var yesterday = new Date($('#booking_date').val());
+               var tomorrow = new Date($('#booking_date').val());
+               
+               console.log(yesterday);
+               console.log(tomorrow);
+               
+               switch (str) {
+               case 'previous':
+            	   	yesterday.setDate(yesterday.getDate() - 1);
+            	   	console.log(yesterday);
+	            	$('#booking_date').val(formatDate(yesterday));
+                break;
+               case 'next':
+            	   tomorrow.setDate(tomorrow.getDate() + 1);
+            	   console.log(tomorrow);
+            	   $('#booking_date').val(formatDate(tomorrow));
+               break;
+            	}
+             }
+            
+            
             </script>
 
             <div id="cal_head_fixed_div_area">
@@ -138,7 +150,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <table class="mt-room-info">
                                     <thead>
                                         <tr>
-                                            <th th:text="${ room.roomName }"></th>
+                                            <th th:text="${ room.roomName }">
+                                            	
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -168,7 +182,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<form>
             <table class="res-tbl" id="booking_main_tbl">
                 <colgroup id="resource_list_colgroup">
-                    <col width="100">
+                    <col width="100px">
                 </colgroup>
 
                 <tbody>
@@ -229,14 +243,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     </td>
                     
 
-
+						<!-- 시간 선택 table : hover시 변함 -->
 						<td style="border-bottom:none;" class="col-width-ctrl rmClick" th:each="room: ${ roomList }">
                         <div class="table-responsive" th:if="${ room.delYn } == 'N'">
-                            <table class="table table-hover mb-0">
+                            <table class="table table-hover mb-0"  th:each="num : ${ #numbers }">
                                 <tbody class="tr-height">
                                     <tr>
                                         <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                                        	<input class="hiddenRmName" type="hidden" th:value="${ room.roomName }">	
+                                        	<!-- roomName을 모달에 넣기 위해 넣어놓은 input 장치 -->
+                                        	<input class="hiddenRmName" type="hidden" th:value="${ room.roomName }">
+                                        	<input type="hidden" th:value="${ room.roomNo }" class="roomNoInput">
                                             <input type="hidden" class="time" value="08:00">
                                         </td>
                                     </tr>
@@ -261,103 +277,138 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                         </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        	<input type="hidden" class="time" value="10:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="11:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="11:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="12:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="12:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal"
-                                            data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="13:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="13:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="14:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="14:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="15:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="15:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="16:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="16:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="17:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="17:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="18:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="18:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal" data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="19:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="19:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal"
-                                            data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="20:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="20:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal"
-                                            data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="21:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="21:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal"
-                                            data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="22:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="22:30">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="before" data-bs-toggle="modal"
-                                            data-bs-target="#inlineForm"></td>
+                                        <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="23:00">
+                                        </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
-                                        <td class="after" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                                        <input type="hidden" class="time" value="23:30">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -368,18 +419,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             </table>
         </form>
         </div>
-		<script>
-		
-		 	$('.time-td').click(function(){
-		 		const timeIndex = $('.time').index($(this).find(".time"));
-		 		console.log(timeIndex);
-		 	})
-		
-/*         function timeDispatch($time) {
-            jQuery('#eight').val($time);
-            jQuery('#eightthirty').val($time);
-        } */
-		</script>
 
         <!--회의실 예약 Modal -->
         <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
@@ -395,13 +434,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     </div>
                    	
                     <form class="form form-horizontal" method="post" th:action="@{/reserve/meeting/list}">
-                        <div class="form-body modal-body">
+                        <div class="form-body modal-body" sec:authorize="isAuthenticated()">
                            <div class="row">
                                 <div class="col-md-4 modal-margin">
                                     <label>회의실 이름</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
                                     <input type="text" class="form-control input-margin" name="roomName" id="rmName" readonly>
+                                    <input type="hidden" name="roomNo" id="roomNo">
                                 </div>
                                 <div class="col-md-4 modal-margin">
                                     <label>예약기간</label>
@@ -427,8 +467,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                     <label>목적</label>
                                 </div>
                                 <div class="col-md-8 form-group modal-margin">
-                                    <textarea rows="5" cols="49" name="content" style="resize:none;"
-                                        required></textarea>
+                                    <textarea rows="5" cols="49" style="resize:none;" name="meetPurpose" required></textarea>
                                 </div>
 
 
@@ -447,47 +486,70 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     </div>
     
     <script>
+    	
+    	
     	/* tableBody의 input hidden으로 숨겨둔 roomName value 가져와 form roomName 적는 곳에 넣어주기 */
 		$(".rmClick").click(function() {
 			let val = $(this).find('.hiddenRmName').val();
 			console.log(val);
 			
 			let roomNameField = document.getElementById('rmName');
-			console.log(roomNameField);
 			
 			roomNameField.value = val;
 			
+			/* roomNo를 가져오기 위한 script*/
+			let roomNo  = document.getElementById('roomNo');
+			let roomNoInput = $(this).find('.roomNoInput').val();
+			console.log(roomNoInput);
+			roomNo.value = roomNoInput;
+			
 		})
-    
-    
-		/* let dateElement = document.getElementById('period1');
-	    let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -8);
-	    dateElement.value = date;
+    	
+		/* table에서 받아둔 시간 value를 이용해 form period1 에 넣어주기 */
+		$('.time-td').click(function(){
+			const time = $(this).find('.time').val();
+			console.log(time);
+			
+			let dateElement = document.getElementById('period1');
+			let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -13);
+			let timeDate = date + time;
+			console.log(timeDate);
+			/* 가져온 값을 input Element에 넣어준다. */
+			dateElement.value=timeDate;
+			
+			/* 현재보다 이전 날짜 선택 못하게 하는 function */
+			dateElement.setAttribute("min", date);
 	    
-	    dateElement.setAttribute("min", date);
-	    
-	    function setMinValue() {
-	        if(dateElement.value < date) {
-	            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
-	            dateElement.value = date;
-	        }
-	    }
-	    
-		let dateElement2 = document.getElementById('period2');
-	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0, -8);
-	    console.log(date2);
-	    dateElement2.value = date2;
-	    
-	    dateElement2.setAttribute("min", date);
+		    function setMinValue() {
+		        if(dateElement.value < date) {
+		            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
+		            dateElement.value = date;
+		        }
+		    }
+			
+			
+			let dateElement2 = document.getElementById('period2');
+			/* new Date 안에 format을 맞춘 문자열을 넣어주면 Date값으로 반환해준다.*/
+			let temp = new Date(timeDate);
+			console.log(temp);
+		    let date2 = new Date(new Date(timeDate).getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0,-8);
+		    console.log(date2);
+		    
+		    dateElement2.value = date2;
+		    
+		    /* 현재보다 이전 날짜 선택 못하게 하는 function */
+			dateElement2.setAttribute("min", date);
+		    
+		    function setMinValue2() {
+		        if(dateElement2.value < date) {
+		            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
+		            dateElement2.value = date;
+		        }
+		    }
+		})
 	
-	    function setMinValue2() {
-	        if(dateElement2.value < date) {
-	            alert('현재 시간보다 이전의 날짜는 설정할 수 없습니다.');
-	            dateElement2.value = date;
-	        }
-	    } */
+		
 	</script>
-    </script>
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>

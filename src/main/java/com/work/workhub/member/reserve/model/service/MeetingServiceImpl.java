@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.admin.reserve.model.dto.MeetingRoomDTO;
-import com.work.workhub.member.member.dto.MemberDTO;
 import com.work.workhub.member.reserve.model.dao.MeetingMapper;
+import com.work.workhub.member.reserve.model.dto.ResMeetingDTO;
 
 @Service("meetingService")
 @Transactional
@@ -26,6 +26,19 @@ public class MeetingServiceImpl implements MeetingService {
 	@Override
 	public List<MeetingRoomDTO> selectRoomList() {
 		return meetingMapper.selectRoomList();
+	}
+
+	@Override
+	public boolean reserveRoom(ResMeetingDTO resRoom) throws Exception {
+		
+		int result = meetingMapper.reserveRoom(resRoom);
+		
+		if(result <= 0) {
+			throw new Exception("회의실 예약 실패");
+		}
+		
+		
+		return result > 0 ? true : false;
 	}
 
 }
