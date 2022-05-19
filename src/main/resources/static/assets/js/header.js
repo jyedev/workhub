@@ -1,37 +1,36 @@
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-
 var socket = null;
+
 $(document).ready(function(){
 	
-	sock = new SockJS('/alert');
+	socket = new SockJS('/alert');
 	
-	sock.onopen = function() {
+	socket.onopen = function() {
 		console.log('open');
 	};
 	
-	sock.onmessage = onMessage;
+	socket.onmessage = function(evt) {
+		var data = evt.data;
+		
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-middle',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer);
+				toast.addEventListener('mouseleave', Swal.resumeTimer);
+			}
+		})
+		
+		Toast.fire({
+			icon: 'warning',
+			html: data,
+		})
+	};
+	
+	socket.onclose = function() {
+		console.log('close');
+	}
 	
 });
-
-function onMessage(evt) {
-	var data = evt.data;
-	
-	const Toast = Sql.mixin({
-		toast: true,
-		position: 'top-middle',
-		showConfirmButton: false,
-		timer: 3000,
-		timerProgressBar: true,
-		didOpen: (toast) => {
-			toast.addEventListener('mouseenter', Swal.stopTimer);
-			toast.addEventListener('mouseleave', Swal.resumeTimer);
-		}
-	})
-	
-	Toast.fire({
-		icon: 'warning',
-		html: 'data',
-	})
-	
-		
-}

@@ -64,7 +64,9 @@ public class MessageController {
 	@GetMapping("sentList")
 	public ModelAndView findMessageSentList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
-		List<MessageDTO> messageSentList = messageService.findMessageSent();
+		int no = user.getNo();
+		
+		List<MessageDTO> messageSentList = messageService.findMessageSent(no);
 		
 		
 		mv.addObject("messageSentList", messageSentList);
@@ -144,24 +146,6 @@ public class MessageController {
 		return msgCode;
 		
 	}
-	
-	/* 웹 소켓 */
-	@MessageMapping("/chat.sendMessage")
-	@SendTo("/topic/public")
-	public MessageDTO sendMessage(@Payload MessageDTO messageDTO) {
-		return messageDTO;
-	}
-	
-	@MessageMapping("/chat.addUser")
-	@SendTo("/topic/public")
-	public MessageDTO addUser(@Payload MessageDTO messageDTO, SimpMessageHeaderAccessor headerAccessor) {
-		headerAccessor.getSessionAttributes().put("username", messageDTO.getSenderNo());
-		return messageDTO;
-	}
-	
-	
-	
-	
 	
 	
 }

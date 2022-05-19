@@ -8,6 +8,8 @@
 
     <!-- fonts -->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
     <!-- bootstrap -->
@@ -498,13 +500,55 @@
     		
     	}
     </script>
+    
+    <script>
+	    var socket = null;
+	
+	    $(document).ready(function(){
+	    	
+	    	socket = new SockJS('/alert');
+	    	
+	    	socket.onopen = function() {
+	    		console.log('open');
+	    	};
+	    	
+	    	socket.onmessage = function(evt) {
+	    		var data = evt.data;
+	    		
+	    		const Toast = Swal.mixin({
+	    			toast: true,
+	    			position: 'top-middle',
+	    			showConfirmButton: false,
+	    			timer: 3000,
+	    			timerProgressBar: true,
+	    			didOpen: (toast) => {
+	    				toast.addEventListener('mouseenter', Swal.stopTimer);
+	    				toast.addEventListener('mouseleave', Swal.resumeTimer);
+	    			}
+	    		})
+	    		
+	    		Toast.fire({
+	    			icon: 'warning',
+	    			html: data,
+	    		})
+	    	};
+	    	
+	    	socket.onclose = function() {
+	    		console.log('close');
+	    	}
+	    	
+	    });
+    </script>
+    
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
     <script src="/assets/js/pages/dashboard.js"></script>
 
     <script src="/assets/js/main.js"></script>
-    <script src="/asserts/js/header.js"></script>
+    
+    
+    
 </body>
 
 </html>

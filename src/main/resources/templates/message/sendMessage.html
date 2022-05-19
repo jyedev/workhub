@@ -9,6 +9,8 @@
 
     <!-- fonts -->
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
     <!-- bootstrap -->
@@ -298,8 +300,8 @@
                                                 <div class="card-content">
                                                     <div class="card-body pt-0">
                                                         <div class="form-group pb-50">
-                                                            <label for="emailfrom">보내는 사람</label>
-                                                            <div id="emailfrom" class="form-control bg-light secondary" sec:authentication="principal.name" disabled></div>
+                                                            <label>보내는 사람</label>
+                                                            <div id="emailfrom" class="form-control bg-light secondary" sec:authentication="principal.email" disabled></div>
                                                         </div>
                                                         <div class="form-label-group">
                                                             <label for="emailTo">받는 사람 </label>
@@ -389,7 +391,7 @@
                                                         <div class="snow-container border rounded p-50">
                                                             <div class="compose-editor mx-75 ql-container ql-snow">
                                                                 <div class="ql-editor ql-blank" data-gramm="false" data-placeholder="Type something....." contenteditable="true">
-                                                                    <input class="contextInput" name="msgContent" id="contextInput"><br>
+                                                                    <textarea class="contextInput" name="msgContent" id="contextInput"></textarea><br>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -438,9 +440,12 @@
         	/* 웹소켓 메시지 전송 영역 */
         	$('#sendMessageBtn').click(function(e){
         		let sender = $('#emailfrom').val();
+        		let receiver = $('#memberNos').val();
         		let url = '/message/inboxList';
         		
-        		socket.send(url + "," + sender);
+        		console.log(sender);
+        		console.log(receiver);
+        		socket.send(url + "," + sender + "," + receiver);
         	
 	        	$('#contextInput').val(''); //초기화  
         	});
@@ -464,6 +469,46 @@
     		
     	}
     </script>
+    
+    <script>
+	    var socket = null;
+	
+	    $(document).ready(function(){
+	    	
+	    	socket = new SockJS('/alert');
+	    	
+	    	socket.onopen = function() {
+	    		console.log('open');
+	    	};
+	    	
+	    	socket.onmessage = function(evt) {
+	    		var data = evt.data;
+	    		
+	    		const Toast = Swal.mixin({
+	    			toast: true,
+	    			position: 'top-middle',
+	    			showConfirmButton: false,
+	    			timer: 3000,
+	    			timerProgressBar: true,
+	    			didOpen: (toast) => {
+	    				toast.addEventListener('mouseenter', Swal.stopTimer);
+	    				toast.addEventListener('mouseleave', Swal.resumeTimer);
+	    			}
+	    		})
+	    		
+	    		Toast.fire({
+	    			icon: 'warning',
+	    			html: data,
+	    		})
+	    	};
+	    	
+	    	socket.onclose = function() {
+	    		console.log('close');
+	    	}
+	    	
+	    });
+    </script>
+    
     <script src="/assets/js/message.js"></script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>

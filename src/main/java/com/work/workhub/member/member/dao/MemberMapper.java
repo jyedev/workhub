@@ -9,6 +9,9 @@ import com.work.workhub.member.member.dto.MemberDTO;
 public interface MemberMapper {
 
 	MemberDTO findMemberById(String username);
+	
+	/* 웹소켓 쪽지 Id 찾기 */
+	String findIdByNo(String receiver);
 
 	// 마이페이지
 //	@Transactional
