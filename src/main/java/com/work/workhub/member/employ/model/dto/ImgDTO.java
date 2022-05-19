@@ -1,6 +1,7 @@
 package com.work.workhub.member.employ.model.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,6 @@ import lombok.ToString;
 public class ImgDTO {
    
 	   private int imageId;
-	   private int overNo;
 	   private int porestNo;
 	   private String imagePath;
 	   private String imageName;
@@ -27,6 +27,6 @@ public class ImgDTO {
 	   private String thumbnailPath;
 	   private String imageStatus;
 	 
-   
+	   private List<RestDTO> porestList;
   
 }

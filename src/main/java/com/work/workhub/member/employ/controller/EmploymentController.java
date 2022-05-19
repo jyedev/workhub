@@ -51,8 +51,11 @@ public class EmploymentController {
 		//근무 유형 select box
 		List<WorkDTO> attList = employmentService.selectBox();
 		
+		//내 근태 조회
+		List<AttDTO> myList = employmentService.selectMy();
 
 		mv.addObject("attList",attList);
+		mv.addObject("myList",myList);
 		
 		
 		mv.setViewName("employ/employmentSelect");

@@ -74,6 +74,13 @@ public class EmploymentServiceImpl implements EmploymentService{
 		return empstatusMapper.attenSelect();
 	}
 	
+	//내 근태 조회
+	@Override
+	public List<AttDTO> selectMy() {
+		
+		return empstatusMapper.mySelect();
+	}
+	
 	
 	
 

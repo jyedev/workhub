@@ -7,6 +7,7 @@
 	<id property="attNo" column="ATT_NO"/>
 	<result property="no" column="NO"/>
 	<result property="workNo" column="WORK_NO"/>
+	<result property="workName" column="WORK_NAME"/>
 	<result property="attGo" column="ATT_GO"/>
 	<result property="attOff" column="ATT_OFF"/>
 	<result property="attAdd" column="ATT_ADD"/>
@@ -45,6 +46,42 @@
 	<result property="restModdate" column="REST_MODDATE"/>
 	<result property="writeNo" column="WRITE_NO"/>
 </resultMap>
+
+<!-- 연차 신청 -->
+<resultMap type="com.work.workhub.member.employ.model.dto.RestDTO" id="restReportResultMap">
+	<id property="porestNo" column="POREST_NO"/>
+	<result property="no" column="NO"/>
+	<result property="restNo" column="REST_NO"/>
+	<result property="repNo" column="REP_NO"/>
+	<result property="porestDate" column="POREST_DATE"/>
+	<result property="porestModdate" column="POREST_MODDATE"/>
+	<result property="porestFir" column="POREST_FIR"/>
+	<result property="porestEnd" column="POREST_END"/>
+	<result property="porestReason" column="POREST_REASON"/>
+	<result property="porestStatus" column="POREST_STATUS"/>
+	<result property="porestDay" column="POREST_DAY"/>
+	<result property="porestYn" column="POREST_YN"/>
+	<result property="porestOk" column="POREST_OK"/>
+	<result property="porestPoss" column="POREST_POSS"/>
+	<result property="name" column="NAME"/>
+	<result property="depName" column="DEP_NAME"/>
+	<result property="restName" column="REST_NAME"/>
+</resultMap>
+
+<!-- 이미지 -->
+<resultMap type="com.work.workhub.member.employ.model.dto.ImgDTO" id="imgResultMap">
+	<id property="imageId" column="IMAGE_ID"/>
+	<result property="porestNo" column="POREST_NO"/>
+	<result property="imagePath" column="IMAGE_PATH"/>
+	<result property="imageName" column="IMAGE_NAME"/>
+	<result property="imageRename" column="IMAGE_RENAME"/>
+	<result property="fileType" column="FILE_TYPE"/>
+	<result property="thumbnailPath" column="THUMBNAIL_PATH"/>
+	<result property="imageStatus" column="IMAGE_STATUS"/>
+	
+	<collection property="porestList" resultMap="restReportResultMap"/>
+</resultMap>
+
 
 	<!-- 출근하기 버튼 눌렀을 때 -->
 	<insert id="employmentIn">
@@ -154,6 +191,145 @@
 	WHERE REST_USE = '사용'
 	AND REST_STATUS = 'Y'
 	ORDER BY REST_NO
+	</select>
+	
+	<!-- 연차 신청서 값 등록 -->
+	<insert id="insertPara">
+	        INSERT 
+	        	INTO POREST
+	    (
+	       POREST_NO
+	     , NO
+	     , REST_NO
+	     , POREST_FIR
+	     , POREST_END
+	     , POREST_DAY
+	     , POREST_REASON
+	     , POREST_STATUS
+	     )
+        VALUES
+        (
+            SEQ_POREST_NO.NEXTVAL
+          , #{ no }   
+          , #{ restNo }  
+          , #{ porestFir }
+          , #{ porestEnd }
+          , #{ porestDay }
+          , #{ porestReason }
+          , DEFAULT
+        )
+        <!-- 게시물 번호 얻어오는거 porestNo -->
+     <!--    <selectKey keyProperty="porestNo" resultType="Int" order="AFTER">
+        	SELECT
+        	       SEQ_POREST_NO.CURRVAL
+        	  FROM DUAL
+        </selectKey>--> 
+	</insert>
+	
+
+
+	<!-- 연차 신청서 사진 등록 -->
+	<insert id="insertRest">
+	        INSERT 
+	        	INTO ATT_IMAGE
+	    (
+	       IMAGE_ID
+	     , POREST_NO
+	     , IMAGE_NAME
+	     , IMAGE_RENAME
+	     , IMAGE_PATH
+	     , IMAGE_STATUS
+	     )
+        VALUES
+        (
+            SEQ_IMAGE_ID.NEXTVAL
+          , SEQ_POREST_NO.CURRVAL
+          , #{ imageName }
+          , #{ imageRename }
+          , #{ imagePath }
+          , DEFAULT
+        )
+	</insert>
+	
+	
+	<!-- 내 근태 조회 -->
+	<select id="mySelect" resultMap="AttResultMap">
+	SELECT
+		  A.ATT_NO
+		, A.NO
+		, A.WORK_NO
+		, A.ATT_GO
+		, A.ATT_OFF
+		, A.ATT_ADD
+		, A.ATT_OVER
+		, A.ATT_NIGHT
+		, A.ATT_REASON
+		, A.ATT_DATE
+		, A.ATT_STATUS
+		, A.ATT_MODDATE
+		, B.WORK_NAME
+		FROM ATT A
+		JOIN WORK_CATEGORY B ON (A.WORK_NO = B.WORK_NO)
+		WHERE A.ATT_STATUS = 'Y'
+		ORDER BY A.ATT_DATE
+	</select>
+	
+	
+	<!-- 연차 유형 사용한 것 -->
+	<!-- 연산자 구문 오류 나므로 <![CDATA[ > ]]> 이렇게 표현한다. 사용한 연차 조회하는 것이므로
+		지금 날짜보다 작은 날을 조회한다.-->
+	<select id="restselect" resultMap="restReportResultMap">
+	SELECT
+		  A.POREST_NO
+		, A.NO
+		, A.REST_NO
+		, A.REP_NO
+		, A.POREST_DATE
+		, A.POREST_MODDATE
+		, A.POREST_FIR
+		, A.POREST_END
+		, A.POREST_REASON
+		, A.POREST_STATUS
+		, A.POREST_DAY
+		, A.POREST_YN
+		, A.POREST_OK
+		, A.POREST_POSS
+		, B.NAME
+		, C.DEP_NAME
+		, D.REST_NAME
+		FROM POREST A
+		JOIN TBL_MEMBER B ON (A.NO = B.NO)
+		JOIN DEPARTMENT C ON (B.DEP_NO = C.DEP_NO)
+		JOIN REST_CATEGORY D ON (A.REST_NO = D.REST_NO)
+		WHERE TO_CHAR(SYSDATE, 'YY/MM/DD') <![CDATA[ > ]]> TO_CHAR(A.POREST_END, 'YY/MM/DD')
+	</select>
+	
+	
+	<!-- 연차 유형 사용하지 않은 것 -->
+		<select id="restsselect" resultMap="restReportResultMap">
+	SELECT
+		  A.POREST_NO
+		, A.NO
+		, A.REST_NO
+		, A.REP_NO
+		, A.POREST_DATE
+		, A.POREST_MODDATE
+		, A.POREST_FIR
+		, A.POREST_END
+		, A.POREST_REASON
+		, A.POREST_STATUS
+		, A.POREST_DAY
+		, A.POREST_YN
+		, A.POREST_OK
+		, A.POREST_POSS
+		, B.NAME
+		, C.DEP_NAME
+		, D.REST_NAME
+		FROM POREST A
+		JOIN TBL_MEMBER B ON (A.NO = B.NO)
+		JOIN DEPARTMENT C ON (B.DEP_NO = C.DEP_NO)
+		JOIN REST_CATEGORY D ON (A.REST_NO = D.REST_NO)
+		WHERE TO_CHAR(SYSDATE, 'YY/MM/DD') <![CDATA[ < ]]> TO_CHAR(A.POREST_FIR, 'YY/MM/DD')
 	</select>
 	
 	

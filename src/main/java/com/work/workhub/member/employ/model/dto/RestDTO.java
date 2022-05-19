@@ -16,7 +16,8 @@ import lombok.ToString;
 @ToString
 @Data
 public class RestDTO {
-   
+		
+	//연차 신청
 	   private int porestNo;
 	   private int no;
 	   private int restNo;
@@ -32,6 +33,7 @@ public class RestDTO {
 	   private String porestOk;
 	   private Date porestPoss;
 	   
-   
-  
+	   private String name;
+	   private String depName;
+	   private String restName;
 }
