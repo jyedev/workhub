@@ -50,7 +50,7 @@ public class MemberController {
 	// myPage 수정
 	@RequestMapping(value = "/edit_info.do", method = RequestMethod.POST)
 	public String edit_info(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
-		session.setAttribute("member", memberService.edit_info(member));
+		session.setAttribute("member", memberService.editInfo(member));
 		rttr.addFlashAttribute("msg", "회원정보 수정 완료");
 		return "redirect:/member/myPage.do";
 	}
@@ -58,7 +58,7 @@ public class MemberController {
 	// 비밀번호 변경
 	@RequestMapping(value = "/update_pw.do", method = RequestMethod.POST)
 	public String update_pw(@ModelAttribute MemberDTO member, @RequestParam("old_pw") String old_pw, HttpSession session, HttpServletResponse response, RedirectAttributes rttr) throws Exception{
-		session.setAttribute("member", memberService.update_pw(member, old_pw, response));
+		session.setAttribute("member", memberService.updatePw(member, old_pw, response));
 		rttr.addFlashAttribute("msg", "비밀번호 수정 완료");
 		return "redirect:/member/mypage.do";
 	}

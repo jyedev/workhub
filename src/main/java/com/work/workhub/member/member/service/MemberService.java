@@ -14,9 +14,9 @@ public interface MemberService extends UserDetailsService {
 	
 	public int findPwCheck(MemberDTO memberDTO) throws Exception;
 
-	public MemberDTO edit_info(MemberDTO member)throws Exception;
+	public MemberDTO editInfo(MemberDTO member)throws Exception;
 	
-	public MemberDTO update_pw(MemberDTO member, String old_pw, HttpServletResponse response) throws Exception;
+	public MemberDTO updatePw(MemberDTO member, String old_pw, HttpServletResponse response) throws Exception;
 }
 
 
