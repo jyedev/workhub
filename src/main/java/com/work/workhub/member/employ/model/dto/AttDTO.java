@@ -17,10 +17,13 @@ import lombok.ToString;
 @Data
 public class AttDTO {
    
+	//근태관리
+	
    private int attNo;
    private int no;
    private int workNo;
-   private Date attGo;
+   private String workName;
+   private String attGo;
    private Date attOff;
    private Date attAdd;
    private Date attOver;

@@ -115,61 +115,21 @@
                                                     <th class="qqq">이름</th>
                                                     <th class="qqq">부서명</th>
                                                     <th class="qqq">휴가 종류</th>
-                                                    <th class="qqqs">연차 사용기간</th>
-                                                    <th class="qqqss">사용 연차</th>
+                                                    <th class="qqqs">연차 시작</th>
+                                                    <th class="qqqs">연차 끝</th>
+                                                    <th class="qqqs">연차일</th>
                                                     <th>내용</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="text-bold-500">김땡땡</td>
-                                                    <td>워크허브</td>
-                                                    <td class="text-bold-500">연차</td>
-                                                    <td>2022-04-02 ~ 2022-05-01</td>
-                                                    <td>4</td>
-                                                    <td><a href="#"><i
-                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                data-feather="mail"></i></a>너무너무 피곤해서</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Morgan Vanblum</td>
-                                                    <td>$13/hr</td>
-                                                    <td class="text-bold-500">Graphic concepts</td>
-                                                    <td>Remote</td>
-                                                    <td>Shangai,China</td>
-                                                    <td><a href="#"><i
-                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                data-feather="mail"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Tiffani Blogz</td>
-                                                    <td>$15/hr</td>
-                                                    <td class="text-bold-500">Animation</td>
-                                                    <td>Remote</td>
-                                                    <td>Austin,Texas</td>
-                                                    <td><a href="#"><i
-                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                data-feather="mail"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Ashley Boul</td>
-                                                    <td>$15/hr</td>
-                                                    <td class="text-bold-500">Animation</td>
-                                                    <td>Remote</td>
-                                                    <td>Austin,Texas</td>
-                                                    <td><a href="#"><i
-                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                data-feather="mail"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Mikkey Mice</td>
-                                                    <td>$15/hr</td>
-                                                    <td class="text-bold-500">Animation</td>
-                                                    <td>Remote</td>
-                                                    <td>Austin,Texas</td>
-                                                    <td><a href="#"><i
-                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                data-feather="mail"></i></a></td>
+                                                <tr th:each="ho : ${ resList }">
+                                                    <td th:text="${ ho.name }">김땡땡</td>
+                                                    <td th:text="${ ho.depName }">워크허브</td>
+                                                    <td th:text="${ ho.restName }">연차</td>
+                                                    <td th:text="${ ho.porestFir }">2022-04-02</td>
+                                                    <td th:text="${ ho.porestEnd }">2022-05-01</td>
+                                                    <td th:text="${ ho.porestDay }">4</td>
+                                                    <td th:text="${ ho.porestReason }">너무너무 피곤해서</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -196,66 +156,26 @@
                                                     <div class="table-responsive">
                                                         <table class="table table-hover mb-0">
                                                             <thead>
-                                                                <tr>
-                                                                    <th class="qqq">이름</th>
-                                                                    <th class="qqq">부서명</th>
-                                                                    <th class="qqq">휴가 종류</th>
-                                                                    <th class="qqqs">연차 사용기간</th>
-                                                                    <th class="qqqss">사용 연차</th>
-                                                                    <th>내용</th>
-                                                                </tr>
+                                                <tr>
+                                                    <th class="qqq">이름</th>
+                                                    <th class="qqq">부서명</th>
+                                                    <th class="qqq">휴가 종류</th>
+                                                    <th class="qqqs">연차 시작</th>
+                                                    <th class="qqqs">연차 끝</th>
+                                                    <th class="qqqs">연차일</th>
+                                                    <th>내용</th>
+                                                </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td class="text-bold-500">김땡땡</td>
-                                                                    <td>워크허브</td>
-                                                                    <td class="text-bold-500">연차</td>
-                                                                    <td>2022-04-02 ~ 2022-05-01</td>
-                                                                    <td>4</td>
-                                                                    <td><a href="#"><i
-                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                                data-feather="mail"></i></a>너무너무 피곤해서</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-bold-500">Morgan Vanblum</td>
-                                                                    <td>$13/hr</td>
-                                                                    <td class="text-bold-500">Graphic concepts</td>
-                                                                    <td>Remote</td>
-                                                                    <td>Shangai,China</td>
-                                                                    <td><a href="#"><i
-                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                                data-feather="mail"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-bold-500">Tiffani Blogz</td>
-                                                                    <td>$15/hr</td>
-                                                                    <td class="text-bold-500">Animation</td>
-                                                                    <td>Remote</td>
-                                                                    <td>Austin,Texas</td>
-                                                                    <td><a href="#"><i
-                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                                data-feather="mail"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-bold-500">Ashley Boul</td>
-                                                                    <td>$15/hr</td>
-                                                                    <td class="text-bold-500">Animation</td>
-                                                                    <td>Remote</td>
-                                                                    <td>Austin,Texas</td>
-                                                                    <td><a href="#"><i
-                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                                data-feather="mail"></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-bold-500">Mikkey Mice</td>
-                                                                    <td>$15/hr</td>
-                                                                    <td class="text-bold-500">Animation</td>
-                                                                    <td>Remote</td>
-                                                                    <td>Austin,Texas</td>
-                                                                    <td><a href="#"><i
-                                                                                class="badge-circle badge-circle-light-secondary font-medium-1"
-                                                                                data-feather="mail"></i></a></td>
-                                                                </tr>
+                                                			<tr th:each="hos : ${ ressList }">
+                                                   				<td th:text="${ hos.name }"></td>
+                                                   			    <td th:text="${ hos.depName }"></td>
+                                                  		 	    <td th:text="${ hos.restName }"></td>
+                                                    			<td th:text="${ hos.porestFir }"></td>
+                                                    			<td th:text="${ hos.porestEnd }"></td>
+                                                    			<td th:text="${ hos.porestDay }"></td>
+                                                    			<td th:text="${ hos.porestReason }"></td>
+                                                			</tr>                                                                
                                                             </tbody>
                                                         </table>
                                                     </div>

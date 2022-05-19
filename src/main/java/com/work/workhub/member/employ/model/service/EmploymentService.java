@@ -23,6 +23,9 @@ public interface EmploymentService {
 	//근태 조회
 	List<AttDTO> attenSelect();
 	
+	//근태 조회
+	List<AttDTO> selectMy();
+	
 
 	
 	

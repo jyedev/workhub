@@ -28,7 +28,7 @@
 		<div th:include="sidebar/sidebar" th:remove="tag"/></div>
         
         <!-- th:action="@{//}" 나중에 작성-->
-     <form method="post" enctype="multipart/form-data" class="dsad">
+     <form method="post" action="/rest/write" enctype="multipart/form-data" class="dsad">
     <div class="col-md-6 col-12 dfdda">
         <div class="card">
             <div class="card-header">
@@ -44,28 +44,28 @@
                                 </div>
                                 <div class="col-md-8 form-group">
                                     <input type="text" id="first-name" class="form-control rtyh"
-                                        name="no" placeholder="기안자">
+                                         placeholder="기안자">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="fgd">기안부서</label>
                                 </div>
                                 <div class="col-md-8 form-group">
                                     <input type="text" id="email-id" class="form-control rtyh"
-                                        name="depName" placeholder="기안부서">
+                                         placeholder="기안부서">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="jhgfg">기안일</label>
                                 </div>
                                 <div class="col-md-8 form-group">
                                     <input type="text" id="contact-info" class="form-control rtyh"
-                                        name="porestDate" placeholder="기안일">
+                                         placeholder="기안일">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="jhgfg">문서번호</label>
                                 </div>
                                 <div class="col-md-8 form-group">
                                     <input type="text" id="password" class="form-control rtyh"
-                                        name="porestNo" placeholder="문서번호">
+                                         placeholder="문서번호">
                                 </div>
                                 
                                 <br><br><br><br>
