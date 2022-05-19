@@ -53,8 +53,8 @@
 	</select>
 	
 	<!-- 회원정보 수정 -->
-<!-- 	<update id="update_mypage" parameterType="member">
+ 	<update id="edit_info" parameterType="member">
 		update member set email = #{email} where id = #{id}
-	</update> -->
+	</update>
 	
 </mapper>

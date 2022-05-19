@@ -10,10 +10,4 @@ public interface MemberMapper {
 
 	MemberDTO findMemberById(String username);
 
-	// 마이페이지
-//	@Transactional
-//	public int update_myPage(MemberDTO member) throws Exception{
-//		return sqlsession.update("member.update_mypage", member);
-//	}
-
 }

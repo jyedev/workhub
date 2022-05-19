@@ -33,45 +33,63 @@
             <div class="page-heading">
                 <h3>내 정보</h3>
                 <div class="container">
-                	<div class="info-wrap">
-                		<table>
-                			<tr>
-                				<td>프로필 사진</td>
-                				<td>
-                					<img src="" />
-                						<div class="up-file">
-                							<p>사진 올리기</p>
-                						</div> <!-- 사진올리기hover-wrap -->
-                					<button>삭제</button>
-                				</td>
-                			</tr> <!-- /프로필 사진 -->
-                			<tr>
-                				<td>이름</td>
-                				<td></td>
-                			</tr> <!-- /이름 -->
-                			<tr>
-                				<td>부서</td>
-                				<td></td>
-                			</tr> <!-- /부서 -->
-                			<tr>
-                				<td>직책</td>
-                				<td></td>
-                			</tr> <!-- /직책 -->
-                			<tr>
-                				<td>이메일</td>
-                				<td></td>
-                			</tr> <!-- /이메일 -->
-                			<tr>
-                				<td>연락처</td>
-                				<td></td>
-                			</tr> <!-- /연락처 -->
-                		</table>
+	                <form th:action="@{/myPage/edit-info}" method="post">
+	                	<div class="info-wrap">
+	                		<table>
+	                			<tr>
+	                				<td>프로필 사진</td>
+	                				<td>
+	                					<img src="" />
+	                						<div class="up-file">
+	                							<p>사진 올리기</p>
+	                						</div> <!-- 사진올리기hover-wrap -->
+	                					<button>삭제</button>
+	                				</td>
+	                			</tr> <!-- /프로필 사진 -->
+	                			<tr>
+	                				<td>이름</td>
+	                				<td></td>
+	                			</tr> <!-- /이름 -->
+	                			<tr>
+	                				<td>비밀번호</td>
+	                				<td>
+	                					<input class="w3-input" id="pw" name="pw" type="password" required>
+	                				</td>
+	                			</tr>
+	                			<tr>
+	                				<td>부서</td>
+	                				<td></td>
+	                			</tr> <!-- /부서 -->
+	                			<tr>
+	                				<td>직책</td>
+	                				<td></td>
+	                			</tr> <!-- /직책 -->
+	                			<tr>
+	                				<td>이메일</td>
+	                				<td>
+	                					<input type="text" id="email" class="email" value="${ member.email }" required>
+	                				</td>
+	                			</tr> <!-- /이메일 -->
+	                			<tr>
+	                				<td>연락처</td>
+	                				<td>
+	                					<input type="text" id="tel" class="tel" value="${ member.tel }" required>
+	                				</td>
+	                			</tr> <!-- /연락처 -->
+	                		</table>
                 	</div> <!-- /info-wrap -->
                 	<hr>
                 	<button>저장</button> <!-- 저장 -->
                 	<button>취소</button> <!-- 취소 -->
+	                </form>
                 </div> <!-- /container -->
             </div>
+            
+            <script>
+	        	
+            </script>
+            
+            
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
