@@ -70,7 +70,21 @@
 		 ORDER BY ROOM_NO
 	</select>
     
-    
+    <insert id="reserveRoom">
+    	INSERT INTO RES_MT
+    	VALUES
+    	(
+    		SEQ_MEETING_RES_NO.NEXTVAL,
+    		#{ memberNo },
+    		#{ roomNo },
+    		#{ startTime },
+    		#{ endTime },
+    		#{ meetPurpose },
+    		DEFAULT
+    	)
+    	
+    	
+    </insert>
     
 
 </mapper>
