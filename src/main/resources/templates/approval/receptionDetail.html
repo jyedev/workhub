@@ -78,7 +78,11 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">내용</span>
-                                    <input th:utext="${ approvalDTO.content }" type="text" class="form-control" id="app-content" readonly>
+                                    <!-- <input th:utext="${ approvalDTO.content }" type="text" class="form-control" id="app-content" readonly> -->
+                                    <div th:utext="${ approvalDTO.content }" class="com-detail-content">
+                                    내용
+                                	</div>
+                                    <!-- <input th:value="${#strings.unescapeJava(approvalDTO.content)}" type="text" class="form-control" id="app-content"/> -->
                                 </div>
                                 <div class="container">
                                     <div class="row">

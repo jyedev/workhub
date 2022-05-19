@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -108,7 +109,7 @@ public class ApprovalController {
 	}
 	
 	@GetMapping("receptionDetail")
-	public ModelAndView receptionDetail(ModelAndView mv, @RequestParam("approvalNo") Integer approvalNo) {
+	public ModelAndView receptionDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user, @RequestParam("approvalNo") Integer approvalNo) {
 		
 		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
 		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
@@ -122,7 +123,34 @@ public class ApprovalController {
 		
 		return mv;
 		
-		
 	}
+	
+	@GetMapping("sendDetail")
+	public ModelAndView sendDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user, @RequestParam("approvalNo") Integer approvalNo) {
+		
+		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
+		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
+		List<ReferenceDTO> ref = approvalService.findRefByNo(approvalNo);
+		
+		mv.addObject("approvalDTO", approval);
+		mv.addObject("receiver", receiver);
+		mv.addObject("ref", ref);
+		
+		mv.setViewName("/approval/sendDetail");
+		
+		return mv;
+	}
+	
+	//회수 버튼 눌렀을 때 상태 회수로 바꾸기
+	/*
+	 * @RequestMapping("/approval/retrieve")
+	 * 
+	 * @ResponseBody public String modifyRet(@ModelAttribute ApprovalDTO approval,
+	 * RedirectAttributes rttr, Locale locale) {
+	 * 
+	 * 
+	 * }
+	 */
+	
 
 }

@@ -11,7 +11,7 @@ public interface MessageService {
 	
 	List<MessageDTO> findMessageInbox(int no);
 
-	List<MessageDTO> findMessageSent();
+	List<MessageDTO> findMessageSent(int no);
 
 	List<MessageDTO> findMessageRecyclebinList();
 
@@ -26,5 +26,5 @@ public interface MessageService {
 	Map<Integer, List<MemberDTO>> selectMemberListMap(List<DepartmentDTO> departmentList, List<MemberDTO> memberList);
 
 	void updateMessageForView(int msgCode);
-
+	
 }

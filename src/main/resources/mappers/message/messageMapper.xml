@@ -60,7 +60,7 @@
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
           WHERE MSG_RECYCLE_BIN_STATUS='N' 
-            AND MSG_SENDER_NO = #{ no }
+            AND A.MSG_REICIPIENT_NO = #{ no }
 	</select>
 	
 	<select id="findMessageSent" resultMap="messageResultMap">
@@ -78,7 +78,8 @@
 			  , B.NAME
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
-          WHERE A.MSG_REICIPIENT_NO = #{ no }
+          WHERE A.MSG_SENDER_NO = #{ no }
+          
     </select>
     
     <select id="findMessageRecyclebinList" resultMap="messageResultMap">
@@ -117,7 +118,7 @@
         )
        VALUES
        (
-         SEQ_MESSAGE_NO.NEXTVAL
+         SEQ_MSG_CODE.NEXTVAL
        , #{ senderNo }
        , #{ reicipientNo }
        , #{ msgContent }

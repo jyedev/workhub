@@ -10,4 +10,7 @@ public interface ReplyService {
 
 	List<ReplyDTO> findReplyListByPostNo(Integer postNo);
 
+	int deleteReply(int replyNo);
+
+
 }

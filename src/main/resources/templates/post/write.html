@@ -55,7 +55,7 @@
                                 <label>제목</label>
                             </div>
                             <div class="col-md-10 form-group">
-                                <input type="text" name="postTitle" class="form-control btn-sm">
+                                <input type="text" name="postTitle" class="form-control btn-sm" maxlength="50" required>
                             </div>
                             <div class="col-md-2">
                                 <label>파일 첨부</label>
@@ -96,7 +96,7 @@
                             </div>                            
                         </div>
                         <div class="write-textarea">
-                            <textarea id="summernote" name="postContent"></textarea>
+                            <textarea id="summernote" name="postContent" required></textarea>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-center write-submit-btn">
                             <input type="submit" value="등록" class="btn btn-primary me-1 mb-1">

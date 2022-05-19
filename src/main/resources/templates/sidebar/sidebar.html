@@ -131,13 +131,13 @@
                                     <a th:href="@{/survey/home}">설문 홈</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a th:href="@{/survey/ongoing}">진행 중인 설문</a>
+                                    <a th:href="@{/survey/list_ing}">진행 중인 설문</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a th:href="@{/survey/end}">마감된 설문</a>
+                                    <a th:href="@{/survey/list_end}">마감된 설문</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a th:href="@{/survey/mySurvey}">내가 만든 설문</a>
+                                    <a th:href="@{/survey/list_my}">내가 만든 설문</a>
                                 </li>
                             </ul>
                         </li>
@@ -164,10 +164,12 @@
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+                
             </div>
         </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
 

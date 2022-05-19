@@ -1639,6 +1639,8 @@ a {
     margin-bottom: 40px;
     height: 40vh;
     overflow-y: auto;
+    
+    margin-left : 20px;
 }
 
 .tr-height-2x tr {
@@ -1941,4 +1943,9 @@ a {
 
 .col-width-ctrl {
 	width : 400px;
+}
+
+.mt-date-area {
+	padding-left : 150px;
+	padding-bottom : 20px;
 }

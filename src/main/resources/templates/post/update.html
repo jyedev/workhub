@@ -40,13 +40,13 @@
             </div>
             <section class="section">
                 <div class="card">
-                <form action="@{'/post/update/no/' + ${ postDTO.postNo }}" method="post">
+                <form action="@{'/post/update/no/' + ${ post.postNo }}" method="post">
                     <div class="card-header">
                         <fieldset class="post-write-select">
                             <select class="form-select btn-sm">
                                 <option>게시판</option>
                             </select>
-                            <select class="form-select btn-sm" name="categoryNo" id="categoryNo"></select>
+                            <select class="form-select btn-sm" name="categoryNo" id="categoryNo" th:value="${ post.categoryNo}"></select>
                         </fieldset>
                     </div><hr>
                     <div class="card-body">
@@ -55,7 +55,7 @@
                                 <label>제목</label>
                             </div>
                             <div class="col-md-10 form-group">
-                                <input type="text" name="postTitle" class="form-control btn-sm" th:value="${ postDTO.postTitle }">
+                                <input type="text" name="postTitle" class="form-control btn-sm" th:value="${ post.postTitle }">
                             </div>
                             <div class="col-md-2">
                                 <label>파일 첨부</label>
@@ -97,14 +97,15 @@
                             </div>                            
                         </div>
                         <div class="write-textarea">
-                            <textarea id="summernote" name="postContent" th:value="${ postDTO.postContent }"></textarea>
+                            <textarea id="summernote" name="postContent"></textarea>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-center write-submit-btn">
-                            <input type="submit" value="등록" class="btn btn-primary me-1 mb-1">
+                            <input type="submit" value="글 수정" class="btn btn-primary me-1 mb-1">
                             <input type="button" value="임시저장" class="btn btn-light-secondary me-1 mb-1">
                         </div>
                     </form>
                     </div>
+                    <!-- category -->
                     <script>
 						$(function(){
 							$.ajax({
@@ -140,9 +141,10 @@
             tabsize: 2,
             height: 120,
         });
-        
+	</script>
+	<script>        
         $(document).ready(function(){
-        	$('#summernote').summernote();
+        	$("#summernote").summernote('code', "${ post.postContent }");
         });
     </script>
 

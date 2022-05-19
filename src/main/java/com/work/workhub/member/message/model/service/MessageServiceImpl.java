@@ -33,8 +33,8 @@ public class MessageServiceImpl implements MessageService {
 
 	/* 쪽지 - 보낸 쪽지함 조회 */
 	@Override
-	public List<MessageDTO> findMessageSent() {
-		return messageMapper.findMessageSent();
+	public List<MessageDTO> findMessageSent(int no) {
+		return messageMapper.findMessageSent(no);
 	}
 
 	/* 쪽지 - 휴지통 조회 */

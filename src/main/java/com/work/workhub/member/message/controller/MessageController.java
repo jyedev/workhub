@@ -6,6 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,7 +64,9 @@ public class MessageController {
 	@GetMapping("sentList")
 	public ModelAndView findMessageSentList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
-		List<MessageDTO> messageSentList = messageService.findMessageSent();
+		int no = user.getNo();
+		
+		List<MessageDTO> messageSentList = messageService.findMessageSent(no);
 		
 		
 		mv.addObject("messageSentList", messageSentList);
@@ -140,12 +146,6 @@ public class MessageController {
 		return msgCode;
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }
