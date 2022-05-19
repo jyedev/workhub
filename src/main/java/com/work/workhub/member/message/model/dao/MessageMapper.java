@@ -13,7 +13,7 @@ public interface MessageMapper {
 	
 	List<MessageDTO> findMessageInbox(int no);
 
-	List<MessageDTO> findMessageSent();
+	List<MessageDTO> findMessageSent(int no);
 
 	List<MessageDTO> findMessageRecyclebinList();
 

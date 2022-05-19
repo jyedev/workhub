@@ -57,4 +57,12 @@
 		update member set email = #{email} where id = #{id}
 	</update>
 	
+	<!-- 웹소켓 쪽지 전용  -->
+	<select id="findIdByNo" resultType="java.lang.String">
+		SELECT
+		       A.ID
+		  FROM TBL_MEMBER A
+		 WHERE A.NO = #{ receiver }
+	</select>
+	
 </mapper>
