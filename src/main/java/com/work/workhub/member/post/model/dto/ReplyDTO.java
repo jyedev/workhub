@@ -4,8 +4,18 @@ import java.sql.Date;
 
 import com.work.workhub.member.member.dto.MemberDTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Data
 public class ReplyDTO {
 
