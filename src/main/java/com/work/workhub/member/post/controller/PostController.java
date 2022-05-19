@@ -55,14 +55,18 @@ public class PostController {
 		return mv;
 	}
 	
+	//공지사항 조회
+	@GetMapping("notice")
+	public void findNoticeList() {}
+	
 	
 	//게시글 상세페이지
 	@GetMapping("detail/no/{postNo}")
 	public ModelAndView selectPostDetail(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
 
-		PostDTO postDTO = postService.findPostByNo(postNo);
+		PostDTO post = postService.findPostByNo(postNo);
 		
-		mv.addObject("postDTO", postDTO);
+		mv.addObject("post", post);
 		
 		mv.setViewName("/post/detail");
 		
@@ -107,9 +111,9 @@ public class PostController {
 	@GetMapping("update/no/{postNo}")
 	public ModelAndView updatePost(ModelAndView mv, @PathVariable("postNo") Integer postNo) {
 
-		PostDTO postDTO = postService.findPostByNo(postNo);
+		PostDTO post = postService.findPostByNo(postNo);
 		
-		mv.addObject("postDTO", postDTO);
+		mv.addObject("post", post);
 		mv.setViewName("/post/update");
 		
 		return mv;
@@ -125,9 +129,9 @@ public class PostController {
 		
 		postService.writePost(post);
 		
-		rttr.addFlashAttribute("successMessage", messageSource.getMessage("writePost", null, locale));
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("updatePost", null, locale));
 		
-		return "redirect:/post/list";
+		return "redirect:/post/detail/no/" + post.getPostNo();
 	}
 	
 	

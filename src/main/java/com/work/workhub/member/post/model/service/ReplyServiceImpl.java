@@ -43,4 +43,11 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyMapper.findReplyListByPostNo(postNo);
 	}
 
+	@Override
+	public int deleteReply(int replyNo) {
+		return replyMapper.deleteReply(replyNo);
+	}
+
+
+
 }
