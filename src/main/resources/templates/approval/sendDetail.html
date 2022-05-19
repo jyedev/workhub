@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,9 +47,9 @@
                                     <div class="sidebar-menu-list ps">
                                         <!-- sidebar menu  -->
                                         <div class="list-group list-group-messages">
-                                            <a onclick="location.href='/approval/receptionList'" class="list-group-item active" style="cursor:pointer;">수신
+                                            <a onclick="location.href='/approval/receptionList'" class="list-group-item" style="cursor:pointer;">수신
                                                 결재함</a>
-                                            <a onclick="location.href='/approval/sendList'" class="list-group-item" style="cursor:pointer;">발송 결재함</a>
+                                            <a onclick="location.href='/approval/sendList'" class="list-group-item active" style="cursor:pointer;">발송 결재함</a>
                                             <a href="#" class="list-group-item">임시 저장함</a>
                                         </div>
                                         <!-- sidebar menu  end-->
@@ -135,14 +135,14 @@
 
                             <div class="row">
 
-                                <div class="d-grid col-1 mx-auto">
+                                 <div class="d-grid col-1 mx-auto">
                                 </div>
+                                <span th:if="${ approvalDTO.status.equals('대기') }">
                                 <div class="d-grid col-1 mx-auto">
-                                    <button type="submit" class="btn btn-primary">승인</button>
+                                    <button type="submit" class="btn btn-primary" th:onclick="|javascript:ret('${approvalNo}')|">회수</button>
                                 </div>
-                                <div class="d-grid col-1 mx-auto">
-                                    <button type="submit" class="btn btn-primary">반려</button>
-                                </div>
+                                </span>
+
                                 <div class="d-grid col-1 mx-auto">
                             </div>
 
@@ -162,16 +162,31 @@
             </footer>
         </div>
     </div>
+    
+    <script th:inline="javascript">
+    	function ret(approvalNo) {
+   
+    		
+    		$.ajax({
+    			url: "/approval/retrieve",
+    			type: "post",
+    			dataType: "json",
+    			data: {approvalNo},
+    			success: function(data) {
+    				alert("성공");
+    			}
+    			
+    		});
+    	}
+    </script>
+    
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
-    <script src="/assets/vendors/apexcharts/apexcharts.js"></script>
-    <script src="/assets/js/pages/dashboard.js"></script>
 
     <script src="/assets/js/main.js"></script>
 </body>

@@ -84,7 +84,7 @@
 			 , B.NAME
 	      FROM APPROVAL A
 		  JOIN TBL_MEMBER B ON(A.APP_MEM_NO = B.NO)
-<!-- 		 WHERE A.APP_MEM_NO = #{ no } -->
+ 		 WHERE A.APP_MEM_NO = #{ no }
 	</select>
 	
 	<select id="selectDepartmentList" resultMap="departmentResultMap">
