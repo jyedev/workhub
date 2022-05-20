@@ -115,6 +115,11 @@
     margin: 35px 1%;
 }
 
+.com-update-reply{
+	display: flex;
+	margin-bottom: 20px;
+}
+
 .text-reply{
     width: 85%;
     opacity: 80%;

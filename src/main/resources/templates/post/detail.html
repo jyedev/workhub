@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app2.css">
     <link rel="stylesheet" href="/assets/css/com-surv.css">
-    <link rel="shortcut icon" href="/src/images/favicon-workHub.ico" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
 
 </head>
 
@@ -101,16 +101,28 @@
                                     </td>
                                     <td class="reply-btn-ud">
                                     	<a th:href="@{'/reply/update'  + ${ reply.replyNo }}">수정</a>
-                                    	<a th:href="@{'/reply/delete/' + ${ reply.replyNo }}" onclick="removeCheck2()">삭제</a>
+                                    	<a th:href="@{'/reply/delete/' + ${ reply.replyNo }}" onclick="removeCheck2();">삭제</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td th:text="${ reply.replyContent }" colspan="4" class="reply-content">댓글 내용</td>
                                 </tr>
+                                <!-- 댓글 수정박스 -->
+<!--                                 <tr> -->
+<!--                                     <td colspan="5">  -->
+<!--                                     <div id="updateBox" class="box"> -->
+<!-- 	                                	<form action="/reply/update" method="post" class="com-update-reply"> -->
+<!--                                 			<input type="text" class="text-reply" name="update" th:value="${ reply.replyContent }"> -->
+<!--                                		 		<input type="hidden" name="replyNo" th:value="${ reply.replyNo }">    -->
+<!--                                		 		<input type="submit" class="btn btn-secondary me-1 mb-1 btn-sm" value="수정">                             			 -->
+<!-- 	                                	</form> -->
+<!--                                 	</div> -->
+<!--                                 	</td> -->
+<!--                                 </tr> -->
                             </table>
                             <form action="/reply/write" method="post" class="com-insert-reply">
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
-                                <input type="text" class="text-reply" name="replyContent">
+                                <input type="text" class="text-reply" name="replyContent" required>
                                 <!-- hidden 타입으로 postNo 전달 -->
                                 <input type="hidden" name="postNo" th:value="${ post.postNo }">
                                 <!-- 시간 남으면 이미지 댓글로 수정 -->
@@ -118,6 +130,9 @@
                                 <input type="submit" class="btn btn-secondary me-1 mb-1 btn-sm" value="등록">
                             </form>
                             <hr>
+                            
+                            <script>
+                            </script>
 
                             <div class="post-detail-list">
                                 <table class="table table-borderless" id="table1">         
