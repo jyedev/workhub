@@ -16,5 +16,8 @@ public interface MeetingMapper {
 
 	int reserveRoom(ResMeetingDTO resRoom);
 
+	List<ResMeetingDTO> selectAllResMeeting();
+
+
 
 }

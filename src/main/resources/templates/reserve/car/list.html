@@ -79,10 +79,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             <div class="centered" id="date-area">
 
                 <span><button type="button" class="date-before" onclick="moveDate('previous');">&lt;</button></span>
-                <span><input type="date" class="res-date" id="booking_date"></span>
+                <span><input type="date" class="res-date" id="booking_date" name="res-date"></span>
                 <span><button type="button" class="date-before" onclick="moveDate('next');">&gt;</button></span>
-                <span><button type="button" class="today-btn"
-                        onclick="setToday();">오늘</button></span>
+                <span><button type="button" class="today-btn" onclick="setToday();">오늘</button></span>
+                
             </div>
             
             
@@ -139,34 +139,57 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             </script>
             
             
-            <!--  index 값으로 각각 가져오기 -->
             
+            <!--  index 값으로 각각 가져오기 -->
             <div class="car-img">
                <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }" sec:authorize="isAuthenticated()">
-                    <div class="car-sec" th:if="${ #lists.size(carList) > num }">
+                    <!-- 미등록 차량 -->
+                    <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
+                    
+                    <!-- 예약 가능 차량 -->
+                    <th:block th:unless="${ #lists.size(resCarList) > num }">
+                    	<div class="car-sec" id="reservableCar" th:if="${ #lists.size(carList) > num }">
                     		<input type="hidden" th:value="${ carList[num].carNo }" class="carNoInput">
                     		<img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                    </div>
-                    <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
-                    <th:block th:if="${ #lists.size(resCarList) > num }">
-                    	<div class="car-sec" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
-                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
                     	</div>
                     </th:block>
+                    
+                    <th:block th:if="${ #lists.size(resCarList) > num }">
+                    	<!-- 본인 예약 차량 -->
+                    	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
+                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
+                    	</div>
+                    	<!-- 타인 예약 차량 -->
+                    	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo != #authentication.principal.no }">
+                    		<img src="/assets/images/images/car-rent.png" alt="car">
+                    	</div>
+                    </th:block>
+                    
               </th:block></div>
                <div class="car2"><th:block th:each="num : ${ #numbers.sequence(0,1) }">
                <div><label class="carLabel" th:if="${ #lists.size(carList) > num }" th:text="|${carList[num]?.carNumber} ${carList[num]?.carName}|"></label></div>
                </th:block></div>
                
                <div class="car3"><th:block th:each="num : ${ #numbers.sequence(2,4) }">
-                    <div class="car-sec" th:if="${ #lists.size(carList) > num }">
-                    	<input type="hidden" th:value="${ carList[num].carNo }" class="carNoInput">
-                    	<img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                    </div>
+                    <!-- 미등록 차량 -->
                     <div th:unless="${ #lists.size(carList) > num }"><img src="/assets/images/images/car-unregister-resize.png" alt="car"></div>
+                    
+                    <!-- 예약 가능 차량 -->
+                    <th:block th:unless="${ #lists.size(resCarList) > num }">
+                    	<div class="car-sec" id="reservableCar" th:if="${ #lists.size(carList) > num }">
+                    		<input type="hidden" th:value="${ carList[num].carNo }" class="carNoInput">
+                    		<img src="/assets/images/images/car.png" alt="car" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                    	</div>
+                    </th:block>
+                    
                     <th:block th:if="${ #lists.size(resCarList) > num }">
-                    	<div class="car-sec" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
+                    	<!-- 본인 예약 차량 -->
+                    	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
                     		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
+                    	</div>
+                    	<!-- 타인 예약 차량 -->
+                    	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo != #authentication.principal.no }">
+                    		<img src="/assets/images/images/car-rent.png" alt="car">
                     	</div>
                     </th:block>
                </th:block></div>
@@ -175,6 +198,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                </th:block></div>
             </div>
         </div>
+        
+        <script>
+				if($('.reserved') != null) {
+					document.getElementById('reservableCar').disabled
+					
+				}
+					
+		</script>     
 		
         <!--차량 예약 Modal -->
         <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
@@ -277,7 +308,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	    }
 	    
 		let dateElement2 = document.getElementById('period2');
-	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60).toISOString().slice(0, -8);
+	    let date2 = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000 + 1000*60*60*4).toISOString().slice(0, -8);
 	    console.log(date2);
 	    dateElement2.value = date2;
 	    
