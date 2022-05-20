@@ -87,7 +87,7 @@
 	</select>
 	
 	<!-- 공지사항 목록 조회 -->
-	<select id="findAllNoticePost" resultMap="postResultMap">
+	<select id="findAllNotice" resultMap="postResultMap">
 		SELECT
 			  A.POST_NO
 			, A.POST_TITLE
