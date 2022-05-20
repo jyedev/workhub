@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset='utf-8' />
+	<!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<!-- jquery CDN -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- fullcalendar CDN -->
+	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+	<!-- fullcalendar 언어 CDN -->
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+	
+    <!-- fonts -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/vendors/fullcalendar/fullcalendar.css">
+    <link rel="stylesheet" href="/assets/css/pages/calendar.css">
+    <link rel="stylesheet" href="/assets/css/app1.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body style="padding:30px;">
+	    <div th:include="sidebar/sidebar-calendar" th:remove="tag"></div>
+	    <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading calendar-application">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3 class="ps-3">캘린더</h3>
+                            <p class="text-subtitle text-muted ps-3">일정 목록</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">일정 목록</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">캘린더 </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section class="section content-area-wrapper">
+                    <div class="sidebar-left">
+                        <div class="sidebar">
+                            <div class="sidebar-content calendar-app-sidebar d-flex">
+                                <!-- sidebar close icon -->
+                                <span class="sidebar-close-icon">
+                                    <i class="bx bx-x"></i>
+                                </span>
+                                <!-- sidebar close icon -->
+                                <div class="calendar-app-menu">
+                                    <div class="form-group form-group-compose">
+                                        <!-- compose button  -->
+                                        <a href="application-send-message.html" type="button" class="btn btn-primary btn-block my-4 compose-btn active">
+                                            <i class="bi bi-plus"></i>
+                                            일정 등록
+                                        </a>
+                                    </div>
+                                    <div class="sidebar-menu-list ps">
+                                        <!-- sidebar menu  -->
+                                        <div class="list-group list-group-messages">
+                                            <ul style="list-style:none; float:left;">
+                                                <li>
+                                                    <a href="application-inbox.html" class="list-group-item pt-0 ps-0" id="inbox-menu">
+                                                        <i class="bi bi-calendar"></i>
+                                                    내 캘린더
+                                                    </a>
+                                                    <ul>
+                                                        <li style="list-style:none; ">
+                                                            <div class="checkbox-con" style="float:left;">
+                                                                <div class="checkbox checkbox-shadow checkbox-sm">
+                                                                <input type="checkbox" id="checkboxsmall1"
+                                                                    class='form-check-input'>
+                                                                <label for="checkboxsmall1"></label>
+                                                                </div>
+                                                            </div>
+                                                            <span>내 일정</span>
+                                                        </li>
+                                                        <li style="list-style:none;">
+                                                            <div class="checkbox-con" style="float:left;">
+                                                                <div class="checkbox checkbox-shadow checkbox-sm">
+                                                                <input type="checkbox" id="checkboxsmall1"
+                                                                    class='form-check-input'>
+                                                                <label for="checkboxsmall1"></label>
+                                                                </div>
+                                                            </div>
+                                                            <span>연차</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul style="list-style:none;">
+                                                <li>
+                                                    <a href="application-inbox.html" class="list-group-item pt-0" id="inbox-menu">
+                                                        <i class="bi bi-calendar"></i>
+                                                    전체 캘린더
+                                                    </a>
+                                                    <ul>
+                                                        <li style="list-style:none;">
+                                                            <div class="checkbox-con" style="float:left;">
+                                                                <div class="checkbox checkbox-shadow checkbox-sm">
+                                                                <input type="checkbox" id="checkboxsmall1"
+                                                                    class='form-check-input'>
+                                                                <label for="checkboxsmall1"></label>
+                                                                </div>
+                                                            </div>
+                                                            <span>전체</span>
+                                                        </li>
+                                                        <li style="list-style:none;">
+                                                            <div class="checkbox-con" style="float:left;">
+                                                                <div class="checkbox checkbox-shadow checkbox-sm">
+                                                                <input type="checkbox" id="checkboxsmall1"
+                                                                    class='form-check-input'>
+                                                                <label for="checkboxsmall1"></label>
+                                                                </div>
+                                                            </div>
+                                                            <span>전사 일정</span>
+                                                        </li>
+                                                        <li style="list-style:none;">
+                                                            <div class="checkbox-con" style="float:left;">
+                                                                <div class="checkbox checkbox-shadow checkbox-sm">
+                                                                <input type="checkbox" id="checkboxsmall1"
+                                                                    class='form-check-input'>
+                                                                <label for="checkboxsmall1"></label>
+                                                                </div>
+                                                            </div>
+                                                            <span>부서 일정</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- sidebar menu  end-->
+            
+                                        
+                                        <!-- sidebar label end -->
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- User new mail right area -->
+                            
+                            <!--/ User Chat profile right area -->
+                        </div>
+                    </div>
+                    
+                    <div class="content-right">
+                        <div class="content-overlay"></div>
+                        <div class="content-wrapper">
+                            <div class="content-header row">
+                            </div>
+                            <div class="content-body">
+                                <!-- calendar app overlay -->
+                                <div class="app-content-overlay"></div>
+                                <div class="calendar-app-area">
+                                    <!-- calendar list Area -->
+                                    <div class="pd-20 card-box mb-30">
+										<!-- calendar 태그 -->
+										<div id='calendar-container' style="margin-top:30px;">
+											<div id='calendar'></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+					
+<script>
+(function(){
+	$(function(){
+		// calendar element 취득
+		var calendarEl = $('#calendar')[0];
+		// full-calendar 생성하기
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			height: '650px', // calendar 높이 설정
+			expandRows: true, // 화면에 맞게 높이 재설정
+			slotMinTime: '08:00', // Day 캘린더에서 시작 시간
+			slotMaxTime: '20:00', // Day 캘린더에서 종료 시간
+			// 해더에 표시할 툴바
+			headerToolbar: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+			},
+			initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+			initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+			navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+			editable: true, // 수정 가능?
+			selectable: true, // 달력 일자 드래그 설정가능
+			nowIndicator: true, // 현재 시간 마크
+			dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+			locale: 'ko', // 한국어 설정
+			eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
+			console.log(obj);
+			},
+			eventChange: function(obj) { // 이벤트가 수정되면 발생하는 이벤트
+			console.log(obj);
+			},
+			eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
+			console.log(obj);
+			},
+			select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+			var title = prompt('Event Title:');
+			if (title) {
+			calendar.addEvent({
+			title: title,
+			start: arg.start,
+			end: arg.end,
+			allDay: arg.allDay
+			})
+			}
+			calendar.unselect()
+			}
+			});
+			// 캘린더 랜더링
+			calendar.render();
+		});
+	})();
+</script>
+</body>
+
+</html>

@@ -25,7 +25,7 @@ public class MessageDTO {
 	private MemberDTO sender; //발신자 가져오기
 	private MemberDTO reicipient; // 수신자 가져오기
 	
-	private String memberNos; //수신자사번모아서전달  
+	private String memberNos; //수신자사번 모아서전달  
 	
 	
 
