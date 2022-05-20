@@ -17,4 +17,5 @@ public class AppLineDTO {
 	private int level;
 	
 	private MemberDTO receiver;
+	private ApprovalDTO app;
 }

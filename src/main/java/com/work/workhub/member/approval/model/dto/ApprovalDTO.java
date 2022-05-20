@@ -26,10 +26,10 @@ public class ApprovalDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dueDate;
 	
-	//결재자 수
-	private String receiverCount;
-	//참조자 수
-	private String refCount;
+	//결재자
+	private String receiver;
+	//참조자
+	private String ref;
 	
 	private MemberDTO sender;
 	private AttachDTO att;

@@ -11,6 +11,8 @@
 		<result property="createdDate" column="APP_CREATED_DATE"/>
 		<result property="dueDate" column="APP_DUE_DATE"/>
 		
+<!-- 		<association property="receiver" resultMap="receiverResultMap"/>
+		<association property="ref" resultMap="referenceResultMap"/> -->
 		<association property="sender" resultMap="memberResultMap"/>
 	</resultMap>
 	
@@ -21,6 +23,7 @@
 		<result property="level" column="LINE_LEVEL"/>
 		
 		<association property="receiver" resultMap="memberResultMap"/>
+		<association property="app" resultMap="approvalResultMap"/>
 	</resultMap>
 	
 	<resultMap id="referenceResultMap" type="com.work.workhub.member.approval.model.dto.ReferenceDTO">
@@ -29,6 +32,7 @@
 		<result property="memNo" column="REF_MEM_NO"/>
 		
 		<association property="ref" resultMap="memberResultMap"/>
+		<association property="app" resultMap="approvalResultMap"/>
 	</resultMap>
 	
 	<resultMap id="memberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
@@ -69,7 +73,10 @@
 			 , B.NAME
 	      FROM APPROVAL A
 		  JOIN TBL_MEMBER B ON(A.APP_MEM_NO = B.NO)
-<!--  		 WHERE A.APP_MEM_NO = #{ no } -->
+<!-- 		  JOIN APP_LINE C ON(C.LINE_MEM_NO = B.NO)
+		  JOIN TBL_REFERENCE D ON(D.REF_MEM_NO = B.NO)
+  		  WHERE C.LINE_MEM_NO = #{ receiverNo }
+  		    AND D.REF_MEM_NO = #{ refNo } -->
 	</select>
 	
 	<select id="selectSendList" resultMap="approvalResultMap">
@@ -158,4 +165,51 @@
 		 WHERE A.REF_APP_NO = #{ no }
 	</select>
 	
+	<update id="modifyRet">
+		UPDATE APPROVAL
+		   SET APP_STATUS = '회수'
+		 WHERE APP_NO = #{ no }
+	</update>
+	
+	<delete id="deleteApp">
+		DELETE
+		  FROM APPROVAL
+		 WHERE APP_NO = #{ no }
+	</delete>
+	
+	<!-- 결재자 insert -->
+	<insert id="insertReceiver">
+		INSERT
+		  INTO APP_LINE
+		(
+		  LINE_NO
+		, LINE_APP_NO
+		, LINE_MEM_NO
+		, LINE_LEVEL
+		)
+		VALUES
+		(
+		  SEQ_LINE_NO.NEXTVAL
+		, SEQ_APP_NO.CURRVAL
+		, #{ receiverNo }
+		, '1'
+		)
+	</insert>
+	
+	<!-- 참조자 insert -->
+	<insert id="insertRef">
+		INSERT
+		  INTO TBL_REFERENCE
+		(
+		  REF_NO
+		, REF_APP_NO
+		, REF_MEM_NO
+		)
+		VALUES
+		(
+		  SEQ_REF_NO.NEXTVAL
+		, SEQ_APP_NO.CURRVAL
+		, #{ refNo }
+		)
+	</insert>
 </mapper>

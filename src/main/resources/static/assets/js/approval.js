@@ -79,7 +79,8 @@ $("#selectBtn").click(function(){
 
         // tdArr에 있는 값 하나씩 <input> 안에 넣어주기
         for(let i = 0; i < tdArr.length; i++) {	
-        str += `<input type="hidden" name="receiver[${i}].no" value="${tdArr[i]}"/>`;
+        //str += `<input type="hidden" name="receiver[${i}].no" value="${tdArr[i]}"/>`;
+        str += `<input type="hidden" name="receiver" value="${tdArr[i]}"/>`;
     }
     
     receiverCount = tdArr.length;
@@ -166,7 +167,8 @@ $("#selectBtn2").click(function(){
 
         // tdArr에 있는 값 하나씩 <input> 안에 넣어주기
         for(let i = 0; i < tdArr2.length; i++) {	
-        str2 += `<input type="hidden" name="ref[${i}].no" value="${tdArr2[i]}"/>`;
+        //str2 += `<input type="hidden" name="ref[${i}].no" value="${tdArr2[i]}"/>`;
+        str2 += `<input type="hidden" name="ref" value="${tdArr2[i]}"/>`;
     }
  
     // html에 넣어주기
