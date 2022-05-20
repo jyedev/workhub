@@ -20,7 +20,13 @@
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/memberyj.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
-    
+    <script>
+	const successMessage = '[[${successMessage}]]';
+	
+	if(successMessage) {
+		alert(successMessage);
+	}
+</script>
    
 </head>
 <body>
@@ -118,7 +124,8 @@
                                                     <th class="qqqs">연차 시작</th>
                                                     <th class="qqqs">연차 끝</th>
                                                     <th class="qqqs">연차일</th>
-                                                    <th>내용</th>
+                                                    <th class="qqqs">내용</th>
+                                                    <th class="qqqs">수정</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -130,6 +137,9 @@
                                                     <td th:text="${ ho.porestEnd }">2022-05-01</td>
                                                     <td th:text="${ ho.porestDay }">4</td>
                                                     <td th:text="${ ho.porestReason }">너무너무 피곤해서</td>
+                                                    <td>
+                                    					<span class="badge bg-success" th:onclick="|javascript:porestModify('${ ho.porestNo }')|">수정</span>
+                                				   </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -163,7 +173,8 @@
                                                     <th class="qqqs">연차 시작</th>
                                                     <th class="qqqs">연차 끝</th>
                                                     <th class="qqqs">연차일</th>
-                                                    <th>내용</th>
+                                                    <th class="qqqs">내용</th>
+                                                    <th class="qqqs">수정</th>
                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -175,6 +186,9 @@
                                                     			<td th:text="${ hos.porestEnd }"></td>
                                                     			<td th:text="${ hos.porestDay }"></td>
                                                     			<td th:text="${ hos.porestReason }"></td>
+                                             					<td>
+                                    								<span class="badge bg-success" th:onclick="|javascript:porestModify('${ hos.porestNo }')|">수정</span>
+                                				   				</td>
                                                 			</tr>                                                                
                                                             </tbody>
                                                         </table>
@@ -185,6 +199,20 @@
                                     </div>
                                 
                                 <!-- 신청한 연차 사용 내역 끝 -->
+
+
+       <!-- 수정하기 버튼을 눌렀을 때 게시글 번호 넘기는 것 -->
+    <script type="text/javascript">
+    function porestModify(porestNo) { 
+    	// 근무그룹  번호 확인용
+    	alert(porestNo); 
+    	var porestNo = porestNo; 
+        location.href='/rest/restModify?porestNo='+porestNo; }
+    </script> 
+
+
+
+
 
     <script>
         setInterval(showTime, 1000);

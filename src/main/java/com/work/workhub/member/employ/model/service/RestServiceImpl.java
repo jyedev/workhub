@@ -43,8 +43,10 @@ public class RestServiceImpl implements RestService{
 	@Override
 	public boolean insertRest(ImgDTO img, RestDTO rest) throws Exception {
 		
+		//값만 (여기서부터 나눠서 값을 삽입한다.)
 		int result = empstatusMapper.insertPara(rest);
 		
+		//이미지만
 		int results = empstatusMapper.insertRest(img);
 		
 
@@ -69,6 +71,72 @@ public class RestServiceImpl implements RestService{
 		
 		return empstatusMapper.restsselect();
 	}
+	
+	//연차신청서 파라 옛날 값
+	@Override
+	public List<RestDTO> paModify(int porestNo) {
+		
+		return empstatusMapper.modifyPa(porestNo);
+	}
+	
+	//휴가 유형 select box
+	@Override
+	public List<RestCateDTO> reBox() {
+		
+		return empstatusMapper.boxRe();
+	}
+	
+	//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+//	@Override
+//	public ImgDTO modifyImgs(int porestNo) {
+//		
+//		return empstatusMapper.modifyImgs(porestNo);
+//	}
+	
+	//연차 신청서 수정
+//	@Override
+//	public boolean modifyRestImg(ImgDTO img, RestDTO rest, int porestNo) throws Exception {
+//		
+//		
+//		//값만 (여기서부터 나눠서 값을 삽입한다.)
+//		int result = empstatusMapper.ModifyPara(rest, porestNo);
+//		
+//		//이미지만
+//		int results = empstatusMapper.ModifyRest(img, porestNo);
+//		
+//
+//        if(result <= 0 || results <= 0) {
+//            throw new Exception("연차 신청서 등록 실패");
+//        }
+//
+//
+//        return result > 0 ? true : false;
+//		
+//	}
+	
+	//삭제하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+	@Override
+	public ImgDTO modifyImgss(int porestNo) {
+		
+		return empstatusMapper.modifyImgss(porestNo);
+	}
+	
+	//연차신청서 삭제
+	@Override
+	public boolean deleteRest(RestDTO rest, int porestNo) throws Exception {
+		
+		int result = empstatusMapper.deleteRest(rest, porestNo);
+		
+		if(result <=0) {
+			throw new Exception("연차신청서 삭제 실패");
+		}
+		
+		return result > 0 ? true : false;
+	}
+	
+
+	
+
 	
 	//연차신청서 파라미터  값
 //	@Override

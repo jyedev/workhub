@@ -55,9 +55,26 @@ public class PostController {
 		return mv;
 	}
 	
-	//공지사항 조회
+	
+	//공지사항 목록 조회
 	@GetMapping("notice")
-	public void findNoticeList() {}
+	public ModelAndView findNoticeList(ModelAndView mv) {
+		
+		List<PostDTO> noticeList = postService.findAllNotice();
+		
+		mv.addObject("noticeList", noticeList);
+		mv.setViewName("/post/notice");
+		
+		return mv;
+	}
+	
+	
+	//게시글 카테고리
+	@GetMapping(value="category", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<CategoryDTO> findCategoryList(){
+		return postService.findAllCategory();
+	}
 	
 	
 	//게시글 상세페이지
@@ -77,14 +94,6 @@ public class PostController {
 		mv.addObject("reply", reply);
 		
 		return mv;
-	}
-	
-	
-	//게시글 카테고리
-	@GetMapping(value="category", produces="application/json; charset=UTF-8")
-	@ResponseBody
-	public List<CategoryDTO> findCategoryList(){
-		return postService.findAllCategory();
 	}
 	
 	
@@ -119,9 +128,8 @@ public class PostController {
 		return mv;
 	}
 	
-	//제목밖에 안넘어옴ㅜ
 	@PostMapping("update/no/{postNo}")
-	public String updatePost(@RequestBody PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
+	public String updatePost(@ModelAttribute PostDTO post, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
 		
 		post.setNo(user.getNo());
 		log.info("수정 요청 postNo : " , post.getPostNo());

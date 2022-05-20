@@ -27,12 +27,26 @@ public class PostServiceImpl implements PostService{
 	public List<PostDTO> findAllPost() {
 		return postMapper.findAllPost();
 	}
+	
+	
+	@Override
+	public List<PostDTO> findAllNotice() {
+		return postMapper.findAllNotice();
+	}
 
+	
 	@Override
 	public List<CategoryDTO> findAllCategory() {
 		return postMapper.findAllCategory();
 	}
 
+	
+	@Override
+	public PostDTO findPostByNo(Integer postNo) {
+		return postMapper.findPostByNo(postNo);
+	}
+	
+	
 	@Override
 	public boolean writePost(PostDTO post) throws Exception {
 		
@@ -49,13 +63,6 @@ public class PostServiceImpl implements PostService{
 		}
 		
 		return result > 0 ? true : false;
-	}
-
-
-	@Override
-	public PostDTO findPostByNo(Integer postNo) {
-		
-		return postMapper.findPostByNo(postNo);
 	}
 
 

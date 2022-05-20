@@ -66,6 +66,7 @@
 	<result property="name" column="NAME"/>
 	<result property="depName" column="DEP_NAME"/>
 	<result property="restName" column="REST_NAME"/>
+	<result property="imageName" column="IMAGE_NAME"/>
 </resultMap>
 
 <!-- 이미지 -->
@@ -218,12 +219,6 @@
           , #{ porestReason }
           , DEFAULT
         )
-        <!-- 게시물 번호 얻어오는거 porestNo -->
-     <!--    <selectKey keyProperty="porestNo" resultType="Int" order="AFTER">
-        	SELECT
-        	       SEQ_POREST_NO.CURRVAL
-        	  FROM DUAL
-        </selectKey>--> 
 	</insert>
 	
 
@@ -302,6 +297,7 @@
 		JOIN DEPARTMENT C ON (B.DEP_NO = C.DEP_NO)
 		JOIN REST_CATEGORY D ON (A.REST_NO = D.REST_NO)
 		WHERE TO_CHAR(SYSDATE, 'YY/MM/DD') <![CDATA[ > ]]> TO_CHAR(A.POREST_END, 'YY/MM/DD')
+		AND POREST_STATUS = 'Y'
 	</select>
 	
 	
@@ -330,7 +326,101 @@
 		JOIN DEPARTMENT C ON (B.DEP_NO = C.DEP_NO)
 		JOIN REST_CATEGORY D ON (A.REST_NO = D.REST_NO)
 		WHERE TO_CHAR(SYSDATE, 'YY/MM/DD') <![CDATA[ < ]]> TO_CHAR(A.POREST_FIR, 'YY/MM/DD')
+		AND POREST_STATUS = 'Y'
 	</select>
+	
+	<!-- 연차신청서 옛날 값 파라 -->
+	<select id="modifyPa" resultMap="restReportResultMap">
+	SELECT
+		  A.POREST_NO
+		, A.NO
+		, A.REST_NO
+		, A.REP_NO
+		, A.POREST_DATE
+		, A.POREST_MODDATE
+		, A.POREST_FIR
+		, A.POREST_END
+		, A.POREST_REASON
+		, A.POREST_STATUS
+		, A.POREST_DAY
+		, A.POREST_YN
+		, A.POREST_OK
+		, A.POREST_POSS
+		, B.NAME
+		, C.DEP_NAME
+		, D.REST_NAME
+		, E.IMAGE_NAME
+		FROM POREST A
+		JOIN TBL_MEMBER B ON (A.NO = B.NO)
+		JOIN DEPARTMENT C ON (B.DEP_NO = C.DEP_NO)
+		JOIN REST_CATEGORY D ON (A.REST_NO = D.REST_NO)
+		JOIN ATT_IMAGE E ON (A.POREST_NO = E.POREST_NO)
+	WHERE A.POREST_NO = #{ porestNo } 
+	</select>
+	
+	
+		<!-- 휴가 신청서의 휴가 유형 selectBox -->
+	<select id="boxRe" resultMap="restResultMap">
+	SELECT
+		*
+		FROM REST_CATEGORY
+	WHERE REST_USE = '사용'
+	AND REST_STATUS = 'Y'
+	ORDER BY REST_NO
+	</select>
+	
+	<!-- 수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기 -->
+	<!-- <select id="modifyImgs" resultMap="imgResultMap">
+	SELECT
+		*
+	FROM ATT_IMAGE
+	WHERE POREST_NO = #{ porestNo }
+	</select> -->
+	
+	
+	<!-- 연차신청서 값만 업데이트 -->
+	<!--  <update id="ModifyPara">
+	UPDATE POREST
+	SET
+	   REST_NO = #{ restNo }
+	 , POREST_FIR = #{ porestFir }
+	 , POREST_END = #{ porestEnd }
+	 , POREST_DAY = #{ porestDay }
+	 , POREST_REASON = #{ porestReason }
+	 WHERE POREST_NO = #{ porestNo }			
+	</update>-->
+	
+	
+	
+	<!-- 연차신청서 이미지만 업데이트 -->
+<!-- 	<update id="ModifyRest">
+	UPDATE ATT_IMAGE
+	SET
+    	<if test="name != null">
+    		ORG_NAME = #{ name },
+    		SAVED_NAME = #{ reName },
+    		SAVE_PATH = #{ savePath }
+    	</if>
+	 WHERE POREST_NO = #{ porestNo }	
+	</update> -->
+	
+	
+	<!-- 삭제하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기 -->
+	<select id="modifyImgss" resultMap="imgResultMap">
+	SELECT
+		*
+	FROM ATT_IMAGE
+	WHERE POREST_NO = #{ porestNo }
+	</select>
+	
+	
+	<!-- 연차신청서 삭제 -->
+	<update id="deleteRest">
+	UPDATE
+		POREST
+	SET POREST_STATUS = 'N'
+	WHERE POREST_NO = #{ porestNo }
+	</update>
 	
 	
 	
