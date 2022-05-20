@@ -36,4 +36,5 @@ public class RestDTO {
 	   private String name;
 	   private String depName;
 	   private String restName;
+	   private String imageName;
 }

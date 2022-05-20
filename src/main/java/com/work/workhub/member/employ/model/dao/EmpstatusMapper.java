@@ -16,7 +16,7 @@ public interface EmpstatusMapper {
 	//출근하기 버튼 눌렀을 때
 	int employmentIn(AttDTO post);
 	
-	//출근하기 버튼 눌렀을 때ㄴ
+	//출근하기 버튼 눌렀을 때
 	int employmentOut(AttDTO post);
 	
 	/* 근무유형 select box 내 근태 현황*/	
@@ -48,6 +48,31 @@ public interface EmpstatusMapper {
 	
 	//연차 유형 사용하지 않은 것
 	List<RestDTO> restsselect();
+	
+	//연차신청서 파라 옛날 값
+	List<RestDTO> modifyPa(int porestNo);
+	
+	//휴가 유형 select box
+	List<RestCateDTO> boxRe();
+	
+	//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+//	ImgDTO modifyImgs(int porestNo);
+	
+	//연차 신청서 값만 수정
+//	int ModifyPara(RestDTO rest, int porestNo);
+	
+	//연차 신청서 이미지만 수정
+//	int ModifyRest(ImgDTO img, int porestNo);
+	
+	//삭제하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+	ImgDTO modifyImgss(int porestNo);
+	
+	//연차신청서 삭제
+	int deleteRest(RestDTO rest,int porestNo);
+	
+
+	
+
 
 	
 	
