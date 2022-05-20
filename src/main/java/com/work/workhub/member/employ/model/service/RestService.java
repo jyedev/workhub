@@ -26,6 +26,27 @@ public interface RestService {
 	//연차 유형 사용하지 않은 것
 	List<RestDTO> selectrests();
 	
+	//연차신청서 파라 옛날
+	List<RestDTO> paModify(int porestNo);
+	
+	//휴가 유형 select box
+	List<RestCateDTO> reBox();
+	
+	//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+//	ImgDTO modifyImgs(int porestNo);
+	
+	//연차 신청서 수정
+//	boolean modifyRestImg(ImgDTO img, RestDTO rest,int porestNo ) throws Exception;
+	
+	//삭제 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+	ImgDTO modifyImgss(int porestNo);
+	
+	//연차신청서 삭제
+	boolean deleteRest(RestDTO rest, int porestNo) throws Exception;
+	
+	
+	
+
 	//연차신청서 파라미터  값
 //	boolean insertPara(RestDTO rest) throws Exception;
 	
