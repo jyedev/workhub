@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,15 +40,26 @@ public class MeetingSelectController {
 	@GetMapping("list")
 	public ModelAndView selectMeetingList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
+		/* 상단 location 분류 바에 따라 회의실 목록 불러오기 */
+		/*
+		 * log.info("선택된 locationNo : {}", locationNo); MeetingRoomDTO room =
+		 * meetingService.selectByLocationNo(locationNo);
+		 */
+		
+		/* 로그인 유저 불러오기 */
 		log.info("로그인 유저 {} : ", user);
 		
+		/* 미팅룸 장소, 미팅룸 리스트 불러오기 */
 		List<MeetingRoomDTO> locationList = meetingService.selectAllLocation();
 		List<MeetingRoomDTO> roomList = meetingService.selectRoomList();
 		
-		
 		mv.addObject("locationList", locationList);
 		mv.addObject("roomList", roomList);
+
+		/* 미팅룸 예약 리스트 불러오기 */
+		List<ResMeetingDTO> resMeetingList = meetingService.selectAllResMeeting();
 		
+		mv.addObject("resMeetingList", resMeetingList);
 		
 		mv.setViewName("reserve/meeting/list");
 		

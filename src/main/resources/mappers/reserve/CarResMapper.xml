@@ -64,8 +64,9 @@
 	<select id="selectAllResCarList" resultMap="carResResultMap">
 		SELECT
 		*
-		FROM RES_CAR A
-		JOIN TBL_MEMBER B ON (A.NO = B.NO)
+		FROM RES_CAR
+		WHERE END_TIME > SYSDATE
+          AND TO_CHAR(START_TIME, 'yyyy-MM-dd') = TO_CHAR(SYSDATE, 'yyyy-MM-dd')
 	</select>
 	
 	<select id="selectedCar" resultMap="carResultMap">

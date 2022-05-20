@@ -38,11 +38,11 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		/* 시퀀스 이름을 부서 별로 따로 쓰니깐 부서별로 각각 다르게 정의해주는것 */
 		String sequenceName = "SEQ_MEM_NO_";
 		switch(member.getDepNo()) {
-			case 1 : sequenceName += "GBB"; break;
+			case 1 : sequenceName += "HR"; break;
 			case 2 : sequenceName += "GNT"; break;
-			case 3 : sequenceName += "HR"; break;
+			case 3 : sequenceName += "SAL"; break;
 			case 4 : sequenceName += "MKT"; break;
-			case 5 : sequenceName += "SAL"; break;
+			case 5 : sequenceName += "GBB"; break;
 		}
 		member.setSequenceName(sequenceName);
 		
