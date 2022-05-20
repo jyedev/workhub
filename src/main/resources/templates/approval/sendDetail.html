@@ -33,7 +33,7 @@
             <div class="page-heading email-application">
                 <div class="page-title">
                     <div class="row">
-                        <div class="col-12 col-md-6 order-md-   1 order-last">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
                             <h3>개인 결재함</h3><br>
                         </div>
                     </div>
@@ -133,18 +133,30 @@
                                 </div>
                             </div>
 
+                                <!-- 회수일 때 수정/삭제 버튼 나오게 -->
+                           <span th:if="${ approvalDTO.status.equals('회수') }">
                             <div class="row">
-
                                  <div class="d-grid col-1 mx-auto">
                                 </div>
-                                <span th:if="${ approvalDTO.status.equals('대기') }">
-                                <div class="d-grid col-1 mx-auto">
-                                    <button type="submit" class="btn btn-primary" th:onclick="|javascript:ret('${approvalNo}')|">회수</button>
+                                <div class="d-grid col-2 mx-auto">
+                                    <button type="submit" class="btn btn-primary">수정</button>
                                 </div>
-                                </span>
-
-                                <div class="d-grid col-1 mx-auto">
+                                <div class="d-grid col-2 mx-auto">
+                                    <button type="submit" class="btn btn-primary" th:onclick="|javascript:deleteApp('${approvalDTO.no}')|">삭제</button>
+                                </div>
+                                 <div class="d-grid col-1 mx-auto">
+                            	</div>
                             </div>
+                           </span>
+                             
+                                <!-- 대기일 때 회수 버튼 나오게 -->
+                           <span th:if="${ approvalDTO.status.equals('대기') }">
+                            <div class="row">
+                                <div class="d-grid col-2 mx-auto">
+                                    <button type="submit" class="btn btn-primary" th:onclick="|javascript:ret('${approvalDTO.no}')|">회수</button>
+                                </div>
+                            </div>
+                           </span>
 
 
                             <!-- 서브메뉴 옆 내용 끝 -->
@@ -165,28 +177,35 @@
     
     <script th:inline="javascript">
     	function ret(approvalNo) {
-   
-    		
+    		console.log(approvalNo);
     		$.ajax({
     			url: "/approval/retrieve",
     			type: "post",
-    			dataType: "json",
-    			data: {approvalNo},
+    			data: {approvalNo: approvalNo},
     			success: function(data) {
-    				alert("성공");
+    				//console.log("성공");
+    				location.href = "/approval/sendList";
     			}
     			
+    		});
+    	}
+    	
+    	function deleteApp(approvalNo) {
+    		console.log("삭제 문서 : " + approvalNo);
+    		$.ajax({
+    			url: "/approval/delete",
+    			type: "post",
+    			data: {approvalNo: approvalNo},
+    			success: function(data) {
+    				//console.log("삭제 완료");
+    				location.href = "/approval/sendList";
+    			}
     		});
     	}
     </script>
     
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
 
     <script src="/assets/js/main.js"></script>
 </body>

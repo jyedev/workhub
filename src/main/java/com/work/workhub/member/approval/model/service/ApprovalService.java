@@ -10,8 +10,10 @@ import com.work.workhub.member.member.dto.MemberDTO;
 
 public interface ApprovalService {
 
-	List<ApprovalDTO> selectReceptionList(int no);
+//	List<ApprovalDTO> selectReceptionList(int receiverNo, int refNo);
 
+	List<ApprovalDTO> selectReceptionList(int no);
+	
 	List<ApprovalDTO> selectSendList(int no);
 
 	List<DepartmentDTO> selectDepartmentList();
@@ -25,5 +27,17 @@ public interface ApprovalService {
 	List<AppLineDTO> findReceiverByNo(Integer approvalNo);
 
 	List<ReferenceDTO> findRefByNo(Integer approvalNo);
+
+	void modifyRet(Integer no);
+
+	void deleteApp(int no);
+
+	void insertReceiver(ApprovalDTO approval, int receiverNo);
+
+	void insertRef(ApprovalDTO approval, int refNo);
+
+
+
+
 
 }

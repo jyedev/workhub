@@ -159,6 +159,5 @@
 		  SET POST_STATUS = 'N'
 		WHERE POST_NO = #{ postNo }
 	</update>
-
-
+	
 </mapper>
