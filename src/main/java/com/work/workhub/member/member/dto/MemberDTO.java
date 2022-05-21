@@ -22,6 +22,7 @@ public class MemberDTO {
    private String positionName;
    private int groupNo;
    private String name;
+   private String gender;
    private String email;
    private String phone;
    private String status;
