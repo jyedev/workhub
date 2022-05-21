@@ -185,7 +185,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <th:block th:if="${ #lists.size(resCarList) > num }">
                     	<!-- 본인 예약 차량 -->
                     	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
-                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
+                    		<form method="post" th:action="@{ /reserve/car/return }">
+                    			<input type="hidden" th:value="${ resCarList[num].car.carName }">
+                    			<input type="hidden" th:value="${ resCarList[num].startTime }">
+                    			<input type="hidden" th:value="${ resCarList[num].endTime }">
+                    			<input type="hidden" th:value="${ #authentication.principal.name }">
+                    			<button type="submit" class="bg-transparent-btn"><img src="/assets/images/images/car-rent-my.png" alt="car"></button>
+                    		</form>
                     	</div>
                     	<!-- 타인 예약 차량 -->
                     	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo != #authentication.principal.no }">

@@ -255,16 +255,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                         	<!-- roomName을 모달에 넣기 위해 넣어놓은 input 장치 -->
                                         	<input class="hiddenRmName" type="hidden" th:value="${ room.roomName }">
                                         	<input type="hidden" th:value="${ room.roomNo }" class="roomNoInput">
-                                        	<!-- <th:block th:if="${ room.roomNo ==  resMeeting.roomNo}">
-                                        		<input type="hidden" th:value="${ resMeeting.startTime }" 
-                                        		class="startTime" name="startTime">
-                                        	</th:block> -->
+                                        	<th:block th:if="${ not resMeetingList.?[roomNo == room.roomNo].isEmpty() }">
+                                        		<input type="hidden" class="startTime" name="startTime">
+                                        	</th:block>
                                             <input type="hidden" class="time" value="08:00">
                                         </td>
                                     </tr>
                                     <tr class="tbl-dotted-line">
                                         <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
                                         	<input type="hidden" class="time" value="08:30">
+                                        	<th:block th:if="${ not resMeetingList.?[roomNo == room.roomNo].isEmpty() }">
+                                        		<input type="hidden" class="startTime" name="startTime" th:value="${ resMeetingList[2].startTime }">
+                                        	</th:block>
                                         </td>
                                     </tr>
                                     <tr>
