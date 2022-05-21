@@ -23,7 +23,7 @@
 
 <body>
     <div id="app">
-        <div th:include="sidebar/sidebar" th:remove="tag"/>
+        <div th:include="sidebar/sidebar-surv" th:remove="tag"/>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -50,17 +50,17 @@
                                 </div>
                                 <div class="col-md-10 form-group">
                                     <div class="surv-target">
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <input type="checkbox" class="form-check-input" id="AllDept">
                                         <label for="checkbox2">허브본부</label>
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <input type="checkbox" class="form-check-input" id="PDept">
                                         <label for="checkbox2">인사팀</label>
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <input type="checkbox" class="form-check-input" id="GADept">
                                         <label for="checkbox2">총무팀</label>
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <input type="checkbox" class="form-check-input" id="SDept">
                                         <label for="checkbox2">영업팀</label>
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <input type="checkbox" class="form-check-input" id="MDept">
                                         <label for="checkbox2">마케팅팀</label>
-                                        <input type="checkbox" class="form-check-input" id="checkbox2">
+                                        <input type="checkbox" class="form-check-input" id="DDepy">
                                         <label for="checkbox2">개발팀</label>
                                     </div>
                                 </div>
@@ -109,22 +109,23 @@
                                             <label>설문 항목</label>
                                         </div>
                                         <div class="col-md-10 form-group">
-                                            <span class="que-title-box">
-                                                <input type="radio" name="que-title-radio">
-                                                <input type="text" name="queTitle" class="form-control btn-sm">
-                                                <input type="image" src="src/images/cancle.png" name="que-title-delete" id="que-title-delete" >
-                                            </span>
-                                            <span class="que-title-box">
-                                                <input type="radio" name="que-title-radio">
-                                                <input type="text" name="queTitle" class="form-control btn-sm">
-                                                <input type="image" src="src/images/cancle.png" name="que-title-delete" id="que-title-delete" >
-                                            </span>
-                                            <span class="que-title-box-add">
-                                                <input type="radio" name="que-title-radio">
-                                                <input type="button" value="항목을 추가하려면 이 곳을 클릭하세요.">
-                                            </span>
-                                        </div>
-                                        <div class="que-button">
+	                                        <ul style="padding-left: 0;">
+		                                        <li style="list-style: none;">
+		                                        <div class="col-md-10 form-group">
+		                                            <span class="que-title-box">
+		                                                <input type="radio" name="que-title-radio">
+		                                                <input type="text" name="queTitle" class="form-control btn-sm">
+		                                                <input type="image" src="/assets/images/post-surv/cancle.png" name="que-title-delete" id="que-title-delete" >
+		                                            </span>
+		                                        </div>
+		                                        </li>
+	                                        </ul>
+	                                            <span class="que-title-box-add">
+	                                                <input type="radio" name="que-title-radio">
+	                                                <input type="button" value="항목을 추가하려면 이 곳을 클릭하세요.">
+	                                            </span>
+	                                    </div>
+                                        <div class="surv-button que-button">
                                             <input type="submit" value="완료" id="que-submit">
                                             <input type="submit" value="취소" id="que-cancle">
                                         </div>
@@ -132,7 +133,7 @@
                                 </form>
                             </div><hr>
                             <input type="button" value="질문 추가" id="surv-add-btn">
-                            <div class="que-button">
+                            <div class="surv-button">
                                 <input type="submit" value="등록" id="surv-submit">
                                 <input type="submit" value="취소" id="surv-cancle">
                             </div>

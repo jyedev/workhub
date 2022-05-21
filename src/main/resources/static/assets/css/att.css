@@ -66,13 +66,13 @@
       color: #6caf8d;
     }
 
-    /* Show submenu */
-    .accordion li.show .submenu {
+    /* Show fyy */
+    .accordion li.show .fyy {
       /* height: auto;를 지정하면 transition이 동작하지 않는다 */
       max-height: 500px;
     }
 
-    .submenu {
+    .fyy {
       /* height: auto;를 지정하면 transition이 동작하지 않는다 */
       max-height: 0;
       overflow: hidden;
@@ -83,19 +83,19 @@
     
     
 
-    .submenu li {
+    .fyy li {
       border-bottom: 1px solid #4b4a5e;
     }
 
-    .accordion li:last-child .submenu {
+    .accordion li:last-child .fyy {
       border-radius: 0 0 4px 4px;
     }
 
-    .accordion li:last-child .submenu li:last-child {
+    .accordion li:last-child .fyy li:last-child {
       border-bottom: 0;
     }
 
-    .submenu a {
+    .fyy a {
       display: block;
       text-decoration: none;
       color: #000000;
@@ -110,7 +110,7 @@
       width: 100%;
     }
 
-    .submenu table {
+    .fyy table {
      
      
       width: 100%;
@@ -118,7 +118,8 @@
     
     .huyyy {
       position: relative;
-    left: 320px;
+    left: 900px;
      top: 30px;
+     width: 1400px;
      
     }

@@ -68,8 +68,7 @@ public class MemberServiceImpl implements MemberService {
 		return user;
 	}
 
-	
-	// =========================html 수정 중=========================
+
 	// 이메일 발송
 	@Override
 	public int findPwCheck(MemberDTO memberDTO) throws Exception {
@@ -78,19 +77,16 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void findPw(String memberEmail, String memberId) throws Exception {
-
 		
 	}
 
 	@Override
 	public MemberDTO editInfo(MemberDTO member) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public MemberDTO updatePw(MemberDTO member, String old_pw, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

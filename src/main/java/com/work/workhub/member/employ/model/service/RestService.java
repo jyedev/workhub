@@ -2,6 +2,9 @@ package com.work.workhub.member.employ.model.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.work.workhub.admin.work.model.dto.RestCateDTO;
 import com.work.workhub.admin.work.model.dto.WorkDTO;
 import com.work.workhub.member.employ.model.dto.ImgDTO;
@@ -33,10 +36,10 @@ public interface RestService {
 	List<RestCateDTO> reBox();
 	
 	//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
-//	ImgDTO modifyImgs(int porestNo);
+	ImgDTO modifyImgs(int porestNo);
 	
 	//연차 신청서 수정
-//	boolean modifyRestImg(ImgDTO img, RestDTO rest,int porestNo ) throws Exception;
+	boolean modifyRestImg(@RequestParam("img") ImgDTO img, @RequestParam("rest") RestDTO rest) throws Exception;
 	
 	//삭제 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
 	ImgDTO modifyImgss(int porestNo);

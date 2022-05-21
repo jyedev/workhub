@@ -25,7 +25,7 @@
 
 <body>
     <div id="app">
-        <div th:include="sidebar/sidebar" th:remove="tag"></div>
+        <div th:include="sidebar/sidebar-com" th:remove="tag"/>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -88,25 +88,25 @@
                             </div><hr>
                             
                             <!-- reply -->
-								<table class="com-reply-table" th:each="reply: ${ reply }">
-                                <tr>
-                                    <td><img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo"></td>
-                                    <td th:text="${ reply.member.name }" class="com-reply-writer">댓글 작성자</td>
-                                    <td th:text="${ reply.replyDate }" class="com-reply-date">댓글 작성일</td>
-                                    <td>
-                                        <div class="reply-btn" input type="button">
-                                        <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글">
-                                        <span>답글</span>
-                                        </div>
-                                    </td>
-                                    <td class="reply-btn-ud">
-                                    	<a th:href="@{'/reply/update'  + ${ reply.replyNo }}">수정</a>
-                                    	<a th:href="@{'/reply/delete/' + ${ reply.replyNo }}" onclick="removeCheck2();">삭제</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td th:text="${ reply.replyContent }" colspan="4" class="reply-content">댓글 내용</td>
-                                </tr>
+<!-- 								<table class="com-reply-table" th:each="reply: ${ reply }"> -->
+<!-- 	                                <tr> -->
+<!-- 	                                    <td><img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo"></td> -->
+<!-- 	                                    <td th:text="${ reply.member.name }" class="com-reply-writer">댓글 작성자</td> -->
+<!-- 	                                    <td th:text="${ reply.replyDate }" class="com-reply-date">댓글 작성일</td> -->
+<!-- 	                                    <td> -->
+<!-- 	                                        <div class="reply-btn" input type="button"> -->
+<!-- 	                                        <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글"> -->
+<!-- 	                                        <span>답글</span> -->
+<!-- 	                                        </div> -->
+<!-- 	                                    </td> -->
+<!-- 	                                    <td class="reply-btn-ud"> -->
+<!-- 	                                    	<a th:href="@{'/reply/update'  + ${ reply.replyNo }}">수정</a> -->
+<!-- 	                                    	<a th:href="@{'/reply/delete/' + ${ reply.replyNo }}" onclick="removeCheck2();">삭제</a> -->
+<!-- 	                                    </td> -->
+<!-- 	                                </tr> -->
+<!-- 	                                <tr> -->
+<!-- 	                                    <td th:text="${ reply.replyContent }" colspan="4" class="reply-content">댓글 내용</td> -->
+<!-- 	                                </tr> -->
                                 <!-- 댓글 수정박스 -->
 <!--                                 <tr> -->
 <!--                                     <td colspan="5">  -->
@@ -119,7 +119,40 @@
 <!--                                 	</div> -->
 <!--                                 	</td> -->
 <!--                                 </tr> -->
-                            </table>
+<!--                             </table> -->
+                            
+                            <ul class="reply-ul">
+                                <li style="list-style: none;" th:each="reply: ${ reply }">
+                                    <div class="com-detail-reply">
+                                        <div class="com-reply-writer">
+                                            <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
+                                            <span th:text="${ reply.member.name }" class="com-reply-writer">작성자</span>
+                                            <span th:text="${ reply.replyDate }" class="com-reply-date">댓글 작성일</span>
+                                            <div class="reply-btn" input type="button" onclick="showDiv(this);">
+                                                <img src="/assets/images/post-surv/reply.png" class="icon-reply" alt="답글">
+                                                <span>답글</span>
+                                            </div>
+                                            <div class="reply-btn-ud">
+		                                    	<a onclick="updateContent();">수정</a>
+		                                    	<a th:href="@{'/reply/delete/' + ${ reply.replyNo }}" onclick="removeCheck2();">삭제</a>
+		                                    </div>
+                                        </div>
+                                        <div class="reply-content">
+                                            <p th:text="${ reply.replyContent }">댓글 내용</p>
+                                        </div>
+                                        
+                                        <div id="writerBox" class="box">
+											<form method="post" action="/update/no/{replyNo}">
+												<input type="hidden" name="replyNo" th:value="${ reply.replyNo }">
+												<input type="text" name="refReplyContent" size="70"> &nbsp; 
+												<input type="submit" value="수정">
+											</form>
+										</div>
+										
+                                    </div>
+                                </li>
+                            </ul>
+                            
                             <form action="/reply/write" method="post" class="com-insert-reply">
                                 <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo">
                                 <input type="text" class="text-reply" name="replyContent" required>
@@ -131,7 +164,19 @@
                             </form>
                             <hr>
                             
-                            <script>
+                            <script>        
+	                            function showDiv(elem){
+	                                console.log(elem);
+	                                console.log(elem.id);
+	                                let boxes = document.querySelectorAll(".box");
+	
+	                                for(let box of boxes){
+	                                    if(elem.id+"Box" == box.id)
+	                                        box.style.display = "block";
+	                                    else
+	                                        box.style.display = "none";
+	                                }
+	                            }
                             </script>
 
                             <div class="post-detail-list">
@@ -221,6 +266,7 @@
     		return false;
     	}
     }
+    
     </script>
 
 </body>
