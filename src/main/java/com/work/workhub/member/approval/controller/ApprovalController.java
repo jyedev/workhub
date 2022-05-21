@@ -30,10 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/approval")
 public class ApprovalController {
-	
+
 	private ApprovalService approvalService;
 	private MessageSource messageSource;
-	
+
 	@Autowired
 	public ApprovalController(ApprovalService approvalService, MessageSource messageSource) {
 		this.approvalService = approvalService;
@@ -42,37 +42,63 @@ public class ApprovalController {
 
 	@GetMapping("regist")
 	public ModelAndView registPage(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
-		
+
 		List<DepartmentDTO> departmentList = approvalService.selectDepartmentList();
 		List<MemberDTO> memberList = approvalService.selectMemberList();
-		
+
 		mv.addObject("departmentList", departmentList);
 		mv.setViewName("approval/regist");
-		
+
 		mv.addObject("memberList", memberList);
 		mv.setViewName("approval/regist");
-		
+
 		log.info("부서 목록 : {}", departmentList);
 		log.info("사원 목록 : {}", memberList);
-		
+
 		return mv;
 	}
-	
+
 	@PostMapping("regist")
-	public String registApproval(@ModelAttribute ApprovalDTO approval, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
-		
+	public String registApproval(@ModelAttribute ApprovalDTO approval, @RequestParam("receiver") String receiver, @RequestParam("ref") String ref, @AuthenticationPrincipal UserImpl user,
+			RedirectAttributes rttr, Locale locale) throws Exception {
+
 		approval.setNo(user.getNo());
+
 		log.info("결재문서 등록 : {}", approval);
+
+		int receiverNo = Integer.parseInt(receiver);
+		int refNo = Integer.parseInt(ref);
 		
 		approvalService.registApproval(approval);
-		
+		approvalService.insertReceiver(approval, receiverNo);
+		log.info("결재자 사번 : {}", receiverNo);
+		approvalService.insertRef(approval, refNo);
+		log.info("참조자 사번 : {}", refNo);
+
 		rttr.addFlashAttribute("successMessage", messageSource.getMessage("registApproval", null, locale));
-		
-		System.out.println("결재자 수 : " + approval.getReceiverCount());
-		
+
 		return "redirect:/approval/sendList";
-		
+
 	}
+
+//	@GetMapping("receptionList")
+//	public ModelAndView receptionList(ModelAndView mv, @RequestParam("receiver") String receiver, @RequestParam("ref") String ref) {
+//
+//		int receiverNo = Integer.parseInt(receiver);
+//		int refNo = Integer.parseInt(ref);
+//		
+//		log.info("수신목록 결재자 : {}", receiverNo);
+//		log.info("수신목록 참조자 : {}", refNo);
+//
+//		List<ApprovalDTO> receptionList = approvalService.selectReceptionList(receiverNo, refNo);
+//
+//		mv.addObject("receptionList", receptionList);
+//		mv.setViewName("approval/receptionList");
+//
+//		log.info("수신목록 : {}", receptionList.toString());
+//
+//		return mv;
+//	}
 	
 	@GetMapping("receptionList")
 	public ModelAndView receptionList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
@@ -87,70 +113,77 @@ public class ApprovalController {
 		
 
 		log.info("수신목록 : {}", receptionList.toString());
-//		log.error("수신목록 : {}", receptionList.toString());
 		
 		return mv;
 	}
-	
+
 	@GetMapping("sendList")
 	public ModelAndView sendList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
-		
+
 		int no = user.getNo();
-		
+
 		List<ApprovalDTO> sendList = approvalService.selectSendList(no);
-		
+
 		mv.addObject("sendList", sendList);
 		mv.setViewName("approval/sendList");
-		
+
 		log.info("발신목록 : {}", sendList.toString());
 //		log.error("발신목록 : {}", sendList.toString());
-		
+
 		return mv;
 	}
-	
+
 	@GetMapping("receptionDetail")
-	public ModelAndView receptionDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user, @RequestParam("approvalNo") Integer approvalNo) {
-		
+	public ModelAndView receptionDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user,
+			@RequestParam("approvalNo") Integer approvalNo) {
+
 		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
 		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
 		List<ReferenceDTO> ref = approvalService.findRefByNo(approvalNo);
-		
+
 		mv.addObject("approvalDTO", approval);
 		mv.addObject("receiver", receiver);
 		mv.addObject("ref", ref);
-		
+
 		mv.setViewName("/approval/receptionDetail");
-		
+
 		return mv;
-		
+
 	}
-	
+
 	@GetMapping("sendDetail")
-	public ModelAndView sendDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user, @RequestParam("approvalNo") Integer approvalNo) {
-		
+	public ModelAndView sendDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user,
+			@RequestParam("approvalNo") Integer approvalNo) {
+
 		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
 		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
 		List<ReferenceDTO> ref = approvalService.findRefByNo(approvalNo);
-		
+
 		mv.addObject("approvalDTO", approval);
 		mv.addObject("receiver", receiver);
 		mv.addObject("ref", ref);
-		
+
 		mv.setViewName("/approval/sendDetail");
-		
+
 		return mv;
 	}
+
+	// 회수 버튼 눌렀을 때 상태 회수로 바꾸기
+	@PostMapping("/retrieve")  
+	@ResponseBody
+	public void modifyRet(@RequestParam("approvalNo") String approvalNo) {
+		int no = Integer.parseInt(approvalNo);
+		approvalService.modifyRet(no);
+		
+	}
 	
-	//회수 버튼 눌렀을 때 상태 회수로 바꾸기
-	/*
-	 * @RequestMapping("/approval/retrieve")
-	 * 
-	 * @ResponseBody public String modifyRet(@ModelAttribute ApprovalDTO approval,
-	 * RedirectAttributes rttr, Locale locale) {
-	 * 
-	 * 
-	 * }
-	 */
-	
+	//삭제
+	@PostMapping("/delete")
+	@ResponseBody
+	public void deleteApp(@RequestParam("approvalNo") String approvlNo) {
+		int no = Integer.parseInt(approvlNo);
+		approvalService.deleteApp(no);
+	}
+
 
 }

@@ -2006,6 +2006,7 @@ progress {
 }
 
 .table>:not(caption)>*>* {
+	padding: .5rem;
     background-color: var(--bs-table-bg);
     background-image: linear-gradient(var(--bs-table-accent-bg), var(--bs-table-accent-bg));
     border-bottom-width: 1px

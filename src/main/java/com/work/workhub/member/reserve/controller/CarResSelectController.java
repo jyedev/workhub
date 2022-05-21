@@ -38,7 +38,7 @@ public class CarResSelectController {
 
 	@GetMapping("list")
 	public ModelAndView selectCarList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
-
+		
 		log.info("로그인 유저 정보 : {}", user);
 
 		List<CarDTO> carList = carResService.selectAllCar();
@@ -60,6 +60,7 @@ public class CarResSelectController {
 	
 	@PostMapping("list")
 	public String registCarReserve(@ModelAttribute ResCarDTO resCar, RedirectAttributes rttr, Locale locale, @RequestParam int memberNo) throws Exception {
+		log.info("memberNo : {}", memberNo);
 		
 		log.error("등록요청 : {}",resCar);
 		log.warn("등록요청 : {}",resCar);

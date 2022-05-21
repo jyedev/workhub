@@ -58,6 +58,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             <ul class="nav nav-tabs" id="myTab" >
 				<li class="nav-item font-clr" th:each="location : ${ locationList }">
 					<a class="nav-link" id="home-tab" href="" th:text="${ location.rmLocation }"></a>
+					<!-- "@{ /reserve/meeting/list?rmLocation='4층 회의실' } -->
 				</li>          
             </ul>
         </div>
@@ -243,16 +244,21 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     </td>
                     
 
+
 						<!-- 시간 선택 table : hover시 변함 -->
 						<td style="border-bottom:none;" class="col-width-ctrl rmClick" th:each="room: ${ roomList }">
                         <div class="table-responsive" th:if="${ room.delYn } == 'N'">
-                            <table class="table table-hover mb-0"  th:each="num : ${ #numbers }">
+                            <table class="table table-hover mb-0">
                                 <tbody class="tr-height">
                                     <tr>
                                         <td class="before time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
                                         	<!-- roomName을 모달에 넣기 위해 넣어놓은 input 장치 -->
                                         	<input class="hiddenRmName" type="hidden" th:value="${ room.roomName }">
                                         	<input type="hidden" th:value="${ room.roomNo }" class="roomNoInput">
+                                        	<!-- <th:block th:if="${ room.roomNo ==  resMeeting.roomNo}">
+                                        		<input type="hidden" th:value="${ resMeeting.startTime }" 
+                                        		class="startTime" name="startTime">
+                                        	</th:block> -->
                                             <input type="hidden" class="time" value="08:00">
                                         </td>
                                     </tr>
@@ -420,7 +426,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
         </form>
         </div>
 
-        <!--회의실 예약 Modal -->
+		<script>
+			const matchTime = $('.startTime').val().substr(11, 2);
+			console.log(matchTime);
+		</script>
+
+
+		<!--회의실 예약 Modal -->
         <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-resize"

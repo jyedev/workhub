@@ -13,17 +13,17 @@ public interface PostMapper {
 
 	List<PostDTO> findAllPost();
 
+	List<PostDTO> findAllNotice();
+	
 	List<CategoryDTO> findAllCategory();
 
-	int writePost(PostDTO post);
-
 	PostDTO findPostByNo(Integer postNo);
+
+	int writePost(PostDTO post);
 
 	int updatePost(PostDTO post);
 
 	int deletePost(Integer postNo);
-
-	List<PostDTO> findAllNoticePost();
 
 
 }

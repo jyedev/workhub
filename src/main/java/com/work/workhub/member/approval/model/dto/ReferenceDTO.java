@@ -16,5 +16,6 @@ public class ReferenceDTO {
 	private int memNo;
 	
 	private MemberDTO ref;
+	private ApprovalDTO app;
 	
 }

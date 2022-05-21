@@ -13,6 +13,9 @@ public interface MeetingService {
 
 	boolean reserveRoom(ResMeetingDTO resRoom) throws Exception;
 
+	List<ResMeetingDTO> selectAllResMeeting();
+
+
 	
 	
 

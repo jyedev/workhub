@@ -66,7 +66,8 @@
 				*
 		  FROM MT_ROOM 
 		 WHERE DEL_YN = 'N'
-		   AND RM_LOCATION = '3층 회의실'
+		   AND ROOM_YN = 'Y'
+		   AND RM_LOCATION = '4층 회의실'
 		 ORDER BY ROOM_NO
 	</select>
     
@@ -85,6 +86,15 @@
     	
     	
     </insert>
+    
+    <select id="selectAllResMeeting" resultMap="meetingResultMap">
+    	SELECT
+    			*
+    	  FROM RES_MT
+    	  WHERE END_TIME > SYSDATE
+          AND TO_CHAR(START_TIME, 'yyyy-MM-dd') = TO_CHAR(SYSDATE, 'yyyy-MM-dd')
+    	
+    </select>
     
 
 </mapper>

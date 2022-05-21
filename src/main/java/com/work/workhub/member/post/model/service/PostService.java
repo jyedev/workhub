@@ -10,13 +10,14 @@ public interface PostService {
 
 	List<PostDTO> findAllPost();
 
+	List<PostDTO> findAllNotice();
+	
 	List<CategoryDTO> findAllCategory();
 
+	PostDTO findPostByNo(Integer postNo);
+	
 	boolean writePost(PostDTO post) throws Exception;
 
-	PostDTO findPostByNo(Integer postNo);
-
 	int deletePost(Integer postNo);
-
 	
 }

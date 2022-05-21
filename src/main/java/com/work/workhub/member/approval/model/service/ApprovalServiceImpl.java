@@ -25,6 +25,12 @@ public class ApprovalServiceImpl implements ApprovalService {
 		this.approvalMapper = approvalMapper;
 	}
 
+//	@Override
+//	public List<ApprovalDTO> selectReceptionList(int receiverNo, int refNo) {
+//		
+//		return approvalMapper.selectReceptionList(receiverNo, refNo);
+//	}
+	
 	@Override
 	public List<ApprovalDTO> selectReceptionList(int no) {
 		
@@ -75,6 +81,30 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public List<ReferenceDTO> findRefByNo(Integer approvalNo) {
 		
 		return approvalMapper.findRefByNo(approvalNo);
+	}
+
+	@Override
+	public void modifyRet(Integer no) {
+		
+		approvalMapper.modifyRet(no);
+	}
+
+	@Override
+	public void deleteApp(int no) {
+
+		approvalMapper.deleteApp(no);
+	}
+
+	@Override
+	public void insertReceiver(ApprovalDTO approval, int receiverNo) {
+		
+		approvalMapper.insertReceiver(approval, receiverNo);
+	}
+
+	@Override
+	public void insertRef(ApprovalDTO approval, int refNo) {
+
+		approvalMapper.insertRef(approval, refNo);
 	}
 
 
