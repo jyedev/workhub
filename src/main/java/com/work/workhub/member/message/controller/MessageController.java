@@ -147,5 +147,10 @@ public class MessageController {
 		
 	}
 	
+	@GetMapping("view/{msgCode}")
+	   public @ResponseBody MessageDTO findMessageInboxByCode(@PathVariable int msgCode) {
+	      return messageService.findMessageInboxByCode(msgCode);
+	   }
+	
 	
 }

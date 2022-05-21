@@ -12,6 +12,7 @@
 		<result property="email" column="EMAIL"/>
 		<result property="phone" column="PHONE"/>
 		<result property="status" column="STATUS"/>
+		<result property="depName" column="DEP_NAME"/>
 		
 		<collection property="memberRoleList" resultMap="memberRoleResultMap"/>
 	</resultMap>
@@ -46,9 +47,11 @@
 			 , B.AUTH_NO REF_AUTH_NO
 			 , C.AUTH_NO REF_AUTH_NO2
 			 , C.AUTH_NAME
+			 , D.DEP_NAME
 		 FROM TBL_MEMBER A
 		 LEFT JOIN MEMBER_ROLE B ON (A.NO = B.NO)
 		 LEFT JOIN AUTHORITY C ON (B.AUTH_NO = C.AUTH_NO)
+		 LEFT JOIN DEPARTMENT D ON (A.DEP_NO = D.DEP_NO)
 		WHERE A.ID = #{ username }
 	</select>
 	

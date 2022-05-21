@@ -25,6 +25,7 @@ public class UserImpl extends User{
 	   private String email;
 	   private String phone;
 	   private String status;
+	   private String depName;
 	   
 	   public List<MemberRoleDTO> memberRoleList;
 	   
@@ -52,6 +53,7 @@ public class UserImpl extends User{
 		this.dept = member.getDept();
 		this.position = member.getPosition();
 		this.workGroup = member.getWorkGroup();
+		this.depName = member.getDepName();
 	}
 
 }

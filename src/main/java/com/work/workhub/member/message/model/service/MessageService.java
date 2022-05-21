@@ -10,6 +10,8 @@ import com.work.workhub.member.message.model.dto.MessageDTO;
 public interface MessageService {
 	
 	List<MessageDTO> findMessageInbox(int no);
+	
+	MessageDTO findMessageInboxByCode(int msgCode);
 
 	List<MessageDTO> findMessageSent(int no);
 

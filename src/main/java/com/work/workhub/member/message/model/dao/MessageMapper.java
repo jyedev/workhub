@@ -12,6 +12,8 @@ import com.work.workhub.member.message.model.dto.MessageDTO;
 public interface MessageMapper {
 	
 	List<MessageDTO> findMessageInbox(int no);
+	
+	MessageDTO findMessageInboxByCode(int msgCode);
 
 	List<MessageDTO> findMessageSent(int no);
 

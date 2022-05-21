@@ -27,6 +27,14 @@ public class MessageDTO {
 	
 	private String memberNos; //수신자사번모아서전달  
 	
-	
+//	public String getSendDate() {
+//	      try {
+//	         Date date = new SimpleDateFormat("yyyyMMdd").parse(this.sendDate);
+//	         return new SimpleDateFormat("yyyy-MM-dd").format(date);
+//	      } catch (ParseException e) {
+//	         e.printStackTrace();
+//	      }
+//	      return null;
+//	   }
 
 }
