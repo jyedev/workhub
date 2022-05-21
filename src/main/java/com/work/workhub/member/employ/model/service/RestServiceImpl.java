@@ -2,9 +2,11 @@ package com.work.workhub.member.employ.model.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.work.workhub.admin.work.model.dto.RestCateDTO;
 import com.work.workhub.admin.work.model.dto.WorkDTO;
@@ -87,32 +89,32 @@ public class RestServiceImpl implements RestService{
 	}
 	
 	//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
-//	@Override
-//	public ImgDTO modifyImgs(int porestNo) {
-//		
-//		return empstatusMapper.modifyImgs(porestNo);
-//	}
+	@Override
+	public ImgDTO modifyImgs(int porestNo) {
+		
+		return empstatusMapper.modifyImgs(porestNo);
+	}
 	
 	//연차 신청서 수정
-//	@Override
-//	public boolean modifyRestImg(ImgDTO img, RestDTO rest, int porestNo) throws Exception {
-//		
-//		
-//		//값만 (여기서부터 나눠서 값을 삽입한다.)
-//		int result = empstatusMapper.ModifyPara(rest, porestNo);
-//		
-//		//이미지만
-//		int results = empstatusMapper.ModifyRest(img, porestNo);
-//		
-//
-//        if(result <= 0 || results <= 0) {
-//            throw new Exception("연차 신청서 등록 실패");
-//        }
-//
-//
-//        return result > 0 ? true : false;
-//		
-//	}
+	@Override
+	public boolean modifyRestImg(@RequestParam("img") ImgDTO img,@RequestParam("rest") RestDTO rest) throws Exception {
+		
+		
+		//값만 (여기서부터 나눠서 값을 삽입한다.)
+		int result = empstatusMapper.ModifyPara(rest);
+		
+		//이미지만
+		int results = empstatusMapper.ModifyRest(img);
+		
+
+        if(result <= 0 || results <= 0) {
+            throw new Exception("연차 신청서 등록 실패");
+        }
+
+
+        return result > 0 ? true : false;
+		
+	}
 	
 	//삭제하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
 	@Override

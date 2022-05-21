@@ -141,7 +141,7 @@ public class RestController {
 				//파라미터 삽입
 //				restService.insertPara(rest);
 				
-		        rttr.addFlashAttribute("successMessage", messageSource.getMessage("registRoom", null, locale));
+		        rttr.addFlashAttribute("successMessage", messageSource.getMessage("insertRest", null, locale));
 		        
 		        return "redirect:/rest/restSelect";
 
@@ -169,76 +169,78 @@ public class RestController {
 		 
 		 
 		 	//연차신청서 수정하기
-//			@PostMapping("modify")
-//			public String modifyRest(@RequestParam int porestNo, @RequestParam(value="singleFile", required=false) MultipartFile singleFile, @ModelAttribute ImgDTO img, @ModelAttribute RestDTO rest,HttpServletRequest request, Model model, RedirectAttributes rttr, Locale locale) throws Exception {
-//				
-//				
-//				
-//				//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
-//				ImgDTO beforeImg = restService.modifyImgs(porestNo);
-//				
-//				log.info("수정될 이미지 결과값 : {}", beforeImg);
-//				
-//				if (singleFile != null) {
-//					/* 회의실 사진 등록 */
-//					log.info("singleFile : {}" + singleFile);
-//					
-//					// file 저장 경로 설정
-//					String root = request.getSession().getServletContext().getRealPath("resources");
-//					
-//					log.info("루트 확인 : {}",root);
-//					
-//					
-//
-//					String savePath = root + "\\uploadFiles";
-//
-//					File mkdir = new File(savePath);
-//					if (!mkdir.exists()) {
-//						mkdir.mkdirs();
-//					}
-//
-//					// file name change
-//					String name = singleFile.getOriginalFilename();
-//					String ext = name.substring(name.lastIndexOf("."));
-//					String reName = UUID.randomUUID().toString().replace("-", "") + ext;
-//
-//					// file Save
-//					try {
-//						singleFile.transferTo(new File(uploadFilePath + "\\" + reName));
-//						model.addAttribute("message", "파일 업로드 성공");
-//
-//					} catch (IllegalStateException | IOException e) {
-//						model.addAttribute("message", "파일 업로드 실패");
-//					}
-//
-//					img.setImageName(name);
-//					img.setImageRename(reName);
-//					img.setImagePath(savePath);
-//					
-//					log.info("room info : {}", img);
-//					
-//					
-//					/* 기존 있던 파일 삭제.*/
-//					File deleteFile = new File(savePath + "/" + beforeImg.getImageRename());
-//					boolean isDeleted = deleteFile.delete();
-//					
-//					if(isDeleted == true) {
-//						log.info("기존 파일 삭제 완료");
-//					} else {
-//						log.info("기존 파일 삭제 실패");
-//					}
-//					
-//				}
-//				
-//				//연차신청서 수정
-//				restService.modifyRestImg(img, rest, porestNo);
-//				
-//				//메시지 주석처리 해둠 나중에 주석 제거
-//				rttr.addFlashAttribute("successMessage", messageSource.getMessage("modifyRestImg", null, locale));
-//				
-//				return "redirect:/rest/restSelect";
-//				
-//			}
+			@PostMapping("modify")
+			public String modifyRest(@RequestParam int porestNo, @RequestParam(value="singleFile", required=false) MultipartFile singleFile, @ModelAttribute ImgDTO img, @ModelAttribute RestDTO rest,HttpServletRequest request, Model model, RedirectAttributes rttr, Locale locale) throws Exception {
+				
+				
+				
+				//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
+				ImgDTO beforeImg = restService.modifyImgs(porestNo);
+				
+				log.info("수정될 이미지 결과값 : {}", beforeImg);
+				
+				if (singleFile != null) {
+					/* 회의실 사진 등록 */
+					log.info("singleFile : {}" + singleFile);
+					
+					// file 저장 경로 설정
+					String root = request.getSession().getServletContext().getRealPath("resources");
+					
+					log.info("루트 확인 : {}",root);
+					
+					
+
+					String savePath = "C:/Users/Administrator/git/workhub/src/main/resources/uploadFiles";
+
+					File mkdir = new File(savePath);
+					if (!mkdir.exists()) {
+						mkdir.mkdirs();
+					}
+
+					// file name change
+					String name = singleFile.getOriginalFilename();
+					String ext = name.substring(name.lastIndexOf("."));
+					String reName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+					// file Save
+					try {
+						singleFile.transferTo(new File(uploadFilePath + "\\" + reName));
+						model.addAttribute("message", "파일 업로드 성공");
+
+					} catch (IllegalStateException | IOException e) {
+						model.addAttribute("message", "파일 업로드 실패");
+					}
+
+					img.setImageName(name);
+					img.setImageRename(reName);
+					img.setImagePath(savePath);
+					
+					log.info("room info : {}", img);
+					
+					
+					/* 기존 있던 파일 삭제.*/
+					File deleteFile = new File(savePath + "/" + beforeImg.getImageRename());
+					boolean isDeleted = deleteFile.delete();
+					
+					if(isDeleted == true) {
+						log.info("기존 파일 삭제 완료");
+					} else {
+						log.info("기존 파일 삭제 실패");
+					}
+					
+				}
+				
+				
+				
+				//연차신청서 수정
+				restService.modifyRestImg(img, rest);
+				
+				//메시지 주석처리 해둠 나중에 주석 제거
+				rttr.addFlashAttribute("successMessage", messageSource.getMessage("modifyRestImg", null, locale));
+				
+				return "redirect:/rest/restSelect";
+				
+			}
 		 
 
 			@GetMapping("restDelete")

@@ -3,6 +3,8 @@ package com.work.workhub.member.employ.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.work.workhub.admin.work.model.dto.RestCateDTO;
 import com.work.workhub.admin.work.model.dto.WorkDTO;
@@ -56,13 +58,13 @@ public interface EmpstatusMapper {
 	List<RestCateDTO> boxRe();
 	
 	//수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
-//	ImgDTO modifyImgs(int porestNo);
+	ImgDTO modifyImgs(int porestNo);
 	
 	//연차 신청서 값만 수정
-//	int ModifyPara(RestDTO rest, int porestNo);
+	int ModifyPara(@RequestParam("rest") RestDTO rest);
 	
 	//연차 신청서 이미지만 수정
-//	int ModifyRest(ImgDTO img, int porestNo);
+	int ModifyRest(@RequestParam("img") ImgDTO img);
 	
 	//삭제하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기
 	ImgDTO modifyImgss(int porestNo);
