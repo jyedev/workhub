@@ -370,16 +370,16 @@
 	</select>
 	
 	<!-- 수정하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기 -->
-	<!-- <select id="modifyImgs" resultMap="imgResultMap">
+	<select id="modifyImgs" resultMap="imgResultMap">
 	SELECT
 		*
 	FROM ATT_IMAGE
 	WHERE POREST_NO = #{ porestNo }
-	</select> -->
+	</select> 
 	
 	
 	<!-- 연차신청서 값만 업데이트 -->
-	<!--  <update id="ModifyPara">
+	<update id="ModifyPara">
 	UPDATE POREST
 	SET
 	   REST_NO = #{ restNo }
@@ -388,21 +388,21 @@
 	 , POREST_DAY = #{ porestDay }
 	 , POREST_REASON = #{ porestReason }
 	 WHERE POREST_NO = #{ porestNo }			
-	</update>-->
+	</update>
 	
 	
 	
 	<!-- 연차신청서 이미지만 업데이트 -->
-<!-- 	<update id="ModifyRest">
+	<update id="ModifyRest">
 	UPDATE ATT_IMAGE
 	SET
-    	<if test="name != null">
-    		ORG_NAME = #{ name },
-    		SAVED_NAME = #{ reName },
-    		SAVE_PATH = #{ savePath }
+    	<if test="imageName != null">
+    		IMAGE_NAME = #{ imageName },
+    		IMAGE_RENAME = #{ imageRename },
+    		IMAGE_PATH = #{ imagePath }
     	</if>
 	 WHERE POREST_NO = #{ porestNo }	
-	</update> -->
+	</update> 
 	
 	
 	<!-- 삭제하기 버튼을 눌렀을 때 해당 게시글의 이미지 정보 가져오기 -->
