@@ -9,6 +9,6 @@ import com.work.workhub.member.calendar.model.dto.CalendarDTO;
 @Mapper
 public interface CalendarMapper {
 
-	List<CalendarDTO> selectCalendarList();
+	List<CalendarDTO> selectCalendarList(int no);
 
 }

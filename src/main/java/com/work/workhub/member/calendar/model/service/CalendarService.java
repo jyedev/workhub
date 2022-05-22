@@ -6,6 +6,6 @@ import com.work.workhub.member.calendar.model.dto.CalendarDTO;
 
 public interface CalendarService {
 
-	List<CalendarDTO> selectCalendarList();
+	List<CalendarDTO> selectCalendarList(int no);
 
 }
