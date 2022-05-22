@@ -19,8 +19,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 13vh;
-    width: 99vh;
+    height: 170px;
+    width: 1350px;
+    
   }
   
   .glow {
@@ -109,7 +110,7 @@ body {
  .hr1 {
     position: relative;
     top: 200px;
-    left: 322px;
+    left: 351px;
  }
 
  .buttons {
@@ -124,14 +125,14 @@ body {
 	text-decoration:none;
     position: relative;
     top: 200px;
-    left: 324px;
+    left: 350px;
     margin-right: 18px;
 }
 .buttons:focus {
 	background-color:#BEBEBE;
     color: #ffffff;
     top: 200px;
-    left: 324px;
+    left: 350px;
 }
 
 .buttons:hover {
@@ -150,14 +151,14 @@ body {
 	text-decoration:none;
     position: relative;
     top: 200px;
-    left: 324px;
+    left: 355px;
     margin-right: 18px;
 }
 .buttonsa:focus {
 	background-color:#BEBEBE;
     color: #ffffff;
     top: 200px;
-    left: 324px;
+    left: 355px;
 }
 
 .buttonsa:hover {
@@ -166,10 +167,10 @@ body {
 
  .workss {
     border-radius:9px;
-    padding:4px 78px;
+    padding:4px 60px;
     position: relative;
     top: 215px;
-    left: 325px;
+    left: 350px;
     font-size: 20px;
     border: solid 3px #6caf8d;
  }
@@ -190,12 +191,13 @@ body {
    font-weight: bolder;
    font-size: 26px;
    position: relative;
-   bottom: 220px;
-   left: 700px;
+   bottom: 263px;
+   left: 886px;
    color: #000000;
   }
 
   .box {
+   position: relative;
    float: left;
    border: 1px solid #6CAF8D;
    width: 220px;
@@ -358,15 +360,13 @@ body {
    background-color: #ffffff;
    box-shadow: none;
    border: solid 3px #BEBEBE;
-   margin-right: 13px;
+    position: relative;
+   right: 215px;
+   bottom: 70px;
 
 }
 
-.soiojy {
-   position: relative;
-   left:664px;
-   bottom: 210px;
-}
+
 
 .fc-left {
    position: relative;
@@ -404,7 +404,7 @@ body {
 	text-decoration:none;
     position: relative;
     top: 214px;
-    left: 326px;
+    left: 358px;
     margin-right: 18px;
     border: none;
 }
@@ -412,7 +412,7 @@ body {
 	background-color:#BEBEBE;
     color: #ffffff;
     top: 214px;
-    left: 326px;
+    left: 358px;
 }
 
 .chec:hover {
@@ -434,5 +434,15 @@ body {
 
 .dgsaujjk:hover {
  color: #6caf8d;
+}
+
+.djdji {
+	position: absolute;
+   top: 32px;
+   left: 310px;
+	background-color: #ffffff;
+	height: 500px;
+    width: 340px;
+    border-radius: 20px;
 }
 
