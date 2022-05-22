@@ -63,6 +63,25 @@
             AND A.MSG_REICIPIENT_NO = #{ no }
 	</select>
 	
+	<select id="findMessageInboxByCode" resultMap="messageResultMap">
+		SELECT /* com.work.workhub.member.message.model.dao.findMessageInbox() */
+			    A.MSG_CODE
+			  , A.MSG_SENDER_NO
+			  , A.MSG_REICIPIENT_NO
+			  , A.MSG_CONTENT
+			  , A.MSG_SEND_DATE
+			  , A.MSG_SEND_TIME
+			  , A.MSG_READ_DATE
+			  , A.MSG_READ_TIME
+			  , A.MSG_RECYCLE_BIN_STATUS
+			  , A.MSG_DELETE_STATUS
+			  , B.NAME
+           FROM MESSAGE A
+           JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
+          WHERE MSG_RECYCLE_BIN_STATUS='N' 
+            AND A.MSG_CODE = #{ msgCode }
+	</select>
+	
 	<select id="findMessageSent" resultMap="messageResultMap">
 		SELECT /* com.work.workhub.member.message.model.dao.findMessageSent() */
 			    A.MSG_CODE
@@ -145,6 +164,7 @@
     	     , A.POSITION_NO
     	     , A.NAME
     	     , A.EMAIL
+    	     , A.ID
     	     , B.POSITION_NAME
     	     , C.DEP_NAME
           FROM TBL_MEMBER A 

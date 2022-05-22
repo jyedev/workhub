@@ -10,6 +10,7 @@
     <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.2/dayjs.min.js"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
     <!-- bootstrap -->
@@ -235,8 +236,8 @@
                                                                 </div>
                                                                 <div class="mail-meta-item">
                                                                     <span class="float-right">
-                                                                    	<span class="mail-date" th:text="${ message.sendDate }">발송 날짜</span>
-                                                                        <span class="mail-date" th:text="${ message.sendTime }">발송 시간</span>
+                                                                    	<span class="mail-date" th:text="${ message.sendDate }" data-date-format="YYYY-MM-DD">발송 날짜</span>
+                                                                        <span class="mail-date" th:text="${ message.sendDate + message.sendTime }" data-date-format="HH:mm:ss">발송 시간</span>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -443,7 +444,29 @@
     				console.error(err);
     			}
     		})
+    		
+    		
+    		$.ajax({
+    			url: '/message/view/' + msgCode,
+    			method: 'GET',
+    			success: function(res){
+    				console.log('res==' , res);
+    				$('#message-content').text(res.msgContent);
+    			},
+    			error : function(err) {
+    				console.error(err);
+    			}
+    		})
     	}
+    	
+    	$(document).ready(function(){
+    		var dateFormatList = document.querySelectorAll('[data-date-format]');
+            for(var dateFormatObj of dateFormatList){
+               var dateFormat = dateFormatObj.getAttribute('data-date-format');
+               var paseFormat = (dateFormat==='YYYY-MM-DD')?'YYYYMMDD':'HHmmss';
+               dateFormatObj.innerText = dayjs(dateFormatObj.innerText, paseFormat).format(dateFormat);
+            }
+    	})
     	
     	$(function(){
     		var chkObj = document.getElementsByName("RowCheck");

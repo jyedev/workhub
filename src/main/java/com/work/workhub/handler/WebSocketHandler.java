@@ -10,7 +10,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.work.workhub.member.member.dao.MemberMapper;
+import com.work.workhub.member.message.model.dto.ChatDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,8 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
 	
-	private Map<String, WebSocketSession> userSessionsMap = new ConcurrentHashMap<String, WebSocketSession>();
+	private Map<String, WebSocketSession> userSessionsMap = new ConcurrentHashMap<>();
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private ObjectMapper om;   //json 
 	
 	@Autowired
 	public WebSocketHandler(MemberMapper memberMapper) {
@@ -38,28 +43,23 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception { // 메시지 
 		
 		String msg = message.getPayload();
+		ChatDTO chatDTO = om.readValue(msg, ChatDTO.class);
+		log.info("chatDTO=>{}", chatDTO);
 		
 		if(msg != null) {
-			String[] msgs = msg.split(",");
-			log.info(msgs.toString());
-			if(msgs != null && msgs.length == 3) {  // alarm 테이블 생성해서 추가하기 
-				String sender = msgs[0];
-				String url = msgs[1];
-				String receiver = msgs[2];
-				log.info(sender);
-				log.info(receiver);
-				log.info(url);
-				
-				String receiverId = memberMapper.findIdByNo(receiver);
-				WebSocketSession receiverSession = userSessionsMap.get(receiverId);
-				
+			
+			String[] receivers = chatDTO.getReceiver().split(",");
+			chatDTO.setReceiver(null);
+			TextMessage txtMsg = new TextMessage(om.writeValueAsString(chatDTO));
+			for(String receiver : receivers) {
+				WebSocketSession receiverSession = userSessionsMap.get(receiver);
 				if(receiverSession != null) {
-					TextMessage txtmsg = new TextMessage("<a href='"+ url +"'>" + sender + "로부터 새로운 쪽지가 도착했습니다.</a>");
-					receiverSession.sendMessage(txtmsg);
+					receiverSession.sendMessage(txtMsg);
 				}
 			}
+			session.sendMessage(txtMsg);
+			}
 		}
-	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {

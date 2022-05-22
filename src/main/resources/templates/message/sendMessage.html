@@ -302,6 +302,9 @@
                                                         <div class="form-group pb-50">
                                                             <label>보내는 사람</label>
                                                             <div id="emailfrom" class="form-control bg-light secondary" sec:authentication="principal.email" disabled></div>
+                                                            <input type="hidden" id="sMemberNo" th:value="${#authentication.principal.no}">
+                                                            <input type="hidden" id="sDepName" th:value="${#authentication.principal.depName}">
+                                                            <input type="hidden" id="sName" th:value="${#authentication.principal.name}">
                                                         </div>
                                                         <div class="form-label-group">
                                                             <label for="emailTo">받는 사람 </label>
@@ -357,7 +360,7 @@
                                                                                                                 </thead>
                                                                                                                 <tbody th:id="'team' + ${item.key}" th:each="item : ${ memberListMap }" style="display:none;">
                                                                                                                 	<tr th:each="member : ${ item.value }" >
-                                                                                                                		<td><input type="checkbox" name="userCheckbox" th:value="${ member.no }"></td>
+                                                                                                                		<td><input type="checkbox" name="userCheckbox" th:value="${ member.id }"></td>
 	                                                                                                                	<td th:text="${ member.name }"></td>
 	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
 	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
@@ -408,7 +411,7 @@
                                                     <button type="reset" class="btn btn-light-secondary cancel-btn mr-1 me-2">
                                                         <span class="d-sm-inline d-none">취소</span>
                                                     </button>
-                                                    <button type="submit" class="btn-send btn btn-primary" id="sendMessageBtn">
+                                                    <button type="button" class="btn-send btn btn-primary" id="sendMessageBtn">
                                                         <i class="bi bi-send-fill"></i>
                                                         <span class="d-sm-inline d-none">보내기</span>
                                                     </button>
@@ -439,13 +442,26 @@
         	
         	/* 웹소켓 메시지 전송 영역 */
         	$('#sendMessageBtn').click(function(e){
-        		let sender = $('#emailfrom').val();
+        		let sender = $('#emailfrom').text();
         		let receiver = $('#memberNos').val();
         		let url = '/message/inboxList';
+        		let sMemberNo = $('#sMemberNo').val();
+        		let sDepName = $('#sDepName').val();
+        		let sName = $('#sName').val();
         		
         		console.log(sender);
         		console.log(receiver);
-        		socket.send(url + "," + sender + "," + receiver);
+        		
+        		let msg = {
+        				sender : sender,
+        				receiver : receiver,
+        				url : url,
+        				no : sMemberNo,
+        				depName : sDepName,
+        				name : sName
+        		}
+        		console.log(msg);
+        		socket.send(JSON.stringify(msg));
         	
 	        	$('#contextInput').val(''); //초기화  
         	});
@@ -482,13 +498,20 @@
 	    	};
 	    	
 	    	socket.onmessage = function(evt) {
-	    		var data = evt.data;
+	    		var data = JSON.parse(evt.data);
+	    		var html = '쪽지 전송이 완료되었습니다.'
+	    		var icon = 'success';
+	    		if(data.sender !== $('#emailfrom').text()) {
+	    		 	html = '<a href="' + data.url + '">' + data.name + '('+ data.sender + ')' + '로부터 새로운 쪽지가 도착했습니다.</a>';
+	    		 	icon = 'info';
+	    		}
 	    		
 	    		const Toast = Swal.mixin({
 	    			toast: true,
+	    			showCloseButton: true,
 	    			position: 'top-middle',
 	    			showConfirmButton: false,
-	    			timer: 3000,
+	    			timer: 30000,
 	    			timerProgressBar: true,
 	    			didOpen: (toast) => {
 	    				toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -497,13 +520,16 @@
 	    		})
 	    		
 	    		Toast.fire({
-	    			icon: 'warning',
-	    			html: data,
+	    			icon: icon,
+	    			html: html,
 	    		})
 	    	};
 	    	
 	    	socket.onclose = function() {
 	    		console.log('close');
+	    	}
+	    	socket.onerror = function(err){
+	    		console.log(err);
 	    	}
 	    	
 	    });

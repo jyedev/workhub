@@ -30,6 +30,12 @@ public class MessageServiceImpl implements MessageService {
 	public List<MessageDTO> findMessageInbox(int no) {
 		return messageMapper.findMessageInbox(no);
 	}
+	
+	/* 쪽지 - 쪽지 상세 조회 */
+	@Override
+	public MessageDTO findMessageInboxByCode(int msgCode) {
+		return messageMapper.findMessageInboxByCode(msgCode);
+	}
 
 	/* 쪽지 - 보낸 쪽지함 조회 */
 	@Override
