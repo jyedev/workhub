@@ -3,6 +3,7 @@ package com.work.workhub.member.calendar.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.work.workhub.member.calendar.model.dto.CalendarDTO;
+import com.work.workhub.member.calendar.model.dto.CategoryDTO;
 import com.work.workhub.member.calendar.model.dto.FullCalendarDTO;
 import com.work.workhub.member.calendar.model.service.CalendarService;
 import com.work.workhub.member.member.dto.UserImpl;
@@ -76,12 +80,32 @@ public class CalendarController {
 			String title = calendar.getCalTitle();
 			Date start = calendar.getCalStart();
 			Date end = calendar.getCalEnd();
-			Boolean allDay = calendar.getCalAlldayStatus();
+			String allDay = calendar.getCalAlldayStatus();
 			
 			calMap.put("event" + i, new FullCalendarDTO(title, start, end, allDay));
 		}
 			
 		return calMap;
+	}
+	
+	@GetMapping(value="category", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<CategoryDTO> findCategoryList() {
+		return calendarService.findAllCategory();
+	}
+	
+	@GetMapping("regist")
+	public void registCalendar() {}
+	
+	@PostMapping("/regist")
+	public String registCalendar(@ModelAttribute CalendarDTO calendar, RedirectAttributes rttr, Locale locale) throws Exception {
+		
+		log.info("캘린더 등록 메뉴: {}", calendar);
+		calendarService.registCalendar(calendar);
+		
+		rttr.addFlashAttribute("successMessage", messageSource.getMessage("registCalendar", null, locale));
+		
+		return "redirect:/calendar/list";
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.member.calendar.model.dao.CalendarMapper;
 import com.work.workhub.member.calendar.model.dto.CalendarDTO;
+import com.work.workhub.member.calendar.model.dto.CategoryDTO;
 
 
 @Service
@@ -24,6 +25,23 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public List<CalendarDTO> selectCalendarList(int no) {
 		return calendarMapper.selectCalendarList(no);
+	}
+
+	@Override
+	public boolean registCalendar(CalendarDTO calendar) throws Exception {
+		
+		int result = calendarMapper.registCalendar(calendar);
+		
+		if(result <= 0) {
+			throw new Exception("일정 등록에 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+	}
+
+	@Override
+	public List<CategoryDTO> findAllCategory() {
+		return calendarMapper.findAllCategory();
 	}
 
 }
