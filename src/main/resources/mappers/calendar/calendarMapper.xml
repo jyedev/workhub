@@ -3,20 +3,16 @@
 <mapper namespace="com.work.workhub.member.calendar.model.dao.CalendarMapper">
 
 	<resultMap id="calendarResultMap" type="com.work.workhub.member.calendar.model.dto.CalendarDTO">
-		<id property="calCode" column="CAL_CODE"/>
+		<id property="calNo" column="CAL_NO"/>
 		<result property="calCategoryCode" column="CAL_CATEGORY_CODE"/>
 		<result property="calDepNo" column="CAL_DEP_NO"/>
 		<result property="calWriterNo" column="CAL_WRITER_NO"/>
-		<result property="calName" column="CAL_NAME"/>
+		<result property="calTitle" column="CAL_TITLE"/>
 		<result property="calContent" column="CAL_CONTENT"/>
-		<result property="calStartDate" column="CAL_START_DATE"/>
-		<result property="calEndDate" column="CAL_END_DATE"/>
-		<result property="calStartTime" column="CAL_START_TIME"/>
-		<result property="calEndTime" column="CAL_END_TIME"/>
+		<result property="calStart" column="CAL_START"/>
+		<result property="calEnd" column="CAL_END"/>
 		<result property="calAlldayStatus" column="CAL_ALLDAY_STATUS"/>
 		
-		<association property="calCategory" resultMap="calCategoryResultMap"></association>
-		<association property="department" resultMap="departmentResultMap"/>
 	</resultMap>
 	
 	<resultMap id="calCategoryResultMap" type="com.work.workhub.member.calendar.model.dto.CalCategoryDTO">
@@ -30,19 +26,8 @@
 	</resultMap>
 	
 	<select id="selectCalendarList" resultMap="calendarResultMap">
-		SELECT /* com.work.workhub.member.calendar.model.dao.selectCalendarList() */
-			    A.CAL_CODE
-			  , A.CAL_CATEGORY_CODE
-			  , A.CAL_DEP_NO
-			  , A.CAL_WRITER_NO
-			  , A.CAL_NAME
-			  , A.CAL_CONTENT
-			  , A.CAL_START_DATE
-			  , A.CAL_END_DATE
-			  , A.CAL_START_TIME
-			  , A.CAL_END_TIME
-			  , A.CAL_ALLDAY_STATUS
-		   FROM CALENDAR A
+		SELECT *
+		   FROM CALENDAR
 	</select>
 
 </mapper>
