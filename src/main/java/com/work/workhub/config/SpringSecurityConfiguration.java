@@ -78,19 +78,22 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			/* 요청에 대한 권한 체크 */
 			.authorizeHttpRequests()
 				.antMatchers("/approval/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/approval/**").hasRole("ROLE_MEMBER")
 				.antMatchers("/message/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/message/**").hasRole("ROLE_MEMBER")
 				.antMatchers("/reserve/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/reserve/**").hasRole("ROLE_MEMBER")
 				.antMatchers("/admin/**").authenticated()
 				.antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
+				.antMatchers("/asset/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/asset/**").hasRole("ROLE_ADMIN")
 				.anyRequest().permitAll()
 			.and()
 				.formLogin()
 				.loginPage("/")
 				.loginProcessingUrl("/member/login")
 				//.successForwardUrl("/")
-
 				.defaultSuccessUrl("/employ/employmentSelect", true)
-
 				.failureHandler(loginFailHandler())
 			.and()
 				.logout()
@@ -102,6 +105,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 				/* 성공 시 랜딩 페이지 */
 				.logoutSuccessUrl("/");
+			
 	}
 
 

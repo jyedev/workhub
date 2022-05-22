@@ -18,5 +18,9 @@ public interface CarResMapper {
 
 	int reserveCar(ResCarDTO resCar);
 
+	int updateCarStatus(ResCarDTO car);
+
+	int modifyCarRes(ResCarDTO car);
+
 
 }

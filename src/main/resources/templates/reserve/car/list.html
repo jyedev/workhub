@@ -156,9 +156,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     
                     <th:block th:if="${ #lists.size(resCarList) > num }">
                     	<!-- 본인 예약 차량 -->
-                    	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
-                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
-                    	</div>
+                    	<form method="get" action="returnInfo">
+                    		<input type="hidden" th:value="${ resCarList[num].resNo }" name="resNo">
+                   			<input type="hidden" th:value="${ resCarList[num].car.carName }" name="returnCarName">
+                   			<input type="hidden" th:value="${ resCarList[num].startTime }" name="returnStartTime">
+                   			<input type="hidden" th:value="${ resCarList[num].endTime }" name="returnEndTime">
+                   			<input type="hidden" th:value="${ #authentication.principal.name }" name="returnName">
+                   			<input type="hidden" th:value="${ resCarList[num].carPurpose }" name="returnCarPurpose">
+                   			<button type="submit" class="bg-transparent-btn"><img src="/assets/images/images/car-rent-my.png" alt="car"></button>
+                    	</form>
+                    	
                     	<!-- 타인 예약 차량 -->
                     	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo != #authentication.principal.no }">
                     		<img src="/assets/images/images/car-rent.png" alt="car">
@@ -185,7 +192,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                     <th:block th:if="${ #lists.size(resCarList) > num }">
                     	<!-- 본인 예약 차량 -->
                     	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo == #authentication.principal.no }">
-                    		<a th:href="@{/reserve/car/return}"><img src="/assets/images/images/car-rent-my.png" alt="car"></a>
+                    		<form method="get" action="returnInfo">
+                    			<input type="hidden" th:value="${ resCarList[num].resNo }" name="resNo">
+                    			<input type="hidden" th:value="${ resCarList[num].car.carName }" name="returnCarName">
+                    			<input type="hidden" th:value="${ resCarList[num].startTime }" name="returnStartTime">
+                    			<input type="hidden" th:value="${ resCarList[num].endTime }" name="returnEndTime">
+                    			<input type="hidden" th:value="${ #authentication.principal.name }" name="returnName">
+                    			<input type="hidden" th:value="${ resCarList[num].carPurpose }" name="returnCarPurpose">
+                    			<button type="submit" class="bg-transparent-btn"><img src="/assets/images/images/car-rent-my.png" alt="car"></button>
+                    		</form>
                     	</div>
                     	<!-- 타인 예약 차량 -->
                     	<div class="car-sec reserved" th:if="${ resCarList[num].memberNo != #authentication.principal.no }">

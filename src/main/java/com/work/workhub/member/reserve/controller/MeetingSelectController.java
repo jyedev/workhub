@@ -63,6 +63,8 @@ public class MeetingSelectController {
 		
 		mv.setViewName("reserve/meeting/list");
 		
+		log.info("resMeetingList : {}", resMeetingList);
+		
 		return mv;
 	}
 	
