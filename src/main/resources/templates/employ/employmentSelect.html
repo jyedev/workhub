@@ -45,7 +45,7 @@
         
         
          <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
-        
+        <div class="djdji"></div>
             <div class="wrapper">
                 <div><p class="hatta">근태관리</p></div>
                 <div id="clock" class="clocka">clock</div>
@@ -104,11 +104,12 @@
            <div class="box box4">
             <span class="asa vvv">이번달 연장</span>    
             <span class="csc ssgdd">1:00:00</span></div>
-    </div>
-    <div class="soiojy">
+    
     <input type="button" value="연장근무 신청" class="ppo">
     <input type="button" value="목록 다운로드" class="ppo">
+   
     </div>
+   
 
 	<!-- 캘린더 시작 -->
 	<div class="huyyy">
@@ -136,7 +137,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success">수정</span>
+                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -167,7 +168,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success">수정</span>
+                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -198,7 +199,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success">수정</span>
+                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -229,7 +230,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success">수정</span>
+                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -260,7 +261,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success">수정</span>
+                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -272,7 +273,15 @@
   </ul>
 </div>
 	<!-- 캘린더 끝 -->
-
+	
+	       <!-- 수정하기 버튼을 눌렀을 때 게시글 번호 넘기는 것 -->
+    <script type="text/javascript">
+    function employModify(attNo) { 
+    	// 근무그룹  번호 확인용
+    	alert(attNo); 
+    	var attNo = attNo; 
+        location.href='/employ/employModify?attNo='+attNo; }
+    </script> 
 
     <script>
         setInterval(showTime, 1000);
