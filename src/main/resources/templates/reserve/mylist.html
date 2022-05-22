@@ -61,7 +61,9 @@
 
 
             <!-- table hover -->
+            
             <div class="table-responsive tbl-read tbl-divide">
+            	<form method="post" th:action="@{/reserve/meeting/modify}">
                 <table class="table table-hover mb-0">
                     <colgroup>
                         <col width="200px">
@@ -76,11 +78,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-bold-500">4층 회의실</td>
-                            <td>회의실 S1</td>
-                            <td class="text-bold-500">
-                                <span>2022-04-29 19:00</span>&nbsp ~ &nbsp<span>2022-04-29 21:30</span>
+                        <tr th:each="meeting : ${ resMeetingList }">
+                            <td th:text="${ meeting.room.rmLocation }">
+                            <input type="hidden" name="roomNo" th:value="${ meeting.roomNo }">
+                            </td>
+                            <td th:text="${ meeting.room.roomName }"></td>
+                            <td>
+                                <span th:text="${ meeting.startTime }"></span>&nbsp ~ &nbsp<span th:text="${ meeting.endTime }"></span>
                             </td>
                             <td>
 
@@ -90,21 +94,11 @@
                             </td>
 
                         </tr>
-                        <tr>
-                            <td class="text-bold-500">4층 회의실</td>
-                            <td>회의실 S1</td>
-                            <td class="text-bold-500">
-                                <span>2022-04-29 19:00</span>&nbsp ~ &nbsp<span>2022-04-29 21:30</span>
-                            </td>
-                            <td>
-                                <a th:href="@{/reserve/meeting/modify}">수정</a>
-
-                            </td>
-
-                        </tr>
+                       
 
                     </tbody>
                 </table>
+                </form>
             </div>
             
             <div>
@@ -115,6 +109,7 @@
             </div>
             <!-- table hover -->
             <div class="table-responsive tbl-read tbl-divide">
+            	<form method="post" th:action="@{/reserve/car/modify}">
                 <table class="table table-hover mb-0">
                     <colgroup>
                         <col width="200px">
@@ -129,11 +124,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-bold-500">3360</td>
-                            <td>아반떼</td>
-                            <td class="text-bold-500">
-                                <span>2022-04-29 19:00</span>&nbsp ~ &nbsp<span>2022-04-29 21:30</span>
+                        <tr th:each="resCar : ${ resCarList }">
+                            <td th:text="${ resCar.car.carNumber }">
+                            <input type="hidden" name="resNo" th:value="${ resCar.resNo }">
+                            </td>
+                            <td th:text="${ resCar.car.carName }"></td>
+                            <td>
+                                <span th:text="${ resCar.startTime }"></span>&nbsp ~ &nbsp<span th:text="${ resCar.endTime }"></span>
                             </td>
                             <td>
                                 <a th:href="@{/reserve/car/modify}">수정</a>
@@ -145,6 +142,7 @@
 
                     </tbody>
                 </table>
+                </form>
             </div>
         </div>
     </div>

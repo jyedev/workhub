@@ -7,10 +7,6 @@ import com.work.workhub.member.reserve.model.dto.ResCarDTO;
 
 public interface CarResService {
 
-	void reserveCar(ResCarDTO car);
-
-	void updateCarStatus(ResCarDTO car);
-
 	List<CarDTO> selectAllCar();
 
 	List<ResCarDTO> selectAllResCarList();
@@ -18,6 +14,13 @@ public interface CarResService {
 	CarDTO selectedCar(int carIndex);
 
 	boolean registReservation(ResCarDTO resCar) throws Exception;
+
+	boolean updateCarStatus(ResCarDTO car) throws Exception;
+	
+	boolean modifyCarRes(ResCarDTO car) throws Exception;
+
+	void reserveCar(ResCarDTO car);
+
 	
 	
 

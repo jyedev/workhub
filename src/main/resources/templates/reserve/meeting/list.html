@@ -265,7 +265,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                         <td class="after time-td" data-bs-toggle="modal" data-bs-target="#inlineForm">
                                         	<input type="hidden" class="time" value="08:30">
                                         	<th:block th:if="${ not resMeetingList.?[roomNo == room.roomNo].isEmpty() }">
-                                        		<input type="hidden" class="startTime" name="startTime" th:value="${ resMeetingList[2].startTime }">
+                                        		<input type="hidden" class="startTime" name="startTime">
                                         	</th:block>
                                         </td>
                                     </tr>

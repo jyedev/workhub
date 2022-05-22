@@ -1949,3 +1949,9 @@ a {
 	padding-left : 150px;
 	padding-bottom : 20px;
 }
+
+.bg-transparent-btn {
+	background-color: transparent;
+	border-color: transparent;
+    border: none;
+}

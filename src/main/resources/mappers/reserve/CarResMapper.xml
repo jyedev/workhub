@@ -64,10 +64,14 @@
 	<select id="selectAllResCarList" resultMap="carResResultMap">
 		SELECT
 		*
-		FROM RES_CAR
-		WHERE END_TIME > SYSDATE
-          AND TO_CHAR(START_TIME, 'yyyy-MM-dd') = TO_CHAR(SYSDATE, 'yyyy-MM-dd')
+		FROM RES_CAR A
+		JOIN COM_CAR B ON (A.CAR_NO = B.CAR_NO)
+		WHERE A.END_TIME > SYSDATE
+		<![CDATA[AND A.START_TIME < SYSDATE]]>         
+          AND A.DEL_YN = 'N'
+        ORDER BY A.START_TIME DESC
 	</select>
+	<!-- AND TO_CHAR(A.START_TIME, 'yyyy-MM-dd') = TO_CHAR(SYSDATE, 'yyyy-MM-dd') -->
 	
 	<select id="selectedCar" resultMap="carResultMap">
 		SELECT
@@ -91,4 +95,24 @@
 		)
 	</insert>
 	
+	<!-- 예약 중인 차량을 반납 상태로 바꾸는 쿼리문 -->
+	<update id="updateCarStatus">
+		UPDATE RES_CAR
+		SET
+		DEL_YN = 'Y'
+		WHERE RES_NO = #{ resNo }
+	</update>
+	
+	<!-- 차량 예약 수정 쿼리문 -->
+	<update id="modifyCarRes">
+		UPDATE RES_CAR
+		SET
+		START_TIME = #{ startTime },
+		END_TIME = #{ endTime },
+		CAR_PURPOSE = #{ carPurpose, jdbcType=VARCHAR}
+		WHERE RES_NO = #{ resNo }
+	
+	</update>
+	
+		
 </mapper>

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app-ar.css">
     <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -59,30 +60,30 @@
                 <h5>예약 수정/반납</h5>
             </div>
             <div class="card-body">
-                <!--method="post" th:action="@{/member/signup}"-->
-                <!--   th:each="mtroom = ${ roomList }"  -->
-                <form class="form form-horizontal">
+                <form class="form form-horizontal" method="post" th:action="@{/reserve/car/return}">
                     <div class="form-body modal-body">
                         <div class="row res-row">
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">차량명</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
+                            	<input type="hidden" name="resNo" th:value="${ carInfo.resNo }">
                                 <input type="text" class="form-control input-margin" name="carName"
-                                    value="" readonly>
+                                    th:value="${ carInfo.returnCarName }" readonly>
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">예약기간</label>
                             </div>
+                            <!-- returnStartTime type 오류 나려나 -->
                             <div class="col-md-8 form-group date-grid row-margin col-input">
                                 <div>
-                                    <input type="datetime-local" class="form-control pe-font-size ud-size" name="period"
-                                        value="2022-04-28T09:00">
+                                    <input type="datetime-local" class="form-control pe-font-size ud-size" name="startTime"
+                                        th:value="${ carInfo2.startTime }">
                                 </div>
                                 <div>-</div>
                                 <div>
-                                    <input type="datetime-local" class="form-control pe-font-size ud-size" name="period"
-                                        value="2022-04-28T09:00">
+                                    <input type="datetime-local" class="form-control pe-font-size ud-size" name="endTime"
+                                        th:value="${ carInfo2.endTime }">
                                 </div>
                             </div>
                             <div class="col-md-4 row-margin col-label">
@@ -90,28 +91,58 @@
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
                                 <input type="text" id="contact-info" class="form-control input-margin" name="name"
-                                    value="th:text='${ login.userName }'" readonly>
+                                    th:value="${ carInfo.returnName }" readonly>
                             </div>
                             <div class="col-md-4 row-margin col-label">
                                 <label class="label-size">목적</label>
                             </div>
                             <div class="col-md-8 form-group row-margin col-input">
-                                <textarea rows="5" cols="49" name="purpose" style="resize:none;" required></textarea>
+                                <textarea rows="5" cols="49" name="carPurpose" style="resize:none;" required
+                                th:text="${ carInfo.returnCarPurpose }"></textarea>
                             </div>
 
 
                         </div>
                         <div class="modal-footer rev-footer-align">
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
-                                <button type="submit" class="btn btn-primary me-1 mb-1 edit-btn">수정하기</button>&nbsp
-                                <button class="btn btn-light-secondary me-1 mb-1 edit-btn" onclick="">반납하기</button>
+                                <button type="submit" data-oper="modify" class="btn btn-primary me-1 mb-1 edit-btn">수정하기</button>&nbsp
+                                <button type="submit" data-oper="return" class="btn btn-light-secondary me-1 mb-1 edit-btn">반납하기</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var formObj = $("form");
+		$('button').on("click", function(e) { 		//모든 button태그에 대한 클릭 이벤트 처리
+			e.preventDefault(); 			//버튼의 기본 submit() 동작 막기
+			var operation = $(this).data("oper");	//data-oper 값 읽어오기
+			console.log(operation);
 
+			if (operation === 'return') {
+				if (confirm("차량을 예약 시간 전에 반납하시겠습니까?") == true) {
+					alert("차량이 반납되었습니다.");
+					formObj.attr("action", "/reserve/car/return");
+				} else {
+					return false;
+				}
+			} else if (operation === 'modify') {
+				if (confirm("예약을 수정하시겠습니까?") == true) {
+					alert("예약이 수정되었습니다.");
+					formObj.attr("action", "/reserve/car/modify");
+				} else {
+					return false;
+				}
+			}
+			formObj.submit();
+		})
+	})
+	</script>
+	
+	
     </div>
 
 

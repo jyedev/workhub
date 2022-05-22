@@ -50,7 +50,6 @@ public class CarResSelectController {
 		mv.addObject("resCarList", resCarList);
 
 		log.info("admin 등록된 차량 리스트: {}", carList);
-		log.info("예약 차량 리스트: {}", resCarList);
 		 
 		
 		mv.setViewName("reserve/car/list");

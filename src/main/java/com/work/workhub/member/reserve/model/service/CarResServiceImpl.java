@@ -20,18 +20,7 @@ public class CarResServiceImpl implements CarResService{
 	public CarResServiceImpl(CarResMapper carResMapper) {
 		this.carResMapper = carResMapper;
 	}
-	@Override
-	public void reserveCar(ResCarDTO car) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateCarStatus(ResCarDTO car) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public List<CarDTO> selectAllCar() {
 		return carResMapper.selectCarList();
@@ -44,6 +33,8 @@ public class CarResServiceImpl implements CarResService{
 	public CarDTO selectedCar(int carIndex) {
 		return carResMapper.selectedCar(carIndex);
 	}
+	
+	/* 차량 예약 메소드 */
 	@Override
 	public boolean registReservation(ResCarDTO resCar) throws Exception {
 		int result = carResMapper.reserveCar(resCar);
@@ -56,4 +47,39 @@ public class CarResServiceImpl implements CarResService{
 		return result > 0 ? true : false;	
 	}
 
+	
+	/* 차량 반납 메소드 */
+	@Override
+	public boolean updateCarStatus(ResCarDTO car) throws Exception {
+		int result = carResMapper.updateCarStatus(car);
+		
+		if(result <= 0) {
+			throw new Exception("차량 반납 실패");
+		}
+		
+		
+		return result > 0 ? true : false;	
+	}
+
+	/* 차량 예약 수정 메소드 */
+	@Override
+	public boolean modifyCarRes(ResCarDTO car) throws Exception {
+		int result = carResMapper.modifyCarRes(car);
+		
+		if(result <= 0) {
+			throw new Exception("차량 예약 수정 실패");
+		}
+		
+		
+		return result > 0 ? true : false;	
+	}
+
+	@Override
+	public void reserveCar(ResCarDTO car) {
+		// TODO Auto-generated method stub
+	}
+
+	
+	
+	
 }
