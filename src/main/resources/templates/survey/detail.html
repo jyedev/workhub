@@ -64,12 +64,12 @@
                             <div class="surv-detail-writer">
                                 <div class="surv-info">
                                     <p>작성자: </p>
-                                    <img src="src/images/grey.png" alt="profile" class="profile-photo-surv">
+                                    <img src="/assets/images/post-surv/grey.png" alt="profile" class="profile-photo-surv">
                                     <span>김허브 대리</span>
                                 </div>
                                 <div class="surv-info">
                                     <p>작성일: </p>
-                                    <span id="current-time"></span>
+                                    <span>2022-04-19</span>
                                 </div>
                                 <div class="surv-info">
                                     <p>설문 기간: </p>
@@ -112,7 +112,7 @@
                                         </div>
                                     </div>
                                     <div class="surv-submit">
-                                        <button type="submit" class="btn btn-outline-primary surv-btn">설문 제출</button>
+                                        <button type="submit" class="btn btn-outline-primary surv-btn" onclick="location.href='/survey/detail_check'">설문 제출</button>
                                     </div>
                                     <hr>
                                 </div>
@@ -123,22 +123,6 @@
             </div>
         </div>
     </div>
-    <script>
-        date = new Date();
-        year = date.getFullYear();
-        month = date.getMonth() + 1;
-        day = date.getDate();
-
-	    hour = date.getHours(); 
-	    hour = ( hour > 9 ) ? hour : "0" + hour; 
-	    minute = date.getMinutes(); 
-	    minute = ( minute > 9 ) ? minute : "0" + minute; 
-
-        document.getElementById("current-time").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
-        "&nbsp&nbsp" + hour + ":" + minute;
-        document.getElementById("current-time2").innerHTML =  "&nbsp&nbsp" + year + "/" + month + "/" + day + 
-        "&nbsp&nbsp" + hour + ":" + minute;
-    </script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min2.js"></script>
 
