@@ -44,7 +44,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		
 		String msg = message.getPayload();
 		ChatDTO chatDTO = om.readValue(msg, ChatDTO.class);
-		log.info("chatDTO=>{}", chatDTO);
+		log.info("chatDTO : {}", chatDTO);
 		
 		if(msg != null) {
 			
