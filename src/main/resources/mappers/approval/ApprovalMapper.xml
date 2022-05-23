@@ -35,6 +35,16 @@
 		<association property="app" resultMap="approvalResultMap"/>
 	</resultMap>
 	
+	<resultMap id="acceptResultMap" type="com.work.workhub.member.approval.model.dto.AcceptDTO">
+		<id property="no" column="ACC_NO"/>
+		<result property="appNo" column="ACC_APP_NO"/>
+		<result property="memNo" column="ACC_MEM_NO"/>
+		<result property="status" column="ACC_STATUS"/>
+		<result property="date" column="ACC_DATE"/>
+		
+		<association property="app" resultMap="approvalResultMap"/>
+	</resultMap>
+	
 	<resultMap id="memberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
 		<id property="no" column="NO"/>
 		<result property="id" column="ID"/>
@@ -62,21 +72,16 @@
 	</resultMap>
 	
 	<select id="selectReceptionList" resultMap="approvalResultMap">
-		SELECT
-			   A.APP_NO
-			 , A.APP_MEM_NO
-			 , A.APP_TITLE
-			 , A.APP_CONTENT
-			 , A.APP_STATUS
-			 , A.APP_CREATED_DATE
-			 , A.APP_DUE_DATE
-			 , B.NAME
-	      FROM APPROVAL A
-		  JOIN TBL_MEMBER B ON(A.APP_MEM_NO = B.NO)
-<!-- 		  JOIN APP_LINE C ON(C.LINE_MEM_NO = B.NO)
-		  JOIN TBL_REFERENCE D ON(D.REF_MEM_NO = B.NO)
-  		  WHERE C.LINE_MEM_NO = #{ receiverNo }
-  		    AND D.REF_MEM_NO = #{ refNo } -->
+		SELECT A.*
+		     , F.NAME
+		  FROM APPROVAL A
+		  JOIN APP_LINE B ON(A.APP_NO = B.LINE_APP_NO)
+		  JOIN TBL_MEMBER C ON(B.LINE_MEM_NO = C.NO)
+		  JOIN TBL_REFERENCE D ON(A.APP_NO = D.REF_APP_NO)
+		  JOIN TBL_MEMBER E ON(D.REF_MEM_NO = E.NO)
+		  JOIN TBL_MEMBER F ON(A.APP_MEM_NO = F.NO)
+		 WHERE C.NO IN #{ no }
+		    OR (E.NO IN #{ no } AND A.APP_STATUS = '승인')
 	</select>
 	
 	<select id="selectSendList" resultMap="approvalResultMap">
@@ -151,6 +156,7 @@
 		SELECT
 			   A.*
 			 , B.NAME
+			 , B.NO
 		  FROM APP_LINE A
 		  JOIN TBL_MEMBER B ON(A.LINE_MEM_NO = B.NO)
 		 WHERE A.LINE_APP_NO = #{ no }
@@ -160,6 +166,7 @@
 		SELECT
 			   A.*
 			 , B.NAME
+			 , B.NO
 		  FROM TBL_REFERENCE A
 		  JOIN TBL_MEMBER B ON(A.REF_MEM_NO = B.NO)
 		 WHERE A.REF_APP_NO = #{ no }
@@ -212,4 +219,99 @@
 		, #{ refNo }
 		)
 	</insert>
+	
+	<!-- 결재문서 수정 -->
+	<update id="modifyApp">
+		UPDATE APPROVAL
+		   SET APP_TITLE = #{ title }
+		   	 , APP_CONTENT = #{ content }
+		   	 , APP_STATUS = '대기'
+		   	 , APP_CREATED_DATE = #{ createdDate }
+		   	 , APP_DUE_DATE = #{ dueDate }
+		 WHERE APP_NO = #{ no }
+	</update>
+	
+ 	<update id="modifyReceiver">
+		UPDATE APP_LINE
+		   SET LINE_MEM_NO = #{ receiverNo }
+		 WHERE LINE_NO = #{ no }
+	</update>
+	
+	<update id="modifyRef">
+		UPDATE TBL_REFERENCE
+		   SET REF_MEM_NO = #{ refNo }
+		 WHERE REF_NO = #{ no }
+	</update>
+	
+	<!-- 승인 -->
+	<insert id="acceptApp">
+		INSERT
+		  INTO APP_ACCEPT
+		(
+		  ACC_NO
+	    , ACC_APP_NO
+	    , ACC_MEM_NO
+	    , ACC_STATUS
+	    , ACC_DATE 
+		)
+		VALUES
+		(
+		  SEQ_ACC_NO.NEXTVAL
+		, #{ no }
+		, #{ accNo }
+		, '승인'
+		, SYSDATE
+		)
+	</insert>
+	
+	<update id="modifyStatus">
+		UPDATE APPROVAL
+		   SET APP_STATUS = '승인'
+		 WHERE APP_NO = #{ no }
+	</update>
+	
+	<!-- 반려 -->
+	<insert id="rejectApp">
+		INSERT
+		  INTO APP_ACCEPT
+		(
+		  ACC_NO
+		, ACC_APP_NO
+		, ACC_MEM_NO
+		, ACC_STATUS
+		, ACC_DATE
+		)
+		VALUES
+		(
+		  SEQ_ACC_NO.NEXTVAL
+		, #{ no }
+		, #{ rejNo }
+		, '반려'
+		, SYSDATE
+		)
+	</insert>
+	
+	<update id="rejStatus">
+		UPDATE APPROVAL
+		   SET APP_STATUS = '반려'
+		 WHERE APP_NO = #{ no }
+	</update>
+	
+	<!-- detail 조회 시 AcceptDTO 조회 -->
+	<select id="findAccByNo" resultMap="acceptResultMap">
+		SELECT
+			   *
+		  FROM APP_ACCEPT
+		 WHERE ACC_APP_NO = #{ no }
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
