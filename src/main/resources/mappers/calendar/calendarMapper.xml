@@ -13,11 +13,27 @@
 		<result property="calEnd" column="CAL_END"/>
 		<result property="calAlldayStatus" column="CAL_ALLDAY_STATUS"/>
 		
+		<association property="member" resultMap="memberResultMap"/>
 	</resultMap>
 	
-	<resultMap id="calCategoryResultMap" type="com.work.workhub.member.calendar.model.dto.CalCategoryDTO">
-		<id property="calCategoryCode" column="CAL_CATEGORY_CODE"/>
-		<result property="calCategoryName" column="CAL_CATEGORY_NAME"/>
+	<resultMap id="memberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="depNo" column="DEP_NO"/>
+		<result property="positionNo" column="POSITION_NO"/>
+		<result property="groupNo" column="GROUP_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
+		
+		<association property="dept" resultMap="departmentResultMap"/>
+	</resultMap>
+	
+	<resultMap id="calCategoryResultMap" type="com.work.workhub.member.calendar.model.dto.CategoryDTO">
+		<id property="code" column="CAL_CATEGORY_CODE"/>
+		<result property="name" column="CAL_CATEGORY_NAME"/>
 	</resultMap>
 
 	<resultMap id="departmentResultMap" type="com.work.workhub.member.member.dto.DepartmentDTO">
@@ -25,9 +41,46 @@
 		<result property="depName" column="DEP_NAME"/>
 	</resultMap>
 	
+	
+	
 	<select id="selectCalendarList" resultMap="calendarResultMap">
 		SELECT *
 		   FROM CALENDAR
 	</select>
+	
+	<select id="findAllCategory" resultMap="calCategoryResultMap">
+		SELECT
+		       CAL_CATEGORY_CODE
+		     , CAL_CATEGORY_NAME
+		  FROM CAL_CATEGORY 
+	</select>
+	
+	<insert id="registCalendar">
+		INSERT 
+		  INTO CALENDAR
+        (
+          CAL_NO
+        , CAL_CATEGORY_CODE
+        , CAL_DEP_NO
+        , CAL_WRITER_NO
+        , CAL_TITLE
+        , CAL_CONTENT
+        , CAL_START
+        , CAL_END
+        , CAL_ALLDAY_STATUS
+        )
+        VALUES
+        (
+          SEQ_CAL_NO.NEXTVAL
+        , #{ calCategoryCode }
+        , 1
+        , #{ calWriterNo }
+        , #{ calTitle }
+        , #{ calContent }
+        , #{ calStart, jdbcType=VARCHAR }
+        , #{ calEnd, jdbcType=VARCHAR }
+        , #{ calAlldayStatus }
+        )
+	</insert>
 
 </mapper>

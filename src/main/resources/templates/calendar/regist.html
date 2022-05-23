@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -8,28 +9,24 @@
 
     <!-- fonts -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> -->
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/css/bootstrapforCalendar.css">
-    <link rel="stylesheet" href="assets/vendors/choices.js/choices.min.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrapforCalendar.css">
+    <link rel="stylesheet" href="/assets/vendors/choices.js/choices.min.css" />
 
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
 
-    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/src/plugins/fullcalendar/fullcalendar.css">
+    <link rel="stylesheet" href="/assets/css/pages/calendar.css">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="src/plugins/fullcalendar/fullcalendar.css">
-    <link rel="stylesheet" href="assets/css/pages/calendar.css">
-
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
 
 </head>
 
@@ -344,94 +341,73 @@
                                                 <h3 class="card-title" id="emailCompose">일정 등록</h3>
                                             </div>
                                             <!-- form start -->
-                                            <form action="#" id="compose-form">
+                                            <form th:action="@{/calendar/regist}" method="post" id="compose-form">
                                                 <div class="card-content">
                                                     <div class="card-body pt-0">
                                                         <div class="form-group pb-50">
-                                                            <input type="text" id="scheduleTitle" class="form-control form-control-lg" placeholder="일정 제목" required=""><br>
+                                                            <input type="text" id="calTitle" name="calTitle" class="form-control form-control-lg" placeholder="일정 제목" required=""><br>
+                                                            <input type="hidden" id="calWriterNo" name="calWriterNo" th:value="${#authentication.principal.no}">
+                                                            <input type="hidden" id="writerName" name="writerName" th:value="${#authentication.principal.name}">
+                                                            <input type="hidden" id="writerDepNo" name="writerDepNo" th:value="${#authentication.principal.depName}">
+                                                        </div>
+                                                        <div>
                                                         </div>
                                                         <div class="form-group pb-50">
-                                                        <div class="form-label-group">
-                                                            <label for="scheduleTime">시간</label>
-                                                            <div class="col-md-100 mb-1">
-                                                                <div class="input-group">
-                                                                        <div class='col-md-4'>
-                                                                            <div class="form-group">
-                                                                               <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-                                                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7" style="padding:0;"/>
-                                                                                    <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
-                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                    </div>
-                                                                                </div>
+                                                        	<div class="form-label-group">
+                                                          	  <div class="col-md-100 mb-1">
+                                                               	 <div class="input-group">
+                                                                        <div class="container">
+											                                <div class="row">
+												                                    <div class="col">
+												                                        <label for="exampleFormControlInput1" class="form-label">시작일</label><br>
+												                                        <input type="datetime-local" class="form-control" name="calStart">
+												                                    </div>
+												                                    <div class="col">
+												                                        <label for="exampleFormControlInput1" class="form-label">종료일</label><br>
+												                                        <input type="datetime-local" class="form-control" name="calEnd">
+												                                    </div>
+			                                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+			                                                                        <div class='col-sm-2'>
+			                                                                        	<label></label><br>
+			                                                                            <input type="checkbox"
+			                                                                            class="form-check-input form-check-primary form-check-glow"
+			                                                                            name="calAlldayStatus" id="checkbox1" checked="1" unchecked="0">
+			                                                                            <label class="form-check-label" for="customColorCheck6">&nbsp하루 종일</label>
+			                                                                            &nbsp;
+			                                                                        </div>
                                                                             </div>
-                                                                        </div>
-                                                                        &nbsp
-                                                                        -
-                                                                        &nbsp
-                                                                        <div class='col-md-4'>
-                                                                            <div class="form-group">
-                                                                               <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
-                                                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8" style="padding:0;"/>
-                                                                                    <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
-                                                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        <div class='col-sm-2'>
-                                                                            <input type="checkbox"
-                                                                            class="form-check-input form-check-primary form-check-glow"
-                                                                            name="customCheck" id="customColorCheck6">
-                                                                            <label class="form-check-label" for="customColorCheck6">&nbsp하루 종일</label>
-                                                                            &nbsp;
-                                                                            <input type="checkbox"
-                                                                            class="form-check-input form-check-primary form-check-glow"
-                                                                            name="customCheck" id="customColorCheck6">
-                                                                            <label class="form-check-label" for="customColorCheck6">&nbsp반복</label>
-                                                                        </div>
-                                                                </div>
-                                                            </div>
+                                                                	   </div>
+                                                                 </div>
+                                                          	 </div>
+                                                          </div>
                                                         </div>
-                                                            <div class="form-group pb-50">
-                                                                <label for="calendarCategory">내 캘린더</label>
-                                                                <select class="choices form-select">
-                                                                    <option value="square">내 일정</option>
-                                                                    <option value="rectangle">연차</option>
-                                                                    <option value="rombo">부서일정</option>
-                                                                    <option value="romboid">전사일정</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group pb-50">
-                                                                <label for="schedulePlace">장소</label>
-                                                                <input type="text" id="emailSubject" class="form-control" required=""><br>
-                                                            </div>
-                                                            <div class="form-group pb-50">
-                                                                <label for="messageContent">내용</label>
+                                                        	<br>
+                                                        <div class="form-group pb-50">
+                                                                <label for="calendarCategory">카테고리</label><br>
+                                                                <select class="choices form-select" name="calCategoryCode" id="calCategoryCode"></select>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-group pb-50">
+                                                                <label for="messageContent">내용</label><br>
                                                                     <div class="snow-container border rounded p-50">
                                                                         <div class="compose-editor mx-75 ql-container ql-snow">
                                                                             <div class="ql-editor ql-blank" data-gramm="false" contenteditable="true">
-                                                                            <p class="contextInput" name="contextInput" id="contextInput"><br></p>
+                                                                            <input type="text" class="contextInput" name="calContent" id="calContent"><br>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                             </div>
-
                                                         </div>
-                                                            </div>
                                                         </div>
                                                         <!-- Compose mail Quill editor -->
                                                         <br>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer d-flex justify-content-end pt-3">
+                                               			 <div class="card-footer d-flex justify-content-end pt-3">
                                                     <button type="reset" class="btn btn-light-secondary cancel-btn mr-1 me-2">
                                                         <span class="d-sm-inline d-none">취소</span>
                                                     </button>
                                                     <button type="submit" class="btn-send btn btn-primary">
                                                         <i class="bi bi-send-fill"></i>
-                                                        <span class="d-sm-inline d-none">보내기</span>
+                                                        <span class="d-sm-inline d-none">저장</span>
                                                     </button>
                                                 </div>
                                             </form>
@@ -442,47 +418,42 @@
                     </div>
                 </section>
             </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">A. Saugi</a></p>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker7').datetimepicker();
-            $('#datetimepicker8').datetimepicker({
-                useCurrent: false
-            });
-            $("#datetimepicker7").on("change.datetimepicker", function (e) {
-                $('#datetimepicker8').datetimepicker('minDate', e.date);
-            });
-            $("#datetimepicker8").on("change.datetimepicker", function (e) {
-                $('#datetimepicker7').datetimepicker('maxDate', e.date);
-            });
-        });
+    <script>
+    	$(function(){
+    		$.ajax({
+    			url : "/calendar/category",
+    			success : function(data) {
+    				const $calCategoryCode = $("#calCategoryCode");
+    				
+    				for(let index in data){
+    					$calCategoryCode.append($("<option>").val(data[index].code).text(data[index].name));
+    				}
+    			},
+    			error : function(xhr) {
+    				console.log(xhr);
+    			}
+    		});
+    	});
+    	
+    	$("#checkbox1").is(':checked', function(){
+    		  $("#checkbox1").prop('checked', true);
+    		});
     </script>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
-    <script src="assets/js/pages/dashboard.js"></script>
+    <script src="/assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="/assets/js/pages/dashboard.js"></script>
 
-    <script src="assets/js/main.js"></script>
-    <script src="vendors/scripts/core.js"></script>
-	<script src="vendors/scripts/script.min.js"></script>
-	<script src="vendors/scripts/process.js"></script>
-	<script src="vendors/scripts/layout-settings.js"></script>
-	<script src="src/plugins/fullcalendar/fullcalendar.min.js"></script>
-	<script src="vendors/scripts/calendar-setting.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/vendors/scripts/core.js"></script>
+	<script src="/vendors/scripts/script.min.js"></script>
+	<script src="/vendors/scripts/process.js"></script>
+	<script src="/vendors/scripts/layout-settings.js"></script>
+	<script src="/src/plugins/fullcalendar/fullcalendar.min.js"></script>
+	<script src="/vendors/scripts/calendar-setting.js"></script>
 </body>
 
 </html>
