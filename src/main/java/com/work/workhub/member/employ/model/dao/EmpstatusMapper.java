@@ -72,6 +72,26 @@ public interface EmpstatusMapper {
 	//연차신청서 삭제
 	int deleteRest(RestDTO rest,int porestNo);
 	
+	//내 근태 예전 값
+	List<AttDTO> beforedData(int attNo);
+	
+	//근태 유형 select box
+	List<RestCateDTO> sBox();
+	
+	//근태관리 수정
+	int employmentModifyGo(AttDTO post);
+	
+	//근태관리 삭제
+	int employDelete(AttDTO post, int attNo);
+	
+	//근태 엑셀
+	List<AttDTO> excelDown();
+	
+	
+	
+	
+	
+	
 
 	
 

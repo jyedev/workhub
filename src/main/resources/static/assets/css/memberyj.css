@@ -25,23 +25,23 @@ body {
   }
   
   .glow {
-    font-size: 44px;
+    font-size: 25px;
     color: #767676;
     font-weight: bold;
     animation: glow 1s ease-in-out infinite alternate;
     -moz-animation: glow 1s ease-in-out infinite alternate;
     -webkit-animation: glow 1s ease-in-out infinite alternate;
     position: relative;
-    top: 90px;
-    right: 140px;
+    top: 40px;
+    right: 340px;
 }
   
   .hatta {
-   font-weight: bolder;
-    font-size: 26px;
+    font-weight: bolder;
+    font-size: 14px;
     position: relative;
-    bottom: 15px;
-    left: 56px;
+    bottom: 8px;
+    right: 225px;
     color: #000000;
     
 
@@ -52,8 +52,9 @@ body {
   .clocka {
 
     position: relative;
-    top: 26px;
-    right: 30px;
+    right: 271px;
+    top: 15px;
+    font-size: 4px;
   }
 
   .hattc {
@@ -437,12 +438,12 @@ body {
 }
 
 .djdji {
-	position: absolute;
-   top: 32px;
-   left: 310px;
-	background-color: #ffffff;
-	height: 500px;
-    width: 340px;
+    position: absolute;
+    top: 32px;
+    left: 310px;
+    background-color: #ffffff;
+    height: 30%;
+    width: 15%;
     border-radius: 20px;
 }
 

@@ -32,14 +32,20 @@
 <script src='/assets/js/calendar/interaction.js'></script>
 <script src='/assets/js/calendar/list.js'></script>
 <script src='/assets/js/calendar/timegrid.js'></script>
-
+    <script>
+	const successMessage = '[[${successMessage}]]';
+	
+	if(successMessage) {
+		alert(successMessage);
+	}
+</script>
 <style>
 
 
   
   </style>    
 </head>
-<body>
+<body style="width: 1920px; height: 1080px;">
    		
 		<div th:include="sidebar/sidebar" th:remove="tag"/></div>
         
@@ -47,21 +53,9 @@
          <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
         <div class="djdji"></div>
             <div class="wrapper">
-                <div><p class="hatta">근태관리</p></div>
+                <p class="hatta">근태관리</p>
                 <div id="clock" class="clocka">clock</div>
                 <div id="digital_clock" class="glow">00:00:00</div>
-                <div>
-                <div class="hattc"><p>출근시간</p></div>
-                <div class="hattd"><p>09:00:00</p></div>
-                </div>
-                <div>
-                <div class="hatte"><p>퇴근시간</p></div>
-                <div class="hattf"><p>09:00:00</p></div>
-            </div>
-            <div>
-                <div class="hattee"><p>주간 누적 근무시간</p></div>
-                <div class="hattff"><p>09:00:00</p></div>
-            </div>
               </div>
         
         <hr width="260" class="hr1" size="5">
@@ -82,31 +76,10 @@
        
        <p class="hattsd">내 근태 내역</p>
       
-       <!--사원 근무그룹-->
-      <!--사원 프로필 있는 곳-->
-       <div class="risis">
-        <h6>(기본 근태)B형</h6>
-       <div class="box box1">
-           <div class="sss"></div>
-           <span class="nsns">김땡땡 사원</span></div>
-       <div class="box box2">
-        <span class="asa vvv">이번주 누적</span>   
-        <span class="csc ssgdd">1:00:00</span></div>
-       <div class="box box3">
-        <span class="asa vvv">이번주 초과</span>    
-        <span class="csc ssgdd">1:00:00</span></div>
-       <div class="box box4">
-        <span class="asa vvv">이번주 잔여</span>    
-        <span class="csc ssgdd">1:00:00</span></div>
-        <div class="box box3">
-            <span class="asa vvv">이번달 누적</span>    
-            <span class="csc ssgdd">1:00:00</span></div>
-           <div class="box box4">
-            <span class="asa vvv">이번달 연장</span>    
-            <span class="csc ssgdd">1:00:00</span></div>
+       
     
-    <input type="button" value="연장근무 신청" class="ppo">
-    <input type="button" value="목록 다운로드" class="ppo">
+    
+    <a onclick="location.href='/employ/excelDown'" style="cursor:pointer;"  class="ppo">목록 다운로드</a>
    
     </div>
    
@@ -115,7 +88,7 @@
 	<div class="huyyy">
   <ul id="accordion" class="accordion">    
         <!--여기부터-->
-    <li class="show">
+    <li class="show" style="padding-right: 30px;">
         <div class="menu"><i class="fa fa-code"></i>1주차<i class="fa fa-chevron-down"></i></div>
         <ul class="fyy">
           <table class="table table-striped" id="table1">
@@ -146,7 +119,7 @@
       </li>
       <!--여기까지-->
         <!--여기부터-->
-    <li class="show">
+    <li class="show" style="padding-right: 30px;">
         <div class="menu"><i class="fa fa-code"></i>2주차<i class="fa fa-chevron-down"></i></div>
         <ul class="fyy">
           <table class="table table-striped" id="table1">
@@ -177,7 +150,7 @@
       </li>
       <!--여기까지-->
         <!--여기부터-->
-    <li class="show">
+    <li class="show" style="padding-right: 30px;">
         <div class="menu"><i class="fa fa-code"></i>3주차<i class="fa fa-chevron-down"></i></div>
         <ul class="fyy">
           <table class="table table-striped" id="table1">
@@ -208,7 +181,7 @@
       </li>
       <!--여기까지-->
         <!--여기부터-->
-    <li class="show">
+    <li class="show" style="padding-right: 30px;">
         <div class="menu"><i class="fa fa-code"></i>4주차<i class="fa fa-chevron-down"></i></div>
         <ul class="fyy">
           <table class="table table-striped" id="table1">
@@ -239,7 +212,7 @@
       </li>
       <!--여기까지-->
         <!--여기부터-->
-    <li class="show">
+    <li class="show" style="padding-right: 30px;">
         <div class="menu"><i class="fa fa-code"></i>5주차<i class="fa fa-chevron-down"></i></div>
         <ul class="fyy">
           <table class="table table-striped" id="table1">
@@ -280,7 +253,7 @@
     	// 근무그룹  번호 확인용
     	alert(attNo); 
     	var attNo = attNo; 
-        location.href='/employ/employModify?attNo='+attNo; }
+        location.href='/employ/employmentModify?attNo='+attNo; }
     </script> 
 
     <script>

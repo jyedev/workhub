@@ -1,6 +1,10 @@
 package com.work.workhub.member.employ.model.dto;
 
-import java.sql.Date;
+
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,15 +27,19 @@ public class AttDTO {
    private int no;
    private int workNo;
    private String workName;
+   private String name;
+   @DateTimeFormat(pattern="YYYY-MM-dd")
    private String attGo;
    private Date attOff;
    private Date attAdd;
    private Date attOver;
    private Date attNight;
    private String attReason;
-   private Date attDate;
+   @DateTimeFormat(pattern = "yyyy-MM-dd")
+   private String attDate;
    private String attStatus;
-   private Date attModdate;
+   @DateTimeFormat(pattern = "yyyy-MM-dd")
+   private String attModdate;
    
   
 }
