@@ -25,6 +25,26 @@
 		
 	</resultMap>
 	
+	<resultMap id="carResultMap2" type="com.work.workhub.admin.reserve.model.dto.CarDTO">
+	
+		<id property="carNo" column="CAR_NO"/>
+		<result property="carName" column="CAR_NAME"/>
+		<result property="carNumber" column="CAR_NUMBER"/>
+		<result property="carYn" column="CAR_YN"/>
+		<result property="delYn" column="CAR_DEL_YN"/>
+		
+		<association property="carRes" javaType="com.work.workhub.member.reserve.model.dto.ResCarDTO">
+			<id property="resNo" column="RES_NO"/>
+			<result property="memberNo" column="NO"/>
+			<result property="carNo" column="CAR_NO"/>
+			<result property="startTime" column="START_TIME"/>
+			<result property="endTime" column="END_TIME"/>
+			<result property="carPurpose" column="CAR_PURPOSE"/>
+			<result property="delYn" column="RES_DEL_YN"/>
+		</association>
+		
+	</resultMap>
+	
 	<resultMap id="loginMemberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
 		<id property="no" column="NO"/>
 		<result property="id" column="ID"/>
@@ -72,6 +92,53 @@
         ORDER BY A.START_TIME DESC
 	</select>
 	<!-- AND TO_CHAR(A.START_TIME, 'yyyy-MM-dd') = TO_CHAR(SYSDATE, 'yyyy-MM-dd') -->
+	
+	<select id="selectResCarList" resultMap="carResResultMap">
+		SELECT
+		*
+		FROM RES_CAR A
+		JOIN COM_CAR B ON (A.CAR_NO = B.CAR_NO)
+		WHERE A.END_TIME > SYSDATE
+          AND A.DEL_YN = 'N'
+        ORDER BY A.CAR_NO ASC
+	</select>
+
+	<select id="selectReservableCar" resultMap="carResultMap2">
+	SELECT
+	CAR_NO, CAR_NAME, CAR_NUMBER, CAR_YN, CAR_DEL_YN, RES_NO,
+	NO, START_TIME, END_TIME, CAR_PURPOSE, RES_DEL_YN
+	FROM (
+	SELECT
+	A.CAR_NO, A.CAR_NAME, A.CAR_NUMBER, A.CAR_YN, A.DEL_YN AS CAR_DEL_YN, B.RES_NO,
+	B.NO, B.START_TIME, B.END_TIME, B.CAR_PURPOSE, B.DEL_YN AS RES_DEL_YN
+	FROM COM_CAR A
+	LEFT JOIN RES_CAR B ON(A.CAR_NO = B.CAR_NO)
+	WHERE A.DEL_YN = 'N'
+	AND B.DEL_YN = 'N'
+	<![CDATA[AND B.START_TIME <= SYSDATE]]>  
+	AND B.END_TIME >= SYSDATE
+
+	UNION
+
+	SELECT
+	A.*, NULL, NULL, NULL, NULL, NULL, NULL
+	FROM COM_CAR A
+	WHERE A.DEL_YN = 'N'
+
+	)
+	ORDER BY CAR_NO ASC, RES_NO DESC
+	</select>
+
+<!-- 	<select id="selectReservableCar" resultMap="carResResultMap">
+		SELECT
+        *
+        FROM COM_CAR A 
+        WHERE A.CAR_NO NOT IN (SELECT B.CAR_NO
+		FROM RES_CAR B
+		WHERE B.END_TIME > SYSDATE
+          AND B.DEL_YN = 'N')
+        ORDER BY A.CAR_NO ASC
+	</select> -->
 	
 	<select id="selectedCar" resultMap="carResultMap">
 		SELECT

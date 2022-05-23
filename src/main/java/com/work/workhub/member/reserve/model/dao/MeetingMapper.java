@@ -18,6 +18,10 @@ public interface MeetingMapper {
 
 	List<ResMeetingDTO> selectAllResMeeting();
 
+	int modifyMeeting(ResMeetingDTO meeting);
+
+	int updateMeetingStatus(ResMeetingDTO meeting);
+
 
 
 }

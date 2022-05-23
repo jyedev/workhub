@@ -83,8 +83,6 @@
     		#{ meetPurpose },
     		DEFAULT
     	)
-    	
-    	
     </insert>
     
     <select id="selectAllResMeeting" resultMap="meetingResultMap">
@@ -97,4 +95,22 @@
     	  ORDER BY A.START_TIME DESC   	
     </select>
 
+
+
+	<update id="modifyMeeting">
+		UPDATE RES_MT
+		SET
+			START_TIME = #{ startTime },
+			END_TIME = #{ endTime },
+			MEET_PURPOSE = #{ meetPurpose }
+		WHERE RES_NO = #{ resNo }
+	</update>
+	
+	<update id="updateMeetingStatus">
+		UPDATE RES_MT
+		SET
+		DEL_YN = 'Y'
+		WHERE RES_NO = #{ resNo }
+	</update>
+	
 </mapper>

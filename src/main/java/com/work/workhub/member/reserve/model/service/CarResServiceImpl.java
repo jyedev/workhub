@@ -79,6 +79,16 @@ public class CarResServiceImpl implements CarResService{
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public List<ResCarDTO> selectResCarList() {
+		return carResMapper.selectResCarList();
+	}
+
+	@Override
+	public List<CarDTO> selectReservableCar() {
+		return carResMapper.selectReservableCar();
+	}
+
 	
 	
 	

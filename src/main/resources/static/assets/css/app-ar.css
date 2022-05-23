@@ -1955,3 +1955,7 @@ a {
 	border-color: transparent;
     border: none;
 }
+
+.edit-btn-color {
+	color : #435fad;
+}
