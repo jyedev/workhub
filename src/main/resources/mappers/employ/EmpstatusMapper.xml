@@ -8,6 +8,7 @@
 	<result property="no" column="NO"/>
 	<result property="workNo" column="WORK_NO"/>
 	<result property="workName" column="WORK_NAME"/>
+	<result property="name" column="NAME"/>
 	<result property="attGo" column="ATT_GO"/>
 	<result property="attOff" column="ATT_OFF"/>
 	<result property="attAdd" column="ATT_ADD"/>
@@ -423,5 +424,64 @@
 	</update>
 	
 	
+	<!-- 내 근태 예전 값 -->
+	
+	
+	<!-- 내 근태 수정 근무 유형 selectBox -->
+	<select id="sBox" resultMap="workResultMap">
+		SELECT
+			*
+		FROM WORK_CATEGORY
+		WHERE WORK_USE = '사용'
+		ORDER BY WORK_NO
+	</select>
+	
+	<!-- 내 근태 수정 -->
+		<select id="beforedData" resultMap="AttResultMap">
+		SELECT
+			*
+		FROM ATT
+		WHERE ATT_NO = #{ attNo }
+	</select>
+	
+	
+	<!-- 근태관리 수정 -->
+	<update id="employmentModifyGo">
+	UPDATE ATT
+	SET 
+		WORK_NO = #{ workNo }, 
+        ATT_GO = TO_CHAR(#{ attGo }),
+		ATT_REASON = #{ attReason },
+		NO = #{ no },
+		ATT_MODDATE = SYSDATE
+	WHERE ATT_NO = #{ attNo }
+	</update>
+	
+		<!-- 근태관리 삭제 -->
+	<update id="employDelete">
+	UPDATE ATT
+	SET 
+		ATT_STATUS = 'N'
+	WHERE ATT_NO = #{ attNo }
+	</update>
+	
+		<!-- 근태 엑셀 -->
+	<select id="excelDown" resultMap="AttResultMap">
+	SELECT
+			A.ATT_NO,
+            A.NO,
+            A.WORK_NO,
+            A.ATT_GO,
+            A.ATT_REASON,
+            A.ATT_DATE,
+            A.ATT_MODDATE,
+            B.WORK_NAME,
+            C.NAME
+		FROM ATT A
+        JOIN WORK_CATEGORY B ON (A.WORK_NO = B.WORK_NO)
+        JOIN TBL_MEMBER C ON (A.NO = C.NO)
+		WHERE A.ATT_STATUS = 'Y'
+		ORDER BY A.ATT_NO
+	</select>
 	
 </mapper>

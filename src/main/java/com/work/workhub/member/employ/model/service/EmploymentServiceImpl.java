@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.work.workhub.admin.work.model.dto.RestCateDTO;
 import com.work.workhub.admin.work.model.dto.WorkDTO;
 import com.work.workhub.member.employ.model.dao.EmpstatusMapper;
 import com.work.workhub.member.employ.model.dto.AttDTO;
@@ -80,6 +81,58 @@ public class EmploymentServiceImpl implements EmploymentService{
 		
 		return empstatusMapper.mySelect();
 	}
+	
+	//내 근태 예전 값
+	@Override
+	public List<AttDTO> beforedData(int attNo) {
+		
+		return empstatusMapper.beforedData(attNo);
+	}
+	
+	//근태 유형 select box
+	@Override
+	public List<RestCateDTO> sBox() {
+		
+		return empstatusMapper.sBox();
+	}
+	
+	//근태관리 수정
+	@Override
+	public boolean employmentModifyGo(AttDTO post) throws Exception {
+		
+		int result = empstatusMapper.employmentModifyGo(post);
+		
+		if(result <= 0) {
+			throw new Exception("근태 수정을 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+		
+	}
+	
+	//근태관리 삭제
+	@Override
+	public boolean employDelete(AttDTO post, int attNo) throws Exception {
+		
+		int result = empstatusMapper.employDelete(post, attNo);
+		
+		if(result <= 0) {
+			throw new Exception("내 근태 삭제를 실패하였습니다.");
+		}
+		
+		return result > 0 ? true : false;
+	}
+
+
+	
+	//근태 엑셀
+	@Override
+	public List<AttDTO> excelDown() throws Exception {
+		
+		return empstatusMapper.excelDown();
+	}
+	
+
 	
 	
 	
