@@ -15,6 +15,11 @@ public interface MeetingService {
 
 	List<ResMeetingDTO> selectAllResMeeting();
 
+	boolean modifyMeetingRes(ResMeetingDTO meeting) throws Exception;
+
+	/* 미팅 예약 삭제 메소드 */
+	boolean updateMeetingStatus(ResMeetingDTO meeting) throws Exception;
+
 
 	
 	

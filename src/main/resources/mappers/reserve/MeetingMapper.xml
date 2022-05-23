@@ -83,8 +83,6 @@
     		#{ meetPurpose },
     		DEFAULT
     	)
-    	
-    	
     </insert>
     
     <select id="selectAllResMeeting" resultMap="meetingResultMap">
@@ -93,7 +91,26 @@
     	  FROM RES_MT A
     	  JOIN MT_ROOM B ON (A.ROOM_NO = B.ROOM_NO)
     	  WHERE A.DEL_YN = 'N'
+    	    AND A.END_TIME >= SYSDATE
     	  ORDER BY A.START_TIME DESC   	
     </select>
 
+
+
+	<update id="modifyMeeting">
+		UPDATE RES_MT
+		SET
+			START_TIME = #{ startTime },
+			END_TIME = #{ endTime },
+			MEET_PURPOSE = #{ meetPurpose }
+		WHERE RES_NO = #{ resNo }
+	</update>
+	
+	<update id="updateMeetingStatus">
+		UPDATE RES_MT
+		SET
+		DEL_YN = 'Y'
+		WHERE RES_NO = #{ resNo }
+	</update>
+	
 </mapper>

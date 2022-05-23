@@ -14,6 +14,6 @@ public class FullCalendarDTO {
 	private String title;
 	private Date start;
 	private Date end;
-	private boolean allDay;
+	private String allDay;
 
 }

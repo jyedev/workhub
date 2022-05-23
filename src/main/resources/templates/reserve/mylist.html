@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -63,7 +64,6 @@
             <!-- table hover -->
             
             <div class="table-responsive tbl-read tbl-divide">
-            	<form method="post" th:action="@{/reserve/meeting/modify}">
                 <table class="table table-hover mb-0">
                     <colgroup>
                         <col width="200px">
@@ -78,19 +78,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="meeting : ${ resMeetingList }">
-                            <td th:text="${ meeting.room.rmLocation }">
-                            <input type="hidden" name="roomNo" th:value="${ meeting.roomNo }">
-                            </td>
+                        <tr th:each="meeting : ${ resMeetingList }" sec:authorize="isAuthenticated()">
+                            <td th:text="${ meeting.room.rmLocation }"></td>
                             <td th:text="${ meeting.room.roomName }"></td>
                             <td>
                                 <span th:text="${ meeting.startTime }"></span>&nbsp ~ &nbsp<span th:text="${ meeting.endTime }"></span>
                             </td>
                             <td>
-
-                                <a th:href="@{/reserve/meeting/modify}">수정</a>
-
-
+								<form method="get" action="/reserve/meeting/modifyInfo">
+		                            <input type="hidden" name="modifyResNo" th:value="${ meeting.resNo }">
+		                   			<input type="hidden" th:value="${ meeting.room.roomName }" name="modifyRoomName">
+		                   			<input type="hidden" th:value="${ meeting.startTime }" name="modifyStartTime">
+		                   			<input type="hidden" th:value="${ meeting.endTime }" name="modifyEndTime">
+		                   			<input type="hidden" th:value="${ #authentication.principal.name }" name="modifyName">
+		                   			<input type="hidden" th:value="${ meeting.meetPurpose }" name="modifyMeetPurpose">
+	                                <button type="submit" class="bg-transparent-btn edit-btn-color">수정</button>
+                            	</form>
                             </td>
 
                         </tr>
@@ -98,7 +101,6 @@
 
                     </tbody>
                 </table>
-                </form>
             </div>
             
             <div>
@@ -109,7 +111,7 @@
             </div>
             <!-- table hover -->
             <div class="table-responsive tbl-read tbl-divide">
-            	<form method="post" th:action="@{/reserve/car/modify}">
+            	
                 <table class="table table-hover mb-0">
                     <colgroup>
                         <col width="200px">
@@ -124,17 +126,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="resCar : ${ resCarList }">
-                            <td th:text="${ resCar.car.carNumber }">
-                            <input type="hidden" name="resNo" th:value="${ resCar.resNo }">
-                            </td>
+                        <tr th:each="resCar : ${ resCarList }" sec:authorize="isAuthenticated()">
+                            <td th:text="${ resCar.car.carNumber }"></td>                 
                             <td th:text="${ resCar.car.carName }"></td>
                             <td>
                                 <span th:text="${ resCar.startTime }"></span>&nbsp ~ &nbsp<span th:text="${ resCar.endTime }"></span>
                             </td>
                             <td>
-                                <a th:href="@{/reserve/car/modify}">수정</a>
-
+                            <form method="get" action="/reserve/car/modifyInfo">
+	                            <input type="hidden" name="resNo" th:value="${ resCar.resNo }">
+	                   			<input type="hidden" th:value="${ resCar.car.carName }" name="returnCarName">
+	                   			<input type="hidden" th:value="${ resCar.startTime }" name="returnStartTime">
+	                   			<input type="hidden" th:value="${ resCar.endTime }" name="returnEndTime">
+	                   			<input type="hidden" th:value="${ #authentication.principal.name }" name="returnName">
+	                   			<input type="hidden" th:value="${ resCar.carPurpose }" name="returnCarPurpose">
+                                <button type="submit" class="bg-transparent-btn edit-btn-color">수정</button>
+                            </form>
                             </td>
 
                         </tr>
@@ -142,7 +149,6 @@
 
                     </tbody>
                 </table>
-                </form>
             </div>
         </div>
     </div>

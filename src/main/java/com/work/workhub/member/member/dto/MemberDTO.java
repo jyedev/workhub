@@ -35,9 +35,4 @@ public class MemberDTO {
    private WorkGroupDTO workGroup;
    
    
-public int findPwCheck(MemberDTO memberDTO) {
-	return 0;
-}
-
-   
 }

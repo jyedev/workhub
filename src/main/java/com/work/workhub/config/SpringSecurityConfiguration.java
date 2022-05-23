@@ -83,6 +83,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/message/**").hasRole("ROLE_MEMBER")
 				.antMatchers("/reserve/**").authenticated()
 				.antMatchers(HttpMethod.GET, "/reserve/**").hasRole("ROLE_MEMBER")
+				.antMatchers("/calendar/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
 				.antMatchers("/admin/**").authenticated()
 				.antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
 				.antMatchers("/asset/**").authenticated()

@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalCategoryDTO {
+public class CategoryDTO {
 	
-	private String calCategoryCode;  //일정카테고리코드 
-	private String calCategoryName;  //일정카테고리이름
+	private int code;  //일정카테고리코드 
+	private String name;  //일정카테고리이름
 	
 	
 

@@ -57,7 +57,7 @@
         
         <div class="content-area card-rev">
             <div class="content-ttl">
-                <h5>예약 수정/반납</h5>
+                <h5>예약 수정/삭제</h5>
             </div>
             <div class="card-body">
                 <form class="form form-horizontal" method="post" th:action="@{/reserve/car/modify}">
@@ -105,7 +105,7 @@
                         <div class="modal-footer rev-footer-align">
                             <div class="col-sm-12 d-flex justify-content-end foot-margin">
                                 <button type="submit" data-oper="modify" class="btn btn-primary me-1 mb-1 edit-btn">수정하기</button>&nbsp
-                                <button type="submit" data-oper="return" class="btn btn-light-secondary me-1 mb-1 edit-btn">반납하기</button>
+                                <button type="submit" data-oper="return" class="btn btn-light-secondary me-1 mb-1 edit-btn">삭제하기</button>
                             </div>
                         </div>
                     </div>
@@ -122,9 +122,9 @@
 			console.log(operation);
 
 			if (operation === 'return') {
-				if (confirm("차량을 예약 시간 전에 반납하시겠습니까?") == true) {
-					alert("차량이 반납되었습니다.");
-					formObj.attr("action", "/reserve/car/return");
+				if (confirm("차량 예약을 삭제하시겠습니까?") == true) {
+					alert("예약이 삭제되었습니다.");
+					formObj.attr("action", "/reserve/car/delete");
 				} else {
 					return false;
 				}
