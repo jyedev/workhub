@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <head>
     <meta charset="UTF-8">
@@ -78,11 +79,9 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">내용</span>
-                                    <!-- <input th:utext="${ approvalDTO.content }" type="text" class="form-control" id="app-content" readonly> -->
                                     <div th:utext="${ approvalDTO.content }" class="com-detail-content">
                                     내용
                                 	</div>
-                                    <!-- <input th:value="${#strings.unescapeJava(approvalDTO.content)}" type="text" class="form-control" id="app-content"/> -->
                                 </div>
                                 <div class="container">
                                     <div class="row">
@@ -114,11 +113,13 @@
                                             <div class="card" id="app-date">
                                                 <div class="row">
                                                 <div th:each="receiver : ${ receiver }">
-                                                	<div th:text="${ receiver.receiver.name }" class="col"></div>
+                                                	<span th:text="${ receiver.receiver.name }" class="col"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                       <span th:if="${ accept != null}">
+                                                         <span th:text="${ accept.status }"></span>
+                                                        <span th:text="${#dates.format(accept.date, 'yyyy-MM-dd')}"></span>
+                                                       </span>
                                                 </div>
                                                     <div class="col">
-                                                        <span>승인</span>
-                                                        <span>2022-01-02</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,23 +133,20 @@
                                     </div>
                                 </div>
                             </div>
-
+						  <span th:if="${ approvalDTO.status.equals('대기') }">
                             <div class="row">
-
                                 <div class="d-grid col-1 mx-auto">
                                 </div>
-                                <div class="d-grid col-1 mx-auto">
-                                    <button type="submit" class="btn btn-primary">승인</button>
+                                <div class="d-grid col-2 mx-auto">
+                                    <button type="submit" class="btn btn-primary" th:onclick="|javascript:acceptApp('${approvalDTO.no}')|">승인</button>
                                 </div>
-                                <div class="d-grid col-1 mx-auto">
-                                    <button type="submit" class="btn btn-primary">반려</button>
+                                <div class="d-grid col-2 mx-auto">
+                                    <button type="submit" class="btn btn-primary" th:onclick="|javascript:rejectApp('${approvalDTO.no}')|">반려</button>
                                 </div>
                                 <div class="d-grid col-1 mx-auto">
                             	</div>
-
-
-                            <!-- 서브메뉴 옆 내용 끝 -->
-                        </div>
+                        	</div>
+                          </span>
                     </div>
                 </section>
             </div>
@@ -162,16 +160,35 @@
             </footer>
         </div>
     </div>
+    
+    <script th:inline="javascript">
+    	function acceptApp(approvalNo) {
+    		console.log("승인 문서 : " + approvalNo);
+    		$.ajax({
+    			url: "/approval/accept",
+    			type: "post",
+    			data: {approvalNo: approvalNo},
+    			success: function(data) {
+    				location.href = "/approval/receptionList";
+    			}
+    		});
+    	}
+    	
+    	function rejectApp(approvalNo) {
+    		console.log("반려 문서 : " + approvalNo);
+    		$.ajax({
+    			url: "/approval/reject",
+    			type: "post",
+    			data: {approvalNo: approvalNo},
+    			success: function(data) {
+    				location.href = "/approval/receptionList";
+    			}
+    		});
+    	}
+    </script>
+    
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
-    <script>
-        // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
-    <script src="/assets/vendors/apexcharts/apexcharts.js"></script>
-    <script src="/assets/js/pages/dashboard.js"></script>
 
     <script src="/assets/js/main.js"></script>
 </body>

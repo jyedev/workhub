@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.work.workhub.member.approval.model.dao.ApprovalMapper;
+import com.work.workhub.member.approval.model.dto.AcceptDTO;
 import com.work.workhub.member.approval.model.dto.AppLineDTO;
 import com.work.workhub.member.approval.model.dto.ApprovalDTO;
 import com.work.workhub.member.approval.model.dto.ReferenceDTO;
@@ -24,12 +25,6 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public ApprovalServiceImpl(ApprovalMapper approvalMapper) {
 		this.approvalMapper = approvalMapper;
 	}
-
-//	@Override
-//	public List<ApprovalDTO> selectReceptionList(int receiverNo, int refNo) {
-//		
-//		return approvalMapper.selectReceptionList(receiverNo, refNo);
-//	}
 	
 	@Override
 	public List<ApprovalDTO> selectReceptionList(int no) {
@@ -105,6 +100,54 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public void insertRef(ApprovalDTO approval, int refNo) {
 
 		approvalMapper.insertRef(approval, refNo);
+	}
+
+	@Override
+	public void modifyApp(ApprovalDTO approval) {
+
+		approvalMapper.modifyApp(approval);
+	}
+
+	@Override
+	public void modifyReceiver(int no, int receiverNo) {
+
+		approvalMapper.modifyReceiver(no, receiverNo);
+	}
+
+	@Override
+	public void modifyRef(int no, int refNo) {
+
+		approvalMapper.modifyRef(no, refNo);
+	}
+
+	@Override
+	public void acceptApp(int no, int accNo) {
+		
+		approvalMapper.acceptApp(no, accNo);
+	}
+
+	@Override
+	public void modifyStatus(int no) {
+		
+		approvalMapper.modifyStatus(no);
+	}
+
+	@Override
+	public void rejectApp(int no, int rejNo) {
+		
+		approvalMapper.rejectApp(no, rejNo);
+	}
+
+	@Override
+	public void rejStatus(int no) {
+		
+		approvalMapper.rejStatus(no);
+	}
+
+	@Override
+	public AcceptDTO findAccByNo(Integer approvalNo) {
+		System.out.println("서비스에서 approvalNo: " + approvalNo);
+		return approvalMapper.findAccByNo(approvalNo);
 	}
 
 
