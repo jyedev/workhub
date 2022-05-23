@@ -45,8 +45,8 @@ public class MessageServiceImpl implements MessageService {
 
 	/* 쪽지 - 휴지통 조회 */
 	@Override
-	public List<MessageDTO> findMessageRecyclebinList() {
-		return messageMapper.findMessageRecyclebinList();
+	public List<MessageDTO> findMessageRecyclebinList(int no) {
+		return messageMapper.findMessageRecyclebinList(no);
 	}
 
 	/* 쪽지 - 새 쪽지 보내기 */

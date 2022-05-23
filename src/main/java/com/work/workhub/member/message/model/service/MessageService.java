@@ -15,7 +15,7 @@ public interface MessageService {
 
 	List<MessageDTO> findMessageSent(int no);
 
-	List<MessageDTO> findMessageRecyclebinList();
+	List<MessageDTO> findMessageRecyclebinList(int no);
 
 	void sendMessage(MessageDTO message) throws Exception;
 
