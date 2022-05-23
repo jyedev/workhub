@@ -117,7 +117,7 @@
            FROM MESSAGE A
            JOIN TBL_MEMBER B ON(A.MSG_SENDER_NO = B.NO)
           WHERE A.MSG_RECYCLE_BIN_STATUS = 'Y'
-            AND MSG_SENDER_NO = #{ no }
+            AND A.MSG_REICIPIENT_NO = #{ no }
     </select>
     
     <select id="sendMessage" resultMap="messageResultMap">

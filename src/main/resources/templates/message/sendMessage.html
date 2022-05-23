@@ -28,173 +28,7 @@
 
 <body>
     <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        
-                        <div class="logo">
-                            <a href="index.html"><img src="src/images/logo-workhub.png" alt="Logo" srcset=""></a>
-                            
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>홈</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-stack"></i>
-                                <span>전자결재</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">결재 문서 생성</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">개인 결재함</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">부서 결재함</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>근태관리</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">내 근태 현황</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">내 연차 내역</a>
-                                </li>
-                               
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-alarm-fill"></i>
-                                <span>예약</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">회의실 예약</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">차량 예약</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-calendar-fill"></i>
-                                <span>캘린더</span>
-                            </a>
-                            
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>보고서</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-pen-fill"></i>
-                                <span>게시판</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">글쓰기</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">공지사항</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">자유게시판</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="table.html" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-fill"></i>
-                                <span>설문</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">설문 작성</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">진행 중인 설문</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">마감된 설문</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">내가 만든 설문</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item active">
-                            <a href="application-inbox.html" class='sidebar-link'>
-                                <i class="bi bi-chat-dots-fill"></i>
-                                <span>쪽지</span>
-                            </a>
-                        </li>
-                        <br><br><br><br>
-                        
-
-                        
-
-                        <li class="sidebar-item ">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-person-circle"></i>
-                                <span>내 정보 관리</span>
-                            </a>
-                            
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="ui-file-uploader.html" class='sidebar-link'>
-                                <img src="src/images/logout.png" alt="logout">
-                                <span>Logout</span>
-                            </a>
-                        </li>
-
-                       
-
-                        
-
-                        
-
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
-        </div>
+    	<div th:include="sidebar/sidebar-inbox" th:remove="tag"></div>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -352,6 +186,7 @@
                                                                                                                 <thead class="thead-dark">
                                                                                                                     <tr>
                                                                                                                         <th class="checkbox"><input type="checkbox" onclick='selectAll(this)'></th>
+                                                                                                                        <th class="id" style="display:none;">아이디</th>
                                                                                                                         <th class="name">이름</th>
                                                                                                                         <th class="position">직위</th>
                                                                                                                         <th class="dept">부서</th>
@@ -360,7 +195,8 @@
                                                                                                                 </thead>
                                                                                                                 <tbody th:id="'team' + ${item.key}" th:each="item : ${ memberListMap }" style="display:none;">
                                                                                                                 	<tr th:each="member : ${ item.value }" >
-                                                                                                                		<td><input type="checkbox" name="userCheckbox" th:value="${ member.id }"></td>
+	                                                                                                                	<td><input type="checkbox" name="userCheckbox" th:value="${ member.no }"></td>
+	                                                                                                                	<td th:text="${ member.id }" style="display:none;"></td>
 	                                                                                                                	<td th:text="${ member.name }"></td>
 	                                                                                                                	<td th:text="${ member.position.positionName }"></td>
 	                                                                                                                	<td th:text="${ member.dept.depName }"></td>
@@ -393,20 +229,14 @@
                                                         <label for="messageContent">쪽지 내용</label>
                                                         <div class="snow-container border rounded p-50">
                                                             <div class="compose-editor mx-75 ql-container ql-snow">
-                                                                <div class="ql-editor ql-blank" data-gramm="false" data-placeholder="Type something....." contenteditable="true">
-                                                                    <textarea class="contextInput" name="msgContent" id="contextInput"></textarea><br>
+                                                                <div class="ql-editor ql-blank" data-gramm="false">
+                                                                    <input type="text" class="contextInput" name="msgContent" id="msgContent" style="width:100%; padding: 0; border-width: 0;"></div><br>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="custom-contol custom-checkbox mt-3">
-                                                            <input type="checkbox"
-                                                            class="form-check-input form-check-primary form-check-glow" checked
-                                                             name="customCheck" id="customColorCheck6">
-                                                            <label class="form-check-label" for="customColorCheck6">&nbsp보낸 쪽지함에 저장</label>
-                                                            <span id="letterNo" class="letterNo float-start float-lg-end">0 / 1000자</span>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 <div class="card-footer d-flex justify-content-end pt-3">
                                                     <button type="reset" class="btn btn-light-secondary cancel-btn mr-1 me-2">
                                                         <span class="d-sm-inline d-none">취소</span>
@@ -416,6 +246,7 @@
                                                         <span class="d-sm-inline d-none">보내기</span>
                                                     </button>
                                                     <input type="hidden" name="memberNos" id="memberNos" value="">
+                                                    <input type="hidden" name="memberIds" id="memberIds" value="">
                                                 </div>
                                             </form>
                                             <!-- form start end-->
@@ -428,7 +259,7 @@
         </div>
     </div>
     
-    <script>
+    <script >
         	$('#contentInput').keyup(function (e){
                 var content = $(this).val();
                 $('#letterNo').innerHTML = ("("+content.length+" / 100)");    //글자수 실시간 카운팅
@@ -443,27 +274,36 @@
         	/* 웹소켓 메시지 전송 영역 */
         	$('#sendMessageBtn').click(function(e){
         		let sender = $('#emailfrom').text();
-        		let receiver = $('#memberNos').val();
+        		let receivers = $('#memberIds').val();
+        		let receiver = receivers.split(',');
         		let url = '/message/inboxList';
         		let sMemberNo = $('#sMemberNo').val();
         		let sDepName = $('#sDepName').val();
         		let sName = $('#sName').val();
         		
         		console.log(sender);
-        		console.log(receiver);
-        		
-        		let msg = {
-        				sender : sender,
-        				receiver : receiver,
-        				url : url,
-        				no : sMemberNo,
-        				depName : sDepName,
-        				name : sName
+        		console.log(receivers);
+        		for(var i = 0; i < receiver.length; i ++) {
+        			console.log(receiver[i]);
         		}
-        		console.log(msg);
-        		socket.send(JSON.stringify(msg));
+        		
+        		for(var i = 0; i < receiver.length; i++) {
+	        		let msg = {
+	        				sender : sender,
+	        				receiver : receiver[i],
+	        				url : url,
+	        				no : sMemberNo,
+	        				depName : sDepName,
+	        				name : sName
+	        		}
+	        		console.log(msg);
+	        		socket.send(JSON.stringify(msg));
+        		}
         	
-	        	$('#contextInput').val(''); //초기화  
+            	$('#contextInput').val(''); //초기화
+            	
+            	document.getElementById('compose-form').submit();
+            	
         	});
     </script>
     
@@ -484,6 +324,7 @@
     		/* $('#'+elemId).attr('style', "display:'';"); */
     		
     	}
+    	
     </script>
     
     <script>
@@ -508,10 +349,9 @@
 	    		
 	    		const Toast = Swal.mixin({
 	    			toast: true,
-	    			showCloseButton: true,
 	    			position: 'top-middle',
 	    			showConfirmButton: false,
-	    			timer: 30000,
+	    			timer: 5000,
 	    			timerProgressBar: true,
 	    			didOpen: (toast) => {
 	    				toast.addEventListener('mouseenter', Swal.stopTimer);

@@ -67,17 +67,20 @@ $("#selectBtn").click(function(){
     var tdArr = new Array();
     var checkbox = $("input[name=userCheckbox]:checked");
 	var memberNos = '';
+	var memberIds = '';
     checkbox.each(function(i, obj) {
 		memberNos += obj.value + ',';
         var tr = checkbox.parent().parent().eq(i);
         var td = tr.children();
 
         rowData.push(tr.text());
+        
+        memberIds += td.eq(1).text() + ',';
 
-        var name = td.eq(1).text();
-        var position = td.eq(2).text();
-        var dept = td.eq(3).text();
-        var email = " <"+td.eq(4).text()+"> ";
+        var name = td.eq(2).text();
+        var position = td.eq(3).text();
+        var dept = td.eq(4).text();
+        var email = " <"+td.eq(5).text()+"> ";
 
         tdArr.push(name);
         tdArr.push(position);
@@ -87,7 +90,9 @@ $("#selectBtn").click(function(){
 
     });
     memberNos = memberNos.substring(0,memberNos.length-1);
+    memberIds = memberIds.substring(0,memberIds.length-1);
     $('#memberNos').val(memberNos);
+    $('#memberIds').val(memberIds);
     $('#contactResult').val(tdArr);
     
 

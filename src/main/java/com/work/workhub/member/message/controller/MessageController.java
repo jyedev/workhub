@@ -79,7 +79,9 @@ public class MessageController {
 	@GetMapping("recyclebinList")
 	public ModelAndView findMessageRecyclebinList(ModelAndView mv, @AuthenticationPrincipal UserImpl user) {
 		
-		List<MessageDTO> messageRecyclebinList = messageService.findMessageRecyclebinList();
+		int no = user.getNo();
+		
+		List<MessageDTO> messageRecyclebinList = messageService.findMessageRecyclebinList(no);
 		
 		mv.addObject("messageRecyclebinList", messageRecyclebinList);
 		mv.setViewName("message/recyclebinList");
@@ -110,7 +112,7 @@ public class MessageController {
 	/* 쪽지 보내기 */
 	@PostMapping("sendMessage")
 	public String sendMessage(@ModelAttribute MessageDTO message, RedirectAttributes rttr, Locale locale, @AuthenticationPrincipal UserImpl user) throws Exception {
-	
+		System.out.println(message);
 		message.setSenderNo(user.getNo());
 		
 		messageService.sendMessage(message);
