@@ -21,6 +21,10 @@ public interface CarResService {
 
 	void reserveCar(ResCarDTO car);
 
+	List<ResCarDTO> selectResCarList();
+
+	List<CarDTO> selectReservableCar();
+
 	
 	
 

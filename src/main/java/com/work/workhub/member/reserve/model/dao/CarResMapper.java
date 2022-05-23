@@ -11,7 +11,8 @@ import com.work.workhub.member.reserve.model.dto.ResCarDTO;
 public interface CarResMapper {
 
 	List<CarDTO> selectCarList();
-
+	
+	/* reserve/mylist에서 조회하기 위한 메소드 */
 	List<ResCarDTO> selectAllResCarList();
 
 	CarDTO selectedCar(int carIndex);
@@ -21,6 +22,11 @@ public interface CarResMapper {
 	int updateCarStatus(ResCarDTO car);
 
 	int modifyCarRes(ResCarDTO car);
+
+	/* 예약 조회 화면에서 조회하기 위한 메소드 */
+	List<ResCarDTO> selectResCarList();
+
+	List<CarDTO> selectReservableCar();
 
 
 }

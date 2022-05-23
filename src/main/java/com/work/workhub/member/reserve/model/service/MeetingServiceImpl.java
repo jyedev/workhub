@@ -46,5 +46,30 @@ public class MeetingServiceImpl implements MeetingService {
 		return meetingMapper.selectAllResMeeting();
 	}
 
+	@Override
+	public boolean modifyMeetingRes(ResMeetingDTO meeting) throws Exception {
+		int result = meetingMapper.modifyMeeting(meeting);
+		
+		if(result <= 0) {
+			throw new Exception("회의실 예약 수정 실패");
+		}
+		
+		
+		return result > 0 ? true : false;
+	}
+
+	/* 회의실 예약 삭제 */
+	@Override
+	public boolean updateMeetingStatus(ResMeetingDTO meeting) throws Exception {
+		int result = meetingMapper.updateMeetingStatus(meeting);
+		
+		if(result <= 0) {
+			throw new Exception("회의실 예약 삭제 실패");
+		}
+		
+		
+		return result > 0 ? true : false;
+	}
+
 
 }
