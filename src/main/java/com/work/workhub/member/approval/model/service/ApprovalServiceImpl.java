@@ -146,9 +146,20 @@ public class ApprovalServiceImpl implements ApprovalService {
 
 	@Override
 	public AcceptDTO findAccByNo(Integer approvalNo) {
-		System.out.println("서비스에서 approvalNo: " + approvalNo);
+		
 		return approvalMapper.findAccByNo(approvalNo);
 	}
 
+	@Override
+	public void deleteLine(int no) {
+
+		approvalMapper.deleteLine(no);
+	}
+
+	@Override
+	public void deleteRef(int no) {
+
+		approvalMapper.deleteRef(no);
+	}
 
 }

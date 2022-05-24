@@ -19,6 +19,8 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
     <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/pages/calendar.css">
+    <link rel="stylesheet" href="/assets/css/app1.css">
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -189,7 +191,42 @@
 		calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView: 'dayGridMonth',
 			locale: 'ko',
-			themeSystem: 'bootstrap5'
+			themeSystem: 'bootstrap5',
+			editable: true,
+            selectable: true,
+            
+           	eventDrop: function(info) {
+           		console.log(info);
+           		if(confirm("일정을 수정하시겠습니까?")){
+           		}
+           		/* var events = new Array();
+           		var obj = new Object();
+           		
+           		obj.title = info.event._def.title;
+           		obj.start = info.event._instance.range.start;
+           		obj.end = info.event._instance.range.end;
+           		obj.allDay = info.event._instance.range.allDay;
+           		console.log(obj);
+           		events.push(obj);
+           		
+           		console.log(events);
+           		$(function deleteData() {
+           			$.ajax({
+           				url: "/calendar/update",
+           				method: "PATCH",
+           				dataType: "json",
+           				data: JSON.stringify(events),
+           				contentType: 'application/json',
+           			})
+           		}) */
+           	},
+           	
+           	eventClick: function(info) {
+           		if(confirm("일정을 삭제하시겠습니까?")){
+           			info.event.remove();
+           		}
+           		
+           	}
     	});
 
 		var arr = '';
@@ -218,6 +255,10 @@
 		
 	});
 </script>
+<script src="/assets/js/message.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 
 </html>

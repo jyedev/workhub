@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.work.workhub.admin.reserve.model.dto.CarDTO;
 import com.work.workhub.admin.reserve.model.dto.MeetingRoomDTO;
 import com.work.workhub.admin.reserve.model.service.RoomService;
 
@@ -45,7 +44,7 @@ public class RoomModifyController {
 		
 		log.info("수정될 룸 정보 결과값 : {}", oldRoom);
 		
-		if (singleFile != null) {
+		if (!singleFile.isEmpty()) {
 			/* 회의실 사진 등록 */
 			log.info("singleFile : {}" + singleFile);
 			

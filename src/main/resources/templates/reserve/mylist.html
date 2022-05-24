@@ -82,7 +82,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                             <td th:text="${ meeting.room.rmLocation }"></td>
                             <td th:text="${ meeting.room.roomName }"></td>
                             <td>
-                                <span th:text="${ meeting.startTime }"></span>&nbsp ~ &nbsp<span th:text="${ meeting.endTime }"></span>
+                                <span th:text="${#dates.format(meeting.startTime, 'yyyy-MM-dd HH:mm')}"></span>&nbsp ~ &nbsp
+                                <span th:text="${#dates.format(meeting.endTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </td>
                             <td>
 								<form method="get" action="/reserve/meeting/modifyInfo">
@@ -130,7 +131,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                             <td th:text="${ resCar.car.carNumber }"></td>                 
                             <td th:text="${ resCar.car.carName }"></td>
                             <td>
-                                <span th:text="${ resCar.startTime }"></span>&nbsp ~ &nbsp<span th:text="${ resCar.endTime }"></span>
+                                <span th:text="${ #dates.format(resCar.startTime, 'yyyy-MM-dd HH:mm')}"></span>&nbsp ~ &nbsp
+                                <span th:text="${ #dates.format(resCar.endTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </td>
                             <td>
                             <form method="get" action="/reserve/car/modifyInfo">

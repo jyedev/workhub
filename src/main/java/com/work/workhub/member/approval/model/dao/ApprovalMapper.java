@@ -54,5 +54,15 @@ public interface ApprovalMapper {
 
 	AcceptDTO findAccByNo(Integer approvalNo);
 
+	void deleteLine(int no);
+
+	void deleteRef(int no);
+
+	List<ApprovalDTO> selectTempList(int no);
+
+	void tempApp(int no, int tempNo);
+
+	void tempStatus(int no);
+
 
 }

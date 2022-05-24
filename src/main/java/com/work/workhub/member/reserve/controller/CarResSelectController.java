@@ -42,13 +42,17 @@ public class CarResSelectController {
 		log.info("로그인 유저 정보 : {}", user);
 
 		List<CarDTO> carList = carResService.selectAllCar();
-//		List<ResCarDTO> resCarList = carResService.selectResCarList();
 		List<CarDTO> reservableCar = carResService.selectReservableCar();
+		
+//		List<CarDTO> newList = reservableCar.subList(0,2);
 
 		mv.addObject("carList", carList);
-//		mv.addObject("resCarList", resCarList);
 		mv.addObject("reservableCar",reservableCar);
+		
+		log.info("등록한 차량 목록 : {} ", carList);
 		log.info("reservableCar : {}", reservableCar);
+		
+//		log.info("newList : {}", newList);
 		
 		mv.setViewName("reserve/car/list");
 
