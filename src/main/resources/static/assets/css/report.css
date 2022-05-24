@@ -32,7 +32,7 @@
 .gbhdf {
    position: relative  !important;
    width: 160px !important;
-   right: 140px !important;
+   right: 123px !important;
    bottom: 20px !important;
 }
 
@@ -57,7 +57,7 @@
 .dsf {
    position: relative !important;
    bottom: 40px !important;
-   right: 424px !important;
+   right: 783px !important;
 }
 
 .dfssdf {
@@ -83,14 +83,13 @@
 .dsfdfd {
    position: relative !important;
    bottom: 30px !important;
-   right: 424px !important;
+   right: 780px !important;
 }
 
 .ghfg {
    position: relative !important;
    bottom: 60px !important;
-   right: 14px !important;
-   width: 600px !important;
+   width: 904px !important;
     height: 160px !important;
     resize: none !important;
 }
@@ -107,7 +106,7 @@
 
 .ghhg {
    position: relative !important;
-   right: 240px !important;
+   right: 30px !important;
    
 }
 
@@ -122,9 +121,9 @@
 } 
 
 .ghfdds {
-   position: relative !important;
-   left: 250px !important;
-   
+	position: relative !important;
+    left: 410px !important;
+    font-size: 26px !important;
 }
 
 .dsad {
@@ -136,7 +135,7 @@
 
 .dfdda {
 	position: relative !important;
-   left : 320px !important;
+   right : 320px !important;
 }
 
 .fghkljgj {
@@ -146,14 +145,12 @@
 
 .fgd {
 	position: relative !important;
-   right : 355px !important;
-   top: 50px !important;
+  
 }
 
 .jhgfg {
 	position: relative !important;
-   right : 40px !important;
-   top: 50px !important;
+
 }
 
 .rtyh {
@@ -232,4 +229,25 @@
 	color: #ffffff !important;
     background-color: #6caf8d !important;
     border-color: #6caf8d !important;
+}
+
+.dfssdfs {
+    position: relative !important;
+    width: 220px !important;
+    right: 182px !important;
+    bottom: 90px !important;
+}
+
+.rtyhs {
+       position: relative !important;
+    width: 160px !important;
+    right: 83px !important;
+    bottom: 90px !important;
+  
+}
+
+.dsfs {
+	position: relative !important;
+    left: 6px !important;
+    bottom: 81px !important;
 }

@@ -50,16 +50,17 @@
 		<div th:include="sidebar/sidebar" th:remove="tag"/></div>
         
         
-         <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
+         
+                <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
         <div class="djdji"></div>
             <div class="wrapper">
-                <p class="hatta">근태관리</p>
+                <div><p class="hatta">근태관리</p></div>
                 <div id="clock" class="clocka">clock</div>
                 <div id="digital_clock" class="glow">00:00:00</div>
+                
               </div>
         
-        <hr width="260" class="hr1" size="5">
-       
+        
         <!--출근하기 버튼-->
         <a onclick="location.href='/employ/in'" class="buttons">출근하기</a>
         <!--퇴근하기 버튼-->
@@ -103,14 +104,16 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#dates.day(my.attDate)} < 8 " >
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '1')} or ${#strings.equals(my.attDateSub, '2')} or
+                  ${#strings.equals(my.attDateSub, '3')} or ${#strings.equals(my.attDateSub, '4')} or ${#strings.equals(my.attDateSub, '5')} or
+                  ${#strings.equals(my.attDateSub, '6')} or ${#strings.equals(my.attDateSub, '7')}" >
                       <td th:text="${ my.workName }">출근</td>
                       <td th:text="${ my.attGo }">22-04-12</td>
                       <td th:text="${ my.attReason }">이러이러해서</td>
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
+                          <span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -134,7 +137,9 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#dates.day(my.attDate)} < 15 and ${#dates.day(my.attDate)} > 7" >
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '8')} or ${#strings.equals(my.attDateSub, '9')} or
+                  ${#strings.equals(my.attDateSub, '10')} or ${#strings.equals(my.attDateSub, '11')} or ${#strings.equals(my.attDateSub, '12')} or
+                  ${#strings.equals(my.attDateSub, '13')} or ${#strings.equals(my.attDateSub, '14')}" >
                       <td th:text="${ my.workName }">출근</td>
                       <td th:text="${ my.attGo }">22-04-12</td>
                       <td th:text="${ my.attReason }">이러이러해서</td>
@@ -165,7 +170,9 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#dates.day(my.attDate)} < 22 and ${#dates.day(my.attDate)} > 14" >
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '15')} or ${#strings.equals(my.attDateSub, '16')} or
+                  ${#strings.equals(my.attDateSub, '17')} or ${#strings.equals(my.attDateSub, '18')} or ${#strings.equals(my.attDateSub, '20')} or
+                  ${#strings.equals(my.attDateSub, '21')}" >
                       <td th:text="${ my.workName }">출근</td>
                       <td th:text="${ my.attGo }">22-04-12</td>
                       <td th:text="${ my.attReason }">이러이러해서</td>
@@ -196,7 +203,9 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#dates.day(my.attDate)} < 29 and ${#dates.day(my.attDate)} > 21" >
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '22')} or ${#strings.equals(my.attDateSub, '23')} or
+                  ${#strings.equals(my.attDateSub, '24')} or ${#strings.equals(my.attDateSub, '25')} or ${#strings.equals(my.attDateSub, '26')} or
+                  ${#strings.equals(my.attDateSub, '27')} or ${#strings.equals(my.attDateSub, '28')}" >
                       <td th:text="${ my.workName }">출근</td>
                       <td th:text="${ my.attGo }">22-04-12</td>
                       <td th:text="${ my.attReason }">이러이러해서</td>
@@ -227,7 +236,8 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#dates.day(my.attDate)} < 35 and ${#dates.day(my.attDate)} > 28" >
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '29')} or ${#strings.equals(my.attDateSub, '30')} or
+                  ${#strings.equals(my.attDateSub, '31')} or ${#strings.equals(my.attDateSub, '32')}" >
                       <td th:text="${ my.workName }">출근</td>
                       <td th:text="${ my.attGo }">22-04-12</td>
                       <td th:text="${ my.attReason }">이러이러해서</td>

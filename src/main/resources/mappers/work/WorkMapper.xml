@@ -366,6 +366,7 @@
 	    *
 	 FROM WORK_GROUP
 	 WHERE GROUP_USE = '사용'
+	 AND GROUP_STATUS = 'N'
 	 ORDER BY GROUP_NO    
 	</select>
 	

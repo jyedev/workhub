@@ -28,7 +28,7 @@ public class AttDTO {
    private int workNo;
    private String workName;
    private String name;
-   @DateTimeFormat(pattern="YYYY-MM-dd")
+   @DateTimeFormat(pattern="yyyy-MM-dd")
    private String attGo;
    private Date attOff;
    private Date attAdd;
@@ -40,6 +40,8 @@ public class AttDTO {
    private String attStatus;
    @DateTimeFormat(pattern = "yyyy-MM-dd")
    private String attModdate;
+   //일만 자른 것 
+   private String attDateSub;
    
   
 }

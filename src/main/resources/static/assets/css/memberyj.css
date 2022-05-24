@@ -20,28 +20,28 @@ body {
     align-items: center;
     justify-content: center;
     height: 170px;
-    width: 1350px;
+    width: 1000px;
     
   }
   
   .glow {
-    font-size: 25px;
+    font-size: 43px;
     color: #767676;
     font-weight: bold;
     animation: glow 1s ease-in-out infinite alternate;
     -moz-animation: glow 1s ease-in-out infinite alternate;
     -webkit-animation: glow 1s ease-in-out infinite alternate;
     position: relative;
-    top: 40px;
-    right: 340px;
+    top: 80px;
+    right: 136px;
 }
   
   .hatta {
-    font-weight: bolder;
-    font-size: 14px;
+	font-weight: bolder;
+    font-size: 26px;
     position: relative;
-    bottom: 8px;
-    right: 225px;
+    bottom: 4px;
+    left: 70px;
     color: #000000;
     
 
@@ -51,10 +51,10 @@ body {
 
   .clocka {
 
-    position: relative;
-    right: 271px;
-    top: 15px;
-    font-size: 4px;
+	position: relative;
+    right: 20px;
+    top: 42px;
+    font-size: 17px;
   }
 
   .hattc {
@@ -125,15 +125,15 @@ body {
 	padding:15px 28px;
 	text-decoration:none;
     position: relative;
-    top: 200px;
-    left: 350px;
+    top: 40px;
+    left: 340px;
     margin-right: 18px;
 }
 .buttons:focus {
 	background-color:#BEBEBE;
     color: #ffffff;
-    top: 200px;
-    left: 350px;
+    top: 40px;
+    left: 340px;
 }
 
 .buttons:hover {
@@ -151,15 +151,15 @@ body {
 	padding:15px 28px;
 	text-decoration:none;
     position: relative;
-    top: 200px;
-    left: 355px;
+    top: 40px;
+    left: 338px;
     margin-right: 18px;
 }
 .buttonsa:focus {
 	background-color:#BEBEBE;
     color: #ffffff;
-    top: 200px;
-    left: 355px;
+    top: 40px;
+    left: 338px;
 }
 
 .buttonsa:hover {
@@ -170,8 +170,8 @@ body {
     border-radius:9px;
     padding:4px 60px;
     position: relative;
-    top: 215px;
-    left: 350px;
+    top: 60px;
+    left: 341px;
     font-size: 20px;
     border: solid 3px #6caf8d;
  }
@@ -192,7 +192,7 @@ body {
    font-weight: bolder;
    font-size: 26px;
    position: relative;
-   bottom: 263px;
+   bottom: 214px;
    left: 886px;
    color: #000000;
   }
@@ -314,9 +314,9 @@ body {
 }
 
 .oopo {
-   position: relative;
-   right: 55px;
-   top: 210px;
+	position: relative;
+    left: 2135px;
+    bottom: 160px;
 }
 
 .card-content {
@@ -358,13 +358,15 @@ body {
 }
 
 .ppo {
-   background-color: #ffffff;
-   box-shadow: none;
-   border: solid 3px #BEBEBE;
+    background-color: #ffffff;
+    box-shadow: none;
+    border: solid 3px #BEBEBE;
     position: relative;
-   right: 215px;
-   bottom: 70px;
-
+    left: 2189px;
+    bottom: 220px;
+    color: #000000;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 
@@ -404,16 +406,16 @@ body {
 	padding:5px 10px;
 	text-decoration:none;
     position: relative;
-    top: 214px;
-    left: 358px;
+    top: 59px;
+    left: 340px;
     margin-right: 18px;
     border: none;
 }
 .chec:focus {
 	background-color:#BEBEBE;
     color: #ffffff;
-    top: 214px;
-    left: 358px;
+    top: 59px;
+    left: 340px;
 }
 
 .chec:hover {
@@ -442,8 +444,21 @@ body {
     top: 32px;
     left: 310px;
     background-color: #ffffff;
-    height: 30%;
-    width: 15%;
+    height: 350px;
+    width: 310px;
     border-radius: 20px;
 }
 
+.tgts {
+    position: absolute;
+    bottom: 440px;
+    left: 880px;
+    width: 1624px;
+}
+
+.tgtss {
+    position: relative;
+    bottom: 500px;
+    left: 880px;
+    width: 1600px;
+}
