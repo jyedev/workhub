@@ -35,7 +35,7 @@
     	SELECT *
     	  FROM MT_ROOM
   		 WHERE DEL_YN = 'N'
-		 ORDER BY ROOM_NO DESC 	
+		 ORDER BY RM_LOCATION DESC, ROOM_NO DESC 	
     	
     </select>
     
@@ -50,9 +50,9 @@
     	SET
     	RM_LOCATION = #{ rmLocation },
     	ROOM_NAME = #{ roomName },
-    	ROOM_YN = #{ roomYn },
+    	ROOM_YN = #{ roomYn }
     	<if test="orgName != null">
-    		ORG_NAME = #{ orgName },
+    		, ORG_NAME = #{ orgName },
     		SAVED_NAME = #{ savedName },
     		SAVE_PATH = #{ savePath }
     	</if>
