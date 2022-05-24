@@ -51,8 +51,9 @@ public interface ApprovalService {
 
 	AcceptDTO findAccByNo(Integer approvalNo);
 
+	void deleteLine(int no);
 
-
+	void deleteRef(int no);
 
 
 }
