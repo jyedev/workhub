@@ -117,7 +117,6 @@ public class ApprovalController {
 	@GetMapping("receptionDetail")
 	public ModelAndView receptionDetail(ModelAndView mv, @AuthenticationPrincipal UserImpl user,
 			@RequestParam("approvalNo") Integer approvalNo) {
-		System.out.println("컨트롤러에서 approvalNo: " + approvalNo);
 
 		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
 		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
@@ -144,10 +143,12 @@ public class ApprovalController {
 		ApprovalDTO approval = approvalService.findAppByNo(approvalNo);
 		List<AppLineDTO> receiver = approvalService.findReceiverByNo(approvalNo);
 		List<ReferenceDTO> ref = approvalService.findRefByNo(approvalNo);
+		AcceptDTO accept = approvalService.findAccByNo(approvalNo);
 
 		mv.addObject("approvalDTO", approval);
 		mv.addObject("receiver", receiver);
 		mv.addObject("ref", ref);
+		mv.addObject("accept", accept);
 
 		mv.setViewName("/approval/sendDetail");
 
@@ -168,6 +169,9 @@ public class ApprovalController {
 	@ResponseBody
 	public void deleteApp(@RequestParam("approvalNo") String approvlNo) {
 		int no = Integer.parseInt(approvlNo);
+		
+		approvalService.deleteLine(no);
+		approvalService.deleteRef(no);
 		approvalService.deleteApp(no);
 	}
 

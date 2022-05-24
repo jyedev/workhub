@@ -81,6 +81,7 @@
 		  JOIN TBL_MEMBER E ON(D.REF_MEM_NO = E.NO)
 		  JOIN TBL_MEMBER F ON(A.APP_MEM_NO = F.NO)
 		 WHERE C.NO IN #{ no }
+		   AND (A.APP_STATUS NOT IN '회수')
 		    OR (E.NO IN #{ no } AND A.APP_STATUS = '승인')
 	</select>
 	
@@ -182,6 +183,18 @@
 		DELETE
 		  FROM APPROVAL
 		 WHERE APP_NO = #{ no }
+	</delete>
+	
+	<delete id="deleteLine">
+		DELETE
+		  FROM APP_LINE
+		 WHERE LINE_NO = #{ no }
+	</delete>
+	
+	<delete id="deleteRef">
+		DELETE
+		  FROM TBL_REFERENCE
+		 WHERE REF_APP_NO = #{ no }
 	</delete>
 	
 	<!-- 결재자 insert -->
@@ -304,12 +317,6 @@
 		  FROM APP_ACCEPT
 		 WHERE ACC_APP_NO = #{ no }
 	</select>
-	
-	
-	
-	
-	
-	
 	
 	
 	
