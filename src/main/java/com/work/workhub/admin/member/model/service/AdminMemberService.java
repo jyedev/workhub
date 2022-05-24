@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.work.workhub.member.member.dto.MemberDTO;
 
-public interface AdminMemberService extends UserDetailsService {
+public interface AdminMemberService {
 
 	void signUp(MemberDTO member);
 	

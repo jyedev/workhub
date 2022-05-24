@@ -20,6 +20,7 @@ public class UserImpl extends User{
 	   private String pwd;
 	   private int depNo;
 	   private int positionNo;
+	   private String positionName;
 	   private int groupNo;
 	   private String name;
 	   private String email;
@@ -44,6 +45,7 @@ public class UserImpl extends User{
 		this.pwd = member.getPwd();
 		this.depNo = member.getDepNo();
 		this.positionNo = member.getPositionNo();
+		this.positionName = member.getPositionName();
 		this.groupNo = member.getGroupNo();
 		this.name = member.getName();
 		this.email = member.getEmail();

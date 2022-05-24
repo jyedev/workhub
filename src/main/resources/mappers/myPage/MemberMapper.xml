@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.work.workhub.member.member.dao.MemberMapper">
+<mapper namespace="com.work.workhub.member.myPage.model.dao.MyPageMapper">
 	<resultMap id="loginMemberResultMap" type="com.work.workhub.member.member.dto.MemberDTO">
 		<id property="no" column="NO"/>
 		<result property="id" column="ID"/>
@@ -58,12 +58,9 @@
 		WHERE A.ID = #{ username }
 	</select>
 	
-	<!-- 웹소켓 쪽지 전용  -->
-	<select id="findIdByNo" resultType="java.lang.String">
-		SELECT
-		       A.ID
-		  FROM TBL_MEMBER A
-		 WHERE A.NO = #{ receiver }
-	</select>
+	<!-- 회원정보 수정 -->
+ 	<update id="editInfo">
+		update member set email = #{email} where id = #{id}
+	</update>
 	
 </mapper>

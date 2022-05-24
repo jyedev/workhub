@@ -1,7 +1,14 @@
 package com.work.workhub.member.myPage.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.work.workhub.member.member.dto.MemberDTO;
+import com.work.workhub.member.member.dto.UserImpl;
+import com.work.workhub.member.myPage.model.service.MyPageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,10 +17,21 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/myPage")
 public class MyPageController {
 
+	@Autowired
+	private MyPageService myPageService;
+	
 	// 마이페이지 이동
 	@RequestMapping(value = "/myPage")
-	public String myPage() throws Exception{
-		return "/myPage/myPage";
+	public ModelAndView myPage(@AuthenticationPrincipal UserImpl user, ModelAndView mv) throws Exception{
+		
+		String username = user.getId();
+		MemberDTO member = myPageService.findMemberById(username);
+
+		mv.setViewName("/myPage/myPage");
+		mv.addObject("member", member);
+		
+		return mv;
+		
 	}
 
 	
