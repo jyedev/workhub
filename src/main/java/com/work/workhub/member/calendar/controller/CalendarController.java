@@ -1,5 +1,7 @@
 package com.work.workhub.member.calendar.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -107,5 +111,24 @@ public class CalendarController {
 		
 		return "redirect:/calendar/list";
 	}
+	
+//	 @DeleteMapping("update")
+//	 @ResponseBody
+//	 public Map<String, FullCalendarDTO> deleteEvent(@RequestBody List<Map<String, Object>> param, @AuthenticationPrincipal UserImpl user) {
+//	 
+//		 	Map<String, FullCalendarDTO> calMap = new HashMap<>();
+//		 	
+//	        for (Map<String, Object> list : param) {
+//	        	
+//	        	FullCalendarDTO fullcalendar = new FullCalendarDTO();
+//	            fullcalender.setTitle((String) list.get("title")); // 이름 받아오기
+//	            Date start = (Date) list.get("start");
+//	            Date end = (Date) list.get("end");
+//	            String allDay = (String) list.get("allDay");
+//	            calMap.put("event", new FullCalendarDTO(title, start, end, allDay));
+//	            
+//	        }
+//	        return calMap;
+//	 }
 
 }

@@ -360,11 +360,11 @@
 											                                <div class="row">
 												                                    <div class="col">
 												                                        <label for="exampleFormControlInput1" class="form-label">시작일</label><br>
-												                                        <input type="datetime-local" class="form-control" name="calStart">
+												                                        <input type="datetime-local" class="form-control" name="calStart" id="calStart">
 												                                    </div>
 												                                    <div class="col">
 												                                        <label for="exampleFormControlInput1" class="form-label">종료일</label><br>
-												                                        <input type="datetime-local" class="form-control" name="calEnd">
+												                                        <input type="datetime-local" class="form-control" name="calEnd" id="calEnd">
 												                                    </div>
 			                                                                        &nbsp;&nbsp;&nbsp;&nbsp;
 			                                                                        <div class='col-sm-2'>
@@ -440,6 +440,10 @@
     	$("#checkbox1").is(':checked', function(){
     		  $("#checkbox1").prop('checked', true);
     		});
+    	
+    	document.getElementById('calStart').value= new Date().toISOString().slice(0, 16);
+    	document.getElementById('calEnd').value= new Date().toISOString().slice(0, 16);
+
     </script>
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
