@@ -1,6 +1,11 @@
 package com.work.workhub.member.reserve.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -40,10 +45,10 @@ public class SelectMyReserveList {
 		log.info("로그인 유저 정보 : {}", user);
 
 		List<ResCarDTO> resCarList = carResService.selectAllResCarList();
-
-		mv.addObject("resCarList", resCarList);
 		
+		mv.addObject("resCarList", resCarList);
 		log.info("resCarList : {}", resCarList);
+		
 		
 		List<ResMeetingDTO> resMeetingList = meetingService.selectAllResMeeting();
 		

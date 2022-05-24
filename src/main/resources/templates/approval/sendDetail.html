@@ -33,7 +33,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>개인 결재함</h3><br>
+                            <h3>발송 결재함</h3><br>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                                             <a onclick="location.href='/approval/receptionList'" class="list-group-item" style="cursor:pointer;">수신
                                                 결재함</a>
                                             <a onclick="location.href='/approval/sendList'" class="list-group-item active" style="cursor:pointer;">발송 결재함</a>
-                                            <a href="#" class="list-group-item">임시 저장함</a>
+                                            <a onclick="location.href='/approval/tempList'" class="list-group-item">임시 저장함</a>
                                         </div>
                                         <!-- sidebar menu  end-->
                                     </div>
@@ -113,11 +113,13 @@
                                             <div class="card" id="app-date">
                                                 <div class="row">
                                                 <div th:each="receiver : ${ receiver }">
-                                                	<div th:text="${ receiver.receiver.name }" class="col"></div>
+                                                	<span th:text="${ receiver.receiver.name }" class="col"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                		<span th:if="${ accept != null }">
+                                                			<span th:text="${ accept.status }"></span>
+                                                			<span th:text="${ #dates.format(accept.date, 'yyyy-MM-dd')}"></span>
+                                                		</span>
                                                 </div>
                                                     <div class="col">
-                                                        <span>승인</span>
-                                                        <span>2022-01-02</span>
                                                     </div>
                                                 </div>
                                             </div>

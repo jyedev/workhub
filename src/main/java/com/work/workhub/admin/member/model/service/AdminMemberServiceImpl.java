@@ -25,14 +25,6 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		
-		
-		return null;
-	}
-
-	@Override
 	public void signUp(MemberDTO member) {
 		
 		/* 시퀀스 이름을 부서 별로 따로 쓰니깐 부서별로 각각 다르게 정의해주는것 */

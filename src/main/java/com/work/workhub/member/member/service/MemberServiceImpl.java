@@ -1,6 +1,5 @@
 package com.work.workhub.member.member.service;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +70,8 @@ public class MemberServiceImpl implements MemberService {
 	// 이메일 발송
 	@Override
 	public int findPwCheck(MemberDTO memberDTO) throws Exception {
-		return memberDTO.findPwCheck(memberDTO);
+//		return memberDTO.findPwCheck(memberDTO);
+		return 0;
 	}
 
 	@Override

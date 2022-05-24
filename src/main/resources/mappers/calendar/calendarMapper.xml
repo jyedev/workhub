@@ -77,8 +77,8 @@
         , #{ calWriterNo }
         , #{ calTitle }
         , #{ calContent }
-        , #{ calStart, jdbcType=VARCHAR }
-        , #{ calEnd, jdbcType=VARCHAR }
+        , #{ calStart }
+        , #{ calEnd }
         , #{ calAlldayStatus }
         )
 	</insert>

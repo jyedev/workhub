@@ -43,7 +43,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	/* 정적 리소스는 권한이 없어도 요청 가능하게 무시할 경로를 작성한다 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/vendors/**", "/uploadFiles/**");
+//		web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/vendors/**", "/uploadFiles/**");
+		web.ignoring().antMatchers("/assets/*/**", "/uploadFiles/**");
 	}
 	
 
@@ -77,29 +78,35 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.csrf().disable()	/* csrf는 기본적으로 활성화 되어 있으므로 비활성화 처리 */
 			/* 요청에 대한 권한 체크 */
 			.authorizeHttpRequests()
-				.antMatchers("/approval/**").authenticated()
-				.antMatchers(HttpMethod.GET, "/approval/**").hasRole("ROLE_MEMBER")
-				.antMatchers("/message/**").authenticated()
-				.antMatchers(HttpMethod.GET, "/message/**").hasRole("ROLE_MEMBER")
-				.antMatchers("/reserve/**").authenticated()
-				.antMatchers(HttpMethod.GET, "/reserve/**").hasRole("ROLE_MEMBER")
-				.antMatchers("/calendar/**").authenticated()
-				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
-				.antMatchers("/post/**").authenticated()
-				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
-				.antMatchers("/survey/**").authenticated()
-				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
+//				.antMatchers("/approval/**").authenticated()
+//				.antMatchers(HttpMethod.GET, "/approval/**").hasRole("ROLE_MEMBER")
+//				.antMatchers("/message/**").authenticated()
+//				.antMatchers(HttpMethod.GET, "/message/**").hasRole("ROLE_MEMBER")
+//				.antMatchers("/reserve/**").authenticated()
+//				.antMatchers(HttpMethod.GET, "/reserve/**").hasRole("ROLE_MEMBER")
+//				.antMatchers("/calendar/**").authenticated()
+//				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
+//				.antMatchers("/post/**").authenticated()
+//				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
+//				.antMatchers("/survey/**").authenticated()
+//				.antMatchers(HttpMethod.GET, "/calendar/**").hasRole("ROLE_MEMBER")
 //				.antMatchers("/admin/**").authenticated()
 //				.antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
+				/*
+				 * hasRole("ROLE_MEMBER") 사용 안함 : ROLE_ADMIN인 경우에는 접근이 불가능해지므로 / authenticated()만 적용하여 ROLE 무관하게 로그인한 경우 접근 가능하도록 함
+				 * hasRole("ROLE_ADMIN")만 사용 : ROLE_ADMIN이면 접근 / ROLE_MEMBER인 경우에는 접근 불가능해야 하므로
+				 */
+				.antMatchers("/", "/member/login").permitAll()
+				.antMatchers("/admin/**").authenticated()
+				.antMatchers(HttpMethod.GET, "/admin/**").hasRole("ROLE_ADMIN")
 				.antMatchers("/asset/**").authenticated()
 				.antMatchers(HttpMethod.GET, "/asset/**").hasRole("ROLE_ADMIN")
-				.anyRequest().permitAll()
+				.anyRequest().authenticated()
 			.and()
 				.formLogin()
 				.loginPage("/")
 				.loginProcessingUrl("/member/login")
-				//.successForwardUrl("/")
-				.defaultSuccessUrl("/employ/employmentSelect", true)
+				.defaultSuccessUrl("/myPage/myPage", true)
 				.failureHandler(loginFailHandler())
 			.and()
 				.logout()
@@ -110,7 +117,16 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				/* 세션 만료 */
 				.invalidateHttpSession(true)
 				/* 성공 시 랜딩 페이지 */
-				.logoutSuccessUrl("/");
+				.logoutSuccessUrl("/")
+			.and()
+				.sessionManagement()
+				.maximumSessions(1)
+				.maxSessionsPreventsLogin(false)
+				.expiredUrl("/")
+			.and()
+				.and().rememberMe()
+				.alwaysRemember(true)
+				.tokenValiditySeconds(1800);
 			
 	}
 
