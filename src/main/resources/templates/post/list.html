@@ -56,19 +56,13 @@
                     <div class="card">
                         <div class="card-header">
                             <a th:href="@{/post/write}" class="btn btn-outline-primary">새글쓰기</a>
-                            <a th:href="@{/post/delete}" class="btn btn-outline-primary">삭제하기</a>
-                            <a th:href="@{/post/noticeRegist}" class="btn btn-outline-primary">공지등록</a>
+<!--                             <a th:href="@{/post/delete}" class="btn btn-outline-primary">삭제하기</a> -->
+<!--                             <a th:href="@{/post/noticeRegist}" class="btn btn-outline-primary">공지등록</a> -->
                         </div>
                         <div class="card-body">
                             <table class="table table-borderless" id="table1">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </th>
                                         <th>번호</th>
                                         <th>제목</th>
                                         <th>작성자</th>
@@ -78,13 +72,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr th:each="notice:${notice}" class="post-notice">
+<!--                                         <td th:text="${notice.postNo}">글번호</td> -->
+                                        <td><img src="/assets/images/post-surv/public-relation.png" class="icon-notice"></td>
+                                        <td th:text="${notice.postTitle}" class="post-title">게시글 제목</td>
+                                        <td th:text="${notice.member.name}">작성자</td>
+                                        <td th:text="${notice.postDate}">작성 날짜</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>                                
                                     <tr th:each="post:${postList}">
-                                        <td>
-                                            <div class="checkbox checkbox-shadow">
-                                                <input type="checkbox" class="form-check-input" id="checkbox1">
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                        </td>
                                         <td th:text="${post.postNo}">글번호</td>
                                         <td><a th:href="@{/post/detail/no/{postNo}(postNo=${post.postNo})}" th:text="${post.postTitle}" class="post-title">게시글 제목</a></td>
                                         <td th:text="${post.member.name}">작성자</td>

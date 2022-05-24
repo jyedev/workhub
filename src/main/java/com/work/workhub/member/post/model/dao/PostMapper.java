@@ -25,5 +25,7 @@ public interface PostMapper {
 
 	int deletePost(Integer postNo);
 
+	List<PostDTO> showNotice();
+
 
 }

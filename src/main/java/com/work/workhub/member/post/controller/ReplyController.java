@@ -59,7 +59,7 @@ public class ReplyController {
 //		return mv;
 //	}
 	
-	@PostMapping("update/{postNo}")
+	@PostMapping("update/no/{postNo}")
 	public String updateReply(@ModelAttribute ReplyDTO reply, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr) throws Exception {
 		
 		reply.setNo(user.getNo());

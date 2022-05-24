@@ -47,8 +47,11 @@ public class PostController {
 	@GetMapping("list")
 	public ModelAndView findPostList(ModelAndView mv) {
 		
+		List<PostDTO> notice=postService.showNotice();
+		
 		List<PostDTO> postList = postService.findAllPost();
 		
+		mv.addObject("notice", notice);
 		mv.addObject("postList", postList);
 		mv.setViewName("/post/list");
 		
