@@ -35,27 +35,15 @@
         
         
          <!-- 타이머와 출근시간 퇴근시간 주간 누적근무시간-->
-        <div class="djdji"></div>
+                <div class="djdji"></div>
             <div class="wrapper">
                 <div><p class="hatta">근태관리</p></div>
                 <div id="clock" class="clocka">clock</div>
                 <div id="digital_clock" class="glow">00:00:00</div>
-                <div>
-                <div class="hattc"><p>출근시간</p></div>
-                <div class="hattd"><p>09:00:00</p></div>
-                </div>
-                <div>
-                <div class="hatte"><p>퇴근시간</p></div>
-                <div class="hattf"><p>09:00:00</p></div>
-            </div>
-            <div>
-                <div class="hattee"><p>주간 누적 근무시간</p></div>
-                <div class="hattff"><p>09:00:00</p></div>
-            </div>
+                
               </div>
         
-        <hr width="260" class="hr1" size="5">
-       
+        
         <!--출근하기 버튼-->
         <a onclick="location.href='/employ/in'" class="buttons">출근하기</a>
         <!--퇴근하기 버튼-->
@@ -77,21 +65,6 @@
        
        <p class="hattsd">내 연차 내역</p>
       
-      <!--사원 프로필 있는 곳-->
-       <div class="boxx">
-       <div class="box box1">
-           <div class="sss"></div>
-           <span class="nsns">김땡땡 사원</span></div>
-       <div class="box box2">
-        <span class="asa">사용 연차</span>   
-        <span class="csc">0</span></div>
-       <div class="box box3">
-        <span class="asa">총 연차</span>    
-        <span class="csc">0</span></div>
-       <div class="box box4">
-        <span class="asa">잔여 연차</span>    
-        <span class="csc">0</span></div>
-    </div>
     
     <!--날짜 필터-->
     <form class="oopo">
@@ -105,7 +78,7 @@
 
                 <!-- 사용한 연차 조회 시작-->
                 
-                    <div class="row" id="table-hover-row">
+                    <div class="row tgts" id="table-hover-row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -138,7 +111,7 @@
                                                     <td th:text="${ ho.porestDay }">4</td>
                                                     <td th:text="${ ho.porestReason }">너무너무 피곤해서</td>
                                                     <td>
-                                    					<span class="badge bg-success" th:onclick="|javascript:porestModify('${ ho.porestNo }')|">수정</span>
+                                    					<span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:porestModify('${ ho.porestNo }')|">수정</span>
                                 				   </td>
                                                 </tr>
                                             </tbody>
@@ -154,7 +127,7 @@
 
                                 <!-- 신청한 연차 조회 시작-->
                                
-                                    <div class="rows" id="table-hover-row">
+                                    <div class="rows tgtss" id="table-hover-row">
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-header">
@@ -187,7 +160,7 @@
                                                     			<td th:text="${ hos.porestDay }"></td>
                                                     			<td th:text="${ hos.porestReason }"></td>
                                              					<td>
-                                    								<span class="badge bg-success" th:onclick="|javascript:porestModify('${ hos.porestNo }')|">수정</span>
+                                    								<span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:porestModify('${ hos.porestNo }')|">수정</span>
                                 				   				</td>
                                                 			</tr>                                                                
                                                             </tbody>

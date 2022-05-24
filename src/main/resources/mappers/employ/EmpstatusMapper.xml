@@ -18,6 +18,7 @@
 	<result property="attDate" column="ATT_DATE"/>
 	<result property="attStatus" column="ATT_STATUS"/>
 	<result property="attModdate" column="ATT_MODDATE"/>
+	<result property="attDateSub" column="ATT_DATESUB"/>
 </resultMap>
 
 <!-- 근태유형 -->
@@ -263,6 +264,7 @@
 		, A.ATT_DATE
 		, A.ATT_STATUS
 		, A.ATT_MODDATE
+		, SUBSTR(A.ATT_DATE, 7,8) ATT_DATESUB
 		, B.WORK_NAME
 		FROM ATT A
 		JOIN WORK_CATEGORY B ON (A.WORK_NO = B.WORK_NO)
@@ -450,7 +452,7 @@
 	UPDATE ATT
 	SET 
 		WORK_NO = #{ workNo }, 
-        ATT_GO = TO_CHAR(#{ attGo }),
+        ATT_GO = #{ attGo },
 		ATT_REASON = #{ attReason },
 		NO = #{ no },
 		ATT_MODDATE = SYSDATE
