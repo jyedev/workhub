@@ -71,6 +71,7 @@ public class ReplyController {
 		return "redirect:/post/detail/no/" + reply.getPostNo();
 	}
 	
+	
 	//댓글 삭제
 	@GetMapping("delete/{replyNo}")
 	public String deleteReply(@ModelAttribute ReplyDTO reply, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr, Locale locale) throws Exception {
