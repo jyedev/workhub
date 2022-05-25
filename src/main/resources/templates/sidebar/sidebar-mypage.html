@@ -36,7 +36,7 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active">
+                        <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>홈</span>
@@ -47,17 +47,15 @@
                                 <i class="bi bi-stack"></i>
                                 <span>전자결재</span>
                             </a>
-                            <ul class="submenu active">
+                            <ul class="submenu ">
                                 <li class="submenu-item">
                                     <a onclick="location.href='/approval/regist'" style="cursor:pointer;">결재 문서 생성</a>
                                 </li>
                                 <li class="submenu-item ">
                                     <a onclick="location.href='/approval/receptionList'" style="cursor:pointer;">개인 결재함</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">부서 결재함</a>
-                                </li>
                             </ul>
+                        </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-collection-fill"></i>
@@ -70,9 +68,8 @@
                                 <li class="submenu-item ">
                                     <a th:href="@{/rest/restSelect}">내 연차 내역</a>
                                 </li>
-
                             </ul>
-                        </li> 
+                        </li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-alarm-fill"></i>
@@ -89,7 +86,7 @@
                                     <a th:href="@{/reserve/mylist}">내 예약 조회</a>
                                 </li>
                             </ul>
-                		</li>
+                        </li>
                         <li class="sidebar-item">
                             <a class='sidebar-link' onclick="location.href='/calendar/list'" style="cursor:pointer;">
                                 <i class="bi bi-calendar-fill"></i>
@@ -117,6 +114,7 @@
                                 <li class="submenu-item ">
                                     <a th:href="@{/post/list}">자유게시판</a>
                                 </li>
+
                             </ul>
                         </li>
                         <li class="sidebar-item  has-sub">
@@ -143,14 +141,13 @@
                             </ul>
                         </li>
                         <li class="sidebar-item  ">
-						<a class='sidebar-link' onclick="location.href='/message/inboxList'" style="cursor:pointer;">
-                                <i class="bi bi-chat-dots-fill"></i>
+                            <a class='sidebar-link' onclick="location.href='/message/inboxList'" style="cursor:pointer;">
                                 <span>쪽지</span>
                             </a>
                         </li>
                         <br><br><br><br>
 
-                        <li class="sidebar-item ">
+                        <li class="sidebar-item active">
                             <a th:href="@{/myPage/myPage}" class='sidebar-link'>
                                 <i class="bi bi-person-circle"></i>
                                 <span>내 정보 관리</span>
