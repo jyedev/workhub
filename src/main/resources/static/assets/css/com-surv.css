@@ -26,6 +26,11 @@
 	color: #7b8abf;
 }
 
+.post-notice:hover{
+	cursor: pointer;
+	background-color: #efefef;
+}
+
 #btn-list{
     float: right;
 }
