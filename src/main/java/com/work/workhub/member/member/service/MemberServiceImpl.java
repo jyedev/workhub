@@ -3,8 +3,6 @@ package com.work.workhub.member.member.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -64,29 +62,6 @@ public class MemberServiceImpl implements MemberService {
 		user.setDetails(member);
 		
 		return user;
-	}
-
-
-	// 이메일 발송
-	@Override
-	public int findPwCheck(MemberDTO memberDTO) throws Exception {
-//		return memberDTO.findPwCheck(memberDTO);
-		return 0;
-	}
-
-	@Override
-	public void findPw(String memberEmail, String memberId) throws Exception {
-		
-	}
-
-	@Override
-	public MemberDTO editInfo(MemberDTO member) throws Exception {
-		return null;
-	}
-
-	@Override
-	public MemberDTO updatePw(MemberDTO member, String old_pw, HttpServletResponse response) throws Exception {
-		return null;
 	}
 	
 }

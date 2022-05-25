@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workhub-admin</title>
 
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <!-- fonts -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -58,33 +60,33 @@
 	                            <div class="mem-tab-list">
 	                                <p><a href="#">전체 구성원</a></p>
 	                                <ul>
-	                                    <li><a href="#">인사팀</a></li>
-	                                    <li><a href="#">총무팀</a></li>
-	                                    <li><a href="#">영업팀</a></li>
-	                                    <li><a href="#">마게팅팀</a></li>
-	                                    <li><a href="#">개발팀</a></li>
+	                                    <li th:each="department:${depList}"><a href="#" th:data="${department.depNo}" th:text="${department.depName}"></a></li>
 	                                </ul>
 	                            </div> <!-- /mem-tab-list -->
 	                        </section> <!-- /mem-tab -->
 	
 	                        <section class="mem-list col-7">
-	                            <h3 class="counting"><span>1</span>명</h3>
+	                            <h3 class="counting"><span id="memberCount" th:text="${#lists.size(memberList)}"></span>명</h3>
 	                            <p class="include"><span></span>하위조직 포함<i class=""></i></p>
 	                            <input type="search" name="search" id="search">
 	                            <table class="mem-table">
-	                                <tr>
-	                                    <th>이름</th>
-	                                    <th>조직 · 직책</th>
-	                                    <th>직위</th>
-	                                    <th>상태</th>
-	                                </tr>
-	                                <tr th:each="member : ${ memberList } ">
-	                                    <td th:text="${ member.name }" name="memberName"></td>
-	                                    <td th:text="${ member.depName }" name="depName"></td>
-	                                    <td th:text="${ member.positionName }" name="positionName"></td>
-	                                    <td th:if="${ member.status == 'Y' }" name="memberStatus">재직중</td>
-	                                    <td th:unless="${ member.status == 'Y' }" name="memberStatus">퇴직</td>
-	                                </tr>
+	                                <thead>
+	                                	<tr>
+		                                    <th>이름</th>
+		                                    <th>조직 · 직책</th>
+		                                    <th>직위</th>
+		                                    <th>상태</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="memberList">
+		                                <tr th:each="member : ${ memberList } ">
+		                                    <td th:text="${ member.name }" name="memberName"></td>
+		                                    <td th:text="${ member.depName }" name="depName"></td>
+		                                    <td th:text="${ member.positionName }" name="positionName"></td>
+		                                    <td th:if="${ member.status == 'Y' }" name="memberStatus">재직중</td>
+		                                    <td th:unless="${ member.status == 'Y' }" name="memberStatus">퇴직</td>
+		                                </tr>
+	                                </tbody>
 	                            </table>
 	                        </section>  <!-- /mem-list -->
 	                    </div> <!-- /content-wrap -->
@@ -257,5 +259,35 @@
 
     <script src="/assets/js/main.js"></script>
 </body>
+
+<script>
+	$(".mem-tab-list a").on("click", function(){
+		$.ajax({
+			type: "POST",
+			url: "/admin/member/memberListAjax",
+			data: {
+				depNo: $(this).attr("data") == undefined ? null : $(this).attr("data")
+			},
+			dataType: "json",
+			success: function(result) {
+				var memberListHtml = "";
+            	for(var i=0;i<result.length;i++) {
+            		memberListHtml += "<tr>";
+            		memberListHtml += 	"<td name='memberName'>" + result[i].name + "</td>";
+            		memberListHtml += 	"<td name='depName'>" + result[i].depName + "</td>";
+            		memberListHtml += 	"<td name='positionName'>" + result[i].positionName + "</td>";
+            		if(result.status == "Y") {
+	            		memberListHtml += "<td name='memberStatus'>재직중</td>";
+            		}else{
+	            		memberListHtml += "<td name='memberStatus'>퇴직</td>";
+            		}
+            		memberListHtml += "</tr>";
+            	}
+				$("#memberList").html(memberListHtml);
+				$("#memberCount").text(result.length);
+			}
+		});
+	});
+</script>
 
 </html>
