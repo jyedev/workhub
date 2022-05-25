@@ -31,6 +31,11 @@
 		<result property="authName" column="REF_AUTH_NAME"/>
 	</resultMap>
 	
+	<resultMap id="depResultMap" type="com.work.workhub.member.member.dto.DepartmentDTO">
+		<id property="depNo" column="DEP_NO"/>
+		<result property="depName" column="DEP_NAME"/>
+	</resultMap>
+	
 	<insert id="insertMember">
 		INSERT
 		  INTO TBL_MEMBER
@@ -78,40 +83,38 @@
 	</insert>
 
 	<select id="selectMemberList" resultMap="loginMemberResultMap">
-	SELECT *
-	FROM(
-		SELECT ROWNUM RNUM, Q.*	 
-		FROM (
-			SELECT
-				   A.NO
-				 , A.ID
-				 , A.PWD
-				 , A.DEP_NO
-				 , D.DEP_NAME
-				 , A.POSITION_NO
-				 , P.POSITION_NAME
-				 , A.GROUP_NO
-				 , A.NAME
-				 , A.GENDER
-				 , A.EMAIL
-				 , A.PHONE
-				 , A.STATUS
-				 , B.NO REF_NO
-				 , B.AUTH_NO REF_AUTH_NO
-				 , C.AUTH_NO REF_AUTH_NO2
-				 , C.AUTH_NAME
-			 FROM TBL_MEMBER A
-			 LEFT JOIN MEMBER_ROLE B ON (A.NO = B.NO)
-			 LEFT JOIN AUTHORITY C ON (B.AUTH_NO = C.AUTH_NO)
-			 LEFT JOIN DEPARTMENT D ON (D.DEP_NO = A.DEP_NO)
-			 LEFT JOIN TBL_POSITION P ON (P.POSITION_NO = A.POSITION_NO)
-			 WHERE 1=1
-			 <if test="depName != null and depName != ''">
-			 	D.DEP_NAME = #{depName}
-			 </if>
-		 ) Q
-	)
-	<!-- WHERE RNUM BETWEEN #{start} AND #{end} -->
+		SELECT
+			   A.NO
+			 , A.ID
+			 , A.PWD
+			 , A.DEP_NO
+			 , D.DEP_NAME
+			 , A.POSITION_NO
+			 , P.POSITION_NAME
+			 , A.GROUP_NO
+			 , A.NAME
+			 , A.GENDER
+			 , A.EMAIL
+			 , A.PHONE
+			 , A.STATUS
+			 , B.NO REF_NO
+			 , B.AUTH_NO REF_AUTH_NO
+			 , C.AUTH_NO REF_AUTH_NO2
+			 , C.AUTH_NAME
+		 FROM TBL_MEMBER A
+		 LEFT JOIN MEMBER_ROLE B ON (A.NO = B.NO)
+		 LEFT JOIN AUTHORITY C ON (B.AUTH_NO = C.AUTH_NO)
+		 LEFT JOIN DEPARTMENT D ON (D.DEP_NO = A.DEP_NO)
+		 LEFT JOIN TBL_POSITION P ON (P.POSITION_NO = A.POSITION_NO)
+		 WHERE 1=1
+		 <if test='depNo != null and depNo != ""'>
+		 	and A.DEP_NO = #{depNo}
+		 </if>
 	</select>
+	
+	<select id="selectDepList" resultMap="depResultMap">
+		SELECT * FROM DEPARTMENT
+	</select>
+	
 	
 </mapper>

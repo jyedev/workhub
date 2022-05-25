@@ -1,7 +1,6 @@
 package com.work.workhub.member.myPage.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.work.workhub.member.member.dto.MemberDTO;
 
@@ -9,5 +8,9 @@ import com.work.workhub.member.member.dto.MemberDTO;
 public interface MyPageMapper {
 
 	MemberDTO findMemberById(String username);
+	
+	int changePwd(MemberDTO member);
+	
+	int editInfo(MemberDTO member);
 
 }

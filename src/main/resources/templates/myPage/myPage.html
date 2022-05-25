@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workhub - 내 정보</title>
 
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	
     <!-- fonts -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <!-- bootstrap -->
@@ -33,7 +35,7 @@
             <div class="page-heading">
                 <h3>내 정보</h3>
                 <div class="container">
-	                <form th:action="@{/myPage/edit-info}" method="post" class="in-form">
+	                <form th:action="@{/myPage/editInfo}" method="post" class="in-form">
 	                	<div class="info-wrap">
 	                		<table>
 	                			<tr>
@@ -53,7 +55,16 @@
 	                			<tr>
 	                				<td class="titles">비밀번호</td>
 	                				<td class="info-result">
-	                					<input class="w3-input" id="pw" name="pw" type="password" required>
+	                					<div>
+		                					<input class="check-pwd" id="check-pwd" name="pwd" type="password">
+		                					<button type="button" onclick="checkPwd()">비밀번호 확인</button>
+	                					</div>
+	                					<span id="pwdMsg"></span>
+	                					<div id="changePwd" style="display:none;">
+	                						<input class="new-pwd" id="new-pwd" name="pwd" type="password">
+	                						<input class="new-again-pwd" id="new-again-pwd" name="pwd" type="password">
+	                						<button type="button" onclick="changePwd()">변경</button>
+	                					</div>
 	                				</td>
 	                			</tr>
 	                			<tr>
@@ -68,20 +79,18 @@
 	                				<td class="titles">이메일</td>
 	                				<td class="info-result">
 	                					<input type="text" id="email" class="email" th:value="${ member.email }" required>
-	                					<button class="edit">변경</button>
 	                				</td>
 	                			</tr> <!-- /이메일 -->
 	                			<tr>
 	                				<td class="titles">연락처</td>
 	                				<td class="info-result">
 	                					<input type="text" id="phone" class="tel" th:value="${ member.phone }" required>
-	                					<button class="edit">변경</button>
 	                				</td>
 	                			</tr> <!-- /연락처 -->
 	                		</table>
                 	</div> <!-- /info-wrap -->
                 	<hr>
-                	<button>저장</button> <!-- 저장 -->
+                	<button onclick="editInfo()">저장</button> <!-- 저장 -->
                 	<button>취소</button> <!-- 취소 -->
 	                </form>
                 </div> <!-- /container -->
@@ -113,5 +122,101 @@
 
     <script src="/assets/js/main.js"></script>
 </body>
+
+<script>
+
+	$("#check-pwd").keydown(function(key) {
+		if( key.keyCode == 13 ){
+			checkPwd();
+		}
+	});
+	
+	$("#new-again-pwd").keydown(function(key) {
+		if( key.keyCode == 13 ){
+			changePwd();
+		}
+	});
+	
+	$('input').keydown(function(event) {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		  };
+	});
+	function editInfo() {
+		$.ajax({
+			type: "POST",
+			url: "/myPage/editInfo",
+			data: JSON.stringify({
+				email: $("#email").val(),
+				phone: $("#phone").val()
+			}), 
+	        contentType : "application/json",
+			success: function(result) {
+				console.log(result);
+				
+				if(result == "success") {
+					alert("회원정보가 수정되었습니다.");
+					location.reload();
+				}else {
+					alert("알 수 없는 오류가 발생했습니다. 다시 확인해주세요.");
+				}
+			}
+		});
+	}
+	
+	function checkPwd() {
+		$.ajax({
+			type: "POST",
+			url: "/myPage/checkPwd",
+			data: {
+				pwd: $("#check-pwd").val()
+			},
+			success: function(result) {
+				console.log(result);
+				
+				if(result == "pwConfirmSuccess") {
+					$("#pwdMsg").hide();
+					$("#changePwd").show();
+				}else {
+					$("#pwdMsg").text("비밀번호를 확인해주세요.");
+					$("#pwdMsg").show();
+					$("#changePwd").hide();
+				}
+			}
+		});
+	}
+	
+	function changePwd() {
+		if($("#new-pwd").val() == "" || $("#new-again-pwd").val() == "" || $("#new-pwd").val() != $("#new-again-pwd").val()){
+			$("#pwdMsg").text("비밀번호를 다시 확인해주세요.");
+			$("#pwdMsg").show();
+		}else {
+			$("#pwdMsg").hide();
+			$.ajax({
+				type: "POST",
+				url: "/myPage/changePwd",
+				data: {
+					pwd: $("#new-pwd").val()
+				},
+				success: function(result) {
+					console.log(result);
+					
+					$("#new-pwd").val("");
+					$("#new-again-pwd").val("");
+					
+					if(result == "pwConfirmSuccess") {
+						$("#pwdMsg").text("비밀번호가 변경되었습니다.");
+						$("#pwdMsg").show();
+						$("#changePwd").hide();
+					}else {
+						$("#pwdMsg").text("알 수 없는 오류로 실패했습니다.");
+						$("#pwdMsg").show();
+						$("#changePwd").hide();
+					}
+				}
+			});
+		}
+	}
+</script>
 
 </html>

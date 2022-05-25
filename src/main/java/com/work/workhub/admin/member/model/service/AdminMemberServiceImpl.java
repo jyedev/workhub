@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.work.workhub.admin.member.model.dao.AdminMemberMapper;
+import com.work.workhub.member.member.dto.DepartmentDTO;
 import com.work.workhub.member.member.dto.MemberDTO;
 import com.work.workhub.member.member.dto.MemberRoleDTO;
 
@@ -57,6 +58,16 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	@Override
 	public List<MemberDTO> memberList() {
 		return adminMemberMapper.selectMemberList();
+	}
+
+	@Override
+	public List<MemberDTO> memberList(String depNo) {
+		return adminMemberMapper.selectMemberList(depNo);
+	}
+	
+	@Override
+	public List<DepartmentDTO> depList() {
+		return adminMemberMapper.selectDepList();
 	}
 	
 	

@@ -6,4 +6,8 @@ public interface MyPageService {
 	
 	MemberDTO findMemberById(String username);
 
+	String changePwd(MemberDTO member);
+	
+	String editInfo(MemberDTO member);
+
 }
