@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/assets/css/memberyj.css">
     <link rel="stylesheet" href="/assets/css/att.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
-    
+     <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
     <!--캘린더-->    
     <link href='/assets/css/calendar/core.css' rel='stylesheet' />
 <link href='/assets/css/calendar/daygrid.css' rel='stylesheet' />
@@ -104,9 +104,9 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '1')} or ${#strings.equals(my.attDateSub, '2')} or
-                  ${#strings.equals(my.attDateSub, '3')} or ${#strings.equals(my.attDateSub, '4')} or ${#strings.equals(my.attDateSub, '5')} or
-                  ${#strings.equals(my.attDateSub, '6')} or ${#strings.equals(my.attDateSub, '7')}" >
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '01')} or ${#strings.equals(my.attDateSub, '02')} or
+                  ${#strings.equals(my.attDateSub, '03')} or ${#strings.equals(my.attDateSub, '04')} or ${#strings.equals(my.attDateSub, '05')} or
+                  ${#strings.equals(my.attDateSub, '06')} or ${#strings.equals(my.attDateSub, '07')}" >
                       <td th:text="${ my.workName }">출근</td>
                       <td th:text="${ my.attGo }">22-04-12</td>
                       <td th:text="${ my.attReason }">이러이러해서</td>
@@ -137,7 +137,7 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '8')} or ${#strings.equals(my.attDateSub, '9')} or
+                  <tr th:each="my : ${ myList }" th:if="${#strings.equals(my.attDateSub, '08')} or ${#strings.equals(my.attDateSub, '09')} or
                   ${#strings.equals(my.attDateSub, '10')} or ${#strings.equals(my.attDateSub, '11')} or ${#strings.equals(my.attDateSub, '12')} or
                   ${#strings.equals(my.attDateSub, '13')} or ${#strings.equals(my.attDateSub, '14')}" >
                       <td th:text="${ my.workName }">출근</td>
@@ -146,7 +146,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
+                          <span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -179,7 +179,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
+                          <span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -212,7 +212,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
+                          <span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -244,7 +244,7 @@
                       <td th:text="${ my.attDate }">22-04-12</td>
                       <td th:text="${ my.attModdate }">22-04-14</td>
                       <td>
-                          <span class="badge bg-success" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
+                          <span class="badge bg-success" style="cursor:pointer;" th:onclick="|javascript:employModify('${ my.attNo }')|">수정</span>
                       </td>
                   </tr>
               </tbody>
@@ -261,7 +261,7 @@
     <script type="text/javascript">
     function employModify(attNo) { 
     	// 근무그룹  번호 확인용
-    	alert(attNo); 
+    	//alert(attNo); 
     	var attNo = attNo; 
         location.href='/employ/employmentModify?attNo='+attNo; }
     </script> 

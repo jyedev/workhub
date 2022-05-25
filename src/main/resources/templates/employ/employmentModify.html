@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/report.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
-    
+     <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
 </head>
 <body>
    		
@@ -31,7 +31,7 @@
     <div class="col-md-6 col-12">
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title yyggg">연차 신청서</h1>
+                <h1 class="card-title yyggg">근태 등록</h1>
             </div>
             <div class="card-content">
                 <div class="card-body">
@@ -84,12 +84,7 @@
 
    </form>
          
-     <script>
-        let dateElement = document.getElementById('dateTimeLocal');
-        let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -5);
-        dateElement.value = date;
-        dateElement.setAttribute("min", date);
-    </script>
+
          
              <!-- 삭제 버튼 -->
     <script type="text/javascript">
