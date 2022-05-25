@@ -20,6 +20,7 @@
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/memberyj.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
+    <link rel="shortcut icon" th:href="@{/assets/images/images/favicon-workHub.ico}" type="image/x-icon">
     <script>
 	const successMessage = '[[${successMessage}]]';
 	
@@ -53,7 +54,7 @@
         
         
         <form action="/employ/other" method="post">
-        <select name="workNo" class="workss">
+        <select name="workNo" class="worksss">
             <option th:each="atts : ${attsList}" th:value="${atts.workNo}" th:utext="${atts.workName}">업무</option>
        </select>
       <input type="submit" class="chec" value="✓">
@@ -67,14 +68,14 @@
       
     
     <!--날짜 필터-->
-    <form class="oopo">
+   <!--   <form class="oopo">
     <label for="rest_fir" class="asss">시작 날짜 : </label>
    <input type="date" class="asss" id="rest_fir">
    <label for="rest_fir" class="assss">종료 날짜 : </label>
    <input type="date" class="assss" id="rest_end">
    <input type="submit" value="조회" class="sds">     
 </form>
-
+-->
 
                 <!-- 사용한 연차 조회 시작-->
                 
@@ -178,7 +179,7 @@
     <script type="text/javascript">
     function porestModify(porestNo) { 
     	// 근무그룹  번호 확인용
-    	alert(porestNo); 
+    	//alert(porestNo); 
     	var porestNo = porestNo; 
         location.href='/rest/restModify?porestNo='+porestNo; }
     </script> 
