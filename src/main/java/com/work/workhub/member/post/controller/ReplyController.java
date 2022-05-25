@@ -59,7 +59,7 @@ public class ReplyController {
 //		return mv;
 //	}
 	
-	@PostMapping("update/{postNo}")
+	@PostMapping("update/no/{postNo}")
 	public String updateReply(@ModelAttribute ReplyDTO reply, @AuthenticationPrincipal UserImpl user, RedirectAttributes rttr) throws Exception {
 		
 		reply.setNo(user.getNo());
@@ -70,6 +70,7 @@ public class ReplyController {
 		
 		return "redirect:/post/detail/no/" + reply.getPostNo();
 	}
+	
 	
 	//댓글 삭제
 	@GetMapping("delete/{replyNo}")

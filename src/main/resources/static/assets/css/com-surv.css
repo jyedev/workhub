@@ -13,8 +13,22 @@
 	padding: 10px 0 5px 20px;
 }
 
+.icon-notice{
+	width: 20px;
+}
+
 .btn-outline-primary{
     height: 2.2rem;
+}
+
+.post-notice td{
+	font-weight: bold;
+	color: #7b8abf;
+}
+
+.post-notice:hover{
+	cursor: pointer;
+	background-color: #efefef;
 }
 
 #btn-list{

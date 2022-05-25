@@ -19,5 +19,8 @@ public interface PostService {
 	boolean writePost(PostDTO post) throws Exception;
 
 	int deletePost(Integer postNo);
+
+	List<PostDTO> showNotice();
+
 	
 }
