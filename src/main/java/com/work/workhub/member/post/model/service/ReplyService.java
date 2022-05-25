@@ -12,5 +12,7 @@ public interface ReplyService {
 
 	int deleteReply(int replyNo);
 
+//	int updateReply(ReplyDTO reply);
+
 
 }

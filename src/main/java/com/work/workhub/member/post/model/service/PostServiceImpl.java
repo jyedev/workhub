@@ -46,6 +46,10 @@ public class PostServiceImpl implements PostService{
 		return postMapper.findPostByNo(postNo);
 	}
 	
+	@Override
+	public List<PostDTO> showNotice() {
+		return postMapper.showNotice();
+	}
 	
 	@Override
 	public boolean writePost(PostDTO post) throws Exception {
@@ -70,6 +74,8 @@ public class PostServiceImpl implements PostService{
 	public int deletePost(Integer postNo) {
 		return postMapper.deletePost(postNo);
 	}
+
+
 
 
 }
