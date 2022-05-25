@@ -138,6 +138,7 @@
 		WHERE WORK_USE = '사용'
 		AND NOT WORK_NAME = '출근'
 		AND NOT WORK_NAME = '퇴근'
+		AND WORK_STATUS = 'Y'
 		ORDER BY WORK_NO
 	</select>
 	
@@ -164,8 +165,19 @@
 	
 	<!-- 근태 조회 -->
 	<select id="attenSelect" resultMap="AttResultMap">
-		SELECT
-			*
+	   SELECT
+			ATT_NO,
+			NO,
+			WORK_NO,
+			REPLACE(REPLACE(ATT_GO, '-', '.'),'T',' '),
+			ATT_OFF,
+			ATT_ADD,
+			ATT_OVER,
+			ATT_NIGHT,
+			ATT_REASON,
+			ATT_DATE,
+			ATT_STATUS,
+			ATT_MODDATE
 		FROM ATT
 		WHERE ATT_STATUS = 'Y'
 		ORDER BY ATT_NO
@@ -182,6 +194,7 @@
 		WHERE WORK_USE = '사용'
 		AND NOT WORK_NAME = '출근'
 		AND NOT WORK_NAME = '퇴근'
+		AND WORK_STATUS = 'Y'
 		ORDER BY WORK_NO
 	</select>
 	
@@ -255,7 +268,7 @@
 		  A.ATT_NO
 		, A.NO
 		, A.WORK_NO
-		, A.ATT_GO
+		, REPLACE(REPLACE(A.ATT_GO, '-', '.'),'T',' ') ATT_GO
 		, A.ATT_OFF
 		, A.ATT_ADD
 		, A.ATT_OVER
