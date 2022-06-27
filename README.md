@@ -18,7 +18,7 @@ KH정보교육원 2조 파이널 프로젝트 그룹웨어 사이트를 기획/�
 - 관리자 기능(사원, 근태, 게시판, 자산)
 ### 4. 개발환경
 - 운영 체제: windwos10,11 MacOS
-- 개발 도구: SpringTollSuite4
+- 개발 도구: SpringTolSuite4
 - DBMS: Oracle SQL Developer
 - Server: Apache Tomcat
 - 개발언어: Java, HTML5, CSS3, JavaScript, jQuery, Ajax, Thymeleaf
